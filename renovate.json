@@ -1,5 +1,4 @@
 {
-  "extends": ["config:best-practices"],
-  "dependencyDashboardApproval": true,
-  "rangeStrategy": "bump"
+  "extends": ["config:recommended"],
+  "dependencyDashboardApproval": true
 }
