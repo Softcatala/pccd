@@ -2,7 +2,6 @@
 binlog_expire_logs_seconds = 0
 character_set_server = utf8mb4
 collation_server = utf8mb4_uca1400_ai_ci
-innodb_adaptive_hash_index = 1
 innodb_buffer_pool_size = 2G
 innodb_doublewrite = 0
 innodb_flush_log_at_timeout = 1800

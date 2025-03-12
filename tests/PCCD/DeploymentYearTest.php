@@ -33,8 +33,8 @@ final class DeploymentYearTest extends TestCase
         $this->assertContains(
             $fileYear,
             $acceptableYears,
-            "File tmp/db_date.txt should contain the current year {$currentYear}" .
-            (date('n') === '1' ? " or the previous year {$previousYear} in January" : '')
+            "File tmp/db_date.txt should contain the current year {$currentYear}"
+            . (date('n') === '1' ? " or the previous year {$previousYear} in January" : '')
         );
     }
 }

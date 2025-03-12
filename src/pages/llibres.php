@@ -20,6 +20,6 @@ $books = cache_get('obresvpr', static function (): array {
 });
 echo '<div class="books">';
 foreach ($books as $book) {
-    echo $book->render(['lazy_loading' => false]);
+    echo $book->render(lazy_loading: false);
 }
 echo '</div>';

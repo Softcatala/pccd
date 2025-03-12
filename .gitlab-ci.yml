@@ -65,7 +65,6 @@ php_lint:
   extends: .php_lint_template
   parallel:
     matrix:
-      - PHP_VERSION: "8.3"
       - PHP_VERSION: "8.4"
   image: php:${PHP_VERSION}
   before_script:
@@ -109,7 +108,7 @@ npm_lint:
 
 check_code_ubuntu:
   extends: .check_code_template
-  image: ubuntu:rolling
+  image: ubuntu:devel
   rules:
     - if: '$CI_PIPELINE_SOURCE == "schedule"'
       when: never

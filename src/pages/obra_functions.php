@@ -70,8 +70,9 @@ function get_paremiotipus_count_by_font(string $font_id): int
 /**
  * Formats a price in Catalan.
  */
-function format_preu(float $num): string
+function format_preu(string $price): string
 {
+    $num = (float) $price;
     $decimals = $num === floor($num) ? 0 : 2;
 
     return number_format(

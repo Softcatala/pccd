@@ -16,12 +16,12 @@ require __DIR__ . '/../../src/common.php';
 
 require __DIR__ . '/functions.php';
 
-$filePath = __DIR__ . '/../../tmp/tags_output.json';
+$file_path = __DIR__ . '/../../tmp/tags_output.json';
 
 $paremiotipus = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $sentence) {
     $display = get_paremiotipus_display($sentence, escape_html: false);
     if (str_contains($display, ' ') && mb_strlen($display) > 10) {
-        appendToJsonFile(['sentence' => $sentence, 'tags' => getSentenceTags($display)], $filePath);
+        append_to_json_file(['sentence' => $sentence, 'tags' => get_sentence_tags($display)], $file_path);
     }
 }

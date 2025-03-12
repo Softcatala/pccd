@@ -12,12 +12,12 @@ h2 {
 }
 
 #share {
-    min-width: 111px;
-    padding: 4px;
+    min-width: 110px;
 }
 
 #share svg {
     width: 0.875rem;
+    vertical-align: top;
 }
 
 .share-wrapper {
@@ -31,7 +31,7 @@ h2 {
     bottom: 0;
     left: 0;
     z-index: 20;
-    min-width: 111px;
+    min-width: 110px;
     padding: 0.5rem;
     font-size: 0.875rem;
     background: #fff;
@@ -70,7 +70,7 @@ h2 {
 
 .share-image {
     width: 2.5rem;
-    padding: 4px;
+    padding: 0.25rem;
     margin: 1px;
 }
 
@@ -82,8 +82,7 @@ h2 {
 .close {
     float: right;
     width: 2rem;
-    margin-bottom: 1rem;
-    margin-left: 1rem;
+    margin: 0 0 1rem 1rem;
     cursor: pointer;
 }
 
@@ -93,22 +92,19 @@ h2 {
 
 .shortcuts {
     display: flex;
-}
-
-h1 + .shortcuts {
-    margin-top: -0.75rem;
+    margin-top: -0.25rem;
 }
 
 .shortcuts:has(#toggle-all) {
+    margin-top: 0;
     margin-bottom: 1rem;
 }
 
 .shortcuts button {
-    display: block;
-    padding: 4px 8px;
+    padding: 5px;
     font-size: 0.875rem;
     line-height: 1;
-    background-color: #eee;
+    background: #eee;
     border: 1px solid #ccc;
     border-radius: 0.25rem;
 }
@@ -137,7 +133,7 @@ h1 + .shortcuts {
 }
 
 .entry .footer {
-    background-color: #f9f9f9;
+    background: #f9f9f9;
 }
 
 details,
@@ -159,7 +155,7 @@ summary {
 }
 
 figcaption {
-    margin-top: 5px;
+    margin-top: 7px;
     font-size: 0.875rem;
     text-align: left;
 }

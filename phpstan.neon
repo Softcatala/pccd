@@ -14,8 +14,8 @@ parameters:
     - scripts
   excludePaths:
     - *.generated.php
-    - */apc.conf.php
     - */third_party/*
+    - docroot/admin/apc.conf.php
   ignoreErrors:
     - identifier: property.onlyRead
     - identifier: property.uninitializedReadonly

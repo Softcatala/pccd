@@ -13,7 +13,7 @@
 /**
  * Gets an array of unique variants, keyed by MODISME.
  *
- * @return array<string, non-empty-list<Variant>>
+ * @return array<string, non-empty-list<ParemiotipusVariant>>
  */
 function get_modismes_by_variant(string $paremiotipus): array
 {
@@ -56,7 +56,7 @@ function get_modismes_by_variant(string $paremiotipus): array
         `LLOC`');
     $stmt->execute([':paremiotipus' => $paremiotipus]);
 
-    return $stmt->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_CLASS, Variant::class);
+    return $stmt->fetchAll(PDO::FETCH_GROUP | PDO::FETCH_CLASS, ParemiotipusVariant::class);
 }
 
 /**

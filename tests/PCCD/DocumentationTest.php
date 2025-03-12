@@ -19,7 +19,7 @@ final class DocumentationTest extends TestCase
     public function testReadmeHasCorrectPhpMinimumVersion(): void
     {
         $composerJsonContent = file_get_contents(__DIR__ . '/../../composer.json');
-        $composerJson = json_decode($composerJsonContent, true);
+        $composerJson = json_decode(json: $composerJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
         \assert(\is_string($composerJson['require']['php']));
         $composerPhpVersion = trim($composerJson['require']['php'], '>=^');
         $minimumVersionInformation = "PHP: version {$composerPhpVersion} or later is required.";
@@ -31,7 +31,7 @@ final class DocumentationTest extends TestCase
     public function testReadmeHasCorrectNodeJsMinimumVersion(): void
     {
         $composerJsonContent = file_get_contents(__DIR__ . '/../../package.json');
-        $packageJson = json_decode($composerJsonContent, true);
+        $packageJson = json_decode(json: $composerJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
         \assert(\is_string($packageJson['engines']['node']));
         $minimumVersion = trim($packageJson['engines']['node'], '>=^');
         $minimumVersionInformation = "Node.js: version {$minimumVersion} or later is required.";

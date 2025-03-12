@@ -14,11 +14,11 @@ cd "$(dirname "$0")/.."
 echo "Minifying src/js/app.js..."
 npx terser src/js/app.js --compress --mangle > docroot/js/app.min.js
 sdt_version=$(jq -r '.dependencies["simple-datatables"]' package.json | sed 's/^\^//')
-std_dislaimer="/*! This bundle includes simple-datatables ${sdt_version} (https://github.com/fiduswriter/simple-datatables). License: https://www.gnu.org/licenses/lgpl-3.0.html */"
+sdt_dislaimer="/*! This bundle includes simple-datatables ${sdt_version} (https://github.com/fiduswriter/simple-datatables). License: https://www.gnu.org/licenses/lgpl-3.0.html */"
 for file in src/js/pages/*.js; do
     echo "Minifying ${file}..."
     if [[ "${file}" == "src/js/pages/fonts.js" ]]; then
-        echo "${std_dislaimer}" > docroot/js/pages/fonts.min.js
+        echo "${sdt_dislaimer}" > docroot/js/pages/fonts.min.js
         npx terser node_modules/simple-datatables/dist/umd/simple-datatables.js --compress --mangle >> docroot/js/pages/fonts.min.js
         npx terser src/js/pages/fonts.js --compress --mangle >> docroot/js/pages/fonts.min.js
     else
@@ -31,7 +31,7 @@ npx lightningcss --minify --bundle src/css/base.css > docroot/css/base.min.css
 for file in src/css/pages/*.css; do
     echo "Minifying ${file}..."
     if [[ "${file}" == "src/css/pages/fonts.css" ]]; then
-        echo "${std_dislaimer}" > docroot/css/pages/fonts.min.css
+        echo "${sdt_dislaimer}" > docroot/css/pages/fonts.min.css
         npx lightningcss --minify --bundle node_modules/simple-datatables/dist/style.css >> docroot/css/pages/fonts.min.css
         npx lightningcss --minify --bundle "${file}" >> docroot/css/pages/fonts.min.css
     else

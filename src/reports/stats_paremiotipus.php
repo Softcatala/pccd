@@ -198,11 +198,11 @@ function stats_paremiotipus(): void
     echo '</article>';
 
     echo '<h3>Creixement històric de la base de dades</h3>';
-    $directoryPath = __DIR__ . '/../../tests/playwright/data/historic/';
-    $files = scandir($directoryPath);
+    $directory_path = __DIR__ . '/../../tests/playwright/data/historic/';
+    $files = scandir($directory_path);
     assert(is_array($files));
-    $paremiotipusNumberData = get_data_from_files($files, $directoryPath, 'paremiotipusNumber');
-    $fitxesNumberData = get_data_from_files($files, $directoryPath, 'fitxesNumber');
-    echo get_chart('line', $paremiotipusNumberData, 'paremiotipus', 'Mesos (2023-)', 'Nombre de registres', style: 'width:800px;');
-    echo get_chart('line', $fitxesNumberData, 'fitxes', 'Mesos (2023-)', 'Nombre de registres', style: 'width:800px;');
+    $paremiotipus_number_data = get_data_from_files($files, $directory_path, 'paremiotipusNumber');
+    $fitxes_number_data = get_data_from_files($files, $directory_path, 'fitxesNumber');
+    echo get_chart('line', $paremiotipus_number_data, 'paremiotipus', 'Mesos (2023-)', 'Nombre de registres', style: 'width:800px;');
+    echo get_chart('line', $fitxes_number_data, 'fitxes', 'Mesos (2023-)', 'Nombre de registres', style: 'width:800px;');
 }

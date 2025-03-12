@@ -67,7 +67,7 @@ foreach ($variants as $modisme => $variant) {
     foreach ($variant as $v) {
         // TODO: rector is less clever.
         // @phpstan-ignore identical.alwaysTrue, function.alreadyNarrowedType
-        assert($v::class === Variant::class);
+        assert($v::class === ParemiotipusVariant::class);
         $work = '';
         if ($v->AUTOR !== '') {
             $work = htmlspecialchars($v->AUTOR);
@@ -86,8 +86,7 @@ foreach ($variants as $modisme => $variant) {
         }
         $editorial = '';
         if ($v->EDITORIAL !== '') {
-            $editorial = $v->EDITORIAL;
-            $editorial = $editorials[$editorial] ?? $editorial;
+            $editorial = $editorials[$v->EDITORIAL] ?? $v->EDITORIAL;
         }
         // Print DIARI if it is different from EDITORIAL.
         if ($v->DIARI !== '' && $v->DIARI !== $editorial) {
@@ -210,7 +209,7 @@ foreach ($variants as $modisme => $variant) {
         if ($paremia === '' || $variant_sources === 0) {
             // Sources with only a year are displayed without details.
             if ($min_year < YEAR_MAX) {
-                $rendered_variant .= '<div class="summary">1 font, ' . $min_year . '.</div>';
+                $rendered_variant .= "<div class='summary'>1 font, {$min_year}.</div>";
             }
         } else {
             $rendered_variant .= '<details open>';
@@ -241,98 +240,104 @@ foreach ($variants as $modisme => $variant) {
 $mp3_files = get_cv_files($paremiotipus_db);
 $cv_output = '';
 foreach ($mp3_files as $mp3_file) {
-    if (is_file(__DIR__ . "/../../docroot/mp3/{$mp3_file}")) {
-        $is_first_audio = $cv_output === '';
-        if ($is_first_audio) {
-            PageRenderer::setOgAudioUrl("https://pccd.dites.cat/mp3/{$mp3_file}");
-        }
-
-        $cv_output .= '<a class="audio" href="/mp3/' . $mp3_file . '" role="button">';
-        $cv_output .= '<audio preload="none" src="/mp3/' . $mp3_file . '"></audio>';
-        $cv_output .= '<svg width="32" height="27" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 18" aria-label="Reprodueix" role="img"><g fill="#3c9ae3"><path d="M3.153 6.5H0v4.999h3.153l4.108 3.38s.863.757.863.051V3.001c0-.559-.759.044-.759.044zm10.897 9.841c2.195-1.833 3.453-4.508 3.453-7.34S16.245 3.494 14.05 1.66a.69.69 0 0 0-.971.085.68.68 0 0 0 .084.963A8.18 8.18 0 0 1 16.126 9a8.2 8.2 0 0 1-2.961 6.291.676.676 0 0 0-.086.962c.244.293.68.329.971.088"/><path d="M14.74 9c0-2.02-.896-3.935-2.463-5.243a.69.69 0 0 0-.971.083.68.68 0 0 0 .084.965 5.46 5.46 0 0 1 1.975 4.194 5.46 5.46 0 0 1-1.975 4.194.68.68 0 0 0-.084.963.69.69 0 0 0 .971.082A6.8 6.8 0 0 0 14.74 9"/><path d="M11.984 9a4.09 4.09 0 0 0-1.479-3.147.69.69 0 0 0-1.13.524c0 .195.085.39.246.525a2.72 2.72 0 0 1 0 4.195.68.68 0 0 0-.084.962.69.69 0 0 0 .969.084A4.08 4.08 0 0 0 11.984 9"/></g></svg>';
-        $cv_output .= '</a>';
-    } else {
+    if (!is_file(__DIR__ . "/../../docroot/mp3/{$mp3_file}")) {
         error_log("Error: asset file is missing: {$mp3_file}");
+
+        continue;
     }
+
+    $is_first_audio = $cv_output === '';
+    if ($is_first_audio) {
+        PageRenderer::setOgAudioUrl("https://pccd.dites.cat/mp3/{$mp3_file}");
+    }
+
+    $cv_output .= '<a class="audio" href="/mp3/' . $mp3_file . '" role="button">';
+    $cv_output .= '<audio preload="none" src="/mp3/' . $mp3_file . '"></audio>';
+    $cv_output .= '<svg width="32" height="27" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 21 18" aria-label="Reprodueix" role="img"><g fill="#3c9ae3"><path d="M3.153 6.5H0v4.999h3.153l4.108 3.38s.863.757.863.051V3.001c0-.559-.759.044-.759.044zm10.897 9.841c2.195-1.833 3.453-4.508 3.453-7.34S16.245 3.494 14.05 1.66a.69.69 0 0 0-.971.085.68.68 0 0 0 .084.963A8.18 8.18 0 0 1 16.126 9a8.2 8.2 0 0 1-2.961 6.291.676.676 0 0 0-.086.962c.244.293.68.329.971.088"/><path d="M14.74 9c0-2.02-.896-3.935-2.463-5.243a.69.69 0 0 0-.971.083.68.68 0 0 0 .084.965 5.46 5.46 0 0 1 1.975 4.194 5.46 5.46 0 0 1-1.975 4.194.68.68 0 0 0-.084.963.69.69 0 0 0 .971.082A6.8 6.8 0 0 0 14.74 9"/><path d="M11.984 9a4.09 4.09 0 0 0-1.479-3.147.69.69 0 0 0-1.13.524c0 .195.085.39.246.525a2.72 2.72 0 0 1 0 4.195.68.68 0 0 0-.084.962.69.69 0 0 0 .969.084A4.08 4.08 0 0 0 11.984 9"/></g></svg>';
+    $cv_output .= '</a>';
 }
 
 // Images.
 $images = get_images($paremiotipus_db);
 $images_output = '';
 foreach ($images as $image) {
-    if (is_file(__DIR__ . '/../../docroot/img/imatges/' . $image->Identificador)) {
-        $is_first_image = $images_output === '';
-        if ($is_first_image) {
-            // Use it for the meta image.
-            PageRenderer::setMetaImage('https://pccd.dites.cat/img/imatges/' . rawurlencode($image->Identificador));
-        }
+    if (!is_file(__DIR__ . "/../../docroot/img/imatges/{$image->Identificador}")) {
+        error_log("Error: asset file is missing: {$image->Identificador}");
 
-        $image_tag = get_image_tags(
-            file_name: $image->Identificador,
-            path: '/img/imatges/',
-            alt_text: $paremiotipus_display,
-            escape_html: false,
-            width: (int) $image->WIDTH,
-            height: (int) $image->HEIGHT,
-            preload: $is_first_image,
-            preload_media: '(min-width: 768px)'
-        );
-
-        $image_link = get_clean_url($image->URL_ENLLAÇ);
-        if ($image_link !== '') {
-            $image_tag = '<a href="' . $image_link . '">' . $image_tag . '</a>';
-        }
-
-        $images_output .= '<div class="bloc bloc-image text-break"><figure>';
-        $images_output .= $image_tag;
-
-        $image_caption = '';
-        if ($image->AUTOR !== '') {
-            $image_caption = htmlspecialchars($image->AUTOR);
-        }
-        if ($image->ANY !== '' && $image->ANY !== '0') {
-            if ($image_caption !== '') {
-                $image_caption .= ' ';
-            }
-            $image_caption .= '(' . $image->ANY . ')';
-        }
-        if ($image->DIARI !== '' && $image->DIARI !== $image->AUTOR) {
-            if ($image_caption !== '') {
-                $image_caption .= ': ';
-            }
-
-            // If there is no ARTICLE, link DIARI to the content.
-            $diari = htmlspecialchars($image->DIARI);
-            if ($image_link !== '' && $image->ARTICLE === '') {
-                $diari = '<a href="' . $image_link . '" class="external" target="_blank" rel="noopener">' . $diari . '</a>';
-            }
-            $image_caption .= "<em>{$diari}</em>";
-        }
-        if ($image->ARTICLE !== '') {
-            if ($image_caption !== '') {
-                $image_caption .= ' ';
-            }
-
-            // Link to the content, unless the text has a link already.
-            if (str_contains($image->ARTICLE, 'http')) {
-                // In that case, link to the included URL.
-                $article = html_escape_and_link_urls($image->ARTICLE);
-            } else {
-                $article = htmlspecialchars($image->ARTICLE);
-                // Reuse the link of the image, if there is one.
-                if ($image_link !== '') {
-                    $article = '<a href="' . $image_link . '" class="external" target="_blank" rel="noopener">' . $article . '</a>';
-                }
-            }
-            $image_caption .= "«{$article}»";
-        }
-
-        if ($image_caption !== '') {
-            $images_output .= '<figcaption class="small">' . $image_caption . '</figcaption>';
-        }
-
-        $images_output .= '</figure></div>';
+        continue;
     }
+
+    $is_first_image = $images_output === '';
+    if ($is_first_image) {
+        // Use it for the meta image.
+        PageRenderer::setMetaImage('https://pccd.dites.cat/img/imatges/' . rawurlencode($image->Identificador));
+    }
+
+    $image_tag = get_image_tags(
+        file_name: $image->Identificador,
+        path: '/img/imatges/',
+        alt_text: $paremiotipus_display,
+        escape_html: false,
+        width: $image->WIDTH,
+        height: $image->HEIGHT,
+        preload: $is_first_image,
+        preload_media: '(min-width: 768px)'
+    );
+
+    $image_link = get_clean_url($image->URL_ENLLAÇ);
+    if ($image_link !== '') {
+        $image_tag = '<a href="' . $image_link . '">' . $image_tag . '</a>';
+    }
+
+    $images_output .= '<div class="bloc bloc-image text-break"><figure>';
+    $images_output .= $image_tag;
+
+    $image_caption = '';
+    if ($image->AUTOR !== '') {
+        $image_caption = htmlspecialchars($image->AUTOR);
+    }
+    if ($image->ANY !== '' && $image->ANY !== '0') {
+        if ($image_caption !== '') {
+            $image_caption .= ' ';
+        }
+        $image_caption .= '(' . $image->ANY . ')';
+    }
+    if ($image->DIARI !== '' && $image->DIARI !== $image->AUTOR) {
+        if ($image_caption !== '') {
+            $image_caption .= ': ';
+        }
+
+        // If there is no ARTICLE, link DIARI to the content.
+        $diari = htmlspecialchars($image->DIARI);
+        if ($image_link !== '' && $image->ARTICLE === '') {
+            $diari = '<a href="' . $image_link . '" class="external" target="_blank" rel="noopener">' . $diari . '</a>';
+        }
+        $image_caption .= "<em>{$diari}</em>";
+    }
+    if ($image->ARTICLE !== '') {
+        if ($image_caption !== '') {
+            $image_caption .= ' ';
+        }
+
+        // Link to the content, unless the text has a link already.
+        if (str_contains($image->ARTICLE, 'http')) {
+            // In that case, link to the included URL.
+            $article = html_escape_and_link_urls($image->ARTICLE);
+        } else {
+            $article = htmlspecialchars($image->ARTICLE);
+            // Reuse the link of the image, if there is one.
+            if ($image_link !== '') {
+                $article = '<a href="' . $image_link . '" class="external" target="_blank" rel="noopener">' . $article . '</a>';
+            }
+        }
+        $image_caption .= "«{$article}»";
+    }
+
+    if ($image_caption !== '') {
+        $images_output .= '<figcaption class="small">' . $image_caption . '</figcaption>';
+    }
+
+    $images_output .= '</figure></div>';
 }
 
 if ($images_output === '') {
@@ -355,22 +360,23 @@ if ($images_output !== '') {
 }
 PageRenderer::setParemiotipusBlocks($blocks);
 
-// Main page output.
-$output = '';
-if ($total_variants > 1) {
-    // Show a short description only when there is more than 1 variant.
-    $output .= '<div class="description">';
-    $output .= "{$total_recurrences}&nbsp;recurrències en {$total_variants}&nbsp;variants.";
-    if ($total_min_year < YEAR_MAX) {
-        $output .= " Primera&nbsp;citació:&nbsp;{$total_min_year}.";
-    }
-    $output .= '</div>';
-    $output .= '<div class="shortcuts">';
-    $output .= '<button type="button" id="toggle-all" title="Amaga els detalls de cada font">Contrau-ho tot</button>';
+$output = '<div class="description">';
+if ($total_recurrences === 1) {
+    $output .= '1&nbsp;recurrència.';
+} elseif ($total_variants === 1) {
+    $output .= "{$total_recurrences}&nbsp;recurrències.";
 } else {
-    $output .= '<div class="shortcuts">';
+    $output .= "{$total_recurrences}&nbsp;recurrències en {$total_variants}&nbsp;variants.";
 }
+if ($total_min_year < YEAR_MAX) {
+    $output .= " Primera&nbsp;citació:&nbsp;{$total_min_year}.";
+}
+$output .= '</div>';
 
+$output .= '<div class="shortcuts">';
+if ($total_variants > 1) {
+    $output .= '<button type="button" id="toggle-all" title="Amaga els detalls de cada font">Contrau-ho tot</button>';
+}
 $output .= '<div class="share-wrapper">';
 $output .= '<button type="button" id="share">Comparteix <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17 22q-1.3 0-2.1-.9T14 19v-.7l-7-4.1q-.4.4-.9.6T5 15q-1.3 0-2.1-.9T2 12t.9-2.1T5 9q.6 0 1.1.2t1 .6l7-4.1v-.3L14 5q0-1.3.9-2.1T17 2t2.1.9T20 5t-.9 2.1T17 8q-.6 0-1.1-.2t-1-.6l-7 4.1v.3l.1.4q.1.3 0 .4t0 .3l7 4.1q.4-.4.9-.6T17 16q1.3 0 2.1.9T20 19t-.9 2.1-2.1.9"/></svg></button>';
 $output .= '<div class="share-icons" hidden>';

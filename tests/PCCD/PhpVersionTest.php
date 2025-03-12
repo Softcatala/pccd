@@ -19,7 +19,7 @@ final class PhpVersionTest extends TestCase
     public function testShellNixHasAtLeastComposerJsonPhpVersion(): void
     {
         $composerJsonContent = file_get_contents(__DIR__ . '/../../composer.json');
-        $composerJson = json_decode($composerJsonContent, true);
+        $composerJson = json_decode(json: $composerJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
         \assert(\is_string($composerJson['require']['php']));
         $composerPhpVersion = trim($composerJson['require']['php'], '>=^');
 
@@ -31,21 +31,5 @@ final class PhpVersionTest extends TestCase
         $nixPhpVersion = $matches[1][0] . '.' . $matches[1][1];
 
         $this->assertTrue(version_compare($nixPhpVersion, $composerPhpVersion, '>='), "PHP version in shell.nix ({$nixPhpVersion}) is lower than composer.json minimum version ({$composerPhpVersion})");
-    }
-
-    public function testPhpStormSettingsHasAtLeastComposerJsonPhpVersion(): void
-    {
-        $phpStormConfigPath = realpath(__DIR__ . '/../../.idea/php.xml');
-        $phpStormConfigContent = file_get_contents($phpStormConfigPath);
-
-        preg_match('/php_language_level="(\d+\.\d+)"/', $phpStormConfigContent, $matches);
-        $phpStormPhpVersion = $matches[1];
-
-        $composerJsonContent = file_get_contents(__DIR__ . '/../../composer.json');
-        $composerJson = json_decode($composerJsonContent, true);
-        \assert(\is_string($composerJson['require']['php']));
-        $composerPhpVersion = trim($composerJson['require']['php'], '>=^');
-
-        $this->assertTrue(version_compare($phpStormPhpVersion, $composerPhpVersion, '>='), "PHP version in PhpStorm settings {$phpStormPhpVersion}) is lower than composer.json minimum version ({$composerPhpVersion})");
     }
 }

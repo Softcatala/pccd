@@ -5,6 +5,8 @@
 vendor/
 node_modules/
 
-# Include hidden files by default, but ignore git directory
+# Include hidden files by default, but ignore some
 !.*
 .git/
+.idea/
+.vscode/

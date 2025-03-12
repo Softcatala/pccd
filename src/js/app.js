@@ -19,7 +19,7 @@ gtag("config", "G-CP42Y3NK1R");
 
 (() => {
     // Show the cookie alert if it hasn't been accepted.
-    if (localStorage.getItem("accept_cookies") !== "1") {
+    if (!localStorage.getItem("accept_cookies")) {
         const cookieBanner = document.querySelector("#cookie-banner");
         cookieBanner.removeAttribute("hidden");
         cookieBanner.querySelector("button").addEventListener("click", () => {

@@ -36,3 +36,4 @@ package-lock.json
 .php-cs-fixer.cache
 .phpunit.result.cache
 .picasa.ini
+.vscode/

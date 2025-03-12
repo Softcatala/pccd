@@ -49,8 +49,8 @@ if (is_file(__DIR__ . '/../../docroot/img/obres/' . $obra->Imatge)) {
         file_name: $obra->Imatge,
         path: '/img/obres/',
         alt_text: $is_book ? 'Coberta' : $obra->Títol,
-        width: (int) $obra->WIDTH,
-        height: (int) $obra->HEIGHT,
+        width: $obra->WIDTH,
+        height: $obra->HEIGHT,
         preload: true,
         preload_media: '(min-width: 576px)'
     );
@@ -136,7 +136,7 @@ if ($obra->Lloc_compra !== '') {
 }
 if ($obra->Preu !== '' && $obra->Preu !== '0') {
     $output .= '<dt>Preu de compra:</dt>';
-    $output .= '<dd>' . format_preu((float) $obra->Preu) . '&nbsp;€</dd>';
+    $output .= '<dd>' . format_preu($obra->Preu) . '&nbsp;€</dd>';
 }
 if ($obra->URL !== '') {
     $output .= '<dt hidden>Enllaç:</dt>';
@@ -149,24 +149,12 @@ if ($obra->Observacions !== '') {
 }
 $output .= '</dl>';
 
-// Print the record count, but only when there are records.
 $n_recollides = get_paremiotipus_count_by_font($obra->Identificador);
-$registres = '';
-if ($obra->Registres === '0' && $n_recollides > 0) {
-    if ($n_recollides === 1) {
-        $registres = 'Aquesta obra té 1 fitxa recollida en aquest web.';
-    } else {
-        $registres = 'Aquesta obra té ' . format_nombre($n_recollides) . ' fitxes recollides en aquest web.';
-    }
-} elseif ($obra->Registres > 0 && $n_recollides === 0) {
-    $registres = 'Aquesta obra té ' . ($obra->Registres === '1' ? '1 fitxa' : format_nombre($obra->Registres) . ' fitxes') . ' a la base de dades.';
-} elseif ($obra->Registres > 0 && $n_recollides > 0) {
-    $registres = 'Aquesta obra té ' . ($obra->Registres === '1' ? '1 fitxa' : format_nombre($obra->Registres) . ' fitxes') .
-                 ' a la base de dades, de les quals ' . ($n_recollides === 1 ? '1 està recollida' : format_nombre($n_recollides) . ' estan recollides') . ' en aquest web.';
-}
-if ($registres !== '') {
-    $output .= '<div class="footer">' . $registres . '</div>';
-}
+$output .= '<div class="footer">';
+$output .= 'Aquesta obra té ' . format_nombre($obra->Registres) . ($obra->Registres === '1' ? ' fitxa' : ' fitxes');
+$output .= ' a la base de dades, de les quals ' . format_nombre($n_recollides);
+$output .= ($n_recollides === 1 ? ' està recollida' : ' estan recollides') . ' en aquest web.';
+$output .= '</div>';
 
 $output .= '</div></div>';
 echo $output;

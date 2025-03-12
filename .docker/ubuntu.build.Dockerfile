@@ -3,7 +3,7 @@
 FROM rust:latest as oxipng-builder
 
 # Install oxipng
-RUN cargo install oxipng --version 9.1.3
+RUN cargo install oxipng --version 9.1.4
 
 # hadolint ignore=DL3007
 FROM ubuntu:latest

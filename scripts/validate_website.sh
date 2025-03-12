@@ -37,23 +37,25 @@ fi
 readonly BASE_URL
 
 ##############################################################################
-# Validates URL using curl, HTML Tidy, htmlhint, linkinator and html-validate.
+# Validates URL using curl, HTML Tidy, HTMLHint, Linkinator and HTML-validate.
 # Arguments:
 #   URL                  The URL to validate
 # Optional arguments:
 #   --skip-tidy          Skip HTML Tidy validation
-#   --skip-htmlhint      Skip htmlhint validation
-#   --skip-linkinator    Skip linkinator validation
-#   --skip-htmlvalidate  Skip html-validate validation
-# Globals:
-#   SKIP_TIDY            Whether to skip HTML Tidy
-#   SKIP_HTMLHINT        Whether to skip htmlhint
-#   SKIP_LINKINATOR      Whether to skip linkinator
-#   SKIP_HTMLVALIDATE    Whether to skip html-validate
+#   --skip-htmlhint      Skip HTMLHint validation
+#   --skip-linkinator    Skip Linkinator validation
+#   --skip-htmlvalidate  Skip HTML-validate validation
+#   --check-external     Check external links with Linkinator
 ##############################################################################
 validate_url() {
     local -r URL=$1
     shift 1
+
+    local SKIP_TIDY=""
+    local SKIP_HTMLHINT=""
+    local SKIP_LINKINATOR=""
+    local SKIP_HTMLVALIDATE=""
+    local CHECK_EXTERNAL=""
 
     while [[ $# -gt 0 ]]; do
         case $1 in
@@ -61,6 +63,7 @@ validate_url() {
             --skip-htmlhint) SKIP_HTMLHINT=true ;;
             --skip-linkinator) SKIP_LINKINATOR=true ;;
             --skip-htmlvalidate) SKIP_HTMLVALIDATE=true ;;
+            --check-external) CHECK_EXTERNAL=true ;;
             *)
                 echo "Unknown parameter passed: $1"
                 exit 1
@@ -107,7 +110,9 @@ validate_url() {
         set -e -o pipefail
     fi
 
-    # htmlhint is a quick static code analysis tool for HTML. See .htmlhintrc.json file.
+    # HTMLHint is a fast static analysis tool for HTML. See the .htmlhintrc.json file for configuration.
+    # Although this package is not actively maintained, it remains a better option than Markuplint, which is slow and
+    # enforces too many rules by default.
     if [[ -z ${SKIP_HTMLHINT} ]]; then
         echo "=============="
         echo "htmlhint"
@@ -115,15 +120,21 @@ validate_url() {
         npx htmlhint --config ../.htmlhintrc.json "${OUTPUT_FILENAME}"
     fi
 
-    # linkinator works well for checking that all local links work properly.
+    # Linkinator works well for checking that all links work properly.
     if [[ -z ${SKIP_LINKINATOR} ]]; then
         echo "=============="
         echo "linkinator"
         echo "=============="
-        npx linkinator "${URL}" --verbosity error --skip "^(?!${BASE_URL})"
+        if [[ -n ${CHECK_EXTERNAL} ]]; then
+            echo "Checking both internal and external links."
+            npx linkinator "${URL}" --verbosity error
+        else
+            echo "Checking internal links only."
+            npx linkinator "${URL}" --verbosity error --skip "^(?!${BASE_URL})"
+        fi
     fi
 
-    # html-validate is an offline HTML5 validator with strict parsing. Apart from parsing and content model validation
+    # HTML-validate is an offline HTML5 validator with strict parsing. Apart from parsing and content model validation
     # it also includes style, cosmetics, good practice and accessibility rules. See .htmlvalidate.json.
     if [[ -z ${SKIP_HTMLVALIDATE} ]]; then
         echo "=============="
@@ -171,7 +182,7 @@ validate_url "${BASE_URL}/projecte"
 validate_url "${BASE_URL}/top100"
 validate_url "${BASE_URL}/llibres"
 validate_url "${BASE_URL}/instruccions"
-validate_url "${BASE_URL}/credits"
+validate_url "${BASE_URL}/credits" --check-external
 validate_url "${BASE_URL}/fonts"
 validate_url "${BASE_URL}/p/A_Abrera%2C_donen_garses_per_perdius"
 validate_url "${BASE_URL}/p/Qui_no_vulgui_pols%2C_que_no_vagi_a_l%27era"

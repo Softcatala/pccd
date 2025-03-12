@@ -21,7 +21,6 @@
 /src/third_party/* linguist-vendored
 
 .mailmap export-ignore
-/.idea export-ignore
 /docroot/google*.html export-ignore
 /docroot/img/imatges export-ignore
 /docroot/img/obres export-ignore

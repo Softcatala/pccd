@@ -1,19 +1,11 @@
-# Vendor directories
-node_modules
-vendor
-third_party
-
-# Generated files
+# Generated and optimized files
 *.min.*
-*.report.html
+*.sql
 *.sublime-project
-*.sublime-workspace
-*Brewfile.lock.json
-.idea
+*.svg
 /tmp
 composer.lock
 package-lock.json
-*.sql
 
 # HTML pages
 /docroot/*.html

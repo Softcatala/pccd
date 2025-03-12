@@ -32,25 +32,27 @@ $config = new Config();
 $config
     ->setRiskyAllowed(true)
     ->setRules([
+        // Import some generally useful rule sets.
         '@PHP82Migration:risky' => true,
         '@PHP84Migration' => true,
         '@PhpCsFixer' => true,
         '@PhpCsFixer:risky' => true,
         '@PHPUnit100Migration:risky' => true,
+        // Override some insanse rules of these sets.
         'concat_space' => ['spacing' => 'one'],
+        // Having strict types is not worth it when using phpstan/psalm.
         'declare_strict_types' => false,
         'header_comment' => ['header' => $header, 'comment_type' => 'PHPDoc', 'location' => 'after_open'],
         'increment_style' => ['style' => 'post'],
-        'modernize_strpos' => true,
         'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
         'php_unit_internal_class' => false,
         'php_unit_test_case_static_method_calls' => ['call_type' => 'this'],
         'php_unit_test_class_requires_covers' => false,
         'phpdoc_align' => false,
         'phpdoc_annotation_without_dot' => false,
-        'phpdoc_list_type' => true,
         'phpdoc_to_comment' => false,
         'psr_autoloading' => false,
+        // Cryptographically secure functions are not required.
         'random_api_migration' => false,
         'yoda_style' => false,
     ])

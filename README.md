@@ -26,7 +26,7 @@ For detailed instructions on updating the content and pushing a new release, ple
 
 ### Development requirements
 
-- PHP: version 8.3 or later is required.
+- PHP: version 8.4 or later is required.
 - Node.js: version 20 or later is required.
 - Docker.
 
@@ -120,6 +120,7 @@ Note that the database and media files are not distributed with this repository.
 
 This repository includes:
 
+- [Composer](https://getcomposer.org/), which is licensed under the [MIT License](https://github.com/composer/composer/blob/main/LICENSE).
 - [simple-datatables](https://github.com/fiduswriter/simple-datatables), an
   [LGPL-licensed](https://github.com/fiduswriter/simple-datatables/blob/main/LICENSE) JavaScript library to enhance HTML tables.
 - The [Roboto font](https://github.com/googlefonts/roboto), licensed under [Apache License Version 2.0](src/fonts/LICENSE).

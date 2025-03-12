@@ -41,6 +41,6 @@ final class ComposerPackageJsonTest extends TestCase
 
     private function getJsonArray(string $filename): array
     {
-        return json_decode(file_get_contents($filename), true);
+        return json_decode(json: file_get_contents($filename), associative: true, flags: JSON_THROW_ON_ERROR);
     }
 }

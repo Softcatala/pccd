@@ -66,11 +66,9 @@ require __DIR__ . '/../../docroot/css/base.min.css';
         <p><?php echo format_nombre(get_n_modismes()); ?>&nbsp;fitxes, corresponents a <?php echo format_nombre(get_n_paremiotipus()); ?>&nbsp;paremiotipus, recollides de <?php echo format_nombre(get_n_fonts()); ?>&nbsp;fonts i <?php echo format_nombre(get_n_informants()); ?>&nbsp;informants. Última actualització: <?php require __DIR__ . '/../../tmp/db_date.txt'; ?></p>
         <p>© Víctor Pàmies i Riudor, 2020-2025.</p>
     </footer>
-    <div id="cookie-banner" hidden>
-        <div role="alert">
-            <div>Aquest lloc web fa servir galetes de Google per analitzar el trànsit.</div>
-            <button type="button">D'acord</button>
-        </div>
+    <div id="cookie-banner" role="alert" hidden>
+        <p>Aquest lloc web fa servir galetes de Google per analitzar el trànsit.</p>
+        <button type="button">D'acord</button>
     </div>
     <script>
 <?php

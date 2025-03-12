@@ -12,7 +12,7 @@
 
 require __DIR__ . '/../../src/common.php';
 
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '1024M');
 set_time_limit(0);
 session_start();
 
@@ -91,7 +91,7 @@ if (isset($_GET['logout'])) {
 
 session_write_close();
 
-if (isset($_GET['test']) && is_string($_GET['test']) && $_GET['test'] !== '') {
+if (isset($_GET['test']) && $_GET['test'] !== '' && is_string($_GET['test'])) {
     $start_time = microtime(true);
 
     require __DIR__ . '/../../src/reports_common.php';

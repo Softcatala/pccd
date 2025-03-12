@@ -1,4 +1,4 @@
-ARG PHP_IMAGE_TAG=8.4.3-apache-bookworm
+ARG PHP_IMAGE_TAG=8.4.4-apache-bookworm
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
@@ -59,7 +59,7 @@ RUN if [ "$profiler" = "xhprof" ]; then \
         echo "    AllowOverride FileInfo"; \
         echo "    Require all granted"; \
         echo "    php_value auto_prepend_file none"; \
-        echo "    php_value memory_limit 512M"; \
+        echo "    php_value memory_limit 1024M"; \
         echo "</Directory>"; \
         } >> /etc/apache2/sites-available/000-default.conf; \
         echo '</VirtualHost>' >> /etc/apache2/sites-available/000-default.conf && \

@@ -1,9 +1,8 @@
 # Unnecessary developer files
 *.sublime-workspace
 .DS_Store
-.fleet/
+.idea/
 .vscode/
-.idea/php-test-framework.xml
 sftp-config.json
 
 # The original database file (MS Access) and provided zipped files

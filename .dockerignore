@@ -2,8 +2,10 @@
 .git
 .github
 .husky
+.idea
+.vscode
 
-# The database files, provided zip files and original images
+# Database, provided zips and original images
 *.accdb
 *.zip
 src/images
@@ -12,8 +14,9 @@ src/images
 *.phar
 node_modules
 scripts/SentenceSimilarityGroup
+# Composer is used to add git repositories as dev dependencies
 vendor
-# We use Composer to add git repositories as dev dependencies
+# php-spx needs to be available
 !vendor/noisebynorthwest/php-spx
 
 # Temporary files

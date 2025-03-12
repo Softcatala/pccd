@@ -68,7 +68,8 @@
     "generate:reports:paremiotipus_accents": "docker exec pccd-web php scripts/generate_report.php paremiotipus_accents > tmp/test_paremiotipus_accents.txt",
     "generate:reports:paremiotipus_repetits_part1": "docker exec pccd-web php scripts/generate_report.php paremiotipus_repetits 0 12000 > tmp/test_tmp_repetits_1.txt",
     "generate:reports:paremiotipus_repetits_part2": "docker exec pccd-web php scripts/generate_report.php paremiotipus_repetits 12000 28000 > tmp/test_tmp_repetits_2.txt",
-    "generate:reports:paremiotipus_repetits_part3": "docker exec pccd-web php scripts/generate_report.php paremiotipus_repetits 28000 > tmp/test_tmp_repetits_3.txt",
+    "generate:reports:paremiotipus_repetits_part3": "docker exec pccd-web php scripts/generate_report.php paremiotipus_repetits 28000 50000 > tmp/test_tmp_repetits_3.txt",
+    "generate:reports:paremiotipus_repetits_part4": "docker exec pccd-web php scripts/generate_report.php paremiotipus_repetits 50000 > tmp/test_tmp_repetits_4.txt",
     "generate:reports:sinonims": "docker exec pccd-web php scripts/sinonims-export/app.php > scripts/sinonims-export/sinonims_strict.txt 2> scripts/sinonims-export/sinonims.txt",
     "generate:reports:small_images": "node scripts/report-small-images.js > tmp/test_imatges_petites.txt",
     "generate:reports:unsupported_image_extensions": "node scripts/report-unsupported-image-extensions.js > tmp/test_imatges_file_extensions.txt",
@@ -134,24 +135,24 @@
   ],
   "devDependencies": {
     "@ls-lint/ls-lint": "^2.3.0-beta.3",
-    "@playwright/test": "^1.50.1",
-    "@size-limit/file": "^11.1.6",
+    "@playwright/test": "^1.51.0",
+    "@size-limit/file": "^11.2.0",
     "concurrently": "^9.1.2",
     "dotenv": "^16.4.7",
-    "eslint": "^9.20.1",
-    "eslint-plugin-unicorn": "^56.0.1",
-    "html-validate": "^9.2.2",
+    "eslint": "^9.22.0",
+    "eslint-plugin-unicorn": "^57.0.0",
+    "html-validate": "^9.5.0",
     "htmlhint": "^1.1.4",
     "husky": "^9.1.7",
-    "lighthouse": "^12.3.0",
-    "lightningcss": "^1.29.1",
-    "lightningcss-cli": "^1.29.1",
+    "lighthouse": "^12.4.0",
+    "lightningcss": "^1.29.2",
+    "lightningcss-cli": "^1.29.2",
     "linkinator": "^6.1.2",
     "markdownlint-cli": "^0.44.0",
-    "prettier": "^3.5.1",
+    "prettier": "^3.5.3",
     "sharp": "^0.33.5",
-    "size-limit": "^11.1.6",
-    "stylelint": "^16.14.1",
+    "size-limit": "^11.2.0",
+    "stylelint": "^16.15.0",
     "stylelint-config-recess-order": "^6.0.0",
     "stylelint-config-standard": "^37.0.0",
     "svgo": "^3.3.2",
@@ -161,6 +162,9 @@
     "simple-datatables": "^10.0.0"
   },
   "overrides": {
-    "picomatch": "^4.0.2"
+    "picomatch": "^4.0.2",
+    "@sidvind/better-ajv-errors": {
+      "ajv": "^6.12.6"
+    }
   }
 }

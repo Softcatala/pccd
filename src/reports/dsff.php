@@ -53,7 +53,7 @@ function test_dsff(): void
 
     $sentences = [];
     $missing_from_source = [];
-    $data = json_decode($json_content, true);
+    $data = json_decode(json: $json_content, associative: true, flags: JSON_THROW_ON_ERROR);
     assert(is_array($data));
     // Generate this set for quick lookups in next reports.
     $dsff_all_sentences = [];

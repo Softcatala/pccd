@@ -34,7 +34,7 @@ th {
 }
 
 tr:nth-of-type(even) {
-    background-color: #f9f9f9;
+    background: #f9f9f9;
 }
 
 thead tr:first-child {

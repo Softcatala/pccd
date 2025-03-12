@@ -13,6 +13,64 @@
 const PAGER_DEFAULT = 10;
 
 /**
+ * Returns the search mode.
+ */
+function get_search_mode(): string
+{
+    $allowed_input_modes = ['comença', 'acaba', 'coincident'];
+    $search_mode = isset($_GET['mode']) && is_string($_GET['mode']) ? $_GET['mode'] : '';
+    $search_mode = in_array($search_mode, $allowed_input_modes, true) ? $search_mode : 'conté';
+
+    // Switch to internal search modes based on conditions.
+    if ($search_mode === 'conté' && isset($_GET['cerca']) && $_GET['cerca'] !== '' && is_string($_GET['cerca'])) {
+        $trimmed_search = mb_trim($_GET['cerca']);
+        if (str_starts_with($trimmed_search, '"') && str_ends_with($trimmed_search, '"')) {
+            // Simple custom search mode for whole sentence search.
+            $search_mode = 'whole_sentence';
+        } elseif (
+            !str_contains($trimmed_search, ' ')
+            && (
+                str_contains($trimmed_search, '*')
+                || str_contains($trimmed_search, '?')
+            )
+        ) {
+            // Simple custom search mode for using wildcards in single-word searches.
+            $search_mode = 'wildcard';
+        }
+    }
+
+    return $search_mode;
+}
+
+/**
+ * Gets the search input normalized, for the SQL query.
+ */
+function get_search_normalized(string $search_mode): string
+{
+    if (isset($_GET['cerca']) && $_GET['cerca'] !== '' && is_string($_GET['cerca'])) {
+        $trimmed_search = mb_trim($_GET['cerca']);
+        $search_length = strlen($trimmed_search);
+        if ($search_length > 0 && $search_length < 255) {
+            return normalize_search($trimmed_search, $search_mode);
+        }
+    }
+
+    return '';
+}
+
+/**
+ * Gets the search input sanitized for rendering.
+ */
+function get_search_clean(): string
+{
+    if (isset($_GET['cerca']) && $_GET['cerca'] !== '' && is_string($_GET['cerca'])) {
+        return htmlspecialchars(mb_trim($_GET['cerca']));
+    }
+
+    return '';
+}
+
+/**
  * Returns the pagination limit from query string. Defaults to 10.
  */
 function get_search_page_limit(): int
@@ -36,6 +94,22 @@ function get_search_page_limit(): int
 }
 
 /**
+ * Returns the number of search pages.
+ */
+function get_search_pages_number(int $total, int $results_per_page): int
+{
+    return (int) ceil($total / $results_per_page);
+}
+
+/**
+ * Returns the page number offset.
+ */
+function get_search_page_offset(int $current_page, int $results_per_page): int
+{
+    return ($current_page - 1) * $results_per_page;
+}
+
+/**
  * Returns whether a checkbox should be checked in the search page.
  */
 function checkbox_checked(string $checkbox): bool
@@ -54,7 +128,7 @@ function checkbox_checked(string $checkbox): bool
 function get_search_pager_url(int $page_number): string
 {
     $mostra = get_search_page_limit();
-    if (!isset($_GET['cerca']) || !is_string($_GET['cerca']) || $_GET['cerca'] === '') {
+    if (!isset($_GET['cerca']) || $_GET['cerca'] === '' || !is_string($_GET['cerca'])) {
         // Simplify links to the homepage as much as possible.
         if ($page_number === 1) {
             if ($mostra === PAGER_DEFAULT) {
@@ -74,7 +148,7 @@ function get_search_pager_url(int $page_number): string
     // Build the URL in the same format as it is when the search form is submitted, so the browser/CDN cache can be
     // reused.
     $url = '/?mode=';
-    if (isset($_GET['mode']) && is_string($_GET['mode']) && $_GET['mode'] !== '') {
+    if (isset($_GET['mode']) && is_string($_GET['mode'])) {
         $url .= htmlspecialchars(urlencode($_GET['mode']));
     }
 
@@ -231,7 +305,7 @@ function build_search_query(string $search, string $search_mode, string &$where_
         $where_clause = " WHERE `PAREMIOTIPUS` LIKE CONCAT('%', ?)";
     } elseif ($search_mode === 'coincident') {
         $where_clause = ' WHERE `PAREMIOTIPUS` = ?';
-    } elseif (isset($_GET['font']) && is_string($_GET['font']) && $_GET['font'] !== '') {
+    } elseif (isset($_GET['font']) && $_GET['font'] !== '' && is_string($_GET['font'])) {
         $arguments = [path_to_name($_GET['font'])];
         $where_clause = ' WHERE `ID_FONT` = ?';
     } else {

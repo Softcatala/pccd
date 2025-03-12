@@ -17,11 +17,11 @@ npm
 php-cli
 php-curl
 php-dev
-php-dom
 php-gd
 php-intl
 php-mbstring
 php-mysql
+php-xml
 php-zip
 pngcheck
 pngquant

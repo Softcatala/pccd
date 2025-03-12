@@ -10,19 +10,6 @@
  * source code in the file LICENSE.
  */
 
-// TODO: Remove when PHP 8.4 is required.
-if (!function_exists('mb_ucfirst')) {
-    /**
-     * ucfirst() function for multibyte character encodings.
-     *
-     * Borrowed from https://stackoverflow.com/a/58915632/1391963.
-     */
-    function mb_ucfirst(string $str, ?string $encoding = null): string
-    {
-        return mb_strtoupper(mb_substr($str, 0, 1, $encoding), $encoding) . mb_substr($str, 1, null, $encoding);
-    }
-}
-
 final class PageRenderer
 {
     public readonly string $name;
@@ -138,9 +125,9 @@ final class PageRenderer
     {
         $allowed_pages = ['credits', 'instruccions', 'fonts', 'llibres', 'obra', 'paremiotipus', 'projecte', 'top100', 'top10000'];
 
-        foreach ($allowed_pages as $allowed_page) {
-            if (isset($_GET[$allowed_page])) {
-                return $allowed_page;
+        foreach ($allowed_pages as $page) {
+            if (isset($_GET[$page])) {
+                return $page;
             }
         }
 
@@ -164,7 +151,7 @@ final class PageRenderer
     {
         $block = '<div class="bloc bloc-books">';
         $block .= '<p><a href="/llibres">Llibres de l\'autor</a></p>';
-        $block .= get_random_book()->render(['preload' => true, 'preload_media' => '(min-width: 768px)']);
+        $block .= get_random_book()->render(preload: true, preload_media: '(min-width: 768px)');
         $block .= '</div>';
 
         return $block;
@@ -229,7 +216,7 @@ final class PageRenderer
     }
 }
 
-final readonly class Variant
+final readonly class ParemiotipusVariant
 {
     public string $PAREMIOTIPUS;
     public string $AUTOR;
@@ -292,48 +279,31 @@ final readonly class Image
 
 final readonly class Book
 {
-    private const array URL_FIXES = [
-        'https://lafinestralectora.cat/els-100-refranys-mes-populars-2/' => 'https://lafinestralectora.cat/els-100-refranys-mes-populars/',
-    ];
     private string $Imatge;
     private string $Títol;
     private string $URL;
     private string $WIDTH;
     private string $HEIGHT;
 
-    /**
-     * @param array{
-     *     alt_text?: string,
-     *     file_name?: string,
-     *     height?: int,
-     *     lazy_loading?: bool,
-     *     path?: string,
-     *     width?: int,
-     *     preload?: bool,
-     *     preload_media?: string
-     * } $imageOptions
-     */
-    public function render(array $imageOptions = []): string
+    public function render(bool $lazy_loading = true, bool $preload = false, string $preload_media = ''): string
     {
-        $url = self::URL_FIXES[$this->URL] ?? $this->URL;
         $html = '';
-        if ($url !== '') {
-            $html .= '<a href="' . $url . '" title="' . htmlspecialchars($this->Títol) . '">';
+        if ($this->URL !== '') {
+            $html .= '<a href="' . $this->URL . '" title="' . htmlspecialchars($this->Títol) . '">';
         }
 
-        // Default image options.
-        $defaultOptions = [
-            'alt_text' => $this->Títol,
-            'file_name' => $this->Imatge,
-            'height' => (int) $this->HEIGHT,
-            'path' => '/img/obres/',
-            'width' => (int) $this->WIDTH,
-        ];
+        $html .= get_image_tags(
+            file_name: $this->Imatge,
+            path: '/img/obres/',
+            alt_text: $this->Títol,
+            width: $this->WIDTH,
+            height: $this->HEIGHT,
+            lazy_loading: $lazy_loading,
+            preload: $preload,
+            preload_media: $preload_media
+        );
 
-        // Generate image tags, merging provided options.
-        $html .= get_image_tags(...$imageOptions + $defaultOptions);
-
-        if ($url !== '') {
+        if ($this->URL !== '') {
             $html .= '</a>';
         }
 
@@ -701,73 +671,66 @@ function get_idioma_iso_code(string $code): string
  */
 function normalize_search(string $string, string $search_mode = ''): string
 {
-    if ($string !== '') {
-        // Remove useless characters in search that may affect syntax, or that are not useful.
+    // Remove useless characters in search that may affect syntax, or that are not useful.
+    $string = str_replace(
+        ['"', '+', '.', '%', '--', '_', '(', ')', '[', ']', '{', '}', '^', '>', '<', '~', '@', '$', '|', '/', '\\'],
+        '',
+        $string
+    );
+
+    // Standardize simple quotes.
+    $string = str_replace('’', "'", $string);
+
+    // Remove double spaces.
+    $string = preg_replace('/\s+/', ' ', $string);
+    assert(is_string($string));
+    // Fix characters for search.
+    if ($search_mode === 'whole_sentence') {
+        // Remove wildcards and unnecessary characters.
+        $string = str_replace(['*', '?'], '', $string);
+    } elseif ($search_mode === 'wildcard') {
+        // Replace wildcard characters.
+        $string = str_replace(['*', '?'], ['.*', '.'], $string);
+    } elseif ($search_mode === 'conté') {
+        // Remove characters that may affect FULL-TEXT search syntax.
+        $string = str_replace(['*', '?'], '', $string);
+
+        // Remove loose `-` operator.
+        $string = str_replace(' - ', ' ', $string);
+
+        // Nice to have: remove extra useless characters (not `-`).
         $string = str_replace(
-            ['"', '+', '.', '%', '--', '_', '(', ')', '[', ']', '{', '}', '^', '>', '<', '~', '@', '$', '|', '/', '\\'],
+            ['“', '”', '«', '»', '…', ',', ':', ';', '!', '¡', '¿', '–', '—', '―', '─'],
             '',
             $string
         );
 
-        // Standardize simple quotes.
-        $string = str_replace('’', "'", $string);
+        // Build the full-text query.
+        $words = preg_split('/\s+/', $string);
+        assert(is_array($words));
+        $string = '';
+        foreach ($words as $word) {
+            if ($word !== '') {
+                if (str_starts_with($word, '-')) {
+                    // Respect `-` operator.
+                    $string .= '-';
+                    $word = ltrim($word, '-');
+                } else {
+                    // Manually put the `+` operator to ensure the word is searched.
+                    $string .= '+';
+                }
 
-        // Remove double spaces.
-        $string = preg_replace('/\s+/', ' ', $string);
-        assert(is_string($string));
-        if ($string !== '') {
-            // Fix characters for search.
-            if ($search_mode === 'whole_sentence') {
-                // Remove wildcards and unnecessary characters.
-                $string = str_replace(['*', '?'], '', $string);
-            } elseif ($search_mode === 'wildcard') {
-                // Replace wildcard characters.
-                $string = str_replace(['*', '?'], ['.*', '.'], $string);
-            } elseif ($search_mode === 'conté') {
-                // Remove characters that may affect FULL-TEXT search syntax.
-                $string = str_replace(['*', '?'], '', $string);
-
-                // Remove loose `-` operator.
-                /** @noinspection CascadeStringReplacementInspection */
-                $string = str_replace(' - ', ' ', $string);
-
-                // Nice to have: remove extra useless characters (not `-`).
-                /** @noinspection CascadeStringReplacementInspection */
-                $string = str_replace(
-                    ['“', '”', '«', '»', '…', ',', ':', ';', '!', '¡', '¿', '–', '—', '―', '─'],
-                    '',
-                    $string
-                );
-
-                // Build the full-text query.
-                $words = preg_split('/\s+/', $string);
-                $string = '';
-
-                /** @var non-empty-list<string> $words */
-                foreach ($words as $word) {
-                    if (str_starts_with($word, '-')) {
-                        // Respect `-` operator.
-                        $string .= '-';
-                        $word = ltrim($word, '-');
-                    } else {
-                        // Manually put the `+` operator to ensure the word is searched.
-                        $string .= '+';
-                    }
-
-                    if (str_contains($word, '-')) {
-                        // See https://stackoverflow.com/a/5192800/1391963.
-                        $string .= '"' . $word . '" ';
-                    } else {
-                        $string .= "{$word} ";
-                    }
+                if (str_contains($word, '-')) {
+                    // See https://stackoverflow.com/a/5192800/1391963.
+                    $string .= '"' . $word . '" ';
+                } else {
+                    $string .= "{$word} ";
                 }
             }
-
-            return trim($string);
         }
     }
 
-    return '';
+    return mb_trim($string);
 }
 
 /**
@@ -807,8 +770,8 @@ function get_fonts_paremiotipus(): array
  * @param string $path The path to the image file, starting with a slash.
  * @param string $alt_text (optional) The alternative text for the image. Defaults to an empty string.
  * @param bool $escape_html (optional) Whether to escape the alternative text. Defaults to true.
- * @param int $width (optional) The width attribute for the <img> tag. Defaults to 0 (not set).
- * @param int $height (optional) The height attribute for the <img> tag. Defaults to 0 (not set).
+ * @param string $width (optional) The width attribute for the <img> tag. Defaults to '0' (not set).
+ * @param string $height (optional) The height attribute for the <img> tag. Defaults to '0' (not set).
  * @param bool $lazy_loading (optional) If true, adds 'loading="lazy"' to the <img> tag. Defaults to true.
  * @param bool $preload (optional) If true, adds a preload HTTP header for the image. Defaults to false.
  * @param string $preload_media (optional) Adds the media rule to the preloaded image. Defaults to empty string (no media rule).
@@ -820,8 +783,8 @@ function get_image_tags(
     string $path,
     string $alt_text = '',
     bool $escape_html = true,
-    int $width = 0,
-    int $height = 0,
+    string $width = '0',
+    string $height = '0',
     bool $lazy_loading = true,
     bool $preload = false,
     string $preload_media = ''
@@ -869,7 +832,7 @@ function get_image_tags(
     if ($lazy_loading) {
         $image_tags .= ' loading="lazy"';
     }
-    if ($width > 0 && $height > 0) {
+    if ($width !== '0' && $height !== '0') {
         $image_tags .= ' width="' . $width . '" height="' . $height . '"';
     }
     $image_tags .= ' src="' . $file_url . '">';
@@ -987,6 +950,8 @@ function get_n_fonts(): int
  */
 function get_random_top_paremiotipus(int $max = 10000): string
 {
+    // mt_rand() is faster than random_int(), and does not throw exceptions if the necessary
+    // entropy cannot be gathered. And it is random enough for this use case.
     $random_index = mt_rand(0, $max - 1);
 
     return cache_get("paremiotipus_{$random_index}", static function () use ($random_index): string {

@@ -18,7 +18,7 @@
 
 require __DIR__ . '/../src/reports/offline.php';
 
-ini_set('memory_limit', '512M');
+ini_set('memory_limit', '1024M');
 
 if (!isset($argv[1])) {
     echo 'Argument is required.' . "\n";

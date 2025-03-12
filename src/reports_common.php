@@ -174,7 +174,7 @@ function group_data_stats(array $data, string $key): array
  *
  * @return array<string, int>
  */
-function get_data_from_files(array $files, string $directoryPath, string $attribute): array
+function get_data_from_files(array $files, string $directory_path, string $attribute): array
 {
     $data = [];
     foreach ($files as $file) {
@@ -182,9 +182,9 @@ function get_data_from_files(array $files, string $directoryPath, string $attrib
             $year = substr($matches[1], 2, 2);
             $month = substr($matches[1], 4, 2);
             $formattedDate = $month . '-' . $year;
-            $json_content = file_get_contents($directoryPath . $file);
+            $json_content = file_get_contents($directory_path . $file);
             assert(is_string($json_content));
-            $decoded = json_decode($json_content, true);
+            $decoded = json_decode(json: $json_content, associative: true, flags: JSON_THROW_ON_ERROR);
             assert(is_array($decoded));
             if (isset($decoded[$attribute])) {
                 assert(is_int($decoded[$attribute]));

@@ -1,14 +1,15 @@
 let
   nixpkgsVersion = {
-    url = "https://github.com/NixOS/nixpkgs/archive/ab3ea20adfe05a2328b4991612912ef7db67af83.tar.gz";
-    sha256 = "1l0q15x3l4p7y43jqjvg92nq5wfw7k3ixkp5rqzyvzbz2rcv4rss";
+    url = "https://github.com/NixOS/nixpkgs/archive/e318dabd6397aee8ef35f656c929762ccc373c86.tar.gz";
+    sha256 = "0ianlsjsa6bhqsa9y3s0agd6kcs3wv532rhar63xxxdwjafk2krf";
   };
 
   pinnedPkgs = import (fetchTarball nixpkgsVersion) { };
   in pinnedPkgs.mkShell {
     buildInputs = with pinnedPkgs; [
-      (php83.withExtensions ({ all, ... }:
+      (php84.withExtensions ({ all, ... }:
         with all; [
+          ctype
           curl
           dom
           filter

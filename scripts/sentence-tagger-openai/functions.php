@@ -19,7 +19,7 @@ use GuzzleHttp\Client;
  *
  * @throws JsonException
  */
-function getSentenceTags(string $sentence): array
+function get_sentence_tags(string $sentence): array
 {
     // TODO: - Implement request rate limiting (e.g., X max requests per minute).
     //       - Ensure the function is idempotent (it can resume safely after an interruption).
@@ -61,16 +61,16 @@ function getSentenceTags(string $sentence): array
     ]);
 
     $body = (string) $response->getBody();
-    $body = json_decode($body, true, 512, JSON_THROW_ON_ERROR);
+    $body = json_decode(json: $body, associative: true, flags: JSON_THROW_ON_ERROR);
     assert(is_array($body));
 
     /** @var array{choices: array{0: array{message: array{content: string}}}} $body */
-    $tagsContent = $body['choices'][0]['message']['content'];
-    $tagsJson = json_decode($tagsContent, true, 512, JSON_THROW_ON_ERROR);
+    $tags_content = $body['choices'][0]['message']['content'];
+    $tags_json = json_decode(json: $tags_content, associative: true, flags: JSON_THROW_ON_ERROR);
 
-    assert(is_array($tagsJson) && array_is_list($tagsJson));
+    assert(is_array($tags_json) && array_is_list($tags_json));
 
-    return $tagsJson;
+    return $tags_json;
 }
 
 /**
@@ -80,17 +80,17 @@ function getSentenceTags(string $sentence): array
  *
  * @throws JsonException
  */
-function appendToJsonFile(array $data, string $filePath): void
+function append_to_json_file(array $data, string $file_path): void
 {
-    if (!file_exists($filePath)) {
-        file_put_contents($filePath, json_encode([], JSON_THROW_ON_ERROR));
+    if (!file_exists($file_path)) {
+        file_put_contents($file_path, json_encode([], JSON_THROW_ON_ERROR));
     }
 
-    $content = file_get_contents($filePath);
+    $content = file_get_contents($file_path);
     assert(is_string($content));
-    $currentData = json_decode($content, true, 512, JSON_THROW_ON_ERROR);
-    assert(is_array($currentData));
-    $currentData[] = $data;
+    $current_data = json_decode(json: $content, associative: true, flags: JSON_THROW_ON_ERROR);
+    assert(is_array($current_data));
+    $current_data[] = $data;
 
-    file_put_contents($filePath, json_encode($currentData, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
+    file_put_contents($file_path, json_encode($current_data, JSON_THROW_ON_ERROR | JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
 }
