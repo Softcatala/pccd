@@ -25,7 +25,7 @@ if ($total_variants === 0) {
 
     // If no match could be found, return an HTTP 404 page.
     error_log("Error: entry not found for URL: {$request_uri}");
-    return_404_and_exit(paremiotipus: get_paremiotipus_best_match($paremiotipus));
+    return_404_and_exit(input_paremiotipus: get_paremiotipus_best_match($paremiotipus));
 }
 
 $editorials = get_editorials();
@@ -169,7 +169,7 @@ foreach ($variants as $modisme => $variant) {
             }
 
             // Do not print the footer if the entry only contains the year.
-            if ($body === '' && preg_match('/\(\d{4}\).$/', $work) > 0) {
+            if ($body === '' && preg_match('/\(\d{4}\).$/', $work) === 1) {
                 $work = '';
             }
 
@@ -273,7 +273,7 @@ foreach ($images as $image) {
         PageRenderer::setMetaImage('https://pccd.dites.cat/img/imatges/' . rawurlencode($image->Identificador));
     }
 
-    $image_tag = get_image_tags(
+    $image_tag = render_image_tags(
         file_name: $image->Identificador,
         path: '/img/imatges/',
         alt_text: $paremiotipus_display,

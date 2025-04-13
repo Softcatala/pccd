@@ -1,7 +1,7 @@
-const sharp = require("sharp");
-const path = require("node:path");
-const fs = require("node:fs");
 const { execFileSync, spawnSync } = require("node:child_process");
+const fs = require("node:fs");
+const path = require("node:path");
+const sharp = require("sharp");
 
 const SIZE_THRESHOLD = 5000;
 const PNG_MIN_QUALITY = 70;
@@ -56,8 +56,8 @@ const resizeImage = async function (sourceFile, targetFile, width) {
 const createAvifImage = function (sourceFile, targetFile, width) {
     const targetFileAvif = path.format({
         dir: path.dirname(targetFile),
-        name: path.basename(targetFile, path.extname(targetFile)),
         ext: ".avif",
+        name: path.basename(targetFile, path.extname(targetFile)),
     });
 
     // Process file only once.
@@ -116,8 +116,8 @@ const processGif = function (sourceFile, targetFile) {
     // and special care needs to be taken to keep the alpha channel.
     const targetFileWebp = path.format({
         dir: path.dirname(targetFile),
-        name: path.basename(targetFile, path.extname(targetFile)),
         ext: ".webp",
+        name: path.basename(targetFile, path.extname(targetFile)),
     });
 
     // Process file only once.
@@ -164,12 +164,12 @@ const resizeAndOptimizeImagesBulk = function (sourceDirectory, targetDirectory, 
                 processGif(sourceFile, targetFile);
                 break;
             }
-            case ".png": {
-                processPng(sourceFile, targetFile, width);
-                break;
-            }
             case ".jpg": {
                 processJpg(sourceFile, targetFile, width);
+                break;
+            }
+            case ".png": {
+                processPng(sourceFile, targetFile, width);
                 break;
             }
         }

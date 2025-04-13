@@ -1,5 +1,5 @@
-const path = require("node:path");
 const fs = require("node:fs");
+const path = require("node:path");
 const sharp = require("sharp");
 
 const IMAGE_MIN_WIDTH = 350;

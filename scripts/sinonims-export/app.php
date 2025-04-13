@@ -32,26 +32,32 @@ foreach ($parem as $p) {
     $sinonims = $sin_stmt->fetchAll(PDO::FETCH_COLUMN);
 
     foreach ($sinonims as $sinonim) {
-        if ($sinonim !== false) {
-            $sinonims_array = get_sinonims($sinonim);
-            foreach ($sinonims_array as $s) {
-                // Try get a paremiotipus for that sinònim.
-                $parem_stmt->execute([':paremiotipus' => $s]);
-                $sp = $parem_stmt->fetchColumn();
+        if ($sinonim === false) {
+            continue;
+        }
 
-                // Try to get the paremiotipus from the modisme.
-                if ($sp === false) {
-                    $modisme_stmt->execute([':modisme' => $s]);
-                    $sp = $modisme_stmt->fetchColumn();
-                }
+        $sinonims_array = get_sinonims($sinonim);
+        foreach ($sinonims_array as $s) {
+            // Try get a paremiotipus for that sinònim.
+            $parem_stmt->execute([':paremiotipus' => $s]);
+            $sp = $parem_stmt->fetchColumn();
 
-                if ($sp !== false) {
-                    assert(is_string($sp));
-                    if (!in_array($sp, $parem_sin_array[$p], true)) {
-                        $parem_sin_array[$p][] = $sp;
-                    }
-                }
+            // Try to get the paremiotipus from the modisme.
+            if ($sp === false) {
+                $modisme_stmt->execute([':modisme' => $s]);
+                $sp = $modisme_stmt->fetchColumn();
             }
+
+            if ($sp === false) {
+                continue;
+            }
+
+            assert(is_string($sp));
+            if (in_array($sp, $parem_sin_array[$p], true)) {
+                continue;
+            }
+
+            $parem_sin_array[$p][] = $sp;
         }
     }
 }

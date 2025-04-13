@@ -14,6 +14,7 @@ maven
 mdbtools
 nodejs
 npm
+openjdk-17-jdk
 php-cli
 php-curl
 php-dev

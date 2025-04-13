@@ -1,4 +1,4 @@
-const { test, expect } = require("@playwright/test");
+const { expect, test } = require("@playwright/test");
 const fs = require("node:fs");
 const path = require("node:path");
 
@@ -8,7 +8,7 @@ test.describe("Homepage", () => {
     let extractedNumber = "";
     let updatedDate = "";
     test.beforeEach(async ({ page }) => {
-        await page.setViewportSize({ width: 1280, height: 720 });
+        await page.setViewportSize({ height: 720, width: 1280 });
         await page.goto("/");
     });
 

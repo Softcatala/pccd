@@ -1,11 +1,11 @@
-const path = require("node:path");
 const fs = require("node:fs");
+const path = require("node:path");
 
 const paremiesDirectory = path.join(__dirname, "../src/images/paremies");
 const cobertesDirectory = path.join(__dirname, "../src/images/cobertes");
 
 const listUnsupportedExtensions = function (sourceDirectory) {
-    const supportedExtensions = new Set([".jpg", ".png", ".gif"]);
+    const supportedExtensions = new Set([".gif", ".jpg", ".png"]);
     const unsupportedFiles = [];
 
     const files = fs.readdirSync(sourceDirectory);

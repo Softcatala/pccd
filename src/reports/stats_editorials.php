@@ -35,12 +35,14 @@ function stats_editorials(): void
     $data = [];
     $data_table_paremiotipus = [];
     foreach ($records as $ed_key => $count) {
-        if (isset($editorials[$ed_key])) {
-            if (count($data) <= 25) {
-                $data[$editorials[$ed_key]] = $count;
-            }
-            $data_table_paremiotipus[$editorials[$ed_key]] = $count;
+        if (!isset($editorials[$ed_key])) {
+            continue;
         }
+
+        if (count($data) <= 25) {
+            $data[$editorials[$ed_key]] = $count;
+        }
+        $data_table_paremiotipus[$editorials[$ed_key]] = $count;
     }
     echo get_chart('doughnut', $data, 'paremiotipus', style: 'width:600px;');
 
@@ -70,12 +72,14 @@ function stats_editorials(): void
     $data = [];
     $data_table = [];
     foreach ($records as $ed_key => $count) {
-        if (isset($editorials[$ed_key])) {
-            if (count($data) <= 25) {
-                $data[$editorials[$ed_key]] = $count;
-            }
-            $data_table[$editorials[$ed_key]] = $count;
+        if (!isset($editorials[$ed_key])) {
+            continue;
         }
+
+        if (count($data) <= 25) {
+            $data[$editorials[$ed_key]] = $count;
+        }
+        $data_table[$editorials[$ed_key]] = $count;
     }
     echo get_chart('doughnut', $data, 'fitxes', style: 'width:600px;');
 

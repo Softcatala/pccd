@@ -11,7 +11,6 @@
  */
 
 // Code to prepend when using XHProf in dev environments.
-
 xhprof_enable(XHPROF_FLAGS_CPU | XHPROF_FLAGS_MEMORY);
 register_shutdown_function(
     static function (): void {

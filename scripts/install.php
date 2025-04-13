@@ -25,14 +25,14 @@ require __DIR__ . '/../src/install_common.php';
 $pdo = get_db();
 
 // Check that latest table has already been created to know if we are ready to proceed with the installation process.
-if (!tableExists('paremiotipus_display')) {
+if (!table_exists('paremiotipus_display')) {
     echo "Not ready to install\n";
 
     exit;
 }
 
 // Check that installation has not been executed already.
-if (tableExists('pccd_is_installed')) {
+if (table_exists('pccd_is_installed')) {
     echo "Already installed\n";
 
     exit;
@@ -55,7 +55,7 @@ foreach ($paremies as $p) {
     // Try to clean phrases ending with numbers and fill ACCEPCIO field instead.
     assert(is_string($p['MODISME']));
     $modisme = trim($p['MODISME']);
-    if (preg_match_all('/ ([1-4])$/', $modisme, $matches) > 0) {
+    if (preg_match_all('/ ([1-4])$/', $modisme, $matches) === 1) {
         $last = end($matches[0]);
         if (is_string($last)) {
             $last_number = trim($last);

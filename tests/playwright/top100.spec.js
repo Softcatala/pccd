@@ -1,4 +1,4 @@
-const { test, expect } = require("@playwright/test");
+const { expect, test } = require("@playwright/test");
 
 test.describe("Top paremiotipus", () => {
     test("top 100 has 100 entries", async ({ page }) => {

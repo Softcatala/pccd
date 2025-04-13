@@ -1,6 +1,6 @@
-const fs = require("node:fs");
 const { chromium } = require("@playwright/test");
 const dotenv = require("dotenv");
+const fs = require("node:fs");
 
 dotenv.config();
 

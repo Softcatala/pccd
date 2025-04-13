@@ -13,9 +13,9 @@
 /**
  * Standardize spaces in a string.
  */
-function standardize_spaces(string $string): string
+function standardize_spaces(string $input_string): string
 {
-    $string = str_replace(["\n", "\r", "\t"], ' ', $string);
+    $string = str_replace(["\n", "\r", "\t"], ' ', $input_string);
     $string = preg_replace('/\s+/', ' ', $string);
     assert(is_string($string));
 
@@ -25,10 +25,10 @@ function standardize_spaces(string $string): string
 /**
  * Remove parentheses and everything inside them from a given string.
  */
-function remove_parentheses(string $input): string
+function remove_parentheses(string $input_string): string
 {
-    // Handle specific examples such as "A (o d')aquesta part"
-    $input = str_replace(')a', ') a', $input);
+    // Handle specific examples such as "A (o d')aquesta part".
+    $string = str_replace(')a', ') a', $input_string);
 
-    return preg_replace('/\s*\([^)]*\)/', '', $input) ?? '';
+    return preg_replace('/\s*\([^)]*\)/', '', $string) ?? '';
 }

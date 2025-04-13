@@ -13,7 +13,7 @@
 /**
  * Checks if a table exists in the database.
  */
-function tableExists(string $table): bool
+function table_exists(string $table): bool
 {
     $pdo = get_db();
 
@@ -42,24 +42,30 @@ function store_image_dimensions(string $table, string $field, string $directory)
     $images = $pdo->query("SELECT `{$field}` FROM `{$table}`")->fetchAll(PDO::FETCH_COLUMN);
     foreach ($images as $image) {
         $filename = __DIR__ . '/../' . $directory . '/' . $image;
-        if (is_file($filename)) {
-            $image_size = getimagesize($filename);
-            if ($image_size !== false) {
-                [$width, $height] = $image_size;
-                if ($width > 0) {
-                    $update_stmt->execute([$width, $height, $image]);
-                }
-            }
+        if (!is_file($filename)) {
+            continue;
         }
+
+        $image_size = getimagesize($filename);
+        if ($image_size === false) {
+            continue;
+        }
+
+        [$width, $height] = $image_size;
+        if ($width < 1) {
+            continue;
+        }
+
+        $update_stmt->execute([$width, $height, $image]);
     }
 }
 
 /**
  * Returns a paremiotipus formatted for improved sorting, removing useless characters.
  */
-function clean_paremiotipus_for_sorting(string $paremiotipus): string
+function clean_paremiotipus_for_sorting(string $input_paremiotipus): string
 {
-    $paremiotipus = str_replace(['(', ')', '«', '»'], '', $paremiotipus);
+    $paremiotipus = str_replace(['(', ')', '«', '»'], '', $input_paremiotipus);
 
     return ltrim($paremiotipus, "º-–—―─'\"“”‘’….¡¿* \n\r\t\v\0\x95");
 }

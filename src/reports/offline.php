@@ -39,13 +39,17 @@ function background_test_llibres_urls(): string
             continue;
         }
 
-        if (!isset($urls[$url])) {
-            $response_code = curl_get_response_code(url: $url, nobody: false);
-            $urls[$url] = $response_code;
-            if (!in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
-                $output .= 'HTTP ' . $response_code . ' (' . $llibre['Títol'] . '): ' . $url . "\n";
-            }
+        if (isset($urls[$url])) {
+            continue;
         }
+
+        $response_code = curl_get_response_code(url: $url, nobody: false);
+        $urls[$url] = $response_code;
+        if (in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
+            continue;
+        }
+
+        $output .= 'HTTP ' . $response_code . ' (' . $llibre['Títol'] . '): ' . $url . "\n";
     }
 
     return $output;
@@ -63,16 +67,20 @@ function background_test_fonts_urls(): string
     foreach ($fonts as $font) {
         assert(is_string($font['URL']));
         $url = trim($font['URL']);
-        if ($url !== '') {
-            if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
-                $output .= 'URL no vàlida (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
-            } elseif (!isset($urls[$url])) {
-                $response_code = curl_get_response_code($url);
-                $urls[$url] = $response_code;
-                if (!in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
-                    $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
-                }
+        if ($url === '') {
+            continue;
+        }
+
+        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
+            $output .= 'URL no vàlida (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
+        } elseif (!isset($urls[$url])) {
+            $response_code = curl_get_response_code($url);
+            $urls[$url] = $response_code;
+            if (in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
+                continue;
             }
+
+            $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
         }
     }
 
@@ -88,25 +96,30 @@ function background_test_imatges_urls(int $start = 0, int $end = 0): string
     $output = '';
     $urls = [];
     $fonts = get_db()->query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
-    $total = count($fonts);
-    if ($end === 0) {
-        $end = $total;
+
+    $limit = $end;
+    if ($limit === 0) {
+        $limit = count($fonts);
     }
 
-    for ($i = $start; $i < $end; $i++) {
+    for ($i = $start; $i < $limit; $i++) {
         $font = $fonts[$i];
         assert(is_string($font['URL_IMATGE']));
         $url = trim($font['URL_IMATGE']);
-        if ($url !== '') {
-            if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
-                $output .= 'URL no vàlida (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
-            } elseif (!isset($urls[$url])) {
-                $response_code = curl_get_response_code($url);
-                $urls[$url] = $response_code;
-                if (!in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
-                    $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
-                }
+        if ($url === '') {
+            continue;
+        }
+
+        if (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://')) {
+            $output .= 'URL no vàlida (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
+        } elseif (!isset($urls[$url])) {
+            $response_code = curl_get_response_code($url);
+            $urls[$url] = $response_code;
+            if (in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
+                continue;
             }
+
+            $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
         }
     }
 
@@ -122,12 +135,13 @@ function background_test_imatges_links(int $start = 0, int $end = 0): string
     $output = '';
     $urls = [];
     $fonts = get_db()->query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
-    $total = count($fonts);
-    if ($end === 0) {
-        $end = $total;
+
+    $limit = $end;
+    if ($limit === 0) {
+        $limit = count($fonts);
     }
 
-    for ($i = $start; $i < $end; $i++) {
+    for ($i = $start; $i < $limit; $i++) {
         $font = $fonts[$i];
         $url = $font['URL_ENLLAÇ'];
         assert(is_string($url));
@@ -154,9 +168,11 @@ function background_test_imatges_links(int $start = 0, int $end = 0): string
 
         // Request URL.
         $response_code = curl_get_response_code($url);
-        if (!in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
-            $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
+        if (in_array($response_code, [0, 200, 301, 302, 307, 308], true)) {
+            continue;
         }
+
+        $output .= 'HTTP ' . $response_code . ' (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
     }
 
     return $output;
@@ -176,12 +192,14 @@ function background_test_paremiotipus_repetits(int $start = 0, int $end = 0): st
 
     $modismes = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     $total = count($modismes);
-    if ($end === 0) {
-        $end = $total;
+
+    $limit = $end;
+    if ($limit === 0) {
+        $limit = $total;
     }
 
     $output = '';
-    for ($i = $start; $i < $end; $i++) {
+    for ($i = $start; $i < $limit; $i++) {
         $value1 = $modismes[$i];
         assert(is_string($value1));
         $length1 = strlen($value1);
@@ -191,13 +209,17 @@ function background_test_paremiotipus_repetits(int $start = 0, int $end = 0): st
             assert(is_string($value2));
             $length2 = strlen($value2);
 
-            if (abs($length1 - $length2) < LEVENSHTEIN_MAX_DISTANCE) {
-                $similarity = 1 - (levenshtein($value1, $value2) / max($length1, $length2));
-
-                if ($similarity >= LEVENSHTEIN_SIMILARITY_THRESHOLD) {
-                    $output .= get_paremiotipus_display($value1, escape_html: false) . "\n" . get_paremiotipus_display($value2, escape_html: false) . "\n\n";
-                }
+            if (abs($length1 - $length2) >= LEVENSHTEIN_MAX_DISTANCE) {
+                continue;
             }
+
+            $similarity = 1 - (levenshtein($value1, $value2) / max($length1, $length2));
+
+            if ($similarity < LEVENSHTEIN_SIMILARITY_THRESHOLD) {
+                continue;
+            }
+
+            $output .= get_paremiotipus_display($value1, escape_html: false) . "\n" . get_paremiotipus_display($value2, escape_html: false) . "\n\n";
         }
     }
 
@@ -268,17 +290,25 @@ function background_test_imatges_no_existents(): string
     $stmt = get_db()->query('SELECT `Identificador` FROM `00_IMATGES`');
     $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
     foreach ($imatges as $imatge) {
-        if ($imatge !== '' && !is_file(__DIR__ . '/../../docroot/img/imatges/' . $imatge)) {
-            $output .= 'paremies/' . $imatge . "\n";
+        if ($imatge === '') {
+            continue;
         }
+        if (is_file(__DIR__ . '/../../docroot/img/imatges/' . $imatge)) {
+            continue;
+        }
+        $output .= 'paremies/' . $imatge . "\n";
     }
 
     $stmt = get_db()->query('SELECT `Imatge` FROM `00_FONTS`');
     $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
     foreach ($imatges as $i) {
-        if ($i !== '' && !is_file(__DIR__ . '/../../docroot/img/obres/' . $i)) {
-            $output .= 'cobertes/' . $i . "\n";
+        if ($i === '') {
+            continue;
         }
+        if (is_file(__DIR__ . '/../../docroot/img/obres/' . $i)) {
+            continue;
+        }
+        $output .= 'cobertes/' . $i . "\n";
     }
 
     return $output;
@@ -308,9 +338,11 @@ function background_test_imatges_no_referenciades(): string
             continue;
         }
 
-        if (!isset($images[$filename])) {
-            $output .= "{$filename}\n";
+        if (isset($images[$filename])) {
+            continue;
         }
+
+        $output .= "{$filename}\n";
     }
 
     $fonts = get_db()->query('SELECT `Imatge`, 1 FROM `00_FONTS`')->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -332,10 +364,14 @@ function background_test_imatges_no_referenciades(): string
         if (!in_array($extension, ['jpg', 'png', 'gif'], true)) {
             continue;
         }
-
-        if (!isset($fonts[$filename]) && !isset($llibres[$filename])) {
-            $output .= "{$filename}\n";
+        if (isset($fonts[$filename])) {
+            continue;
         }
+        if (isset($llibres[$filename])) {
+            continue;
+        }
+
+        $output .= "{$filename}\n";
     }
 
     return $output;
@@ -404,11 +440,11 @@ function background_test_intl_modismes_repetits(): string
 
     $output = '';
     $results = get_db()->query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
-    $groupedResults = [];
+    $grouped_results = [];
     foreach ($results as $row) {
-        $groupedResults[$row['PAREMIOTIPUS']][] = $row['MODISME'];
+        $grouped_results[$row['PAREMIOTIPUS']][] = $row['MODISME'];
     }
-    foreach ($groupedResults as $modisme_array) {
+    foreach ($grouped_results as $modisme_array) {
         $prev = '';
         foreach ($modisme_array as $modisme) {
             if ($prev !== '' && $checker->areConfusable($modisme, $prev)) {
@@ -433,27 +469,31 @@ function background_test_intl_modismes_molt_diferents(): string
     $output = '';
     $results = get_db()->query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $row) {
-        if ($row['MODISME'] !== $row['PAREMIOTIPUS']) {
-            $modisme_ascii = $transliterator->transliterate($row['MODISME']);
-            $paremiotipus_ascii = $transliterator->transliterate($row['PAREMIOTIPUS']);
-            assert(is_string($modisme_ascii));
-            assert(is_string($paremiotipus_ascii));
-
-            $words_modisme = array_unique(array_diff(str_word_count(strtolower($modisme_ascii), 1), $words_exclude));
-            $words_paremiotipus = array_unique(array_diff(str_word_count(strtolower($paremiotipus_ascii), 1), $words_exclude));
-
-            $common_words = count(array_intersect($words_modisme, $words_paremiotipus));
-            if ($common_words < WORD_DIFFERENCE_MIN) {
-                if ($prev_paremiotipus !== $row['PAREMIOTIPUS']) {
-                    if ($prev_paremiotipus !== '') {
-                        $output .= "\n";
-                    }
-                    $output .= get_paremiotipus_display($row['PAREMIOTIPUS'], escape_html: false) . ":\n";
-                }
-                $output .= '    ' . $row['MODISME'] . "\n";
-                $prev_paremiotipus = $row['PAREMIOTIPUS'];
-            }
+        if ($row['MODISME'] === $row['PAREMIOTIPUS']) {
+            continue;
         }
+
+        $modisme_ascii = $transliterator->transliterate($row['MODISME']);
+        $paremiotipus_ascii = $transliterator->transliterate($row['PAREMIOTIPUS']);
+        assert(is_string($modisme_ascii));
+        assert(is_string($paremiotipus_ascii));
+
+        $words_modisme = array_unique(array_diff(str_word_count(strtolower($modisme_ascii), 1), $words_exclude));
+        $words_paremiotipus = array_unique(array_diff(str_word_count(strtolower($paremiotipus_ascii), 1), $words_exclude));
+
+        $common_words = count(array_intersect($words_modisme, $words_paremiotipus));
+        if ($common_words >= WORD_DIFFERENCE_MIN) {
+            continue;
+        }
+
+        if ($prev_paremiotipus !== $row['PAREMIOTIPUS']) {
+            if ($prev_paremiotipus !== '') {
+                $output .= "\n";
+            }
+            $output .= get_paremiotipus_display($row['PAREMIOTIPUS'], escape_html: false) . ":\n";
+        }
+        $output .= '    ' . $row['MODISME'] . "\n";
+        $prev_paremiotipus = $row['PAREMIOTIPUS'];
     }
 
     return $output;

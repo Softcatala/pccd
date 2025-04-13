@@ -1,9 +1,9 @@
 /* eslint-env browser */
-const { test, expect } = require("@playwright/test");
+const { expect, test } = require("@playwright/test");
 
 test.describe("Homepage <picture> tag", () => {
     test.beforeEach(async ({ page }) => {
-        await page.setViewportSize({ width: 1280, height: 720 });
+        await page.setViewportSize({ height: 720, width: 1280 });
         await page.goto("/");
     });
 
@@ -62,7 +62,7 @@ test.describe("Homepage <picture> tag", () => {
 
 test.describe("SVG in <img> tags", () => {
     test.beforeEach(async ({ page }) => {
-        await page.setViewportSize({ width: 1280, height: 720 });
+        await page.setViewportSize({ height: 720, width: 1280 });
         await page.goto("/");
     });
 

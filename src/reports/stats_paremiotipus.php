@@ -17,9 +17,9 @@ function stats_paremiotipus(): void
 
     require_once __DIR__ . '/../reports_common.php';
 
-    $n_paremiotipus = get_n_paremiotipus();
-    $n_modismes = get_n_modismes();
-    $n_modismes_distinct = (int) get_db()->query('SELECT COUNT(DISTINCT `MODISME`) FROM `00_PAREMIOTIPUS`')->fetchColumn();
+    $paremiotipus_count = get_paremiotipus_count();
+    $modisme_count = get_modisme_count();
+    $unique_modisme_diff = (int) get_db()->query('SELECT COUNT(DISTINCT `MODISME`) FROM `00_PAREMIOTIPUS`')->fetchColumn();
     echo '<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>';
     echo '<h3>Paremiotipus per nombre de recurrències</h3>';
     $stmt = get_db()->query('SELECT `PAREMIOTIPUS`, COUNT(1) AS `MODISME_COUNT` FROM `00_PAREMIOTIPUS` GROUP BY `PAREMIOTIPUS`');
@@ -38,7 +38,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb equivalents' => $total,
-        'Sense equivalents' => $n_paremiotipus - $total,
+        'Sense equivalents' => $paremiotipus_count - $total,
     ];
     echo get_chart('pie', $data, 'paremiotipus', style: 'width:330px;');
     echo '</article>';
@@ -49,7 +49,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb sinònims' => $total,
-        'Sense sinònims' => $n_paremiotipus - $total,
+        'Sense sinònims' => $paremiotipus_count - $total,
     ];
     echo get_chart('pie', $data, 'paremiotipus', style: 'width:330px;');
     echo '</article>';
@@ -60,7 +60,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb imatges' => $total,
-        'Sense imatges' => $n_paremiotipus - $total,
+        'Sense imatges' => $paremiotipus_count - $total,
     ];
     echo get_chart('pie', $data, 'paremiotipus', style: 'width:330px;');
     echo '</article>';
@@ -71,7 +71,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb veus' => $total,
-        'Sense veus' => $n_paremiotipus - $total,
+        'Sense veus' => $paremiotipus_count - $total,
     ];
     echo get_chart('pie', $data, 'paremiotipus', style: 'width:330px;');
     echo '</article>';
@@ -82,7 +82,7 @@ function stats_paremiotipus(): void
     if ($text !== false) {
         $total = substr_count($text, "\n");
         $data = [
-            'Sense errors' => $n_paremiotipus - $total,
+            'Sense errors' => $paremiotipus_count - $total,
             'Amb errors' => $total,
         ];
         echo get_chart('pie', $data, 'paremiotipus', style: 'width:330px;');
@@ -97,7 +97,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb equivalents' => $total,
-        'Sense equivalents' => $n_modismes - $total,
+        'Sense equivalents' => $modisme_count - $total,
     ];
     echo get_chart('pie', $data, 'fitxes', style: 'width:330px;');
     echo '</article>';
@@ -108,7 +108,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb sinònims' => $total,
-        'Sense sinònims' => $n_modismes - $total,
+        'Sense sinònims' => $modisme_count - $total,
     ];
     echo get_chart('pie', $data, 'fitxes', style: 'width:330px;');
     echo '</article>';
@@ -119,7 +119,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb explicacions' => $total,
-        'Sense explicacions' => $n_modismes - $total,
+        'Sense explicacions' => $modisme_count - $total,
     ];
     echo get_chart('pie', $data, 'fitxes', style: 'width:330px;');
     echo '</article>';
@@ -130,7 +130,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb exemples' => $total,
-        'Sense exemples' => $n_modismes - $total,
+        'Sense exemples' => $modisme_count - $total,
     ];
     echo get_chart('pie', $data, 'fitxes', style: 'width:330px;');
     echo '</article>';
@@ -141,7 +141,7 @@ function stats_paremiotipus(): void
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb llocs' => $total,
-        'Sense llocs' => $n_modismes - $total,
+        'Sense llocs' => $modisme_count - $total,
     ];
     echo get_chart('pie', $data, 'fitxes', style: 'width:330px;');
     echo '</article>';
@@ -169,7 +169,7 @@ function stats_paremiotipus(): void
         $total++;
     }
     $data = [
-        'Amb coincidència' => $n_paremiotipus - $total,
+        'Amb coincidència' => $paremiotipus_count - $total,
         'Sense coincidència' => $total,
     ];
     echo "<details><summary>Mostra la llista</summary><pre>{$list}</pre></details>";
@@ -178,20 +178,20 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Modismes sense cap paraula en comú amb el seu paremiotipus</h3>';
-    $n_modismes_diff = 0;
+    $modisme_count_diff = 0;
     $lines = file(__DIR__ . '/../../tmp/test_intl_modismes_molt_diferents.txt');
     $list = '';
     if ($lines !== false) {
         foreach ($lines as $line) {
             if (str_starts_with($line, '    ')) {
-                $n_modismes_diff++;
+                $modisme_count_diff++;
             }
             $list .= $line;
         }
     }
     $data = [
-        'Amb coincidència' => $n_modismes_distinct - $n_modismes_diff,
-        'Sense coincidència' => $n_modismes_diff,
+        'Amb coincidència' => $unique_modisme_diff - $modisme_count_diff,
+        'Sense coincidència' => $modisme_count_diff,
     ];
     echo "<details><summary>Mostra la llista</summary><pre>{$list}</pre></details>";
     echo get_chart('pie', $data, 'modismes (únics)', style: 'width:330px;');

@@ -27,7 +27,7 @@ docker exec pccd-web php scripts/languagetool-checker/export.php > all.txt
 )
 
 # Clean up filter output.
-grep -v -F 'SLF4J:' error.txt > excluded.txt
+grep -v -F 'SLF4J' error.txt > excluded.txt
 
 # Get the new LT-excluded sentences since last commit.
 git diff --unified=0 HEAD excluded.txt | grep -E '^\+[^+]' | sed 's/^\+//' > excluded_new_tmp.txt

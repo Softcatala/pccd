@@ -36,7 +36,6 @@ build:
 
 .setup:
   before_script:
-    - export DEBIAN_FRONTEND=noninteractive
     - export PHP_CS_FIXER_IGNORE_ENV=1
     - apt-get update && apt-get upgrade -y && xargs apt-get install --no-install-recommends -y < apt_packages.txt
     - npm ci --ignore-scripts
@@ -45,7 +44,6 @@ build:
 .php_lint_template:
   stage: build
   script:
-    - export DEBIAN_FRONTEND=noninteractive
     - apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y git unzip wget
     - curl -L https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions > /usr/local/bin/install-php-extensions
     - chmod +x /usr/local/bin/install-php-extensions

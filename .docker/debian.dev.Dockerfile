@@ -1,12 +1,10 @@
-ARG PHP_IMAGE_TAG=8.4.4-apache-bookworm
+ARG PHP_IMAGE_TAG=8.4.6-apache-bookworm
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Debian-based image with Apache and mod_php. Used for development."
 
 ARG profiler
-
-ENV DEBIAN_FRONTEND=noninteractive
 
 # Set working directory
 WORKDIR /srv/app

@@ -243,7 +243,7 @@ function test_imatges_repetides(): void
     $stmt = get_db()->query('SELECT `Identificador` FROM `00_IMATGES`');
     $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
 
-    // See https://stackoverflow.com/a/5995153/1391963
+    // See https://stackoverflow.com/a/5995153/1391963.
     $repetides = array_unique(array_diff_assoc($imatges, array_unique($imatges)));
     foreach ($repetides as $r) {
         echo $r . "\n";

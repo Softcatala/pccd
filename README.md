@@ -112,10 +112,6 @@ Copyright (c) Víctor Pàmies i Riudor <vpamies@gmail.com>, 2020.
 This source code is licensed under the GNU Affero General Public License, version 3 or later, as
 detailed in the [LICENSE](LICENSE) file or available at <https://www.gnu.org/licenses/agpl-3.0.html>.
 
-File [scripts/common-voice-export/pccd.txt](scripts/common-voice-export/pccd.txt)
-is Copyright (c) Víctor Pàmies i Riudor and is made available under the
-[Creative Commons Zero 1.0 Universal license](https://creativecommons.org/publicdomain/zero/1.0/) (CC0 1.0).
-
 Note that the database and media files are not distributed with this repository. For more details about PCCD, visit <https://pccd.dites.cat/>.
 
 This repository includes:

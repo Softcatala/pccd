@@ -48,9 +48,9 @@ function get_obra(string $obra_title): false|Obra
 /**
  * ISBN simple (but incorrect) validation.
  */
-function isbn_is_valid(string $isbn): bool
+function isbn_is_valid(string $input_isbn): bool
 {
-    $isbn = str_replace('-', '', $isbn);
+    $isbn = str_replace('-', '', $input_isbn);
     $isbn_removed_chars = preg_replace('/[^a-zA-Z0-9]/', '', $isbn);
 
     return $isbn === $isbn_removed_chars && (strlen($isbn) === 10 || strlen($isbn) === 13);
@@ -70,9 +70,9 @@ function get_paremiotipus_count_by_font(string $font_id): int
 /**
  * Formats a price in Catalan.
  */
-function format_preu(string $price): string
+function format_preu(string $input_price): string
 {
-    $num = (float) $price;
+    $num = (float) $input_price;
     $decimals = $num === floor($num) ? 0 : 2;
 
     return number_format(

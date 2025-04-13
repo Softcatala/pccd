@@ -63,7 +63,7 @@ require __DIR__ . '/../../docroot/css/base.min.css';
         </div>
     </main>
     <footer>
-        <p><?php echo format_nombre(get_n_modismes()); ?>&nbsp;fitxes, corresponents a <?php echo format_nombre(get_n_paremiotipus()); ?>&nbsp;paremiotipus, recollides de <?php echo format_nombre(get_n_fonts()); ?>&nbsp;fonts i <?php echo format_nombre(get_n_informants()); ?>&nbsp;informants. Última actualització: <?php require __DIR__ . '/../../tmp/db_date.txt'; ?></p>
+        <p><?php echo format_nombre(get_modisme_count()); ?>&nbsp;fitxes, corresponents a <?php echo format_nombre(get_paremiotipus_count()); ?>&nbsp;paremiotipus, recollides de <?php echo format_nombre(get_font_count()); ?>&nbsp;fonts i <?php echo format_nombre(get_informant_count()); ?>&nbsp;informants. Última actualització: <?php require __DIR__ . '/../../tmp/db_date.txt'; ?></p>
         <p>© Víctor Pàmies i Riudor, 2020-2025.</p>
     </footer>
     <div id="cookie-banner" role="alert" hidden>

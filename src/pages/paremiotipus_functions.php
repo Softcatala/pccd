@@ -119,10 +119,10 @@ function get_cv_files(string $paremiotipus): array
 /**
  * Tries to get the best paremiotipus by searching.
  */
-function get_paremiotipus_best_match(string $modisme): string
+function get_paremiotipus_best_match(string $input_modisme): string
 {
     // We do not want to avoid words here.
-    $modisme = trim($modisme, '-');
+    $modisme = trim($input_modisme, '-');
     $modisme = str_replace(' -', ' ', $modisme);
     $modisme = trim($modisme);
 
@@ -157,9 +157,9 @@ function get_paremiotipus_best_match(string $modisme): string
 /**
  * Try to redirect to a valid paremiotipus page and exit.
  */
-function try_to_redirect_to_valid_paremiotipus_and_exit(string $paremiotipus): void
+function try_to_redirect_to_valid_paremiotipus_and_exit(string $input_paremiotipus): void
 {
-    $paremiotipus = trim($paremiotipus);
+    $paremiotipus = trim($input_paremiotipus);
 
     // Do nothing if the provided paremiotipus was empty.
     if ($paremiotipus === '') {

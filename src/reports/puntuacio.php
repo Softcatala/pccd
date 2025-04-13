@@ -256,8 +256,8 @@ function test_paremiotipus_caracters_inusuals(): void
             mb_strtolower($p)
         );
         if (
-            // If it contains any non-ASCII character
-            preg_match('/[^\x00-\x7F]/', $t) > 0
+            // If it contains any non-ASCII character.
+            preg_match('/[^\x00-\x7F]/', $t) === 1
         ) {
             echo get_paremiotipus_display($p, escape_html: false) . "\n";
         }

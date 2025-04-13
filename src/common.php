@@ -36,41 +36,6 @@ final class PageRenderer
         return self::$title;
     }
 
-    public static function setTitle(string $title): void
-    {
-        self::$title = ct(text: $title, escape_html: false, end_with_dot: false);
-    }
-
-    public static function setParemiotipusBlocks(string $blocks): void
-    {
-        self::$paremiotipusBlocks = $blocks;
-    }
-
-    public static function setCanonicalUrl(string $url): void
-    {
-        self::$canonicalUrl = $url;
-    }
-
-    public static function setMetaDescription(string $description): void
-    {
-        self::$metaDescription = $description;
-    }
-
-    public static function setMetaImage(string $image_url): void
-    {
-        self::$metaImage = $image_url;
-    }
-
-    public static function setOgAudioUrl(string $audio_url): void
-    {
-        self::$ogAudioUrl = $audio_url;
-    }
-
-    public static function setOgType(string $type): void
-    {
-        self::$ogType = $type;
-    }
-
     public function renderPageMetaTags(): string
     {
         $meta_tags = [];
@@ -105,15 +70,43 @@ final class PageRenderer
         return implode("\n", $meta_tags);
     }
 
+    public static function setTitle(string $title): void
+    {
+        self::$title = ct(input: $title, escape_html: false, end_with_dot: false);
+    }
+
+    public static function setParemiotipusBlocks(string $blocks): void
+    {
+        self::$paremiotipusBlocks = $blocks;
+    }
+
+    public static function setCanonicalUrl(string $url): void
+    {
+        self::$canonicalUrl = $url;
+    }
+
+    public static function setMetaDescription(string $description): void
+    {
+        self::$metaDescription = $description;
+    }
+
+    public static function setMetaImage(string $image_url): void
+    {
+        self::$metaImage = $image_url;
+    }
+
+    public static function setOgAudioUrl(string $audio_url): void
+    {
+        self::$ogAudioUrl = $audio_url;
+    }
+
+    public static function setOgType(string $type): void
+    {
+        self::$ogType = $type;
+    }
+
     public static function render(): void
     {
-        // Redirect to the homepage if 'index.php' is in the URL.
-        if (str_contains(get_request_uri(), 'index.php')) {
-            header('Location: /');
-
-            exit;
-        }
-
         // Cache pages for 15 minutes in the browser.
         header('Cache-Control: public, max-age=900');
 
@@ -292,7 +285,7 @@ final readonly class Book
             $html .= '<a href="' . $this->URL . '" title="' . htmlspecialchars($this->Títol) . '">';
         }
 
-        $html .= get_image_tags(
+        $html .= render_image_tags(
             file_name: $this->Imatge,
             path: '/img/obres/',
             alt_text: $this->Títol,
@@ -421,10 +414,10 @@ function get_db(): PDO
  *
  * Optionally and by default, escapes HTML and ensures the string ends with a dot or punctuation.
  */
-function ct(string $text, bool $escape_html = true, bool $end_with_dot = true): string
+function ct(string $input, bool $escape_html = true, bool $end_with_dot = true): string
 {
     // Remove unsafe characters (https://htmlhint.com/docs/user-guide/rules/attr-unsafe-chars).
-    $text = preg_replace("/\u{00AD}/", '', $text);
+    $text = preg_replace("/\u{00AD}/", '', $input);
     assert(is_string($text));
     $text = preg_replace("/\u{200E}/", '', $text);
     assert(is_string($text));
@@ -576,9 +569,9 @@ function get_obra_url(string $obra, bool $absolute = false): string
 /**
  * Returns a URL with some encoded characters if $url is a valid HTTP/HTTPS url, or an empty string otherwise.
  */
-function get_clean_url(string $url): string
+function get_clean_url(string $input_url): string
 {
-    $url = trim($url);
+    $url = trim($input_url);
     if (
         (str_starts_with($url, 'http://') || str_starts_with($url, 'https://'))
         && filter_var($url, FILTER_VALIDATE_URL) !== false
@@ -617,9 +610,9 @@ function get_idiomes(): array
 /**
  * Gets a language name in lowercase from its language code, or an empty string.
  */
-function get_idioma(string $code): string
+function get_idioma(string $input_code): string
 {
-    $code = strtoupper(trim($code));
+    $code = strtoupper(trim($input_code));
     if ($code !== '') {
         $languages = get_idiomes();
         if (isset($languages[$code])) {
@@ -636,9 +629,9 @@ function get_idioma(string $code): string
  * Input parameter $code is returned when value is not found in mapping but the format is valid. An empty string is
  * returned if the format of $code is not valid. Value is trimmed and converted to lowercase before performing checks.
  */
-function get_idioma_iso_code(string $code): string
+function get_idioma_iso_code(string $input_code): string
 {
-    $code = strtolower(trim($code));
+    $code = strtolower(trim($input_code));
     if (preg_match('/^[a-z]{2,3}$/', $code) !== 1) {
         return '';
     }
@@ -669,13 +662,13 @@ function get_idioma_iso_code(string $code): string
  *
  * @param string $search_mode The search mode to normalize for. If provided, the string is processed for search.
  */
-function normalize_search(string $string, string $search_mode = ''): string
+function normalize_search(string $input_string, string $search_mode = ''): string
 {
     // Remove useless characters in search that may affect syntax, or that are not useful.
     $string = str_replace(
         ['"', '+', '.', '%', '--', '_', '(', ')', '[', ']', '{', '}', '^', '>', '<', '~', '@', '$', '|', '/', '\\'],
         '',
-        $string
+        $input_string
     );
 
     // Standardize simple quotes.
@@ -710,22 +703,24 @@ function normalize_search(string $string, string $search_mode = ''): string
         assert(is_array($words));
         $string = '';
         foreach ($words as $word) {
-            if ($word !== '') {
-                if (str_starts_with($word, '-')) {
-                    // Respect `-` operator.
-                    $string .= '-';
-                    $word = ltrim($word, '-');
-                } else {
-                    // Manually put the `+` operator to ensure the word is searched.
-                    $string .= '+';
-                }
+            if ($word === '') {
+                continue;
+            }
 
-                if (str_contains($word, '-')) {
-                    // See https://stackoverflow.com/a/5192800/1391963.
-                    $string .= '"' . $word . '" ';
-                } else {
-                    $string .= "{$word} ";
-                }
+            if (str_starts_with($word, '-')) {
+                // Respect `-` operator.
+                $string .= '-';
+                $word = ltrim($word, '-');
+            } else {
+                // Manually put the `+` operator to ensure the word is searched.
+                $string .= '+';
+            }
+
+            if (str_contains($word, '-')) {
+                // See https://stackoverflow.com/a/5192800/1391963.
+                $string .= '"' . $word . '" ';
+            } else {
+                $string .= "{$word} ";
             }
         }
     }
@@ -778,7 +773,7 @@ function get_fonts_paremiotipus(): array
  *
  * @return string The generated HTML markup for the image.
  */
-function get_image_tags(
+function render_image_tags(
     string $file_name,
     string $path,
     string $alt_text = '',
@@ -881,16 +876,16 @@ function preload_image_header(string $url, string $media = '', string $type = ''
 /**
  * Returns an HTTP 404 page and exits.
  *
- * @param string $paremiotipus if not empty, suggest to visit that paremiotipus page.
+ * @param string $input_paremiotipus if not empty, suggest to visit that paremiotipus page.
  */
-function return_404_and_exit(string $paremiotipus = ''): never
+function return_404_and_exit(string $input_paremiotipus = ''): never
 {
     header('HTTP/1.1 404 Not Found', response_code: 404);
 
     require __DIR__ . '/../docroot/404.html';
-    if ($paremiotipus !== '') {
-        $url = get_paremiotipus_url($paremiotipus);
-        $paremiotipus = get_paremiotipus_display($paremiotipus);
+    if ($input_paremiotipus !== '') {
+        $url = get_paremiotipus_url($input_paremiotipus);
+        $paremiotipus = get_paremiotipus_display($input_paremiotipus);
         echo "<p>També us pot ser útil la pàgina del paremiotipus <a href='{$url}'>{$paremiotipus}</a>.";
     }
 
@@ -900,9 +895,9 @@ function return_404_and_exit(string $paremiotipus = ''): never
 /**
  * Returns the total number of occurrences (modismes).
  */
-function get_n_modismes(): int
+function get_modisme_count(): int
 {
-    return cache_get('n_modismes', static function (): int {
+    return cache_get('modisme_count', static function (): int {
         $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
@@ -912,9 +907,9 @@ function get_n_modismes(): int
 /**
  * Returns the total number of distinct paremiotipus.
  */
-function get_n_paremiotipus(): int
+function get_paremiotipus_count(): int
 {
-    return cache_get('n_paremiotipus', static function (): int {
+    return cache_get('paremiotipus_count', static function (): int {
         $stmt = get_db()->query('SELECT COUNT(1) FROM `paremiotipus_display`');
 
         return (int) $stmt->fetchColumn();
@@ -924,9 +919,9 @@ function get_n_paremiotipus(): int
 /**
  * Returns the total number of individual authors (informants).
  */
-function get_n_informants(): int
+function get_informant_count(): int
 {
-    return cache_get('n_informants', static function (): int {
+    return cache_get('informant_count', static function (): int {
         $stmt = get_db()->query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
@@ -936,9 +931,9 @@ function get_n_informants(): int
 /**
  * Returns the total number of sources (fonts).
  */
-function get_n_fonts(): int
+function get_font_count(): int
 {
-    return cache_get('n_fonts', static function (): int {
+    return cache_get('font_count', static function (): int {
         $stmt = get_db()->query('SELECT COUNT(1) FROM `00_FONTS`');
 
         return (int) $stmt->fetchColumn();

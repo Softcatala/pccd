@@ -17,32 +17,32 @@ function stats_mysql(): void
     echo '<h2>MariaDB Statistics</h2>';
 
     echo '<h3>InnoDB Buffer Pool Stats</h3>';
-    $bufferPoolStats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool%';")->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($bufferPoolStats as $stat) {
+    $buffer_pool_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool%';")->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($buffer_pool_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Query Cache Stats</h3>';
-    $queryCacheStats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Qcache%';")->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($queryCacheStats as $stat) {
+    $query_cache_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Qcache%';")->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($query_cache_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Performance Metrics</h3>';
-    $slowQueries = get_db()->query("SHOW GLOBAL STATUS LIKE 'Slow_queries';")->fetch(PDO::FETCH_ASSOC);
-    assert(is_array($slowQueries) && is_string($slowQueries['Value']));
-    echo "Slow Queries: {$slowQueries['Value']}<br>";
+    $slow_queries = get_db()->query("SHOW GLOBAL STATUS LIKE 'Slow_queries';")->fetch(PDO::FETCH_ASSOC);
+    assert(is_array($slow_queries) && is_string($slow_queries['Value']));
+    echo "Slow Queries: {$slow_queries['Value']}<br>";
 
     echo '<h3>Thread Statistics</h3>';
-    $threadStats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Threads%';")->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($threadStats as $stat) {
+    $thread_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Threads%';")->fetchAll(PDO::FETCH_ASSOC);
+    foreach ($thread_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Table Cache</h3>';
-    $tableCache = get_db()->query("SHOW GLOBAL STATUS LIKE 'Open_tables';")->fetch(PDO::FETCH_ASSOC);
-    assert(is_array($tableCache) && is_string($tableCache['Value']));
-    echo "Open Tables: {$tableCache['Value']}<br>";
+    $table_cache = get_db()->query("SHOW GLOBAL STATUS LIKE 'Open_tables';")->fetch(PDO::FETCH_ASSOC);
+    assert(is_array($table_cache) && is_string($table_cache['Value']));
+    echo "Open Tables: {$table_cache['Value']}<br>";
 
     $records = get_db()->query("
         SELECT
@@ -77,7 +77,7 @@ function stats_mysql(): void
         table_schema")->fetchColumn();
     echo "Total Database size: {$total_size_mb} MB<br>";
 
-    $tablesWithoutPK = get_db()->query("
+    $tables_without_pk = get_db()->query("
             SELECT
                 t.table_name
             FROM
@@ -93,7 +93,7 @@ function stats_mysql(): void
         ")->fetchAll(PDO::FETCH_ASSOC);
 
     echo '<br>Tables without primary keys:<br>';
-    foreach ($tablesWithoutPK as $table) {
+    foreach ($tables_without_pk as $table) {
         echo "- {$table['table_name']}<br>";
     }
 }

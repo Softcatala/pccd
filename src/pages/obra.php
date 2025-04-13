@@ -45,7 +45,7 @@ if (is_file(__DIR__ . '/../../docroot/img/obres/' . $obra->Imatge)) {
     PageRenderer::setMetaImage('https://pccd.dites.cat/img/obres/' . rawurlencode($obra->Imatge));
 
     $output .= '<figure class="col-image">';
-    $output .= get_image_tags(
+    $output .= render_image_tags(
         file_name: $obra->Imatge,
         path: '/img/obres/',
         alt_text: $is_book ? 'Coberta' : $obra->Títol,

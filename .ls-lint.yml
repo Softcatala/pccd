@@ -15,7 +15,6 @@ ls:
     .sh: snake_case
     .spec.js: kebab-case
     .txt: snake_case
-
 ignore:
   - .idea
   - .vscode

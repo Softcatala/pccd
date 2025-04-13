@@ -56,16 +56,18 @@ foreach ($lines as $i => $line) {
         $paremiotipus = $modismes_paremiotipus[$sentence];
     }
 
-    if ($paremiotipus !== '') {
-        if (!array_key_exists($paremiotipus, $sentences_array)) {
-            $sentences_array[$paremiotipus] = [];
-        }
-
-        $sentences_array[$paremiotipus][] = [
-            'f' => $path,
-            'v' => $votes,
-        ];
+    if ($paremiotipus === '') {
+        continue;
     }
+
+    if (!array_key_exists($paremiotipus, $sentences_array)) {
+        $sentences_array[$paremiotipus] = [];
+    }
+
+    $sentences_array[$paremiotipus][] = [
+        'f' => $path,
+        'v' => $votes,
+    ];
 }
 
 $cp_commands = '';

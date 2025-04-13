@@ -22,36 +22,42 @@ function stats_cerques(): void
         $records_assoc = [];
         $word_count_stats = [];
         foreach (new APCUIterator('/^ WHERE/') as $entry) {
-            if (is_array($entry) && is_string($entry['key'])) {
-                $key = $entry['key'];
-                $last_par = mb_strrpos($key, '|');
-                if ($last_par === false) {
-                    $last_par = mb_strrpos($key, ')');
-                }
-                if ($last_par !== false) {
-                    $key = mb_substr($key, $last_par + 1);
-                }
-
-                $key = str_replace(['+', '.'], ['', '?'], $key);
-                $key = trim($key);
-
-                // Count words.
-                $words = str_word_count($key);
-                if ($words >= 10) {
-                    $words = '10+';
-                }
-                if (!isset($word_count_stats[$words])) {
-                    $word_count_stats[$words] = 0;
-                }
-                $word_count_stats[$words]++;
-
-                if (!isset($records[$key])) {
-                    $records[$key] = $entry['value'];
-                    $records_assoc[$key] = [
-                        'results' => $entry['value'],
-                    ];
-                }
+            if (!is_array($entry)) {
+                continue;
             }
+            if (!is_string($entry['key'])) {
+                continue;
+            }
+            $key = $entry['key'];
+            $last_par = mb_strrpos($key, '|');
+            if ($last_par === false) {
+                $last_par = mb_strrpos($key, ')');
+            }
+            if ($last_par !== false) {
+                $key = mb_substr($key, $last_par + 1);
+            }
+
+            $key = str_replace(['+', '.'], ['', '?'], $key);
+            $key = trim($key);
+
+            if (isset($records[$key])) {
+                continue;
+            }
+
+            // Count words.
+            $words = str_word_count($key);
+            if ($words >= 10) {
+                $words = '10+';
+            }
+            if (!isset($word_count_stats[$words])) {
+                $word_count_stats[$words] = 0;
+            }
+            $word_count_stats[$words]++;
+
+            $records[$key] = $entry['value'];
+            $records_assoc[$key] = [
+                'results' => $entry['value'],
+            ];
         }
 
         // Sort by number of records.

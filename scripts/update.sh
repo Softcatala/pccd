@@ -185,13 +185,13 @@ update_composer() {
 
     # Update non-dev dependencies.
     ./composer.phar show --no-dev --direct --name-only |
-        xargs ./composer.phar require --update-with-all-dependencies
+        xargs ./composer.phar require --no-cache --update-with-all-dependencies
 
     # Update dev dependencies.
     grep -F -v -f \
         <(./composer.phar show --direct --no-dev --name-only | sort) \
         <(./composer.phar show --direct --name-only | sort) |
-        xargs ./composer.phar require --dev --update-with-all-dependencies
+        xargs ./composer.phar require --no-cache --dev --update-with-all-dependencies
 }
 
 ##############################################################################
@@ -231,9 +231,6 @@ update_npm() {
             npm install "${package}@${latest}" --save
         fi
     done
-
-    # TODO: remove when ls-lint@2.3.0 is released
-    npm install "@ls-lint/ls-lint@^2.3.0-beta.3" --save-dev
 
     # Avoid error "node_modules/.bin/lightningcss: line 1: This: command not found"
     npm ci

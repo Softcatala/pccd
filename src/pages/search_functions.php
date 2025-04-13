@@ -96,9 +96,9 @@ function get_search_page_limit(): int
 /**
  * Returns the number of search pages.
  */
-function get_search_pages_number(int $total, int $results_per_page): int
+function get_search_page_count(int $result_count, int $results_per_page): int
 {
-    return (int) ceil($total / $results_per_page);
+    return (int) ceil($result_count / $results_per_page);
 }
 
 /**
@@ -196,14 +196,14 @@ function render_search_pager_element(int $page_number, int|string $name, int|str
 /**
  * Returns the search pagination links.
  */
-function render_search_pager(int $page_num, int $num_pages): string
+function render_search_pager(int $page_number, int $page_count): string
 {
     // Previous and first page links.
     $prev_links = '';
-    if ($page_num > 1) {
+    if ($page_number > 1) {
         // Show previous link.
         $prev_links .= render_search_pager_element(
-            $page_num - 1,
+            $page_number - 1,
             '<svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M15.535 3.515 7.05 12l8.485 8.485 1.415-1.414L9.878 12l7.072-7.071z"/></svg> Anterior',
             'Pàgina anterior'
         );
@@ -213,37 +213,37 @@ function render_search_pager(int $page_num, int $num_pages): string
     }
 
     // Current page item.
-    $page_links = render_search_pager_element($page_num, $page_num, 'Sou a la pàgina ' . $page_num, true);
+    $page_links = render_search_pager_element($page_number, $page_number, 'Sou a la pàgina ' . $page_number, true);
 
     // `…` previous link.
-    if ($page_num > 2) {
-        $prev_prev_page = max(2, $page_num - 5);
+    if ($page_number > 2) {
+        $prev_prev_page = max(2, $page_number - 5);
         $page_links = render_search_pager_element(
             $prev_prev_page,
-            $prev_prev_page === 2 && $page_num === 3 ? '2' : '…',
+            $prev_prev_page === 2 && $page_number === 3 ? '2' : '…',
             'Pàgina ' . $prev_prev_page
         ) . $page_links;
     }
 
     // `…` next link.
-    if ($page_num < $num_pages - 1) {
-        $next_next_page = min($page_num + 5, $num_pages - 1);
+    if ($page_number < $page_count - 1) {
+        $next_next_page = min($page_number + 5, $page_count - 1);
         $page_links .= render_search_pager_element(
             $next_next_page,
-            $next_next_page === $num_pages - 1 && $page_num === $num_pages - 2 ? $next_next_page : '…',
+            $next_next_page === $page_count - 1 && $page_number === $page_count - 2 ? $next_next_page : '…',
             'Pàgina ' . $next_next_page
         );
     }
 
     // Next and last page links.
     $next_links = '';
-    if ($page_num < $num_pages) {
+    if ($page_number < $page_count) {
         // Show the last page link.
-        $next_links = render_search_pager_element($num_pages, $num_pages, 'Última pàgina');
+        $next_links = render_search_pager_element($page_count, $page_count, 'Última pàgina');
 
         // Show the next link.
         $next_links .= render_search_pager_element(
-            $page_num + 1,
+            $page_number + 1,
             'Següent <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M8.465 20.485 16.95 12 8.465 3.515 7.05 4.929 14.122 12 7.05 19.071z"/></svg>',
             'Pàgina següent'
         );
@@ -264,19 +264,19 @@ function number_needs_apostrophe(int $num): bool
 /**
  * Returns the search summary.
  */
-function render_search_summary(int $offset, int $results_per_page, int $total, string $search_string): string
+function render_search_summary(int $offset, int $results_per_page, int $result_count, string $search_string): string
 {
-    if ($total === 1) {
+    if ($result_count === 1) {
         return 'S\'ha trobat 1 paremiotipus per a la cerca <span class="text-monospace">' . $search_string . '</span>.';
     }
 
-    $output = "S'han trobat " . format_nombre($total) . ' paremiotipus per a la cerca <span class="text-monospace">' . $search_string . '</span>.';
+    $output = "S'han trobat " . format_nombre($result_count) . ' paremiotipus per a la cerca <span class="text-monospace">' . $search_string . '</span>.';
 
-    if ($total > $results_per_page) {
+    if ($result_count > $results_per_page) {
         $first_record = $offset + 1;
         $output .= (number_needs_apostrophe($first_record) ? " Registres de l'" : ' Registres del ') . format_nombre($first_record);
 
-        $last_record = min($offset + $results_per_page, $total);
+        $last_record = min($offset + $results_per_page, $result_count);
         $output .= (number_needs_apostrophe($last_record) ? " a l'" : ' al ') . format_nombre($last_record) . '.';
     }
 
@@ -286,9 +286,9 @@ function render_search_summary(int $offset, int $results_per_page, int $total, s
 /**
  * Builds the search query, storing it in $where_clause variable, and returns the search arguments.
  *
- * @return list<string>
+ * @return array{0: string, 1: list<string>} Returns a tuple where the first element is the SQL where clause and the second element is the list of query arguments
  */
-function build_search_query(string $search, string $search_mode, string &$where_clause): array
+function build_search_sql_query(string $search_query, string $search_mode): array
 {
     $checkboxes = [
         'equivalent' => '`EQUIVALENT`',
@@ -296,7 +296,7 @@ function build_search_query(string $search, string $search_mode, string &$where_
         'variant' => '`MODISME`',
     ];
 
-    $arguments = [$search];
+    $arguments = [$search_query];
     if ($search_mode === 'whole_sentence' || $search_mode === 'wildcard') {
         $where_clause = " WHERE `PAREMIOTIPUS` REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
     } elseif ($search_mode === 'comença') {
@@ -325,21 +325,21 @@ function build_search_query(string $search, string $search_mode, string &$where_
         if (isset($_GET[$checkbox])) {
             if ($search_mode === 'whole_sentence' || $search_mode === 'wildcard') {
                 $where_clause .= " OR {$column} REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
-                $arguments[] = $search;
+                $arguments[] = $search_query;
             } elseif ($search_mode === 'comença') {
                 $where_clause .= " OR {$column} LIKE CONCAT(?, '%')";
-                $arguments[] = $search;
+                $arguments[] = $search_query;
             } elseif ($search_mode === 'acaba') {
                 $where_clause .= " OR {$column} LIKE CONCAT('%', ?)";
-                $arguments[] = $search;
+                $arguments[] = $search_query;
             } elseif ($search_mode === 'coincident') {
                 $where_clause .= " OR {$column} = ?";
-                $arguments[] = $search;
+                $arguments[] = $search_query;
             }
         }
     }
 
-    return $arguments;
+    return [$where_clause, $arguments];
 }
 
 /**
@@ -349,9 +349,9 @@ function build_search_query(string $search, string $search_mode, string &$where_
  *
  * @throws Exception If the query fails
  */
-function get_n_results(string $where_clause, array $arguments): int
+function get_result_count(string $where_clause, array $arguments): int
 {
-    // Create a unique cache key based on the query and arguments
+    // Create a unique cache key based on the query and arguments.
     $cache_key = $where_clause . ' ' . implode('|', $arguments);
 
     return cache_get($cache_key, static function () use ($where_clause, $arguments): int {

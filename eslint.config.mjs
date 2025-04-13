@@ -1,10 +1,14 @@
-import eslintPluginUnicorn from "eslint-plugin-unicorn";
-import js from "@eslint/js";
 import globals from "globals";
+import js from "@eslint/js";
+import regexp from "eslint-plugin-regexp";
+import unicorn from "eslint-plugin-unicorn";
 
+// Default config assumes browser scripts using classic <script> tags.
+// Node.js scripts are explicitly handled with overrides.
 export default [
     js.configs.recommended,
-    eslintPluginUnicorn.configs["flat/recommended"],
+    regexp.configs["flat/recommended"],
+    unicorn.configs.recommended,
     {
         languageOptions: {
             sourceType: "script",
@@ -86,7 +90,7 @@ export default [
         },
     },
     {
-        files: ["tests/**/*.js", "scripts/**/*.js"],
+        files: ["tests/**", "scripts/**"],
         languageOptions: {
             sourceType: "commonjs",
             globals: { ...globals.node },

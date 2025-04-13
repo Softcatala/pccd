@@ -11,8 +11,6 @@ FROM ubuntu:latest
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Ubuntu-based image for building a new release."
 
-ENV DEBIAN_FRONTEND=noninteractive
-
 WORKDIR /srv/app
 
 # Copy project files

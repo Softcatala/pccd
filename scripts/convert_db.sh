@@ -104,7 +104,7 @@ echo "ALTER TABLE 00_EDITORIA ADD INDEX (CODI);" >> ../install/db/db.sql
 # Used for displaying top 10000 paremiotipus.
 echo "CREATE TABLE common_paremiotipus(Paremiotipus varchar (255), Compt int, INDEX (Compt));" >> ../install/db/db.sql
 # This is used because the PAREMIOTIPUS column is preprocessed to optimize sorting, and we still want to display the
-# original value. It is also used to perform a faster count in get_n_paremiotipus() PHP function.
+# original value. It is also used to perform a faster count in get_paremiotipus_count() PHP function.
 echo "CREATE TABLE paremiotipus_display(Paremiotipus varchar (255) PRIMARY KEY, Display varchar (255));" >> ../install/db/db.sql
 
 # Normalize UTF-8 combined characters.

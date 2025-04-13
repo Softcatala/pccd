@@ -178,19 +178,23 @@ function get_data_from_files(array $files, string $directory_path, string $attri
 {
     $data = [];
     foreach ($files as $file) {
-        if (preg_match('/data-(\d{6})\.json$/', $file, $matches) > 0) {
-            $year = substr($matches[1], 2, 2);
-            $month = substr($matches[1], 4, 2);
-            $formattedDate = $month . '-' . $year;
-            $json_content = file_get_contents($directory_path . $file);
-            assert(is_string($json_content));
-            $decoded = json_decode(json: $json_content, associative: true, flags: JSON_THROW_ON_ERROR);
-            assert(is_array($decoded));
-            if (isset($decoded[$attribute])) {
-                assert(is_int($decoded[$attribute]));
-                $data[$formattedDate] = $decoded[$attribute];
-            }
+        if (preg_match('/data-(\d{6})\.json$/', $file, $matches) !== 1) {
+            continue;
         }
+
+        $year = substr($matches[1], 2, 2);
+        $month = substr($matches[1], 4, 2);
+        $formatted_date = $month . '-' . $year;
+        $json_content = file_get_contents($directory_path . $file);
+        assert(is_string($json_content));
+        $decoded = json_decode(json: $json_content, associative: true, flags: JSON_THROW_ON_ERROR);
+        assert(is_array($decoded));
+        if (!isset($decoded[$attribute])) {
+            continue;
+        }
+
+        assert(is_int($decoded[$attribute]));
+        $data[$formatted_date] = $decoded[$attribute];
     }
 
     return $data;
@@ -228,9 +232,10 @@ function curl_get_response_code(string $url, bool $nobody = true): int
 /**
  * Gets a clean sinonim, removing unnecessary characters or notes.
  */
-function get_sinonim_clean(string $sinonim): string
+function get_sinonim_clean(string $input_sinonim): string
 {
     // Try to remove annotations.
+    $sinonim = $input_sinonim;
     $pos = mb_strpos($sinonim, '[');
     if ($pos !== false) {
         $sinonim = mb_substr($sinonim, 0, $pos);

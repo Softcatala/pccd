@@ -20,8 +20,7 @@ function test_dsff(): void
         'B' => 'Balbastre i Ferrer, Josep (1977): Nou recull de modismes i frases fetes, 6a ed. 1992',
         'P' => 'Peris, Antoni (2001): Diccionari de locucions i frases llatines',
         'R' => 'Riera Jaume, Antoni (1999): Així xerram a Mallorca',
-        // This is not the same.
-        // 'R-M' => 'Raspall-Martí (1984): Diccionari de locucions, 2a ed, 1995',
+        // This is not the same: 'R-M' => 'Raspall-Martí (1984): Diccionari de locucions, 2a ed, 1995'.
         'SP' => 'Perramon i Barnadas, Sever (1979): Proverbis, dites i frases fetes de la llengua catalana, ed. 1983',
     ];
 
@@ -76,15 +75,19 @@ function test_dsff(): void
             }
             foreach ($sources as $s) {
                 $source = trim($s);
-                if (isset($pccd_dsff_map[$source])) {
-                    $pccd_source = $pccd_dsff_map[$source];
-                    if (!isset($modisme_font[$title_lc . '_' . $pccd_source])) {
-                        if (!isset($missing_from_source[$pccd_source])) {
-                            $missing_from_source[$pccd_source] = [];
-                        }
-                        $missing_from_source[$pccd_source][] = $title;
-                    }
+                if (!isset($pccd_dsff_map[$source])) {
+                    continue;
                 }
+
+                $pccd_source = $pccd_dsff_map[$source];
+                if (isset($modisme_font[$title_lc . '_' . $pccd_source])) {
+                    continue;
+                }
+
+                if (!isset($missing_from_source[$pccd_source])) {
+                    $missing_from_source[$pccd_source] = [];
+                }
+                $missing_from_source[$pccd_source][] = $title;
             }
         }
     }
@@ -159,14 +162,18 @@ function test_dsff(): void
     $missing_modismes_table .= '<tr><th>Modisme</th><th>Font PCCD</th></tr>';
     $count = 0;
     foreach ($pccd_modismes as $modisme) {
-        if ($modisme['MODISME'] !== '') {
-            assert(is_string($modisme['MODISME']));
-            assert(is_string($modisme['ID_FONT']));
-            if (!isset($dsff_all_sentences[mb_strtolower($modisme['MODISME'])])) {
-                $missing_modismes_table .= '<tr><td>' . htmlspecialchars($modisme['MODISME']) . '</td><td>' . htmlspecialchars($modisme['ID_FONT']) . '</td></tr>';
-                $count++;
-            }
+        if ($modisme['MODISME'] === '') {
+            continue;
         }
+
+        assert(is_string($modisme['MODISME']));
+        assert(is_string($modisme['ID_FONT']));
+        if (isset($dsff_all_sentences[mb_strtolower($modisme['MODISME'])])) {
+            continue;
+        }
+
+        $missing_modismes_table .= '<tr><td>' . htmlspecialchars($modisme['MODISME']) . '</td><td>' . htmlspecialchars($modisme['ID_FONT']) . '</td></tr>';
+        $count++;
     }
     $missing_modismes_table .= '</table>';
     echo '<br>Total: ' . format_nombre($count);

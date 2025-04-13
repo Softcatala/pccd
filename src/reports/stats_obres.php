@@ -21,8 +21,8 @@ function stats_obres(): void
     $directory_path = __DIR__ . '/../../tests/playwright/data/historic/';
     $files = scandir($directory_path);
     assert(is_array($files));
-    $fontsNumberData = get_data_from_files($files, $directory_path, 'fontsNumber');
-    echo get_chart('line', $fontsNumberData, 'fonts', 'Mesos (2023-)', 'Nombre de fonts', style: 'width:800px;');
+    $fonts_number_data = get_data_from_files($files, $directory_path, 'fontsNumber');
+    echo get_chart('line', $fonts_number_data, 'fonts', 'Mesos (2023-)', 'Nombre de fonts', style: 'width:800px;');
 
     echo "<h3>Obres ordenades pel nombre d'entrades a la base de dades</h3>";
     $records = get_db()->query('SELECT
