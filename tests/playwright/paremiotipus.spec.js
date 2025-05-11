@@ -30,24 +30,35 @@ test.describe("Paremiotipus", () => {
 
     test('"Qui no vulgui pols, que no vagi a l\'era" includes a twitter:image meta tag with a valid image URL', async ({
         page,
+        baseURL,
     }) => {
         await page.goto("/p/Qui_no_vulgui_pols%2C_que_no_vagi_a_l%27era");
         const twitterImage = await page.locator('meta[name="twitter:image"]').getAttribute("content");
         expect(twitterImage).toBeTruthy();
 
-        const response = await page.request.get(twitterImage);
+        // Extract the path from the full URL and create a new URL with baseURL.
+        const originalUrl = new URL(twitterImage);
+        const imagePath = originalUrl.pathname;
+        const testImageUrl = new URL(imagePath, baseURL).toString();
+
+        const response = await page.request.get(testImageUrl);
         expect(response.status()).toBe(200);
         expect(response.headers()["content-type"]).toContain("image");
     });
-
     test('"Qui no vulgui pols, que no vagi a l\'era" includes an og:image meta tag with a valid image URL', async ({
         page,
+        baseURL,
     }) => {
         await page.goto("/p/Qui_no_vulgui_pols%2C_que_no_vagi_a_l%27era");
         const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
         expect(ogImage).toBeTruthy();
 
-        const response = await page.request.get(ogImage);
+        // Extract the path from the full URL and create a new URL with baseURL.
+        const originalUrl = new URL(ogImage);
+        const imagePath = originalUrl.pathname;
+        const testImageUrl = new URL(imagePath, baseURL).toString();
+
+        const response = await page.request.get(testImageUrl);
         expect(response.status()).toBe(200);
         expect(response.headers()["content-type"]).toContain("image");
     });

@@ -14,10 +14,8 @@ require __DIR__ . '/search_functions.php';
 
 PageRenderer::setMetaDescription("La PCCD dona accés a la consulta d'un gran ventall de fonts fraseològiques sobre parèmies en general (locucions, frases fetes, refranys, proverbis, citacions, etc.)");
 PageRenderer::setMetaImage('https://pccd.dites.cat/img/screenshot.png');
+PageRenderer::setOgType(OgType::WEBSITE);
 
-$current_page_number = get_search_page_number();
-$results_per_page = get_search_page_limit();
-$offset = get_search_page_offset($current_page_number, $results_per_page);
 $search_mode = get_search_mode();
 $search_normalized = get_search_normalized($search_mode);
 $search_clean = get_search_clean();
@@ -28,17 +26,17 @@ if ($search_normalized === '' && !isset($_GET['font'])) {
     // If the search is empty, we are in the home.
     PageRenderer::setTitle('Paremiologia catalana comparada digital');
     PageRenderer::setCanonicalUrl('https://pccd.dites.cat');
-    PageRenderer::setOgType('website');
     $result_count = get_paremiotipus_count();
 } else {
     // Otherwise, we are in a search page.
     PageRenderer::setTitle('Cerca «' . $search_clean . '»');
-    PageRenderer::setOgType('');
     [$where_clause, $arguments] = build_search_sql_query($search_normalized, $search_mode);
     $result_count = get_result_count($where_clause, $arguments);
 }
 
-$page_count = get_search_page_count($result_count, $results_per_page);
+$pagination_limit = get_search_pagination_limit();
+$page_count = get_search_page_count($result_count, $pagination_limit);
+$current_page_number = get_search_page_number();
 if ($page_count > 1 && $search_normalized !== '') {
     // Show the page number in the title too.
     PageRenderer::setTitle('Cerca «' . $search_clean . "», pàgina {$current_page_number}");
@@ -50,9 +48,9 @@ if ($page_count > 1 && $search_normalized !== '') {
             <div class="mode">
                 <select name="mode" aria-label="Mode de cerca">
                     <option value="">conté</option>
-                    <option<?php echo $search_mode === 'comença' ? ' selected' : ''; ?> value="comença">comença per</option>
-                    <option<?php echo $search_mode === 'acaba' ? ' selected' : ''; ?> value="acaba">acaba en</option>
-                    <option<?php echo $search_mode === 'coincident' ? ' selected' : ''; ?> value="coincident">coincident</option>
+                    <option<?php echo $search_mode === SearchMode::STARTS_WITH ? ' selected' : ''; ?> value="comença">comença per</option>
+                    <option<?php echo $search_mode === SearchMode::ENDS_WITH ? ' selected' : ''; ?> value="acaba">acaba en</option>
+                    <option<?php echo $search_mode === SearchMode::EXACT ? ' selected' : ''; ?> value="coincident">coincident</option>
                 </select>
             </div>
             <div class="input">
@@ -84,11 +82,12 @@ if ($page_count > 1 && $search_normalized !== '') {
 
 $output = '';
 if ($result_count > 0) {
+    $offset = get_search_page_offset($current_page_number, $pagination_limit);
     if ($search_normalized !== '') {
         $output .= '<p class="text-break">';
         $output .= render_search_summary(
             offset: $offset,
-            results_per_page: $results_per_page,
+            results_per_page: $pagination_limit,
             result_count: $result_count,
             search_string: $search_clean
         );
@@ -98,7 +97,7 @@ if ($result_count > 0) {
     $paremiotipus = get_paremiotipus_search_results(
         where_clause: $where_clause,
         arguments: $arguments,
-        limit: $results_per_page,
+        limit: $pagination_limit,
         offset: $offset
     );
     $output .= '<ol>';
@@ -120,9 +119,9 @@ if ($page_count > 1) {
 }
 $output .= '<select name="mostra" aria-label="Nombre de resultats per pàgina">';
 $output .= '<option value="10">10</option>';
-$output .= '<option' . ($results_per_page === 15 ? ' selected' : '') . ' value="15">15</option>';
-$output .= '<option' . ($results_per_page === 25 ? ' selected' : '') . ' value="25">25</option>';
-$output .= '<option' . ($results_per_page === 50 ? ' selected' : '') . ' value="50">50</option>';
+$output .= '<option' . ($pagination_limit === 15 ? ' selected' : '') . ' value="15">15</option>';
+$output .= '<option' . ($pagination_limit === 25 ? ' selected' : '') . ' value="25">25</option>';
+$output .= '<option' . ($pagination_limit === 50 ? ' selected' : '') . ' value="50">50</option>';
 $output .= '</select>';
 $output .= '</div>';
 $output .= '</form>';

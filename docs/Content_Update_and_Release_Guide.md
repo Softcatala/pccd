@@ -16,12 +16,6 @@ The rest of dependencies can be installed using `npm`:
 npm ci
 ```
 
-Optionally, some additional packages can be installed using [Homebrew](https://brew.sh/):
-
-```bash
-brew bundle install --file=apt_missing.Brewfile
-```
-
 ### Prerequisites: macOS (Homebrew)
 
 After installing [Homebrew](https://brew.sh/), run the following from the root directory to install all developer

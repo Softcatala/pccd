@@ -1,10 +1,3 @@
-# Use the official Rust image to compile oxipng.
-# hadolint ignore=DL3007
-FROM rust:latest as oxipng-builder
-
-# Install oxipng
-RUN cargo install oxipng --version 9.1.4
-
 # hadolint ignore=DL3007
 FROM ubuntu:latest
 
@@ -22,9 +15,6 @@ RUN apt-get update \
     && xargs apt-get install --no-install-recommends -y < apt_packages.txt \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
-
-# Copy the oxipng binary from the builder stage
-COPY --from=oxipng-builder /usr/local/cargo/bin/oxipng /usr/local/bin/oxipng
 
 # Install the rest of dev dependencies
 RUN npm ci

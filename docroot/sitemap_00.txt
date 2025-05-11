@@ -219,6 +219,7 @@ https://pccd.dites.cat/p/A_Anya%2C_els_peixos
 https://pccd.dites.cat/p/A_anys_llum
 https://pccd.dites.cat/p/A_aplec_de_b%C3%A9
 https://pccd.dites.cat/p/A_aquest_efecte
+https://pccd.dites.cat/p/A_aquest_no_li_hem_d%27ensenyar_res
 https://pccd.dites.cat/p/A_aquest_pas
 https://pccd.dites.cat/p/A_aquesta_casa_s%27hi_ha_ben_girat_la_creu
 https://pccd.dites.cat/p/A_aquestes_al%C3%A7ades
@@ -324,6 +325,7 @@ https://pccd.dites.cat/p/A_Baiasca%2C_fumats
 https://pccd.dites.cat/p/A_Baiasca%2C_les_gallines_fan_els_ous_sense_casca
 https://pccd.dites.cat/p/A_baix
 https://pccd.dites.cat/p/A_baix_a_mar
+https://pccd.dites.cat/p/A_baix_es_va_escalfant
 https://pccd.dites.cat/p/A_baix_preu
 https://pccd.dites.cat/p/A_baix%21
 https://pccd.dites.cat/p/A_baixa_mar_hi_ha_una_roca_i_a_sa_Mesquida_un_roquer%3A_les_al%C2%B7lotes_de_la_Clota_duen_pinta_a_la_bomb%C3%A9
@@ -567,7 +569,6 @@ https://pccd.dites.cat/p/A_Blanes_s%C3%B3n_ses_galanes
 https://pccd.dites.cat/p/A_Blanes_van_posar_sant_Pere_a_la_pres%C3%B3
 https://pccd.dites.cat/p/A_Blanes%2C_les_galanes
 https://pccd.dites.cat/p/A_Boadella%2C_budellada
-https://pccd.dites.cat/p/A_Boadella%2C_dona_i_vedella
 https://pccd.dites.cat/p/A_boca_d%27ampolla
 https://pccd.dites.cat/p/A_boca_de_can%C3%B3
 https://pccd.dites.cat/p/A_boca_de_fosc
@@ -1157,6 +1158,7 @@ https://pccd.dites.cat/p/A_casar%2C_ni_a_recules_s%27hi_pot_anar
 https://pccd.dites.cat/p/A_casar%2C_riu_qui_hi_va_i_plora_qui_en_torna
 https://pccd.dites.cat/p/A_cascar_banquets
 https://pccd.dites.cat/p/A_cascar-la%21
+https://pccd.dites.cat/p/A_Caseres_menges_bledes
 https://pccd.dites.cat/p/A_Caseres%2C_la_guineu
 https://pccd.dites.cat/p/A_Caseres%2C_poc_pa_i_moltes_pasteres
 https://pccd.dites.cat/p/A_Cases_de_Pena%2C_els_panxes_negres
@@ -1512,7 +1514,6 @@ https://pccd.dites.cat/p/A_coscollet
 https://pccd.dites.cat/p/A_cossa_batuda
 https://pccd.dites.cat/p/A_cost_de
 https://pccd.dites.cat/p/A_cost_i_costes
-https://pccd.dites.cat/p/A_cost_i_despeses_de
 https://pccd.dites.cat/p/A_cost_i_messi%C3%B3
 https://pccd.dites.cat/p/A_costa_de
 https://pccd.dites.cat/p/A_costa_de_costes
@@ -1597,6 +1598,7 @@ https://pccd.dites.cat/p/A_darrers_de_mar%C3%A7_i_a_primers_d%27abril_canta_el_c
 https://pccd.dites.cat/p/A_Das_tenen_un_cap_com_un_cab%C3%A0s
 https://pccd.dites.cat/p/A_datar_de
 https://pccd.dites.cat/p/A_daus
+https://pccd.dites.cat/p/A_de_que
 https://pccd.dites.cat/p/A_degolla
 https://pccd.dites.cat/p/A_Delfi%C3%A0%2C_ni_botigues_hi_ha
 https://pccd.dites.cat/p/A_Deltebre%2C_muscleres_i_orugues
@@ -1620,7 +1622,6 @@ https://pccd.dites.cat/p/A_desgrat
 https://pccd.dites.cat/p/A_desgrat_de
 https://pccd.dites.cat/p/A_deshora
 https://pccd.dites.cat/p/A_deshora_la_trauen%2C_la_del_manto_arruat
-https://pccd.dites.cat/p/A_despesa
 https://pccd.dites.cat/p/A_despeses
 https://pccd.dites.cat/p/A_despic
 https://pccd.dites.cat/p/A_despit_de
@@ -1905,6 +1906,7 @@ https://pccd.dites.cat/p/A_favor
 https://pccd.dites.cat/p/A_fe
 https://pccd.dites.cat/p/A_fe_de_cristi%C3%A0
 https://pccd.dites.cat/p/A_fe_de_D%C3%A9u
+https://pccd.dites.cat/p/A_fe_de_D%C3%A9u%21
 https://pccd.dites.cat/p/A_fe_de_m%C3%B3n
 https://pccd.dites.cat/p/A_fe_de_neu
 https://pccd.dites.cat/p/A_feixos
@@ -1981,7 +1983,6 @@ https://pccd.dites.cat/p/A_foc_fluix
 https://pccd.dites.cat/p/A_foc_i_a_ferro
 https://pccd.dites.cat/p/A_foc_i_a_flama
 https://pccd.dites.cat/p/A_foc_i_casament_hi_va_tota_la_gent
-https://pccd.dites.cat/p/A_foc_i_flama
 https://pccd.dites.cat/p/A_foc_i_tropell
 https://pccd.dites.cat/p/A_foc_lent
 https://pccd.dites.cat/p/A_foc_viu
@@ -2626,7 +2627,6 @@ https://pccd.dites.cat/p/A_l%27estil_de
 https://pccd.dites.cat/p/A_l%27estiu_de_ca_l%27Hereu%2C_que_tothom_mana_i_ning%C3%BA_no_creu
 https://pccd.dites.cat/p/A_l%27estiu_la_figa_crida_el_piu
 https://pccd.dites.cat/p/A_l%27estiu_menjar_calent_no_%C3%A9s_gaire_bon_aliment
-https://pccd.dites.cat/p/A_l%27estiu_tota_cuca_viu
 https://pccd.dites.cat/p/A_l%27estiu%2C_amunt_el_piu
 https://pccd.dites.cat/p/A_l%27estiu%2C_bon_cuinat%2C_i_a_l%27hivern%2C_bon_estofat
 https://pccd.dites.cat/p/A_l%27estiu%2C_el_dia_s%27escur%C3%A7a
@@ -2750,6 +2750,7 @@ https://pccd.dites.cat/p/A_l%27olla_de_capell%C3%A0_vint-i-una_coses_hi_ha%3A_al
 https://pccd.dites.cat/p/A_l%27olla_de_sant_Francesc_tant_en_mengen_sis_com_en_mengen_set
 https://pccd.dites.cat/p/A_l%27olla_que_bull_cap_mosca_no_s%27hi_acosta
 https://pccd.dites.cat/p/A_l%27olla%2C_si_no_s%27hi_afegia%2C_es_cremaria
+https://pccd.dites.cat/p/A_l%27olor_de_la_tonyina_s%27escarota_l%27alberg%C3%ADnia
 https://pccd.dites.cat/p/A_l%27olor_del_dot%2C_acudeix_el_borinot_o_el_ninot
 https://pccd.dites.cat/p/A_l%27ombra
 https://pccd.dites.cat/p/A_l%27ombra_de_l%27amo_creix_la_vinya
@@ -3345,6 +3346,7 @@ https://pccd.dites.cat/p/A_la_picota
 https://pccd.dites.cat/p/A_la_p%C3%ADfia
 https://pccd.dites.cat/p/A_la_pila_del_greix%2C_qui_no_hi_entra_no_creix
 https://pccd.dites.cat/p/A_la_piqueta
+https://pccd.dites.cat/p/A_la_piu_piu%2C_a_la_cloc_cloc%2C_polls_i_lloques_tot_fos_mort._A_la_cloc_a_la_cloc%2C_a_la_piu_a_la_piu%2C_polls_i_lloques_tot_fos_viu
 https://pccd.dites.cat/p/A_la_pla%C3%A7a_conec_jo_si_la_dona_val_o_no
 https://pccd.dites.cat/p/A_la_pla%C3%A7a_d%27Alcanar_Monago_ha_perdut_les_dents%3B_Parra_que_les_ha_trobat%3A_%22Monago%2C_aqu%C3%AD_les_tens%22
 https://pccd.dites.cat/p/A_la_pla%C3%A7a_en_venen
@@ -3561,6 +3563,7 @@ https://pccd.dites.cat/p/A_la_terra_de_Xauxa%2C_de_tot_hi_ha_abund%C3%A0ncia
 https://pccd.dites.cat/p/A_la_terra_dels_ganduls_se_celebren_tots_els_sants_i_santets
 https://pccd.dites.cat/p/A_la_terra_dels_nans%2C_qui_fa_un_pam_n%27%C3%A9s_el_rei
 https://pccd.dites.cat/p/A_la_terra_i_bestiar%2C_mai_els_has_de_fatigar
+https://pccd.dites.cat/p/A_la_terra_on_no_hi_hagis_de_fer_res%2C_planta-hi_ametllers
 https://pccd.dites.cat/p/A_la_terra_un_rei%2C_al_cel_un_D%C3%A9u_i_a_la_casa_una_dona
 https://pccd.dites.cat/p/A_la_terra%2C_deixa-la_reposar_i_amb_escreix_t%27ho_pagar%C3%A0
 https://pccd.dites.cat/p/A_la_terra%2C_dona-li_i_et_donar%C3%A0
@@ -3969,7 +3972,6 @@ https://pccd.dites.cat/p/A_lloure
 https://pccd.dites.cat/p/A_Llub%C3%AD%2C_dues_fadrines_es_deixaren_obrir_el_pany
 https://pccd.dites.cat/p/A_Llub%C3%AD%2C_rafalins
 https://pccd.dites.cat/p/A_Lluc%2C_l%27aigua_m%C3%A9s_fina
-https://pccd.dites.cat/p/A_Llucena_s%C3%B3n_raboses%2C_a_l%27Alcora_s%C3%B3n_gelats%3B_a_Figueroles%2C_tarugos%2C_i_a_Costur%2C_escalda-sants%0A
 https://pccd.dites.cat/p/A_Llucena_s%C3%B3n_raboses%2C_a_l%27Alcora_s%C3%B3n_gelats%3B_a_Figueroles%2C_tarugos%2C_i_a_Costur%2C_escalda-sants
 https://pccd.dites.cat/p/A_Llucmajor%2C_gent_poc_fina
 https://pccd.dites.cat/p/A_Llucmajor%2C_hi_deix%C3%A0_llum_per_tots
@@ -4429,6 +4431,7 @@ https://pccd.dites.cat/p/A_m%C3%BAsica_de_brams%2C_contrapunt_de_garrotada
 https://pccd.dites.cat/p/A_Mussa%2C_mussulans_i_mussols
 https://pccd.dites.cat/p/A_n%27en_Putifeina%2C_muda-li_l%27eina
 https://pccd.dites.cat/p/A_n%27en_Torrep%C3%A0_la_fam_el_va_matar
+https://pccd.dites.cat/p/A_n%27esta_vida_val_m%C3%A9s_saber_parlar_que_tindre_un_garrofer
 https://pccd.dites.cat/p/A_Nabiners%2C_panxamolls
 https://pccd.dites.cat/p/A_Nadal%2C_coques
 https://pccd.dites.cat/p/A_Nadal%2C_ferrets_i_esquelles%2C_i_panderos_i_timbals
@@ -4713,6 +4716,7 @@ https://pccd.dites.cat/p/A_part_o_banda
 https://pccd.dites.cat/p/A_partir_d%27aleshores
 https://pccd.dites.cat/p/A_partir_d%27ara
 https://pccd.dites.cat/p/A_partir_de
+https://pccd.dites.cat/p/A_partir_del_silenci
 https://pccd.dites.cat/p/A_partir_dels_vint-i-cinc%2C_ni_es_pregunta_ni_es_diu
 https://pccd.dites.cat/p/A_partir_un_piny%C3%B3
 https://pccd.dites.cat/p/A_parts
@@ -4756,6 +4760,7 @@ https://pccd.dites.cat/p/A_passes_comptades
 https://pccd.dites.cat/p/A_passes_dobles
 https://pccd.dites.cat/p/A_past
 https://pccd.dites.cat/p/A_pastar_fang
+https://pccd.dites.cat/p/A_patir%2C_l%27%C3%BAltim_dia
 https://pccd.dites.cat/p/A_patolls
 https://pccd.dites.cat/p/A_patr%C3%B3_jove_i_a_barco_vell%2C_no_hi_fi%C3%AFs_la_teva_pell
 https://pccd.dites.cat/p/A_Pa%C3%BCls_dels_Ports%2C_sequillos_i_abadejos
@@ -4799,6 +4804,7 @@ https://pccd.dites.cat/p/A_Pen%C3%ADscola%2C_senyores%2C_hi_ha_tres_coses_molt_b
 https://pccd.dites.cat/p/A_pensi%C3%B3
 https://pccd.dites.cat/p/A_pentinar_llufes
 https://pccd.dites.cat/p/A_Peny%C3%ADscola%2C_senyores%2C_hi_ha_tres_coses_de_valor%3A_l%27escala_del_Papa_Lluna%2C_la_Font_i_lo_Bufador
+https://pccd.dites.cat/p/A_per_alt
 https://pccd.dites.cat/p/A_per_totes
 https://pccd.dites.cat/p/A_Peracal%C3%A7%2C_borratxos
 https://pccd.dites.cat/p/A_Peracal%C3%A7%2C_cremats
@@ -4845,6 +4851,7 @@ https://pccd.dites.cat/p/A_Pesill%C3%A0_de_la_Ribera%2C_el_rat_bufot
 https://pccd.dites.cat/p/A_Pesill%C3%A0_de_la_Ribera%2C_els_oiots
 https://pccd.dites.cat/p/A_Pesill%C3%A0%2C_naps
 https://pccd.dites.cat/p/A_Pessonada%2C_guineus
+https://pccd.dites.cat/p/A_pessons
 https://pccd.dites.cat/p/A_pet_de_conill
 https://pccd.dites.cat/p/A_petapell
 https://pccd.dites.cat/p/A_petici%C3%B3
@@ -5185,6 +5192,7 @@ https://pccd.dites.cat/p/A_qualsevol_drap_amb_tireta%2C_li_diuen_samarreta
 https://pccd.dites.cat/p/A_qualsevol_mal%2C_la_paci%C3%A8ncia_%C3%A9s_remei
 https://pccd.dites.cat/p/A_qualsevol_preu
 https://pccd.dites.cat/p/A_qualsevol_soldat_li_diuen_militar
+https://pccd.dites.cat/p/A_quant_va_l%27oli%3F_%E2%80%94A_ral._%E2%80%94I_la_sal%3F_%E2%80%94A_vint-i-dos._%E2%80%94Peti%2C_peti%2C_el_nas_de_gos%2C_que_les_botes_van_a_dos%3B_pif%2C_pof
 https://pccd.dites.cat/p/A_quantes_b%C3%A8sties_toca_l%27ombra%2C_quan_el_sol_%C3%A9s_post%21
 https://pccd.dites.cat/p/A_quants_mant%C3%A9_la_farina%21_I_ella%2C_fina_que_fina%21
 https://pccd.dites.cat/p/A_quart_per_llengua
@@ -6870,12 +6878,15 @@ https://pccd.dites.cat/p/A_xupamorro
 https://pccd.dites.cat/p/A_xurri-burri
 https://pccd.dites.cat/p/A_xurrutades
 https://pccd.dites.cat/p/A_zero
+https://pccd.dites.cat/p/A%2C_a%2C_a
+https://pccd.dites.cat/p/A%2C_a%2C_a%2C_a%2C_a%2C_a%2C_a
 https://pccd.dites.cat/p/A%2C_be%2C_ce%2C_la_pastera_ja_la_s%C3%A9%3B_si_hi_ha_pa_me%27l_menjar%C3%A9%3B_si_hi_ha_peix%2C_far%C3%A9_el_mateix._Si_la_mare_m%27hi_atrapa%2C_fugir%C3%A9_com_una_rata%3B_si_el_pare_m%27hi_veu%2C_fugir%C3%A9_com_una_guineu
 https://pccd.dites.cat/p/A%2C_e%2C_i%2C_o%2C_u%2C_el_burret_sap_m%C3%A9s_que_tu
 https://pccd.dites.cat/p/A%21_El_mestre_em_va_pegar._E%21_Jo_no_s%C3%A9_perqu%C3%A8._I%21_Jo_no_vaig_venir._O%21_Jo_no_estava_bo._U%21_Borriquito_como_t%C3%BA%21
 https://pccd.dites.cat/p/A%E2%80%A6_s%27ha_dit%21
 https://pccd.dites.cat/p/Aaa
 https://pccd.dites.cat/p/Aaah
+https://pccd.dites.cat/p/Aaam
 https://pccd.dites.cat/p/Aah%21
 https://pccd.dites.cat/p/Abab%21
 https://pccd.dites.cat/p/Abaixada
@@ -7255,6 +7266,7 @@ https://pccd.dites.cat/p/Acampanadament
 https://pccd.dites.cat/p/Acanaladament
 https://pccd.dites.cat/p/Acanar_a_ganxos
 https://pccd.dites.cat/p/Acanar_a_pessics
+https://pccd.dites.cat/p/Acanar_un_bardo
 https://pccd.dites.cat/p/Acanar-l%27hi
 https://pccd.dites.cat/p/Acanyar_de_fam
 https://pccd.dites.cat/p/Acanyar_de_set
@@ -7317,6 +7329,7 @@ https://pccd.dites.cat/p/Acobladament
 https://pccd.dites.cat/p/Acollir_candeles
 https://pccd.dites.cat/p/Acollir-se_a_sagrat
 https://pccd.dites.cat/p/Acollit_com_un_gos_a_vespres
+https://pccd.dites.cat/p/Acollonir-se
 https://pccd.dites.cat/p/Acometi_qui_voldr%C3%A0%2C_el_fort_esperar%C3%A0
 https://pccd.dites.cat/p/Acomodadament
 https://pccd.dites.cat/p/Acomodar-ho
@@ -7359,8 +7372,11 @@ https://pccd.dites.cat/p/Activament
 https://pccd.dites.cat/p/Actor_social
 https://pccd.dites.cat/p/Actua_com_cal%2C_que_amb_la_moneda_que_paguis_et_pagaran
 https://pccd.dites.cat/p/Actualment
+https://pccd.dites.cat/p/Actuar_amb_duplicitat
+https://pccd.dites.cat/p/Actuar_sense_const%C3%A0ncia
 https://pccd.dites.cat/p/Acuba%27t_i_morir%C3%A0s_sa
 https://pccd.dites.cat/p/Acuitadament
+https://pccd.dites.cat/p/Acular-se
 https://pccd.dites.cat/p/Acull_el_vell_benignament%2C_encara_que_tingui_mal_geni
 https://pccd.dites.cat/p/Acumulativament
 https://pccd.dites.cat/p/Acuradament
@@ -7683,7 +7699,6 @@ https://pccd.dites.cat/p/Agafar_el_to
 https://pccd.dites.cat/p/Agafar_el_tren
 https://pccd.dites.cat/p/Agafar_el_tren_de_la_modernitat
 https://pccd.dites.cat/p/Agafar_els_set_mals
-https://pccd.dites.cat/p/Agafar_els_tapins
 https://pccd.dites.cat/p/Agafar_els_trapaus
 https://pccd.dites.cat/p/Agafar_els_trastets
 https://pccd.dites.cat/p/Agafar_embranzida
@@ -7727,6 +7742,7 @@ https://pccd.dites.cat/p/Agafar_la_verba
 https://pccd.dites.cat/p/Agafar_la_via_en_pas
 https://pccd.dites.cat/p/Agafar_les_armes
 https://pccd.dites.cat/p/Agafar_les_cartes
+https://pccd.dites.cat/p/Agafar_les_flors_per_les_espines
 https://pccd.dites.cat/p/Agafar_les_regnes
 https://pccd.dites.cat/p/Agafar_les_tercianes
 https://pccd.dites.cat/p/Agafar_los_pataquets
@@ -7857,6 +7873,7 @@ https://pccd.dites.cat/p/Agarrar-se_a_una_paret_llisa
 https://pccd.dites.cat/p/Agarrar-se_com_un_llapiss%C3%B3
 https://pccd.dites.cat/p/Agarrotadament
 https://pccd.dites.cat/p/Agegantadament
+https://pccd.dites.cat/p/Agenollar-se
 https://pccd.dites.cat/p/%C3%80ger_%C3%A9s_m%C3%A9s_amunt_de_Balaguer
 https://pccd.dites.cat/p/Agermanadament
 https://pccd.dites.cat/p/%C3%80gil_com_un_esquirol
@@ -8093,6 +8110,7 @@ https://pccd.dites.cat/p/Aigua_bruta_no_fa_net
 https://pccd.dites.cat/p/Aigua_bullent%2C_butllofa_al_moment
 https://pccd.dites.cat/p/Aigua_caiguda%2C_mai_tota_perduda
 https://pccd.dites.cat/p/Aigua_calent_no_forada_la_dent
+https://pccd.dites.cat/p/Aigua_calenta
 https://pccd.dites.cat/p/Aigua_calenta_i_veta_apretada%2C_sagnia_encertada
 https://pccd.dites.cat/p/Aigua_calenta_salut_per_al_ventre
 https://pccd.dites.cat/p/Aigua_calenta%2C_bona_pels_queixals
@@ -8133,6 +8151,7 @@ https://pccd.dites.cat/p/Aigua_de_castanyes
 https://pccd.dites.cat/p/Aigua_de_col%C3%B2nia
 https://pccd.dites.cat/p/Aigua_de_desembre_%C3%A9s_neu_sempre
 https://pccd.dites.cat/p/Aigua_de_deu%2C_la_dona_D%C3%A9u
+https://pccd.dites.cat/p/Aigua_de_farigola
 https://pccd.dites.cat/p/Aigua_de_febrer_estalvia_el_femer
 https://pccd.dites.cat/p/Aigua_de_febrer%2C_ordi_al_graner
 https://pccd.dites.cat/p/Aigua_de_flor_de_pi%2C_el_constipat_fa_fugir
@@ -8285,6 +8304,7 @@ https://pccd.dites.cat/p/Aiguader_del_vi_dolent
 https://pccd.dites.cat/p/Aiguaders_i_taverners_de_l%27aigua_fan_diners
 https://pccd.dites.cat/p/Aiguafreda%2C_aiguafregits
 https://pccd.dites.cat/p/Aigualir-li_la_festa
+https://pccd.dites.cat/p/Aiguamoix
 https://pccd.dites.cat/p/Aiguardent_de_tenda_i_vi_de_taverna
 https://pccd.dites.cat/p/Aiguardent_del_vi_dolent
 https://pccd.dites.cat/p/Aiguardent_i_vi%2C_borratxo_fi
@@ -8490,6 +8510,7 @@ https://pccd.dites.cat/p/Aix%C3%B2_ho_fa%2C_que_no_plou%21
 https://pccd.dites.cat/p/Aix%C3%B2_ho_fas_perqu%C3%A8_D%C3%A9u_no_t%C3%A9_senyor
 https://pccd.dites.cat/p/Aix%C3%B2_i_aix%C3%B2
 https://pccd.dites.cat/p/Aix%C3%B2_i_no_res_%C3%A9s_el_mateix
+https://pccd.dites.cat/p/Aix%C3%B2_ja_%C3%A9s_massa%21
 https://pccd.dites.cat/p/Aix%C3%B2_ja_%C3%A9s_una_altra_cosa
 https://pccd.dites.cat/p/Aix%C3%B2_ja_s%C3%B3n_altres_cinc-centes
 https://pccd.dites.cat/p/Aix%C3%B2_mateix
@@ -9492,6 +9513,7 @@ https://pccd.dites.cat/p/Albardar_l%27ase_al_rev%C3%A9s
 https://pccd.dites.cat/p/Albatarr%C3%AD%2C_al%C3%A7a_la_cua_i_da-li%21
 https://pccd.dites.cat/p/Alber%2C_pluja_al_darrer
 https://pccd.dites.cat/p/Albercoc
+https://pccd.dites.cat/p/Albercoc_de_Sant_Joan%2C_albercoc_granat
 https://pccd.dites.cat/p/Alberg%C3%ADnia
 https://pccd.dites.cat/p/Alberic_%C3%A9s_molt_ric%2C_de_les_cuques_de_la_seda_del_cadell_i_l%27arr%C3%B2s_de_fora_coto
 https://pccd.dites.cat/p/Alberic_est%C3%A0_molt_ric_per_l%27arr%C3%B2s_de_fora_coto%3B_si_l%27apleguen_a_llevar%2C_algun_home_es_torna_loco
@@ -9623,6 +9645,7 @@ https://pccd.dites.cat/p/Alego
 https://pccd.dites.cat/p/Alegra%27t%2C_panxeta%2C_que_Nadal_ja_ve%3B_menjarem_carneta_i_arrosset_tamb%C3%A9
 https://pccd.dites.cat/p/Alegrar_els_llums
 https://pccd.dites.cat/p/Alegrar-li_la_vista
+https://pccd.dites.cat/p/Alegrar-se_bevent
 https://pccd.dites.cat/p/Alegrar-se_de_cor
 https://pccd.dites.cat/p/Alegre_com_un_fossaire_que_s%27enterraria_ell_mateix
 https://pccd.dites.cat/p/Alegre_com_un_pandero
@@ -9843,6 +9866,7 @@ https://pccd.dites.cat/p/All%C3%AD_on_anir%C3%A0s%2C_pels_diners_que_portis_ser%
 https://pccd.dites.cat/p/All%C3%AD_on_el_gripau_pesca_l%27aigua_%C3%A9s_fresca
 https://pccd.dites.cat/p/All%C3%AD_on_fica_la_banya%2C_ja_no_la_treu
 https://pccd.dites.cat/p/All%C3%AD_on_hi_ha_p%C3%A8l_hi_ha_el_diable
+https://pccd.dites.cat/p/All%C3%AD_on_mori_un_ametller%2C_planta-hi_un_oliver
 https://pccd.dites.cat/p/All%C3%AD_on_posava_l%27ull_posava_la_bala
 https://pccd.dites.cat/p/All%C3%AD_on_s%27acaba_l%27inter%C3%A8s%2C_s%27acaba_la_mem%C3%B2ria
 https://pccd.dites.cat/p/All%C3%AD_on_se_rebolca_el_burro%2C_queda_p%C3%A8l
@@ -9911,6 +9935,7 @@ https://pccd.dites.cat/p/Alls_piquen_i_cebes_couen
 https://pccd.dites.cat/p/Alls_plantats_en_lluna_nova%2C_de_grans_un_cove
 https://pccd.dites.cat/p/Al%C2%B7lucinar_mandonguilles
 https://pccd.dites.cat/p/Al%C2%B7lucines%2C_mandarines%21
+https://pccd.dites.cat/p/Allunyar-se%27n
 https://pccd.dites.cat/p/Almanco
 https://pccd.dites.cat/p/Almassora_la_Vella%2C_boscos_sense_llenya%2C_mar_sense_peix_i_xics_malcriats
 https://pccd.dites.cat/p/Almassora_ni_canta_ni_plora
@@ -10307,6 +10332,7 @@ https://pccd.dites.cat/p/Amb_cara_de_llu%C3%A7
 https://pccd.dites.cat/p/Amb_cara_de_mal%C3%ADcia
 https://pccd.dites.cat/p/Amb_cara_de_pena
 https://pccd.dites.cat/p/Amb_cara_de_p%C3%B2quer
+https://pccd.dites.cat/p/Amb_cara_de_sorpresa
 https://pccd.dites.cat/p/Amb_cara_i_ulls
 https://pccd.dites.cat/p/Amb_car%C3%A0cter_de
 https://pccd.dites.cat/p/Amb_cargols%2C_figues_i_naps%2C_aigua_no_beguis%2C_sin%C3%B3_vi%3B_tan_fi_que_cargols%2C_figues_i_naps_vegis_nedar
@@ -10546,6 +10572,7 @@ https://pccd.dites.cat/p/Amb_guitarra_d%27un_altre%2C_bons_esclafits
 https://pccd.dites.cat/p/Amb_gust
 https://pccd.dites.cat/p/Amb_ham_de_mosca
 https://pccd.dites.cat/p/Amb_hurt
+https://pccd.dites.cat/p/Amb_igual_m%C3%A8rit
 https://pccd.dites.cat/p/Amb_intenci%C3%B3
 https://pccd.dites.cat/p/Amb_intent_de
 https://pccd.dites.cat/p/Amb_just%C3%ADcia
@@ -10718,6 +10745,7 @@ https://pccd.dites.cat/p/Amb_mitja_cana_de_terra_al_cim%2C_tant_li_fan_figues%2C
 https://pccd.dites.cat/p/Amb_mitja_de_seda_i_lligacama_de_jonc
 https://pccd.dites.cat/p/Amb_mitja_paraula
 https://pccd.dites.cat/p/Amb_mitja_veu
+https://pccd.dites.cat/p/Amb_mitjans_insuficients
 https://pccd.dites.cat/p/Amb_mocs_de_ferrer
 https://pccd.dites.cat/p/Amb_modo
 https://pccd.dites.cat/p/Amb_molt
@@ -10946,6 +10974,7 @@ https://pccd.dites.cat/p/Amb_tres_menes_de_gents_no_vulguis_plets%3A_amb_qui_tre
 https://pccd.dites.cat/p/Amb_tristor
 https://pccd.dites.cat/p/Amb_trompes%2C_tabals_i_flautes
 https://pccd.dites.cat/p/Amb_tronada
+https://pccd.dites.cat/p/Amb_tropa_militar
 https://pccd.dites.cat/p/Amb_tu%2C_ni_a_missa
 https://pccd.dites.cat/p/Amb_tu%2C_pa_i_ceba
 https://pccd.dites.cat/p/Amb_ull_ple%2C_no_hi_vulguis_res
@@ -11088,7 +11117,9 @@ https://pccd.dites.cat/p/Am%C3%A9n%21
 https://pccd.dites.cat/p/Amena%C3%A7ar_i_no_pegar
 https://pccd.dites.cat/p/Amenaces_no_s%C3%B3n_llances
 https://pccd.dites.cat/p/Amesuradament
+https://pccd.dites.cat/p/Ametlla_predicadora%2C_poc_condidora
 https://pccd.dites.cat/p/Ametlla_queixalera
+https://pccd.dites.cat/p/Ametller_florit%2C_caga%27t_amb_el_ric
 https://pccd.dites.cat/p/Ametlles%2C_confits_i_merda_en_els_dits
 https://pccd.dites.cat/p/Ameu-vos_com_a_germans_i_mercadegeu_com_a_estranys
 https://pccd.dites.cat/p/Amiatat_que_es_trenca_mai_m%C3%A9s_s%27afegeix
@@ -11804,8 +11835,11 @@ https://pccd.dites.cat/p/Anar_cam%C3%AD_de_Jes%C3%BAs
 https://pccd.dites.cat/p/Anar_cam%C3%AD_tirat
 https://pccd.dites.cat/p/Anar_cany%C3%B3_avall
 https://pccd.dites.cat/p/Anar_cap_a_estonx
+https://pccd.dites.cat/p/Anar_cap_a_l%27aire
 https://pccd.dites.cat/p/Anar_cap_al_Clot
+https://pccd.dites.cat/p/Anar_caperrot
 https://pccd.dites.cat/p/Anar_capficat
+https://pccd.dites.cat/p/Anar_capsoto
 https://pccd.dites.cat/p/Anar_cara_al_sol
 https://pccd.dites.cat/p/Anar_cara_alta
 https://pccd.dites.cat/p/Anar_carenat
@@ -11886,7 +11920,6 @@ https://pccd.dites.cat/p/Anar_curi%C3%B3s
 https://pccd.dites.cat/p/Anar_curt
 https://pccd.dites.cat/p/Anar_curt_de_diners
 https://pccd.dites.cat/p/Anar_curt_de_saula
-https://pccd.dites.cat/p/Anar_d%27ac%C3%AD_i_d%27all%C3%AD
 https://pccd.dites.cat/p/Anar_d%27acord
 https://pccd.dites.cat/p/Anar_d%27albes
 https://pccd.dites.cat/p/Anar_d%27amagat
@@ -11948,6 +11981,7 @@ https://pccd.dites.cat/p/Anar_de_cossia
 https://pccd.dites.cat/p/Anar_de_dansaire
 https://pccd.dites.cat/p/Anar_de_davall
 https://pccd.dites.cat/p/Anar_de_dret_al_bulto
+https://pccd.dites.cat/p/Anar_de_dret_cap_al_fons
 https://pccd.dites.cat/p/Anar_de_dues_dobles
 https://pccd.dites.cat/p/Anar_de_flat
 https://pccd.dites.cat/p/Anar_de_g%C3%A0bia_en_g%C3%A0bia%2C_com_sant_Elm
@@ -11993,6 +12027,7 @@ https://pccd.dites.cat/p/Anar_del_claviller_de_davant
 https://pccd.dites.cat/p/Anar_del_moro_a_l%27%C3%A0ngel
 https://pccd.dites.cat/p/Anar_desencaminat
 https://pccd.dites.cat/p/Anar_desfet
+https://pccd.dites.cat/p/Anar_desfilant
 https://pccd.dites.cat/p/Anar_desmanegat
 https://pccd.dites.cat/p/Anar_desorientat
 https://pccd.dites.cat/p/Anar_despedassat
@@ -12014,6 +12049,8 @@ https://pccd.dites.cat/p/Anar_embalat
 https://pccd.dites.cat/p/Anar_emmascarat
 https://pccd.dites.cat/p/Anar_empalmat
 https://pccd.dites.cat/p/Anar_empaperinat
+https://pccd.dites.cat/p/Anar_empolainat
+https://pccd.dites.cat/p/Anar_Empolistrat
 https://pccd.dites.cat/p/Anar_en_cama_crua
 https://pccd.dites.cat/p/Anar_en_carabasseta
 https://pccd.dites.cat/p/Anar_en_cascarra
@@ -12299,6 +12336,7 @@ https://pccd.dites.cat/p/Anar_tocat
 https://pccd.dites.cat/p/Anar_tomb_per_hom_com_en_Mart%C3%AD_i_sa_truja
 https://pccd.dites.cat/p/Anar_toper
 https://pccd.dites.cat/p/Anar_torrat
+https://pccd.dites.cat/p/Anar_torrat_com_una_ametlla
 https://pccd.dites.cat/p/Anar_tort
 https://pccd.dites.cat/p/Anar_tort_de_barr%C3%B3
 https://pccd.dites.cat/p/Anar_tot_de_trav%C3%A9s
@@ -12630,6 +12668,7 @@ https://pccd.dites.cat/p/Animal_de_mala_casta%2C_un_qui_menja_i_no_paeix%2C_sabe
 https://pccd.dites.cat/p/Animal_de_mala_ress%C3%A0bia
 https://pccd.dites.cat/p/Animal_de_pic_no_fa_a_l%27amo_ric
 https://pccd.dites.cat/p/Animal_de_quatre_potes
+https://pccd.dites.cat/p/Animal_de_rapinya
 https://pccd.dites.cat/p/Animal_de_sella
 https://pccd.dites.cat/p/Animal_de_s%C3%A9quia
 https://pccd.dites.cat/p/Animal_fermat_mai_s%27ha_engreixat
@@ -12725,6 +12764,7 @@ https://pccd.dites.cat/p/Any_d%27albons%2C_any_de_cavallons
 https://pccd.dites.cat/p/Any_d%27ametlla%2C_any_de_merda
 https://pccd.dites.cat/p/Any_d%27ametlles%2C_any_de_blat
 https://pccd.dites.cat/p/Any_d%27ametlles%2C_any_de_penes
+https://pccd.dites.cat/p/Any_d%27ametlles%2C_mai_no_es_veja
 https://pccd.dites.cat/p/Any_d%27aranyoner%2C_any_de_poc_graner
 https://pccd.dites.cat/p/Any_d%27aranyons%2C_blat_pels_recons
 https://pccd.dites.cat/p/Any_d%27aranyons%2C_pocs_garberons
@@ -13011,6 +13051,7 @@ https://pccd.dites.cat/p/Apegar-se_a_roda
 https://pccd.dites.cat/p/Apegat_al_tarr%C3%B3s
 https://pccd.dites.cat/p/Apensadament
 https://pccd.dites.cat/p/Apesaradament
+https://pccd.dites.cat/p/Api
 https://pccd.dites.cat/p/Apiatxosament
 https://pccd.dites.cat/p/Apilotadament
 https://pccd.dites.cat/p/Apinyadament
@@ -13041,6 +13082,7 @@ https://pccd.dites.cat/p/Apocal%C3%ADpticament
 https://pccd.dites.cat/p/Ap%C3%B2crifament
 https://pccd.dites.cat/p/Apoderadament
 https://pccd.dites.cat/p/Apoderar-se_d%27una_pe%C3%A7a_de_roba_de_les_encantades
+https://pccd.dites.cat/p/Apol%C2%B7lo_no_t%C3%A9_tensat_tothora_l%27arc
 https://pccd.dites.cat/p/Apolog%C3%A8ticament
 https://pccd.dites.cat/p/Aportar_el_seu_gra_de_sorra
 https://pccd.dites.cat/p/Apost%C3%A0ticament
@@ -13119,6 +13161,7 @@ https://pccd.dites.cat/p/Apuntar_l%27alba
 https://pccd.dites.cat/p/Apuntar_l%27aurora
 https://pccd.dites.cat/p/Apuntar_la_barba
 https://pccd.dites.cat/p/Apuntar_la_roba
+https://pccd.dites.cat/p/Apuntar-s%27hi
 https://pccd.dites.cat/p/Apuntar-se_a_un_bombardeig
 https://pccd.dites.cat/p/Apuntar-se_al_carro
 https://pccd.dites.cat/p/Apuntar-se%27n_una
@@ -13178,6 +13221,7 @@ https://pccd.dites.cat/p/Aquest_sigui_el_nostre_purgatori_i_flamarades_ben_sovin
 https://pccd.dites.cat/p/Aquest_tot_ho_aplega
 https://pccd.dites.cat/p/Aquest_vi_est%C3%A0_batiat
 https://pccd.dites.cat/p/Aquest_vull%2C_aquest_no_vull
+https://pccd.dites.cat/p/Aquest%2C_qu%C3%A8_vols_que_s%C3%A0piga%21
 https://pccd.dites.cat/p/Aquesta_albarda_per_a_un_altre_ase
 https://pccd.dites.cat/p/Aquesta_boc%21
 https://pccd.dites.cat/p/Aquesta_cua_no_%C3%A9s_d%27aqueix_vedell
@@ -13300,6 +13344,7 @@ https://pccd.dites.cat/p/Ara_per_ara
 https://pccd.dites.cat/p/Ara_per_ara_i_no_per_suara
 https://pccd.dites.cat/p/Ara_per_naps%2C_ara_per_cols
 https://pccd.dites.cat/p/Ara_pla%21
+https://pccd.dites.cat/p/Ara_plou%2C_ara_neva_ara_cau_pedra%2C_pedra_rodona%2C_xim%2C_xim%2C_xim%E2%80%A6_Viva_la_gresca_del_Tor%C3%ADn%3B_si_el_Tor%C3%ADn_no_va_b%C3%A9%2C_posa-hi_pega%2C_sabater
 https://pccd.dites.cat/p/Ara_poc_ha
 https://pccd.dites.cat/p/Ara_pus
 https://pccd.dites.cat/p/Ara_que
@@ -13317,13 +13362,16 @@ https://pccd.dites.cat/p/Ara_s%27espassa%21%2C_i_en_queia_a_portadores
 https://pccd.dites.cat/p/Ara_sabr%C3%A0s_com_es_tiny_el_verd
 https://pccd.dites.cat/p/Ara_seguen_i_baten
 https://pccd.dites.cat/p/Ara_si_mai
+https://pccd.dites.cat/p/Ara_s%C3%AD_que_anirem_b%C3%A9%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_em_voldria_morir%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_ho_ser%C3%A0%2C_cotxe%21
+https://pccd.dites.cat/p/Ara_s%C3%AD_que_ja_hi_som_tots%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_l%27hem_feta_bona%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_les_m%27has_guanyades_totes%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_m%27has_fotut%21
 https://pccd.dites.cat/p/Ara_s%C3%AD_que_m%27has_tocat%E2%80%A6_el_nas
 https://pccd.dites.cat/p/Ara_s%C3%AD%2C_ara_no%2C_les_campanes_d%27Alcan%C3%B3
+https://pccd.dites.cat/p/Ara_s%C3%AD%2C_que_riurem%21
 https://pccd.dites.cat/p/Ara_surt_l%27ofici
 https://pccd.dites.cat/p/Ara_surt_l%27ofici_amb_sos_faristols
 https://pccd.dites.cat/p/Ara_surt_l%27ofici%21
@@ -13513,6 +13561,7 @@ https://pccd.dites.cat/p/Armes_de_cavaller_no_fan_mal_a_donzella
 https://pccd.dites.cat/p/Armes_i_diners_volen_bon_maneig
 https://pccd.dites.cat/p/Armes_no_estan_b%C3%A9_en_mans_de_b%C3%A8sties
 https://pccd.dites.cat/p/Armes_parlants
+https://pccd.dites.cat/p/Arnerols%2C_cap_de_cols
 https://pccd.dites.cat/p/Arnerols%2C_mengeu_cols%2C_mengeu_bledes_de_Caseres
 https://pccd.dites.cat/p/Aroma_i_for%C3%A7a_en_la_poma%21
 https://pccd.dites.cat/p/Arossegar_el_cul_per_un_lloc_o_altre
@@ -13725,6 +13774,7 @@ https://pccd.dites.cat/p/Arriscar_la_pell
 https://pccd.dites.cat/p/Arriscar_la_ventura
 https://pccd.dites.cat/p/Arrodit_com_un_pollet_sota_l%27ala_d%27una_lloca
 https://pccd.dites.cat/p/Arrodonidament
+https://pccd.dites.cat/p/Arrodonir_una_quantitat
 https://pccd.dites.cat/p/Arrogantment
 https://pccd.dites.cat/p/Arromanga%27t_el_camal%21
 https://pccd.dites.cat/p/Arromanga%27t_un_camal_i_veur%C3%A0s_quina_polseguera
@@ -13971,6 +14021,7 @@ https://pccd.dites.cat/p/Atac_de_banyes
 https://pccd.dites.cat/p/Atac_de_cor
 https://pccd.dites.cat/p/Atac_de_feridura
 https://pccd.dites.cat/p/Atac_de_mico
+https://pccd.dites.cat/p/Atac_de_morros
 https://pccd.dites.cat/p/Atac_de_nervis
 https://pccd.dites.cat/p/Atacar_l%27artilleria_rodada
 https://pccd.dites.cat/p/Atacar-li_els_nervis
@@ -14165,6 +14216,7 @@ https://pccd.dites.cat/p/Avui_rojor%2C_dem%C3%A0_calor
 https://pccd.dites.cat/p/Avui_un_i_dem%C3%A0_dos%2C_aix%C3%AD_diuen_els_rectors
 https://pccd.dites.cat/p/Avui_un%2C_dem%C3%A0_un_altre%2C_aix%C3%AD_tots_ens_en_anem
 https://pccd.dites.cat/p/Axiom%C3%A0ticament
+https://pccd.dites.cat/p/Ba_ba_ba_ba
 https://pccd.dites.cat/p/Babal%C3%AD-babal%C3%A0
 https://pccd.dites.cat/p/Babau%2C_beu_vi_bo_i_viu_b%C3%A9
 https://pccd.dites.cat/p/Bac_de_burra%2C_a_la_sepultura
@@ -14192,6 +14244,7 @@ https://pccd.dites.cat/p/Badalonins%2C_lladres_fins
 https://pccd.dites.cat/p/Badant
 https://pccd.dites.cat/p/Badant%2C_badant
 https://pccd.dites.cat/p/Badar_el_queixal
+https://pccd.dites.cat/p/Badar_el_sac
 https://pccd.dites.cat/p/Badar_la_boca_al_vent
 https://pccd.dites.cat/p/Badar_les_orelles
 https://pccd.dites.cat/p/Badar_un_pam_de_boca
@@ -14228,6 +14281,7 @@ https://pccd.dites.cat/p/Baixar_a_segona
 https://pccd.dites.cat/p/Baixar_al_moro
 https://pccd.dites.cat/p/Baixar_bandera
 https://pccd.dites.cat/p/Baixar_d%27Arbeca
+https://pccd.dites.cat/p/Baixar_d%27Arduix
 https://pccd.dites.cat/p/Baixar_d%27Os%C3%B3
 https://pccd.dites.cat/p/Baixar_de_la_Mussara
 https://pccd.dites.cat/p/Baixar_de_llei
@@ -14388,7 +14442,6 @@ https://pccd.dites.cat/p/Bang%21
 https://pccd.dites.cat/p/Bany_de_masses
 https://pccd.dites.cat/p/Bany_de_sang
 https://pccd.dites.cat/p/Bany_de_Sant_Joan%2C_salut_per_tot_l%27any
-https://pccd.dites.cat/p/Banya_baix
 https://pccd.dites.cat/p/Banya_de_bou_per_qui_se_n%27agrada
 https://pccd.dites.cat/p/Banya_de_cabra_al_capvespre%2C_d%27aigua_en_serem_festa
 https://pccd.dites.cat/p/Banyabaix
@@ -14438,7 +14491,12 @@ https://pccd.dites.cat/p/Barba_grisa%2C_flor_de_cementiri
 https://pccd.dites.cat/p/Barba_grossa_gr%C3%A0cia_porta
 https://pccd.dites.cat/p/Barba_llarga_honra_porta
 https://pccd.dites.cat/p/Barba_roja_molt_vent_porta
+https://pccd.dites.cat/p/Barba-serrat
+https://pccd.dites.cat/p/Barbablanc
+https://pccd.dites.cat/p/Barbaclar
 https://pccd.dites.cat/p/Barbadament
+https://pccd.dites.cat/p/Barbaflorit
+https://pccd.dites.cat/p/Barbagris
 https://pccd.dites.cat/p/Barbamec
 https://pccd.dites.cat/p/B%C3%A0rbarament
 https://pccd.dites.cat/p/Barber_mut_mai_sia_conegut
@@ -14514,12 +14572,12 @@ https://pccd.dites.cat/p/Barcelona%2C_posa%27t_guapa
 https://pccd.dites.cat/p/Barcelon%C3%AD%2C_cagasucs
 https://pccd.dites.cat/p/Barcelon%C3%AD%2C_comerciant_fi
 https://pccd.dites.cat/p/Barcelonins%2C_caga-sucs%2C_escuracassoles_i_pixavins
+https://pccd.dites.cat/p/Barcelonins%2C_cap_de_topins
 https://pccd.dites.cat/p/Barcelonins%2C_pixapins
 https://pccd.dites.cat/p/Barco_de_Blanes_o_de_Lloret%2C_barco_complet
 https://pccd.dites.cat/p/Barco_fet_mai_est%C3%A0_quiet
 https://pccd.dites.cat/p/Barco_gran%2C_tant_corrent_com_caminant
 https://pccd.dites.cat/p/Bardusser
-https://pccd.dites.cat/p/Barjaula
 https://pccd.dites.cat/p/Barliqui-barloqui
 https://pccd.dites.cat/p/Baronilment
 https://pccd.dites.cat/p/Baron%C3%ADvolment
@@ -14530,6 +14588,7 @@ https://pccd.dites.cat/p/Barra_de_peix
 https://pccd.dites.cat/p/Barra_de_torrons
 https://pccd.dites.cat/p/Barra_de_xocolata
 https://pccd.dites.cat/p/Barrabam
+https://pccd.dites.cat/p/Barrab%C3%A0s_truca_a_la_porta_amb_un_ram_de_flors_que_porta%2C_no_s%C3%B3n_fulles_ni_s%C3%B3n_ram%2C_Barrab%C3%A0s_se%27n_torna_al_camp
 https://pccd.dites.cat/p/Barrabim-bam-bum
 https://pccd.dites.cat/p/Barrab%C3%ADs-barrab%C3%A0s
 https://pccd.dites.cat/p/Barrab%C3%ADs%2C_barrab%C3%A0s%2C_no_em_picar%C3%A0s_pas
@@ -14725,6 +14784,7 @@ https://pccd.dites.cat/p/B%C3%A9_va%3B_i_ell_rodolava
 https://pccd.dites.cat/p/B%C3%A9_vaja%21
 https://pccd.dites.cat/p/B%C3%A9_ven_la_taverna%2C_per%C3%B2_m%C3%A9s_la_tavernera
 https://pccd.dites.cat/p/B%C3%A9_vinguis%2C_mal%2C_si_vens_tot_sol
+https://pccd.dites.cat/p/Be%2C_be
 https://pccd.dites.cat/p/Be%2C_b%C3%A9%21
 https://pccd.dites.cat/p/Be%2C_corderet%2C_que_ton_pare_%C3%A9s_a_Almatret%3B_be%2C_corder%C3%A0s%2C_que_ton_pare_%C3%A9s_a_Alcarr%C3%A0s
 https://pccd.dites.cat/p/B%C3%A9%21
@@ -15020,6 +15080,7 @@ https://pccd.dites.cat/p/Bestiota_amb_dents
 https://pccd.dites.cat/p/Bestraure_vol_dir_b%C3%A8stia
 https://pccd.dites.cat/p/Bestreure_vol_dir_modorro
 https://pccd.dites.cat/p/Besuc_pel_gener%2C_menjar_de_cavaller
+https://pccd.dites.cat/p/Besup-besup
 https://pccd.dites.cat/p/Bet%2C_digues_ara%2C_i_ja_t%27ho_dir%C3%A0_la_mare
 https://pccd.dites.cat/p/Beta_fins_la_punyeta%2C_i_fil_fins_el_carril
 https://pccd.dites.cat/p/B%C3%A9tera%2C_la_fi_del_m%C3%B3n
@@ -15146,6 +15207,7 @@ https://pccd.dites.cat/p/Bip%21
 https://pccd.dites.cat/p/Birondon-birondena
 https://pccd.dites.cat/p/Bisarrament
 https://pccd.dites.cat/p/Bisbe_d%27or%2C_crossa_de_fusta%3B_bisbe_de_fusta%2C_crossa_d%27or
+https://pccd.dites.cat/p/Bisbirr%C3%A8
 https://pccd.dites.cat/p/Bistec_alemany
 https://pccd.dites.cat/p/Bistec_rus
 https://pccd.dites.cat/p/Bistec_t%C3%A0rtar
@@ -15159,6 +15221,7 @@ https://pccd.dites.cat/p/Bitllo-bitllo
 https://pccd.dites.cat/p/Bitxo%2C_pebre_i_all%2C_menjar_de_cavall
 https://pccd.dites.cat/p/Bla_de_boca
 https://pccd.dites.cat/p/Bla-bla-bla
+https://pccd.dites.cat/p/Blabatx%C3%A0
 https://pccd.dites.cat/p/Blam%21
 https://pccd.dites.cat/p/Blanament
 https://pccd.dites.cat/p/Blanc_com_el_cot%C3%B3
@@ -15217,6 +15280,7 @@ https://pccd.dites.cat/p/Blat_nascut%2C_mai_perdut
 https://pccd.dites.cat/p/Blat_nat%2C_mig_encertat
 https://pccd.dites.cat/p/Blat_pelat%21_blat_pelat%21
 https://pccd.dites.cat/p/Blat_portes%3F%2C_farina_vols
+https://pccd.dites.cat/p/Blat_segat%2C_a_la_garbera_apilat
 https://pccd.dites.cat/p/Blat_segat%21_blat_segat%21
 https://pccd.dites.cat/p/Blat_tard%C3%A0%2C_ni_palla_ni_gra
 https://pccd.dites.cat/p/Blat%2C_a_mostra%3B_vi%2C_a_tast
@@ -15224,8 +15288,9 @@ https://pccd.dites.cat/p/Blau_com_el_mar
 https://pccd.dites.cat/p/Blau_com_un_cel
 https://pccd.dites.cat/p/Blau_com_un_fetge
 https://pccd.dites.cat/p/Blau_com_un_mataparent
+https://pccd.dites.cat/p/Blau_com_una_alberg%C3%ADnia
 https://pccd.dites.cat/p/Bleda_assolellada
-https://pccd.dites.cat/p/Bleda_vol_dir_encantada_i_freda%3B_juliverd%2C_cap_verd%2C_i_marduix%2C_cap_fluix
+https://pccd.dites.cat/p/Bleda_vol_dir_encantada_i_freda%3B_julivert%2C_cap_verd%2C_i_marduix%2C_cap_fluix
 https://pccd.dites.cat/p/Bledanament
 https://pccd.dites.cat/p/Bledes_a_casa_i_bledes_a_l%27hort%2C_per%C3%B2_a_casa_m%C3%A9s_que_enlloc
 https://pccd.dites.cat/p/Bledes_a_dinar_i_bledes_a_sopar%2C_massa_bledes_hi_ha
@@ -15583,6 +15648,7 @@ https://pccd.dites.cat/p/Bon_cap_per_a_fer_ascles%21
 https://pccd.dites.cat/p/Bon_cap_per_a_pom_de_barana_o_d%27escala%21
 https://pccd.dites.cat/p/Bon_cap%2C_bona_tanda
 https://pccd.dites.cat/p/Bon_capell_fa_bon_frare
+https://pccd.dites.cat/p/Bon_capit%C3%A0%2C_bons_soldats
 https://pccd.dites.cat/p/Bon_catal%C3%A0%2C_pare_de_catal%C3%A0
 https://pccd.dites.cat/p/Bon_cavall_i_mal_cavall%2C_vol_esperons
 https://pccd.dites.cat/p/Bon_celler%2C_bona_casa
@@ -15625,6 +15691,7 @@ https://pccd.dites.cat/p/Bon_dret
 https://pccd.dites.cat/p/Bon_exemple%2C_per%C3%B2_sempre
 https://pccd.dites.cat/p/Bon_exercici_cura_de_tot_vici
 https://pccd.dites.cat/p/Bon_front%2C_millor_vida
+https://pccd.dites.cat/p/Bon_g%C3%A8nere
 https://pccd.dites.cat/p/Bon_geni
 https://pccd.dites.cat/p/Bon_g%C3%A8nit_t%C3%A9_sa_moneia%21
 https://pccd.dites.cat/p/Bon_goig
@@ -15866,6 +15933,7 @@ https://pccd.dites.cat/p/Bona_paga_hi_hagi%2C_que_el_treball_no_espanta
 https://pccd.dites.cat/p/Bona_panada_i_mala_pr%C3%A0ctica%2C_plaer_i_b%C3%A9_%C3%A9s_rompre-la
 https://pccd.dites.cat/p/Bona_papeta_fa_bona_careta
 https://pccd.dites.cat/p/Bona_part
+https://pccd.dites.cat/p/Bona_pe%C3%A7a
 https://pccd.dites.cat/p/Bona_per_m%C3%A0rfegues
 https://pccd.dites.cat/p/Bona_planta_i_mals_fets
 https://pccd.dites.cat/p/Bona_ploma
@@ -16017,6 +16085,7 @@ https://pccd.dites.cat/p/Borrianers%2C_fanfarrons_i_fulers
 https://pccd.dites.cat/p/Borriol%2C_Borriol%2C_que_ensenya_el_cam%C3%AD_del_sol
 https://pccd.dites.cat/p/Borr%C3%B3_que_neix_per_l%27abril_no_t%C3%A9_temps_de_fer_bon_vi
 https://pccd.dites.cat/p/Borrobom%21
+https://pccd.dites.cat/p/Borrom-borrom
 https://pccd.dites.cat/p/Borrosament
 https://pccd.dites.cat/p/Borruix-borruix
 https://pccd.dites.cat/p/Borsa_de_treball
@@ -16090,6 +16159,7 @@ https://pccd.dites.cat/p/Bous_i_bestiar%2C_tot_hi_anir%C3%A0
 https://pccd.dites.cat/p/Bous_i_vaques_en_un_prat%2C_pobre_sembrat%21
 https://pccd.dites.cat/p/Bover_sense_barbes%2C_era_sense_garbes
 https://pccd.dites.cat/p/Bra%C3%A7_a_bra%C3%A7
+https://pccd.dites.cat/p/Bra%C3%A7_de_ferro
 https://pccd.dites.cat/p/Bra%C3%A7_de_gitano
 https://pccd.dites.cat/p/Bra%C3%A7_de_mar
 https://pccd.dites.cat/p/Bra%C3%A7_de_riu
@@ -16124,7 +16194,7 @@ https://pccd.dites.cat/p/Brava_cosa%21
 https://pccd.dites.cat/p/Bravament
 https://pccd.dites.cat/p/Bravo%2C_Caprabo%21
 https://pccd.dites.cat/p/Bravo%21
-https://pccd.dites.cat/p/Brbamec
+https://pccd.dites.cat/p/Bregat_en
 https://pccd.dites.cat/p/Bregues_d%27enamorats%2C_amors_doblats
 https://pccd.dites.cat/p/Bresca_sense_mel
 https://pccd.dites.cat/p/Bresquilles_i_cebes_duc_del_millor_que_t%C3%A9_l%27horta%3B_s%C3%B3n_de_la_Pobla_del_Duc_i_totes_de_mata_morta
@@ -16471,7 +16541,6 @@ https://pccd.dites.cat/p/Cabal_mal_suat_prompte_est%C3%A0_gastat
 https://pccd.dites.cat/p/Cabaler_sense_cabals
 https://pccd.dites.cat/p/Cabalment
 https://pccd.dites.cat/p/Cabalosament
-https://pccd.dites.cat/p/Cabanelles%2C_es_casen_fins_les_velles
 https://pccd.dites.cat/p/Cabanes%2C_cau_de_raboses%3B_Torreblanca%2C_granotera_i_Alcal%C3%A0_porta_la_fama_de_la_gent_malfaenera
 https://pccd.dites.cat/p/Cabanes%2C_terra_de_canyes
 https://pccd.dites.cat/p/Cab%C3%A0s
@@ -16992,6 +17061,7 @@ https://pccd.dites.cat/p/Cagar-li_les_calces
 https://pccd.dites.cat/p/Cagar-s%27hi
 https://pccd.dites.cat/p/Cagar-s%27hi_la_burra
 https://pccd.dites.cat/p/Cagar-s%27hi_la_mosca
+https://pccd.dites.cat/p/Cagar-se
 https://pccd.dites.cat/p/Cagar-se_a_la_banca
 https://pccd.dites.cat/p/Cagar-se_a_les_calces
 https://pccd.dites.cat/p/Cagar-se_als_faldons
@@ -17029,6 +17099,7 @@ https://pccd.dites.cat/p/Cagum_tots_els_sants_dins_una_garrafa_i_Jesucrist_per_t
 https://pccd.dites.cat/p/Caic_no_caic
 https://pccd.dites.cat/p/Caient_d%27ulls
 https://pccd.dites.cat/p/Caiga_qui_caiga%2C_pollastre_per_barba
+https://pccd.dites.cat/p/Caiguda_d%27ulls
 https://pccd.dites.cat/p/Caiguda_de_figuera%2C_la_mort_darrere
 https://pccd.dites.cat/p/Caigui_qui_caigui
 https://pccd.dites.cat/p/Caigut_d%27un_arbre
@@ -17760,7 +17831,7 @@ https://pccd.dites.cat/p/Cap_de_burro
 https://pccd.dites.cat/p/Cap_de_cadernera
 https://pccd.dites.cat/p/Cap_de_carabassa
 https://pccd.dites.cat/p/Cap_de_caraina
-https://pccd.dites.cat/p/Cap_de_carbassa
+https://pccd.dites.cat/p/Cap_de_carall%21
 https://pccd.dites.cat/p/Cap_de_casa
 https://pccd.dites.cat/p/Cap_de_cascavells
 https://pccd.dites.cat/p/Cap_de_cat%C3%BAfol
@@ -17936,6 +18007,7 @@ https://pccd.dites.cat/p/Cap_sense_cervell_no_vol_guia_ni_consell
 https://pccd.dites.cat/p/Cap_sense_cervell%2C_al_bordell
 https://pccd.dites.cat/p/Cap_sense_dents
 https://pccd.dites.cat/p/Cap_sense_so%2C_carabassa_segura
+https://pccd.dites.cat/p/Cap_sense_tim%C3%B3
 https://pccd.dites.cat/p/Cap_soc
 https://pccd.dites.cat/p/Cap_sorolla
 https://pccd.dites.cat/p/Cap_tr%C3%A0nsit_tan_fort_com_el_de_la_mort
@@ -18138,7 +18210,6 @@ https://pccd.dites.cat/p/Cara_de_Netol
 https://pccd.dites.cat/p/Cara_de_nineta_de_Manacor
 https://pccd.dites.cat/p/Cara_de_noi
 https://pccd.dites.cat/p/Cara_de_nyonya
-https://pccd.dites.cat/p/Cara_de_pa_de_ral
 https://pccd.dites.cat/p/Cara_de_pa_torrat
 https://pccd.dites.cat/p/Cara_de_Pasqua
 https://pccd.dites.cat/p/Cara_de_pega
@@ -18247,6 +18318,7 @@ https://pccd.dites.cat/p/Carall_fregit
 https://pccd.dites.cat/p/Carall%21
 https://pccd.dites.cat/p/Carallarg
 https://pccd.dites.cat/p/Carallet
+https://pccd.dites.cat/p/Carallindo
 https://pccd.dites.cat/p/Carall%C3%ADssim_nat%21_bon_forment_i_ben_granat%21
 https://pccd.dites.cat/p/Carallots_d%27Atron%2C_que_els_de_Sorre_ja_no_ho_s%C3%B3n
 https://pccd.dites.cat/p/Caralluts_al_ram%2C_caderneres_passen
@@ -18357,6 +18429,7 @@ https://pccd.dites.cat/p/Carpe_diem
 https://pccd.dites.cat/p/Carradament
 https://pccd.dites.cat/p/Carranclinc-carranclanc
 https://pccd.dites.cat/p/Carrapot
+https://pccd.dites.cat/p/Carreeeeeec
 https://pccd.dites.cat/p/C%C3%A0rrega_de_Portugal%2C_dos_ases_sobre_un_animal
 https://pccd.dites.cat/p/C%C3%A0rrega_de_vi%2C_quatre_de_blat%2C_no_est%C3%A0_mal_pagat
 https://pccd.dites.cat/p/Carrega_el_carro%2C_carreter%2C_que_si_tu_el_carregues%2C_jo_ja_el_descarregar%C3%A9
@@ -18698,6 +18771,7 @@ https://pccd.dites.cat/p/Casa%27t_amb_un_teu_igual_i_no_far%C3%A0s_mal
 https://pccd.dites.cat/p/Casa%27t_en_diumenge%2C_Joan%2C_que_el_dilluns_ser%C3%A0s_casat_i_el_dimarts_preguntar%C3%A0s_a_on_venen_pa_fiat
 https://pccd.dites.cat/p/Casa%27t_i_far%C3%A0s_casa
 https://pccd.dites.cat/p/Casa%27t%2C_i_et_diran_v%C3%B3s
+https://pccd.dites.cat/p/Casa%27t%2C_no_per_l%27inter%C3%A8s%2C_sin%C3%B3_pel_capital%2C_que_val_m%C3%A9s
 https://pccd.dites.cat/p/Casa%27t%2C_Pere%2C_que_mal_any_t%27espera
 https://pccd.dites.cat/p/Casa%27t%2C_que_tindrem_dona
 https://pccd.dites.cat/p/Casada_endre%C3%A7ada_treu_el_marit_de_casa_d%27altri
@@ -18857,6 +18931,7 @@ https://pccd.dites.cat/p/Casualment
 https://pccd.dites.cat/p/Cataclac%21
 https://pccd.dites.cat/p/Cataclec%21
 https://pccd.dites.cat/p/Cataclic-cataclac
+https://pccd.dites.cat/p/Cataclic-cataclec
 https://pccd.dites.cat/p/Cataclic%21
 https://pccd.dites.cat/p/Cataclinc%21
 https://pccd.dites.cat/p/Catacloc
@@ -18901,11 +18976,13 @@ https://pccd.dites.cat/p/Catarroja%2C_la_mula_roja
 https://pccd.dites.cat/p/Catatec-catxec
 https://pccd.dites.cat/p/Catatrac
 https://pccd.dites.cat/p/Catatric-catatrac
+https://pccd.dites.cat/p/Catatric-catatrec
+https://pccd.dites.cat/p/Catatric-catatroc
 https://pccd.dites.cat/p/Catatxic-catatxac
 https://pccd.dites.cat/p/Catatxoc
 https://pccd.dites.cat/p/Categ%C3%B2ricament
 https://pccd.dites.cat/p/Caterina%2C_porta_sa_casserina%2C_que_es_burro_s%27escagarrina%21
-https://pccd.dites.cat/p/Caterina%2C_tot_el_m%C3%B3n_inclina
+https://pccd.dites.cat/p/Catetxic-catatxec
 https://pccd.dites.cat/p/Catic-catac
 https://pccd.dites.cat/p/Caticatasques%2C_farem_un_ou_per_Pasq%C3%BCes
 https://pccd.dites.cat/p/Cat%C3%B3
@@ -18917,6 +18994,7 @@ https://pccd.dites.cat/p/Catric-catrec
 https://pccd.dites.cat/p/Catric-catroc
 https://pccd.dites.cat/p/Catric-catruc
 https://pccd.dites.cat/p/Catrina_i_Bertrina_trinxen_trenta_coctrines_a_la_trona
+https://pccd.dites.cat/p/Catrinc-catrinc
 https://pccd.dites.cat/p/Catsoleta%21
 https://pccd.dites.cat/p/Cat%C3%BAfol_de_s%C3%ADnia%2C_el_qui_va_ple%2C_buit_se%27n_torna
 https://pccd.dites.cat/p/C%C3%A0txala%21
@@ -18924,6 +19002,7 @@ https://pccd.dites.cat/p/Catxar_la_m%C3%A0
 https://pccd.dites.cat/p/Catxassudament
 https://pccd.dites.cat/p/Catxec
 https://pccd.dites.cat/p/Catxec-catxec
+https://pccd.dites.cat/p/Catxic-catxac
 https://pccd.dites.cat/p/Catxic-catxec
 https://pccd.dites.cat/p/Catxutxes_amb_caputxes_i_caputxes_amb_catxutxes
 https://pccd.dites.cat/p/Cau
@@ -18966,6 +19045,7 @@ https://pccd.dites.cat/p/Caure_com_fruita_madura
 https://pccd.dites.cat/p/Caure_com_la_girifiga
 https://pccd.dites.cat/p/Caure_com_la_mis%C3%A8ria_sobre_els_pobres
 https://pccd.dites.cat/p/Caure_com_sapet_de_tronada
+https://pccd.dites.cat/p/Caure_com_un_albercoc_madur
 https://pccd.dites.cat/p/Caure_com_un_cop_de_puny_al_ventre
 https://pccd.dites.cat/p/Caure_com_un_fardo
 https://pccd.dites.cat/p/Caure_com_un_merdeg%C3%A0s
@@ -18974,6 +19054,7 @@ https://pccd.dites.cat/p/Caure_com_un_pruner
 https://pccd.dites.cat/p/Caure_com_un_sac
 https://pccd.dites.cat/p/Caure_com_una_bomba
 https://pccd.dites.cat/p/Caure_com_una_figa
+https://pccd.dites.cat/p/Caure_com_una_figa_madura
 https://pccd.dites.cat/p/Caure_d%27anques_a_terra
 https://pccd.dites.cat/p/Caure_d%27esquena
 https://pccd.dites.cat/p/Caure_d%27oros
@@ -19354,6 +19435,7 @@ https://pccd.dites.cat/p/Cercabregues
 https://pccd.dites.cat/p/Cercaclosquilles
 https://pccd.dites.cat/p/Cercafresses
 https://pccd.dites.cat/p/Cercant_un_amic_la_vida_m%27he_passat%2C_em_moro_de_vell_i_no_l%27he_trobat
+https://pccd.dites.cat/p/Cercar_amunt_i_avall
 https://pccd.dites.cat/p/Cercar_bronquina
 https://pccd.dites.cat/p/Cercar_buranyes
 https://pccd.dites.cat/p/Cercar_busques
@@ -19469,6 +19551,7 @@ https://pccd.dites.cat/p/Civada_sembrada_en_lluna_nova%2C_surt_blanca%3B_en_llun
 https://pccd.dites.cat/p/Civadeta_de_capell%C3%A0
 https://pccd.dites.cat/p/C%C3%ADvicament
 https://pccd.dites.cat/p/Civilment
+https://pccd.dites.cat/p/Cla-cataclac-clac-clac
 https://pccd.dites.cat/p/Cla%2C_cla%2C_cla
 https://pccd.dites.cat/p/Clac-clac-clac
 https://pccd.dites.cat/p/Clac%21
@@ -19595,12 +19678,14 @@ https://pccd.dites.cat/p/Clavar-se_al_tos
 https://pccd.dites.cat/p/Clavar-se-li_al_cor
 https://pccd.dites.cat/p/Clavell_a_l%27orella_crida_donzella
 https://pccd.dites.cat/p/Clavilla_del_fust_mateix_t%C3%A9_mal_nom_perqu%C3%A8_el_mereix
+https://pccd.dites.cat/p/Cle-queteclec-clec-clec
 https://pccd.dites.cat/p/Clec-clec-clec
 https://pccd.dites.cat/p/Clec%21
 https://pccd.dites.cat/p/Clenxa
 https://pccd.dites.cat/p/Clenxa_perduda
 https://pccd.dites.cat/p/Clergue_negligent%2C_vaixell_de_diables
 https://pccd.dites.cat/p/Clericalment
+https://pccd.dites.cat/p/Cli-quiticlic-clic-clic
 https://pccd.dites.cat/p/Clic-clac
 https://pccd.dites.cat/p/Clic-clec
 https://pccd.dites.cat/p/Clic-clec-clic-clec
@@ -19612,6 +19697,7 @@ https://pccd.dites.cat/p/Clif-clif-clif
 https://pccd.dites.cat/p/Clif%21
 https://pccd.dites.cat/p/Cli%C3%ADnicament
 https://pccd.dites.cat/p/Clim%C3%A0ticament
+https://pccd.dites.cat/p/Clinc-clanc-clunc
 https://pccd.dites.cat/p/Clinc%21
 https://pccd.dites.cat/p/Cling-cling-cling
 https://pccd.dites.cat/p/Cling-clong
@@ -19693,6 +19779,8 @@ https://pccd.dites.cat/p/Cobrir-se_grande_d%27Espanya
 https://pccd.dites.cat/p/Coc
 https://pccd.dites.cat/p/Coc-coc
 https://pccd.dites.cat/p/Coc-com
+https://pccd.dites.cat/p/Coc-corococ
+https://pccd.dites.cat/p/Coc%2C_coc%2C_coc
 https://pccd.dites.cat/p/Co%C3%A7a_de_cavall_fa_mal%2C_co%C3%A7a_de_ruc_fa_riure
 https://pccd.dites.cat/p/Coca_i_coc%C3%B3%2C_tot_surt_del_pastador
 https://pccd.dites.cat/p/Coca_prima_satisf%C3%A0_la_vista%2C_per%C3%B2_no_atipa
@@ -19721,6 +19809,7 @@ https://pccd.dites.cat/p/Cofinada_ben_preparada_dona_bona_premsada
 https://pccd.dites.cat/p/Coherentment
 https://pccd.dites.cat/p/Coi%21
 https://pccd.dites.cat/p/Coinquinar_la_paci%C3%A8ncia
+https://pccd.dites.cat/p/Coit
 https://pccd.dites.cat/p/Coix_abans_de_matrimoni_no_lleva_nova_fruita
 https://pccd.dites.cat/p/Coix_assegut_es_coneix_que_%C3%A9s_coix
 https://pccd.dites.cat/p/Coix_de_l%27ala
@@ -19863,6 +19952,7 @@ https://pccd.dites.cat/p/Com_a_casa_del_portugu%C3%A8s%2C_que_hi_ha_de_tot%2C_pe
 https://pccd.dites.cat/p/Com_a_casa%2C_enlloc
 https://pccd.dites.cat/p/Com_a_Darnius%2C_on_els_que_no_s%27han_mort_s%C3%B3n_vius
 https://pccd.dites.cat/p/Com_a_dimonis
+https://pccd.dites.cat/p/Com_a_disculpa
 https://pccd.dites.cat/p/Com_a_exemple%E2%80%A6
 https://pccd.dites.cat/p/Com_a_formigues
 https://pccd.dites.cat/p/Com_a_l%27aire_la_vela%2C_aix%C3%AD_la_dona_solta%E2%80%A6
@@ -20165,6 +20255,7 @@ https://pccd.dites.cat/p/Com_en_una_llauna_de_sardines
 https://pccd.dites.cat/p/Com_era_d%27esperar
 https://pccd.dites.cat/p/Com_era_de_neu_se_desfeu
 https://pccd.dites.cat/p/Com_%C3%A9s_ara
+https://pccd.dites.cat/p/Com_%C3%A9s_costum
 https://pccd.dites.cat/p/Com_es_diu%3F
 https://pccd.dites.cat/p/Com_%C3%A9s_el_so%2C_aix%C3%AD_%C3%A9s_el_ball
 https://pccd.dites.cat/p/Com_%C3%A9s_l%27ama%2C_aix%C3%AD_mana
@@ -20579,6 +20670,7 @@ https://pccd.dites.cat/p/Com_qui_no_hi_%C3%A9s_per_a_res
 https://pccd.dites.cat/p/Com_qui_no_hi_%C3%A9s_per_aix%C3%B2
 https://pccd.dites.cat/p/Com_qui_no_hi_toca
 https://pccd.dites.cat/p/Com_qui_no_hi_veu
+https://pccd.dites.cat/p/Com_qui_no_n%27%C3%A9s_res
 https://pccd.dites.cat/p/Com_qui_no_ser-ne
 https://pccd.dites.cat/p/Com_qui_no_vol_la_cosa
 https://pccd.dites.cat/p/Com_qui_passa_les_denes_d%27un_rosari
@@ -20793,6 +20885,7 @@ https://pccd.dites.cat/p/Com_un_tret
 https://pccd.dites.cat/p/Com_un_ull_de_gat
 https://pccd.dites.cat/p/Com_un_ull_de_peix
 https://pccd.dites.cat/p/Com_un_vedell
+https://pccd.dites.cat/p/Com_un_ventall
 https://pccd.dites.cat/p/Com_un_xai
 https://pccd.dites.cat/p/Com_un_xai_a_l%27escorxador
 https://pccd.dites.cat/p/Com_una_argamassa
@@ -20800,6 +20893,7 @@ https://pccd.dites.cat/p/Com_una_bajoca
 https://pccd.dites.cat/p/Com_una_bala
 https://pccd.dites.cat/p/Com_una_baldana_sacsanuda
 https://pccd.dites.cat/p/Com_una_baldufa
+https://pccd.dites.cat/p/Com_una_barca_sense_tim%C3%B3
 https://pccd.dites.cat/p/Com_una_barcella
 https://pccd.dites.cat/p/Com_una_bassa_d%27oli
 https://pccd.dites.cat/p/Com_una_bola
@@ -21252,6 +21346,7 @@ https://pccd.dites.cat/p/Conseq%C3%BCentment
 https://pccd.dites.cat/p/Consequitivament
 https://pccd.dites.cat/p/Conservar_l%27an%C3%B2nim
 https://pccd.dites.cat/p/Conservar_la_calma
+https://pccd.dites.cat/p/Conservar_la_captinen%C3%A7a
 https://pccd.dites.cat/p/Conservar-ne_la_mem%C3%B2ria
 https://pccd.dites.cat/p/Conservar-se_com_un_rovell%C3%B3
 https://pccd.dites.cat/p/Conservar-se_com_una_rosa_en_remull
@@ -21482,6 +21577,7 @@ https://pccd.dites.cat/p/Cop_de_sogra
 https://pccd.dites.cat/p/Cop_de_sol
 https://pccd.dites.cat/p/Cop_de_sort
 https://pccd.dites.cat/p/Cop_de_teatre
+https://pccd.dites.cat/p/Cop_de_tim%C3%B3
 https://pccd.dites.cat/p/Cop_de_tra%C3%AFdor
 https://pccd.dites.cat/p/Cop_de_vano
 https://pccd.dites.cat/p/Cop_de_vent
@@ -21500,6 +21596,7 @@ https://pccd.dites.cat/p/Copios%C3%ADssimament
 https://pccd.dites.cat/p/Cops_al_bot
 https://pccd.dites.cat/p/Cops_i_repics
 https://pccd.dites.cat/p/Cops_que_es_tornen_no_fan_mal
+https://pccd.dites.cat/p/C%C3%B2pula
 https://pccd.dites.cat/p/Copulativament
 https://pccd.dites.cat/p/Coques_de_Sant_Blai_curen_de_tot_mal
 https://pccd.dites.cat/p/Coqueta_o_pastisset%3F
@@ -21774,18 +21871,23 @@ https://pccd.dites.cat/p/Cos_en_calma%2C_si_no_dorm_descansa
 https://pccd.dites.cat/p/Cos_estirat%2C_mig_alimentat
 https://pccd.dites.cat/p/Cos_mal_cuidat_prest_espatllat
 https://pccd.dites.cat/p/Cos_sa%2C_cor_calent_i_bon_sentiment
+https://pccd.dites.cat/p/Cosa_bona
 https://pccd.dites.cat/p/Cosa_complida%2C_en_l%27altra_vida
 https://pccd.dites.cat/p/Cosa_d%27altri_sempre_tira_pel_seu_amo
 https://pccd.dites.cat/p/Cosa_d%27entitat
 https://pccd.dites.cat/p/Cosa_de
 https://pccd.dites.cat/p/Cosa_de_bruixes
+https://pccd.dites.cat/p/Cosa_de_l%27edat
 https://pccd.dites.cat/p/Cosa_de_la_Vall_no_val_un_carall
+https://pccd.dites.cat/p/Cosa_de_no_dir
 https://pccd.dites.cat/p/Cosa_de_veure
 https://pccd.dites.cat/p/Cosa_de%E2%80%A6
 https://pccd.dites.cat/p/Cosa_dolenta%2C_fora_del_ventre
 https://pccd.dites.cat/p/Cosa_dura
 https://pccd.dites.cat/p/Cosa_espatllada%2C_cosa_adobada
 https://pccd.dites.cat/p/Cosa_estranya%21
+https://pccd.dites.cat/p/Cosa_feta
+https://pccd.dites.cat/p/Cosa_fina
 https://pccd.dites.cat/p/Cosa_fina%21
 https://pccd.dites.cat/p/Cosa_jutjada%2C_cosa_sagrada
 https://pccd.dites.cat/p/Cosa_mal_guardada%2C_perduda_o_extraviada
@@ -21992,6 +22094,7 @@ https://pccd.dites.cat/p/Crema%21_%E2%80%94Bufa%21
 https://pccd.dites.cat/p/Cremall%21
 https://pccd.dites.cat/p/Cremallot_al_llum%2C_pluja_i_no_fum
 https://pccd.dites.cat/p/Cremar_candeles
+https://pccd.dites.cat/p/Cremar_el_darrer_cartutx
 https://pccd.dites.cat/p/Cremar_en_el_verd
 https://pccd.dites.cat/p/Cremar_es_sofrit
 https://pccd.dites.cat/p/Cremar_la_barraca
@@ -22069,6 +22172,7 @@ https://pccd.dites.cat/p/Criar_pedres_al_fetge
 https://pccd.dites.cat/p/Criar_popes
 https://pccd.dites.cat/p/Criar_rovell
 https://pccd.dites.cat/p/Criar_teranyines_en_la_gola
+https://pccd.dites.cat/p/Criar_una_serpent_als_seus_pits
 https://pccd.dites.cat/p/Criar-se_com_els_arbres_de_la_Devesa
 https://pccd.dites.cat/p/Criar-se_en_bons_bolquers
 https://pccd.dites.cat/p/Criat_de_molts%2C_agra%C3%AFt_de_ning%C3%BA_i_maltractat_per_tots
@@ -22162,6 +22266,7 @@ https://pccd.dites.cat/p/Cru_i_nu
 https://pccd.dites.cat/p/Cruament
 https://pccd.dites.cat/p/Cruc-cruc
 https://pccd.dites.cat/p/Cruc%21
+https://pccd.dites.cat/p/Crucruc
 https://pccd.dites.cat/p/Crudel%C3%ADssimament
 https://pccd.dites.cat/p/Cruel_com_la_fam
 https://pccd.dites.cat/p/Cruel%C3%ADssimament
@@ -22175,8 +22280,11 @@ https://pccd.dites.cat/p/Cruxir_la_fusta
 https://pccd.dites.cat/p/Cua_d%27any
 https://pccd.dites.cat/p/Cua_de_cavall
 https://pccd.dites.cat/p/Cua_de_gos%2C_cua_de_gat%2C_aquest_mal_ja_s%27ha_curat
+https://pccd.dites.cat/p/Cuac-cuac
 https://pccd.dites.cat/p/Cual
+https://pccd.dites.cat/p/Cuallarg
 https://pccd.dites.cat/p/Cubelles%2C_platja_daurada
+https://pccd.dites.cat/p/Cuc
 https://pccd.dites.cat/p/Cuc_clar%2C_a_l%27amo_fa_cantar
 https://pccd.dites.cat/p/Cuc_de_gener_omple_el_graner
 https://pccd.dites.cat/p/Cuc_de_la_consci%C3%A8ncia
@@ -22196,6 +22304,7 @@ https://pccd.dites.cat/p/Cucut%2C_cucut%3A_lo_nas_te_put%2C_lo_bec_te_sagna_freg
 https://pccd.dites.cat/p/Cucut%2C_vai_curt%21_Vestis-ti%21_No_puc%21_Cucut%E2%80%A6%21
 https://pccd.dites.cat/p/Cucut%21
 https://pccd.dites.cat/p/Cudols_com_a_tabals
+https://pccd.dites.cat/p/Cuec%2C_cuec%2C_cuec
 https://pccd.dites.cat/p/Cueta
 https://pccd.dites.cat/p/Cuida_els_pares_vells_i_a_la_vellesa_ser%C3%A0s_cuidat_com_ells
 https://pccd.dites.cat/p/Cuida%27t_de_ca_d%27altri%2C_que_ja_es_cuidaran_de_ca_teva
@@ -22307,6 +22416,7 @@ https://pccd.dites.cat/p/Cura_de_salut
 https://pccd.dites.cat/p/Cura_de_soldat
 https://pccd.dites.cat/p/Cura_m%C3%A9s_la_dieta_que_la_llanceta
 https://pccd.dites.cat/p/Cura_millor_un_remei_encertat_que_cent_remeis_errats
+https://pccd.dites.cat/p/Cura%2C_cura%2C_cura
 https://pccd.dites.cat/p/Curalotodo
 https://pccd.dites.cat/p/Curar_de_gr%C3%A0cia
 https://pccd.dites.cat/p/Curar-se_amb_aigua_beneita
@@ -22336,6 +22446,7 @@ https://pccd.dites.cat/p/Curt_de_cames
 https://pccd.dites.cat/p/Curt_de_cames_i_llarg_de_cos
 https://pccd.dites.cat/p/Curt_de_feina
 https://pccd.dites.cat/p/Curt_de_gambals
+https://pccd.dites.cat/p/Curt_de_jornal
 https://pccd.dites.cat/p/Curt_de_llengua_i_llarg_d%27ungles
 https://pccd.dites.cat/p/Curt_de_llevar
 https://pccd.dites.cat/p/Curt_de_mans
@@ -22360,6 +22471,7 @@ https://pccd.dites.cat/p/Curtes_passes%2C_pocs_viatges
 https://pccd.dites.cat/p/Curulladament
 https://pccd.dites.cat/p/Cus_cus%21
 https://pccd.dites.cat/p/Cusa_cus_a_casa_de_Cuso_i_es_casa
+https://pccd.dites.cat/p/Cus%C3%AD%2C_cus%C3%AD%2C_cus%C3%AD
 https://pccd.dites.cat/p/Cutx%21
 https://pccd.dites.cat/p/Cutxar%C3%B3_massa_rebentat%2C_propens_a_pa_esguerrat
 https://pccd.dites.cat/p/Cutxo_qui_baola%2C_no_tira_a_mos
@@ -22470,6 +22582,7 @@ https://pccd.dites.cat/p/D%27alta_volada
 https://pccd.dites.cat/p/D%27alto_copete
 https://pccd.dites.cat/p/D%27altra_banda
 https://pccd.dites.cat/p/D%27altra_manera
+https://pccd.dites.cat/p/D%27altra_manera_m%27aniria
 https://pccd.dites.cat/p/D%27altra_part
 https://pccd.dites.cat/p/D%27altri
 https://pccd.dites.cat/p/D%27altura
@@ -22617,6 +22730,7 @@ https://pccd.dites.cat/p/D%27envergadura
 https://pccd.dites.cat/p/D%27%C3%A8poca
 https://pccd.dites.cat/p/D%27Eriny%C3%A0%2C_cireretes_i_bon_pa
 https://pccd.dites.cat/p/D%27esbiaixada
+https://pccd.dites.cat/p/D%27escaire
 https://pccd.dites.cat/p/D%27escallimpantes
 https://pccd.dites.cat/p/D%27escal%C3%B3_en_escal%C3%B3_pugen_l%27escala
 https://pccd.dites.cat/p/D%27escalons_meus_no_vull_que_en_facis_escales
@@ -23150,6 +23264,7 @@ https://pccd.dites.cat/p/De_bon_cor
 https://pccd.dites.cat/p/De_bon_demble
 https://pccd.dites.cat/p/De_bon_encuny
 https://pccd.dites.cat/p/De_bon_%C3%A9sser
+https://pccd.dites.cat/p/De_bon_fer
 https://pccd.dites.cat/p/De_bon_grat_fer_de_D%C3%A9u_la_voluntat%3B_%C3%A7a_com_lla%2C_tamb%C3%A9_es_far%C3%A0
 https://pccd.dites.cat/p/De_bon_gust
 https://pccd.dites.cat/p/De_bon_humor
@@ -23507,6 +23622,7 @@ https://pccd.dites.cat/p/De_color_de_plata
 https://pccd.dites.cat/p/De_color_de_rosa
 https://pccd.dites.cat/p/De_color_de_safr%C3%A0
 https://pccd.dites.cat/p/De_color_de_taronja
+https://pccd.dites.cat/p/De_color_sofert
 https://pccd.dites.cat/p/De_color_verd_d%27espera
 https://pccd.dites.cat/p/De_colors_trencats
 https://pccd.dites.cat/p/De_cols%2C_ventre_no_en_vols%3B_de_naps%2C_ventre_ja_ho_saps
@@ -23820,7 +23936,6 @@ https://pccd.dites.cat/p/De_Gabarra_a_l%27Hostalnou_era_la_mia_posada%3B_a_pa_i_
 https://pccd.dites.cat/p/De_g%C3%A0bia_vella%2C_se%27n_fuig_la_cadernera
 https://pccd.dites.cat/p/De_gaiol%C3%B3
 https://pccd.dites.cat/p/De_gairell
-https://pccd.dites.cat/p/De_gair%C3%B3
 https://pccd.dites.cat/p/De_gaites
 https://pccd.dites.cat/p/De_gala
 https://pccd.dites.cat/p/De_gall%2C_bon_tall
@@ -24382,6 +24497,7 @@ https://pccd.dites.cat/p/De_mal_veure
 https://pccd.dites.cat/p/De_mal%2C_amb_poc_n%27hi_ha_prou
 https://pccd.dites.cat/p/De_mal%2C_no_en_surt_m%C3%A9s_que_mal
 https://pccd.dites.cat/p/De_mal%2C_no_n%27hi_ha_cap_de_bo
+https://pccd.dites.cat/p/De_mala_alberg%C3%ADnia%2C_mai_bona_carabassa
 https://pccd.dites.cat/p/De_mala_anomenada
 https://pccd.dites.cat/p/De_mala_ascla
 https://pccd.dites.cat/p/De_mala_carn%2C_el_diable_en_caga
@@ -24421,6 +24537,7 @@ https://pccd.dites.cat/p/De_Manacor
 https://pccd.dites.cat/p/De_mancada
 https://pccd.dites.cat/p/De_mancom%C3%BA
 https://pccd.dites.cat/p/De_mandr%C3%B3
+https://pccd.dites.cat/p/De_manera_gruixuda
 https://pccd.dites.cat/p/De_manera_que
 https://pccd.dites.cat/p/De_manera_que_s%C3%AD%21
 https://pccd.dites.cat/p/De_manera%21
@@ -24545,6 +24662,7 @@ https://pccd.dites.cat/p/De_molt
 https://pccd.dites.cat/p/De_molt_de_peix_que_menges%2C_si_sabies_el_que_ha_costat_de_treure%2C_ploraries
 https://pccd.dites.cat/p/De_molt_pes
 https://pccd.dites.cat/p/De_molta_mem%C3%B2ria
+https://pccd.dites.cat/p/De_molta_pomada
 https://pccd.dites.cat/p/De_moltes_campanetes
 https://pccd.dites.cat/p/De_moltes_paraules
 https://pccd.dites.cat/p/De_moment
@@ -24597,6 +24715,7 @@ https://pccd.dites.cat/p/De_nassos
 https://pccd.dites.cat/p/De_natura
 https://pccd.dites.cat/p/De_Navata_en_avall%2C_els_burros_van_sense_tenda
 https://pccd.dites.cat/p/De_necessitat
+https://pccd.dites.cat/p/De_negra_nit
 https://pccd.dites.cat/p/De_nervi
 https://pccd.dites.cat/p/De_net_a_net
 https://pccd.dites.cat/p/De_ning%C3%BA_has_de_dir_all%C3%B2_que_de_tu_no_vulguis_sentir
@@ -24645,7 +24764,6 @@ https://pccd.dites.cat/p/De_pa_i_calbot
 https://pccd.dites.cat/p/De_pa_i_companatge
 https://pccd.dites.cat/p/De_pa_i_figa
 https://pccd.dites.cat/p/De_pa_i_formatge
-https://pccd.dites.cat/p/De_pa_i_mel
 https://pccd.dites.cat/p/De_pa_i_mel%C3%B3
 https://pccd.dites.cat/p/De_pa_i_panet%2C_com_el_tio_Canet
 https://pccd.dites.cat/p/De_pa_i_peix
@@ -24748,6 +24866,7 @@ https://pccd.dites.cat/p/De_pega_i_mantega
 https://pccd.dites.cat/p/De_p%C3%A8l
 https://pccd.dites.cat/p/De_p%C3%A8l_a_p%C3%A8l
 https://pccd.dites.cat/p/De_p%C3%A8l_roig%2C_ni_gat_ni_porc_o_ni_gos
+https://pccd.dites.cat/p/De_pela_amb_deu
 https://pccd.dites.cat/p/De_pela_d%C3%B3%27m
 https://pccd.dites.cat/p/De_Pelagalls_a_Barcelona
 https://pccd.dites.cat/p/De_pelatge_fi
@@ -24763,6 +24882,7 @@ https://pccd.dites.cat/p/De_Pepet_de_l%27orde%21
 https://pccd.dites.cat/p/De_per_ah%C3%AD
 https://pccd.dites.cat/p/De_per_avall
 https://pccd.dites.cat/p/De_per_broma
+https://pccd.dites.cat/p/De_per_jugar
 https://pccd.dites.cat/p/De_per_mig
 https://pccd.dites.cat/p/De_per_riure
 https://pccd.dites.cat/p/De_per_si
@@ -24797,6 +24917,7 @@ https://pccd.dites.cat/p/De_petit_gra_se%27n_fa_gran_plaga
 https://pccd.dites.cat/p/De_petites
 https://pccd.dites.cat/p/De_petits%2C_afadics%3B_de_grans%2C_afanys
 https://pccd.dites.cat/p/De_petits%2C_mocs%3B_d%27homes%2C_postermes%2C_i_de_vells%2C_flemes
+https://pccd.dites.cat/p/De_petja
 https://pccd.dites.cat/p/De_pet%C3%B3_i_natjada
 https://pccd.dites.cat/p/De_peu
 https://pccd.dites.cat/p/De_peu_de_banc
@@ -25762,6 +25883,7 @@ https://pccd.dites.cat/p/Deixar_endevinar
 https://pccd.dites.cat/p/Deixar_enlaire
 https://pccd.dites.cat/p/Deixar_enrere
 https://pccd.dites.cat/p/Deixar_erm
+https://pccd.dites.cat/p/Deixar_esquilat
 https://pccd.dites.cat/p/Deixar_estar
 https://pccd.dites.cat/p/Deixar_estar_les_cortesies_per_al_dijous_de_la_cena
 https://pccd.dites.cat/p/Deixar_estar_per_boig
@@ -25819,6 +25941,7 @@ https://pccd.dites.cat/p/Deixar_sense_ni_un_ral
 https://pccd.dites.cat/p/Deixar_sense_paraula
 https://pccd.dites.cat/p/Deixar_sense_polsos
 https://pccd.dites.cat/p/Deixar_sense_una_gota_de_sang_a_les_venes
+https://pccd.dites.cat/p/Deixar_suau
 https://pccd.dites.cat/p/Deixar_tirat
 https://pccd.dites.cat/p/Deixar_una_porta_oberta
 https://pccd.dites.cat/p/Deixar_verd
@@ -25849,6 +25972,7 @@ https://pccd.dites.cat/p/Deixar-ho_caure_en_la_conversaci%C3%B3
 https://pccd.dites.cat/p/Deixar-ho_c%C3%B3rrer
 https://pccd.dites.cat/p/Deixar-ho_dormir
 https://pccd.dites.cat/p/Deixar-ho_estar
+https://pccd.dites.cat/p/Deixar-ho_estar_i_tornar-ho_a_comen%C3%A7ar
 https://pccd.dites.cat/p/Deixar-ho_tot_pel_burro
 https://pccd.dites.cat/p/Deixar-la_caure_com_els_de_Portell
 https://pccd.dites.cat/p/Deixar-les_anar_com_els_ases_els_pets
@@ -26344,6 +26468,7 @@ https://pccd.dites.cat/p/Demanar_%C3%A9s_cortesia
 https://pccd.dites.cat/p/Demanar_feina
 https://pccd.dites.cat/p/Demanar_gelos
 https://pccd.dites.cat/p/Demanar_guerra
+https://pccd.dites.cat/p/Demanar_hora
 https://pccd.dites.cat/p/Demanar_just%C3%ADcia
 https://pccd.dites.cat/p/Demanar_l%27impossible
 https://pccd.dites.cat/p/Demanar_la_lluna
@@ -26399,6 +26524,7 @@ https://pccd.dites.cat/p/Dents_d%27all
 https://pccd.dites.cat/p/Dents_de_cavall
 https://pccd.dites.cat/p/Dents_de_conill
 https://pccd.dites.cat/p/Dents_de_fava
+https://pccd.dites.cat/p/Dents_de_ferro
 https://pccd.dites.cat/p/Dents_de_piano
 https://pccd.dites.cat/p/Dents_de_rata
 https://pccd.dites.cat/p/Dents_llargues
@@ -26432,6 +26558,7 @@ https://pccd.dites.cat/p/Des_de
 https://pccd.dites.cat/p/Des_de_D%C3%A9nia_fins_a_Oriola%2C_%C3%A9s_el_terreny_un_jard%C3%AD%2C_cada_poblet_un_capoll_i_Alacant_la_rosa_en_mig
 https://pccd.dites.cat/p/Des_de_l%27ombra
 https://pccd.dites.cat/p/Des_de_la_barrera
+https://pccd.dites.cat/p/Des_de_la_c%C3%A0tedra
 https://pccd.dites.cat/p/Des_de_la_Mare_de_D%C3%A9u_d%27Agost_a_Sant_Miquel_no_hi_ha_cap_pluja_que_faci_b%C3%A9
 https://pccd.dites.cat/p/Des_de_la_Selva_a_Sant_Pere%2C_una_hora_entera%3B_el_mateix_cam%C3%AD_al_rev%C3%A9s%2C_un_quart_nom%C3%A9s
 https://pccd.dites.cat/p/Des_de_la_vora
@@ -26455,6 +26582,7 @@ https://pccd.dites.cat/p/Des_del_bressol
 https://pccd.dites.cat/p/Des_del_cap_fins_a_la_cua
 https://pccd.dites.cat/p/Des_del_gegant_a_en_Magarrinyes
 https://pccd.dites.cat/p/Des_del_maig_a_Sant_Miquel_de_pastor_tothom_pot_fer
+https://pccd.dites.cat/p/Des_del_primer_moment
 https://pccd.dites.cat/p/Des_del_principi
 https://pccd.dites.cat/p/Des_del_setembre_a_l%27agost%2C_beu_vi_vell_i_no_beguis_most
 https://pccd.dites.cat/p/Des_del_setembre_fins_a_l%27agost%2C_deixa_el_vi_vell_i_deixa_reposar_el_most
@@ -26599,6 +26727,7 @@ https://pccd.dites.cat/p/Descurosament
 https://pccd.dites.cat/p/Desc%C3%BAs_i_no_trenquis
 https://pccd.dites.cat/p/Desde_luego%2C_corber%C3%B3
 https://pccd.dites.cat/p/Desdenyosament
+https://pccd.dites.cat/p/Desdir-se
 https://pccd.dites.cat/p/Desditxadament
 https://pccd.dites.cat/p/Desdobladament
 https://pccd.dites.cat/p/Desdomenegadament
@@ -26958,6 +27087,7 @@ https://pccd.dites.cat/p/Destorbaplaers
 https://pccd.dites.cat/p/Destorbar_el_seny
 https://pccd.dites.cat/p/Destorbar-li_el_marro
 https://pccd.dites.cat/p/Destrament
+https://pccd.dites.cat/p/Destre_en
 https://pccd.dites.cat/p/Destrellatadament
 https://pccd.dites.cat/p/Destrempadament
 https://pccd.dites.cat/p/Destrempar-se
@@ -26978,6 +27108,7 @@ https://pccd.dites.cat/p/Desvergonyidament
 https://pccd.dites.cat/p/Desvergonyir-s%27hi
 https://pccd.dites.cat/p/Desvernissaplats
 https://pccd.dites.cat/p/Desvetlladament
+https://pccd.dites.cat/p/Desvirgagallines
 https://pccd.dites.cat/p/Detalladament
 https://pccd.dites.cat/p/Detectivescament
 https://pccd.dites.cat/p/Detenir_un_negoci
@@ -27179,6 +27310,7 @@ https://pccd.dites.cat/p/D%C3%A9u_nos_d%C3%B3_un_bon_dia%21
 https://pccd.dites.cat/p/D%C3%A9u_nos_en_guard_d%27ovella_pigarda
 https://pccd.dites.cat/p/D%C3%A9u_nos_en_guard_d%27un_banastra
 https://pccd.dites.cat/p/D%C3%A9u_nos_en_guard_d%27un_ja_est%C3%A0_fet
+https://pccd.dites.cat/p/D%C3%A9u_nos_guard_de_barco_vell_i_de_capit%C3%A0_novell
 https://pccd.dites.cat/p/D%C3%A9u_nos_guard_de_foc_i_de_gent_de_Sort
 https://pccd.dites.cat/p/D%C3%A9u_nos_guard_de_freds_tardans%2C_i_de_frares_i_capellans
 https://pccd.dites.cat/p/D%C3%A9u_nos_guard_de_poll_ressuscitat
@@ -27455,6 +27587,8 @@ https://pccd.dites.cat/p/Digau_lo_que_voldreu
 https://pccd.dites.cat/p/Digau-la%2C_ma_filla%2C_que_creguedora_sia
 https://pccd.dites.cat/p/Dignament
 https://pccd.dites.cat/p/Dign%C3%ADssimament
+https://pccd.dites.cat/p/Digo-digo-dag
+https://pccd.dites.cat/p/Digo-digo-digo
 https://pccd.dites.cat/p/Digod%C3%AD-digod%C3%AD
 https://pccd.dites.cat/p/Digue%27m_amb_qui_vas_i_et_dir%C3%A9_qui_ser%C3%A0s
 https://pccd.dites.cat/p/Digue%27m_el_que_tens_i_et_dir%C3%A9_el_que_vals
@@ -27674,6 +27808,7 @@ https://pccd.dites.cat/p/Dins_de
 https://pccd.dites.cat/p/Dins_de_les_muralles
 https://pccd.dites.cat/p/Dins_del_plat%2C_i_sense_cap%3A_qui_sap_si_%C3%A9s_conill_o_gat%3F
 https://pccd.dites.cat/p/Dins_el_mal%2C_el_b%C3%A9
+https://pccd.dites.cat/p/Dins_el_termini
 https://pccd.dites.cat/p/Dins_els_pots_petits_hi_ha_els_bons_ung%C3%BCents
 https://pccd.dites.cat/p/Dins_els_pots_petits_s%27hi_fan_bones_olors
 https://pccd.dites.cat/p/Dins_es_pinar_de_Galdent%2C_mal_penyal_te_desenroc%21_Am%C3%A9n_que_fos_d%27arr%C3%B2s_groc_per_v%C3%B3s_que_teniu_talent
@@ -27832,6 +27967,7 @@ https://pccd.dites.cat/p/Dir-ne_de_coentes
 https://pccd.dites.cat/p/Dir-ne_de_totes
 https://pccd.dites.cat/p/Dir-ne_de_tots_colors
 https://pccd.dites.cat/p/Dir-ne_desditxes
+https://pccd.dites.cat/p/Dir-ne_foc_i_flama
 https://pccd.dites.cat/p/Dir-ne_la_mala_p%C3%A8ssima
 https://pccd.dites.cat/p/Dir-ne_la_prima
 https://pccd.dites.cat/p/Dir-ne_mal
@@ -27872,6 +28008,7 @@ https://pccd.dites.cat/p/Discutiblement
 https://pccd.dites.cat/p/Discutir_sobre_el_sexe_dels_%C3%A0ngels
 https://pccd.dites.cat/p/Disertament
 https://pccd.dites.cat/p/Disfressadament
+https://pccd.dites.cat/p/Disfressar_amb_alls_i_julivert
 https://pccd.dites.cat/p/Disfruta%2C_menja_i_beu%2C_que_la_vida_%C3%A9s_breu
 https://pccd.dites.cat/p/Disgregadament
 https://pccd.dites.cat/p/Disgustadament
@@ -29100,6 +29237,7 @@ https://pccd.dites.cat/p/Donar-ho_a_la_premsa
 https://pccd.dites.cat/p/Donar-ho_a_les_cames
 https://pccd.dites.cat/p/Donar-ho_amb_cullereta
 https://pccd.dites.cat/p/Donar-ho_per_un_tros_de_pa
+https://pccd.dites.cat/p/Donar-ho_tot
 https://pccd.dites.cat/p/Donar-l%27hi_entenent
 https://pccd.dites.cat/p/Donar-l%27hi_la_vida
 https://pccd.dites.cat/p/Donar-l%27hi_mastegat
@@ -29828,6 +29966,7 @@ https://pccd.dites.cat/p/Dur_un_ciri_a_la_Sang
 https://pccd.dites.cat/p/Dur_un_conill
 https://pccd.dites.cat/p/Dur_un_dimoni_a_cada_cabell
 https://pccd.dites.cat/p/Dur_un_tom%C3%A0quet
+https://pccd.dites.cat/p/Dur_una_ametlla_calenta
 https://pccd.dites.cat/p/Dur_una_bona_saliva
 https://pccd.dites.cat/p/Dur_una_bona_somada
 https://pccd.dites.cat/p/Dur_una_finestra_tancada
@@ -30057,6 +30196,7 @@ https://pccd.dites.cat/p/Eixordar_el_cel
 https://pccd.dites.cat/p/Eixorellats_de_Tartareu%2C_que_amb_els_d%27%C3%80ger_teniu_brega%2C_guardeu-vos_de_Miquel_Gall%2C_que_no_us_llevi_l%27altra_orella
 https://pccd.dites.cat/p/Eixorit_com_un_sabater_d%27aigua
 https://pccd.dites.cat/p/Eixuga%27t%2C_que_sues%21
+https://pccd.dites.cat/p/Eixugall%C3%A0grimes
 https://pccd.dites.cat/p/Eixugaporrons
 https://pccd.dites.cat/p/Eixugar_un_deute
 https://pccd.dites.cat/p/Eixugar_una_vaca
@@ -30127,6 +30267,7 @@ https://pccd.dites.cat/p/El_b%C3%A9_va_i_ve
 https://pccd.dites.cat/p/El_bel_%C3%A9s_ben_b%C3%A9_d%27un_be
 https://pccd.dites.cat/p/El_bell_sexe
 https://pccd.dites.cat/p/El_ben_dormir_i_el_poc_sopar_plegats_solen_anar
+https://pccd.dites.cat/p/El_ben_esmagencar_es_coneix_al_segar
 https://pccd.dites.cat/p/El_ben_parlar_i_el_poc_aimar_no_costen_gaire
 https://pccd.dites.cat/p/El_ben_parlat_%C3%A9s_ben_mirat
 https://pccd.dites.cat/p/El_bestiar_acorralat%2C_el_comprador_sempre_el_sap
@@ -30407,6 +30548,7 @@ https://pccd.dites.cat/p/El_cant_del_grill_allunya_a_les_bruixes
 https://pccd.dites.cat/p/El_cant_del_mussol_assenyala_pluja
 https://pccd.dites.cat/p/El_cant_del_tambor_no_es_grat_mes_que_de_lluny
 https://pccd.dites.cat/p/El_cant_del_tambor%2C_de_lluny
+https://pccd.dites.cat/p/El_cant_dels_cants
 https://pccd.dites.cat/p/El_cantar_alegra_el_treball
 https://pccd.dites.cat/p/El_cantar_vol_alegria_i_el_plorar_vol_tristor
 https://pccd.dites.cat/p/El_canvi_de_cel_%C3%A9s_bo_si_un_no_est%C3%A0_prou_bo
@@ -30430,6 +30572,7 @@ https://pccd.dites.cat/p/El_cap%2C_el_nas_i_la_boca%2C_fins_la_mort_els_cura
 https://pccd.dites.cat/p/El_capell%C3%A0_de_la_Guixa_no_caga_ni_pixa
 https://pccd.dites.cat/p/El_capell%C3%A0_de_Sant_Feliu_toca_la_missa_i_no_la_diu
 https://pccd.dites.cat/p/El_capell%C3%A0_de_Vilafranca%2C_agafat_amb_una_branca%2C_se_mirava_l%27ull_de_l%27anca%2C_com_se_li_obre_i_se_li_tanca
+https://pccd.dites.cat/p/El_capit%C3%A0_i_el_cuiner_s%C3%B3n_els_que_mengen_m%C3%A9s_b%C3%A9_i_treballen_m%C3%A9s_poc
 https://pccd.dites.cat/p/El_capit%C3%A0_ven%C3%A7ut_no_%C3%A9s_alabat
 https://pccd.dites.cat/p/El_caragol_on_neix_mor
 https://pccd.dites.cat/p/El_caragol_surt_quan_plou_i_l%27home_quan_fa_sol
@@ -31348,6 +31491,7 @@ https://pccd.dites.cat/p/El_mal_%C3%A9s
 https://pccd.dites.cat/p/El_mal_%C3%A9s_fill_de_l%27ombra
 https://pccd.dites.cat/p/El_mal_%C3%A9s_m%C3%A9s_del_que_diuen
 https://pccd.dites.cat/p/El_mal_%C3%A9s_molt_brut_i_vol_ser_molt_net
+https://pccd.dites.cat/p/El_mal_%C3%A9s_que
 https://pccd.dites.cat/p/El_mal_%C3%A9s_que%2C_d%27un_plet%2C_en_venen_tres
 https://pccd.dites.cat/p/El_mal_fuster_molts_encenalls_sol_fer
 https://pccd.dites.cat/p/El_mal_gran_no_fa_mal%2C_el_mal_petit_dona_neguit
@@ -32097,6 +32241,7 @@ https://pccd.dites.cat/p/El_primer_diner_%C3%A9s_el_que_costa%3B_els_altres_el_s
 https://pccd.dites.cat/p/El_primer_entre_iguals
 https://pccd.dites.cat/p/El_primer_%C3%A9s_el_primer
 https://pccd.dites.cat/p/El_primer_%C3%A9s_ma_persona%3B_dels_altres%2C_poc_se_me%27n_dona
+https://pccd.dites.cat/p/El_primer_fill%2C_hereu%3B_el_segon%2C_capell%C3%A0%2C_i_el_tercer%2C_militar
 https://pccd.dites.cat/p/El_primer_home_del_m%C3%B3n
 https://pccd.dites.cat/p/El_primer_i_principal%2C_anar_a_missa_i_esmorzar
 https://pccd.dites.cat/p/El_primer_lladre_va_sortir_d%27Argentona
@@ -32172,6 +32317,7 @@ https://pccd.dites.cat/p/El_que_els_grans_no_gosen%2C_els_petits_ho_diran
 https://pccd.dites.cat/p/El_que_em_va_ensenyar_de_viure_com_a_pobre_em_va_fer_ric
 https://pccd.dites.cat/p/El_que_en_diumenge_es_guanya%2C_a_ca_l%27apotecari_es_gasta
 https://pccd.dites.cat/p/El_que_en_la_joventut_es_malgasta%2C_en_la_vellesa_fa_falta
+https://pccd.dites.cat/p/El_qu%C3%A8_en_lloc_del_com
 https://pccd.dites.cat/p/El_que_%C3%A9s_apuntat_no_s%27esborra
 https://pccd.dites.cat/p/El_que_%C3%A9s_ase%2C_el_mateix_diu_el_d%27ell_que_el_dels_altres
 https://pccd.dites.cat/p/El_que_%C3%A9s_bo_per_al_cos%2C_no_%C3%A9s_bo_per_a_l%27%C3%A0nima
@@ -32576,6 +32722,7 @@ https://pccd.dites.cat/p/El_rot_pel_lloro_i_el_pet_pel_met
 https://pccd.dites.cat/p/El_rotet_del_bon_profit_no_est%C3%A0_b%C3%A9%2C_per%C3%B2_%C3%A9s_consentit
 https://pccd.dites.cat/p/El_rovell_de_l%27ou
 https://pccd.dites.cat/p/El_rovell_de_l%27ou_de_l%27Empord%C3%A0_%C3%A9s_Borrass%C3%A0
+https://pccd.dites.cat/p/El_rovell_es_menja_el_ferro
 https://pccd.dites.cat/p/El_rovell_rosega_el_ferro%2C_com_la_tristor_del_vell_el_seu_cor
 https://pccd.dites.cat/p/El_ruc_brama%3F_Palla_vol
 https://pccd.dites.cat/p/El_ruc_com_m%C3%A9s_menut_m%C3%A9s_astut
@@ -32583,6 +32730,7 @@ https://pccd.dites.cat/p/El_ruc_del_traginer_sempre_va_davant
 https://pccd.dites.cat/p/El_ruc_%C3%A9s_dolent_per_llaurar_i_bo_per_traginar
 https://pccd.dites.cat/p/El_ruc_i_l%27ignorant_s%C3%B3n_fills_de_cosins_germans
 https://pccd.dites.cat/p/El_ruc_porta_picarol_i_la_somera_tamb%C3%A9_en_vol
+https://pccd.dites.cat/p/El_rumor_vola
 https://pccd.dites.cat/p/El_sa_posa_en_regla_el_malalt
 https://pccd.dites.cat/p/El_sabater_a_cantar%2C_el_sastre_a_xafardejar_i_el_barber_a_xerrar%2C_el_diable_els_ho_degu%C3%A9_ensenyar
 https://pccd.dites.cat/p/El_sabater_en_el_tamboret_%C3%A9s_m%C3%A9s_valent_que_en_Maiet
@@ -33200,7 +33348,6 @@ https://pccd.dites.cat/p/Els_bancs_ens_deixen_un_paraigua_quan_fa_sol_i_ens_el_r
 https://pccd.dites.cat/p/Els_banquers_s%C3%B3n_uns_voltors
 https://pccd.dites.cat/p/Els_banys_de_Sant_Norbert_inunden_tota_la_terra
 https://pccd.dites.cat/p/Els_banys_porten_molts_danys
-https://pccd.dites.cat/p/Els_barcelonins_s%C3%B3n_cagasucs_i_escuracassoles
 https://pccd.dites.cat/p/Els_batejats_a_la_Seu_s%C3%B3n_m%C3%A9s_barcelonins_que_els_altres
 https://pccd.dites.cat/p/Els_beneits_es_moriren_l%27any_de_la_neu
 https://pccd.dites.cat/p/Els_b%C3%A9ns_alcan%C3%A7ats_de_pressa%2C_meng%C3%BCen%3B_i_els_adquirits_a_poc_a_poc_creixen
@@ -33781,7 +33928,6 @@ https://pccd.dites.cat/p/Els_de_Lasquarri%2C_melers
 https://pccd.dites.cat/p/Els_de_les_Borges%2C_apegalosos
 https://pccd.dites.cat/p/Els_de_les_Cases_d%27Alcanar%2C_descamisats
 https://pccd.dites.cat/p/Els_de_les_Cases_de_Pena%2C_panxanegres
-https://pccd.dites.cat/p/Els_de_les_Corts%2C_panarres_i_alberg%C3%ADnies
 https://pccd.dites.cat/p/Els_de_les_Coves%2C_borratxos
 https://pccd.dites.cat/p/Els_de_les_Llagunes%2C_cap_de_matxos
 https://pccd.dites.cat/p/Els_de_les_Planes_d%27Hostoles%2C_nyerros
@@ -34339,6 +34485,7 @@ https://pccd.dites.cat/p/Els_fadrins_de_Ventol%C3%A0
 https://pccd.dites.cat/p/Els_fadrins_de_Viladamat%2C_faves_i_blat
 https://pccd.dites.cat/p/Els_favors_dels_germans_es_paguen_m%C3%A9s_cars_que_els_del_metge
 https://pccd.dites.cat/p/Els_fems_donen_el_gra_i_la_farina%2C_el_pa
+https://pccd.dites.cat/p/Els_ferrers_del_Regomir_remullen_el_ferro_amb_vi
 https://pccd.dites.cat/p/Els_ferrers_escriuen_amb_ses_armolles
 https://pccd.dites.cat/p/Els_fets_s%C3%B3n_mascles_i_les_paraules_femelles
 https://pccd.dites.cat/p/Els_fideus_fan_estar_alegre_quaranta-vuit_hores
@@ -34655,6 +34802,7 @@ https://pccd.dites.cat/p/Els_segurs_mai_s%C3%B3n_molts
 https://pccd.dites.cat/p/Els_sense_feina
 https://pccd.dites.cat/p/Els_sense_terra
 https://pccd.dites.cat/p/Els_senyors_de_Terrassa_i_els_homes_de_Sabadell
+https://pccd.dites.cat/p/Els_set_pecats_capitals
 https://pccd.dites.cat/p/Els_seus
 https://pccd.dites.cat/p/Els_sonadors_bons_trempen_nou_mesos_i_en_sonen_tres
 https://pccd.dites.cat/p/Els_sous_no_neixen
@@ -34741,6 +34889,7 @@ https://pccd.dites.cat/p/Els_ximples_fan_la_festa_i_els_llestos_la_celebren
 https://pccd.dites.cat/p/Els_xiquets_de_la_Romana_s%C3%B3n_poquets_i_ballen_b%C3%A9%2C_en_sentir_una_guitarra_ixen_corrents_al_carrer
 https://pccd.dites.cat/p/Els_xiquets_s%C3%B3n_l%27alegria_de_la_casa
 https://pccd.dites.cat/p/Els_xiquets%2C_la_m%C3%A0_de_donar_la_tenen_curta
+https://pccd.dites.cat/p/Eludir_la_responsabilitat
 https://pccd.dites.cat/p/Elx%2C_el_millor_carrer_de_Crevillent
 https://pccd.dites.cat/p/Em_cago_en_la_beta_del_capdavall_de_la_camal_dret_dels_pantalons_del_pag%C3%A8s_que_va_plantar_la_primera_fava_que_va_menjar_l%27ase_que_va_portar_la_Mare_de_D%C3%A9u_a_Egipte%21
 https://pccd.dites.cat/p/Em_cague_en_D%C3%A9nia_i_en_la_terra_que_rega_el_S%C3%A9nia%2C_en_Palma_i_Ador_i_en_poble_que_no_t%C3%A9_rector
@@ -34883,6 +35032,8 @@ https://pccd.dites.cat/p/Empinar_la_campana
 https://pccd.dites.cat/p/Empinar_un_carro
 https://pccd.dites.cat/p/Empinar-se-li
 https://pccd.dites.cat/p/Empinyat_com_un_esquirol_al_cim_d%27un_pi
+https://pccd.dites.cat/p/Empipador_com_un_mal_de_cap
+https://pccd.dites.cat/p/Empipador_com_un_ull_de_poll
 https://pccd.dites.cat/p/Emp%C3%ADricament
 https://pccd.dites.cat/p/Emplatjar-se_el_peix
 https://pccd.dites.cat/p/Empoltronidament
@@ -35327,7 +35478,9 @@ https://pccd.dites.cat/p/En_el_joc%2C_qui_m%C3%A9s_guanya%2C_%C3%A9s_el_que_mira
 https://pccd.dites.cat/p/En_el_llibre_dels_sepells%2C_tants_n%27hi_ha_de_joves_com_de_vells
 https://pccd.dites.cat/p/En_el_llibre_petit_hi_ha_la_bona_sent%C3%A8ncia
 https://pccd.dites.cat/p/En_el_llit_s%27hi_moren%3B_sort%C3%B3s_qui_s%27hi_pot_morir
+https://pccd.dites.cat/p/En_el_lloc
 https://pccd.dites.cat/p/En_el_lloc_de_la_rabosa%2C_qui_se%27n_va_ja_no_s%27hi_posa
+https://pccd.dites.cat/p/En_el_lloc_esmentat
 https://pccd.dites.cat/p/En_el_maig%2C_el_dia_s%27allarga_i_el_graner_s%27escur%C3%A7a
 https://pccd.dites.cat/p/En_el_mal_que_el_teu_ve%C3%AD_no_sap%2C_no_hi_tens_part
 https://pccd.dites.cat/p/En_el_mar%2C_llu%C3%A7os_pescar%2C_i_en_el_riu%2C_barbs
@@ -35336,6 +35489,7 @@ https://pccd.dites.cat/p/En_el_matrimoni_un_fill_lliga_i%2C_dos%2C_deslliguen
 https://pccd.dites.cat/p/En_el_menjar%2C_no_s%27hi_val_estalviar
 https://pccd.dites.cat/p/En_el_moll_d%27Alacant_hi_ha_molt_a_discutir%3A_hi_han_fet_una_porta_nova_per_entrar_i_no_per_sortir
 https://pccd.dites.cat/p/En_el_molt_parlar_mai_falta_el_pecar
+https://pccd.dites.cat/p/En_el_moment_de_la_mort
 https://pccd.dites.cat/p/En_el_moment_menys_pensat
 https://pccd.dites.cat/p/En_el_m%C3%B3n_no_hi_ha_com_la_riquesa%2C_que_la_pobresa_ning%C3%BA_la_vol
 https://pccd.dites.cat/p/En_el_m%C3%B3n_tothom_treballa_per_portar_bona_gramalla
@@ -35345,6 +35499,7 @@ https://pccd.dites.cat/p/En_el_parir_i_en_el_cuinar_la_dona_sempre_%C3%A9s_novel
 https://pccd.dites.cat/p/En_el_pati_d%27en_Colom%2C_qui_juga_no_dorm
 https://pccd.dites.cat/p/En_el_pecat_s%27hi_porta_la_penit%C3%A8ncia
 https://pccd.dites.cat/p/En_el_perill_es_coneix_l%27amic
+https://pccd.dites.cat/p/En_el_pit
 https://pccd.dites.cat/p/En_el_pla_de_la_llacuna_hi_ha_una_bassa_i_un_pouet%3B_a_mi_em_donen_pa_i_sardina_i_%C3%B2mplic_el_canterer
 https://pccd.dites.cat/p/En_el_plet%2C_el_qui_guanya_perd
 https://pccd.dites.cat/p/En_el_plor_de_l%27hereu%2C_l%27alegria_es_veu
@@ -35502,6 +35657,7 @@ https://pccd.dites.cat/p/En_guaret
 https://pccd.dites.cat/p/En_guerra_i_en_pau%2C_tu%2C_amo_de_la_clau
 https://pccd.dites.cat/p/En_guisa
 https://pccd.dites.cat/p/En_harmonia
+https://pccd.dites.cat/p/En_havent
 https://pccd.dites.cat/p/En_haver_acabat%2C_haurem_fet
 https://pccd.dites.cat/p/En_haver_cagat%2C_llavors_plora
 https://pccd.dites.cat/p/En_haver_caus%2C_conills%3B_en_haver_sembra%2C_perdius
@@ -35562,6 +35718,7 @@ https://pccd.dites.cat/p/En_l%27esp%C3%A8s_D%C3%A9u_hi_%C3%A9s%3B_en_el_clar_enc
 https://pccd.dites.cat/p/En_l%27estable_el_bestiar_c%C3%B2modament_ha_d%27estar%3B_fes-li_bona_habitaci%C3%B3%2C_no_el_tingues_com_en_pres%C3%B3
 https://pccd.dites.cat/p/En_l%27estiu_deu_treballar_qui_en_l%27hivern_se%27n_vol_posar
 https://pccd.dites.cat/p/En_l%27instant_de
+https://pccd.dites.cat/p/En_l%27obra_citada
 https://pccd.dites.cat/p/En_l%27ull_%C3%A9s_la_vergonya
 https://pccd.dites.cat/p/En_l%C3%A0
 https://pccd.dites.cat/p/En_la_bellesa_del_cos%2C_la_vergonya_hi_resplendeix
@@ -35594,6 +35751,7 @@ https://pccd.dites.cat/p/En_la_pres%C3%A8ncia_del_sol%2C_poca_%C3%A9s_la_llum_de
 https://pccd.dites.cat/p/En_la_seda_o_escarlata%2C_se_taca%2C_si_no_es_recata
 https://pccd.dites.cat/p/En_la_serra%2C_apedrega
 https://pccd.dites.cat/p/En_la_seva_%C3%A8poca
+https://pccd.dites.cat/p/En_la_tercera_fase
 https://pccd.dites.cat/p/En_la_terra_dels_elegants%2C_fins_les_rates_porten_guants
 https://pccd.dites.cat/p/En_la_terra_hi_ha_la_creu%3B_en_el_cel%2C_D%C3%A9u
 https://pccd.dites.cat/p/En_la_terra_que_no_%C3%A9s_bona%2C_molt_m%C3%A9s_mal_hi_ha_del_que_sona
@@ -36173,6 +36331,7 @@ https://pccd.dites.cat/p/En_un_tot
 https://pccd.dites.cat/p/En_un_tranc
 https://pccd.dites.cat/p/En_un_tres_i_no_res
 https://pccd.dites.cat/p/En_un_trico
+https://pccd.dites.cat/p/En_un_vidre
 https://pccd.dites.cat/p/En_un_vol
 https://pccd.dites.cat/p/En_un_zip-zap
 https://pccd.dites.cat/p/En_una
@@ -36243,6 +36402,7 @@ https://pccd.dites.cat/p/En_xerrar_d%27un_home_valent%2C_sempre_el_tens_present
 https://pccd.dites.cat/p/En_Xo%2C_en_Go_i_en_Peret_del_carrer%C3%B3
 https://pccd.dites.cat/p/En_Xumeta
 https://pccd.dites.cat/p/En_Xumeu_veu_es_gep_d%27altri_i_no_veu_es_seu
+https://pccd.dites.cat/p/En_xurris-murris
 https://pccd.dites.cat/p/Enaiguar-se-li_els_ulls
 https://pccd.dites.cat/p/Enaix%C3%AD
 https://pccd.dites.cat/p/Enamigablement
@@ -36285,6 +36445,7 @@ https://pccd.dites.cat/p/Encara_com_no%21
 https://pccd.dites.cat/p/Encara_com%21
 https://pccd.dites.cat/p/Encara_despr%C3%A9s_de
 https://pccd.dites.cat/p/Encara_D%C3%A9u_no_%C3%A9s_mort
+https://pccd.dites.cat/p/Encara_dic_poc
 https://pccd.dites.cat/p/Encara_dura_el_pa_de_bodes
 https://pccd.dites.cat/p/Encara_em_far%C3%A0s_tornar_llebre%21
 https://pccd.dites.cat/p/Encara_encara
@@ -36409,6 +36570,7 @@ https://pccd.dites.cat/p/Encertar_la_tecla
 https://pccd.dites.cat/p/Enc%C3%A8s_com_un_foc
 https://pccd.dites.cat/p/Enc%C3%A8s_com_un_lluquet
 https://pccd.dites.cat/p/Enc%C3%A8s_de_cara
+https://pccd.dites.cat/p/Enc%C3%A8s_en_flama
 https://pccd.dites.cat/p/Encesament
 https://pccd.dites.cat/p/Encetar_ametlles
 https://pccd.dites.cat/p/Encetar_el_son
@@ -36448,6 +36610,7 @@ https://pccd.dites.cat/p/Endari-endari
 https://pccd.dites.cat/p/Endarrer
 https://pccd.dites.cat/p/Endarrere
 https://pccd.dites.cat/p/Endarrerir_el_rellotge
+https://pccd.dites.cat/p/Endarrerir-se
 https://pccd.dites.cat/p/Endarrerir-se_de_pagues
 https://pccd.dites.cat/p/Endavant
 https://pccd.dites.cat/p/Endavant_i_endarrere
@@ -36607,6 +36770,7 @@ https://pccd.dites.cat/p/Enguany_hi_ha_eixut%2C_a_Campos
 https://pccd.dites.cat/p/Enguany_passat
 https://pccd.dites.cat/p/Enguanyasses
 https://pccd.dites.cat/p/Eng%C3%BC%C3%A8
+https://pccd.dites.cat/p/Engu%C3%A9%2C_engu%C3%A9%2C_cu%C3%A9%2C_cu%C3%A9
 https://pccd.dites.cat/p/Enguis
 https://pccd.dites.cat/p/Engull%2C_que_s%C3%B3n_sopes%21
 https://pccd.dites.cat/p/Engull%2C_que_tot_%C3%A9s_molla%21
@@ -36639,6 +36803,7 @@ https://pccd.dites.cat/p/Enlluernar_com_si_s%27hagu%C3%A9s_aparegut_l%27estrella
 https://pccd.dites.cat/p/Enllustrar_la_perleta
 https://pccd.dites.cat/p/Enllustrar-se_el_minaret
 https://pccd.dites.cat/p/Enmig_de
+https://pccd.dites.cat/p/Enmig_de_la_plana_una_font_n%27hi_ha
 https://pccd.dites.cat/p/Ennegrir-se_el_cel
 https://pccd.dites.cat/p/Enormement
 https://pccd.dites.cat/p/Enramada_li_fas%3F_No_t%27hi_casar%C3%A0s
@@ -36659,6 +36824,7 @@ https://pccd.dites.cat/p/Enrere%2C_mestre_Pere%21
 https://pccd.dites.cat/p/Enrevessadament
 https://pccd.dites.cat/p/Enriquir-se_amb_la_sang_dels_pobres
 https://pccd.dites.cat/p/Enrogir-se_fins_a_les_orelles
+https://pccd.dites.cat/p/Enrojolar-se
 https://pccd.dites.cat/p/Enrotllar-se_com_una_persiana
 https://pccd.dites.cat/p/Ens_escalfem_tots_o_fotem_puntada_al_braser
 https://pccd.dites.cat/p/Ens_fa_ballar_a_tots%21
@@ -36713,6 +36879,7 @@ https://pccd.dites.cat/p/Ensenyar-li_la_llesca
 https://pccd.dites.cat/p/Ensenyar-li_la_porta_del_carrer
 https://pccd.dites.cat/p/Ensenyar-li_la_solfa
 https://pccd.dites.cat/p/Ensenyar-li_les_ferradures
+https://pccd.dites.cat/p/Ensobre
 https://pccd.dites.cat/p/Ensopir-se_com_un_llu%C3%A7
 https://pccd.dites.cat/p/Ensopit_com_una_ostra
 https://pccd.dites.cat/p/Ensorrar-li_la_barraca_a_terra
@@ -36729,6 +36896,7 @@ https://pccd.dites.cat/p/Ens%C3%BAs
 https://pccd.dites.cat/p/Enta
 https://pccd.dites.cat/p/Entabanar_de_cap
 https://pccd.dites.cat/p/Entaular_diners
+https://pccd.dites.cat/p/Entaular-se
 https://pccd.dites.cat/p/Entaular-se_el_vent
 https://pccd.dites.cat/p/Enteladament
 https://pccd.dites.cat/p/Entelar-se-li_els_ulls
@@ -36939,6 +37107,7 @@ https://pccd.dites.cat/p/Entre_el_c%C3%B3rrer_i_el_parar%2C_hi_ha_un_mig_que_%C3
 https://pccd.dites.cat/p/Entre_el_negre_i_el_blanc%2C_el_tiraren_al_barranc
 https://pccd.dites.cat/p/Entre_el_rector_i_el_vicari_passen_el_rosari
 https://pccd.dites.cat/p/Entre_el_rector_i_l%27escol%C3%A0_diuen_la_missa
+https://pccd.dites.cat/p/Entre_els_esbarzers_neixen_roses
 https://pccd.dites.cat/p/Entre_els_uns_i_els_altres%2C_la_feina_per_fer
 https://pccd.dites.cat/p/Entre_empentes_i_raons%2C_sempre_la_m%C3%A0_als_butxacons
 https://pccd.dites.cat/p/Entre_fadrinalla%2C_el_diable_enmig_hi_balla
@@ -36994,6 +37163,7 @@ https://pccd.dites.cat/p/Entre_marit_i_muller%2C_embolicar-s%27hi_%C3%A9s_mal_fe
 https://pccd.dites.cat/p/Entre_marit_i_muller%2C_no_hi_vulguis_posar_els_dits
 https://pccd.dites.cat/p/Entre_Marquet_i_Creueta%2C_no_te%27n_llevis_la_jaqueta
 https://pccd.dites.cat/p/Entre_meu_i_teu%2C_plet_fareu_i_res_haureu
+https://pccd.dites.cat/p/Entre_mig_de_les_cames_ho_tinc_i_ell_en_fa_catrinc-catrinc
 https://pccd.dites.cat/p/Entre_mitjanit_i_Algaida%2C_devora_sa_f%C3%A0brica_de_llavor_de_fil_de_ferro
 https://pccd.dites.cat/p/Entre_moles_no_t%27hi_pos_perqu%C3%A8_molen_fins_a_l%27os
 https://pccd.dites.cat/p/Entre_molts_pelegrinants%2C_tant_caminen_els_coixos_com_els_sants
@@ -37020,6 +37190,7 @@ https://pccd.dites.cat/p/Entre_pares_i_germans_no_hi_vulguis_ficar_les_mans
 https://pccd.dites.cat/p/Entre_Pasqua_i_Pentacosta_no_mengis_gaire_la_crosta
 https://pccd.dites.cat/p/Entre_pell_i_cuiro
 https://pccd.dites.cat/p/Entre_penya_i_penya%2C_el_barranquet_se_despenya
+https://pccd.dites.cat/p/Entre_persones_vives
 https://pccd.dites.cat/p/Entre_pescaire_i_ca%C3%A7aire_no_fan_mai_bon_afaire
 https://pccd.dites.cat/p/Entre_pet_i_pet_els_gitanos_de_la_Costa_fan_c%C3%B3rrer_els_del_Canyeret
 https://pccd.dites.cat/p/Entre_pic_i_repic
@@ -37215,6 +37386,7 @@ https://pccd.dites.cat/p/Era_ahir_que_nedava
 https://pccd.dites.cat/p/Era_conya%2C_cigonya%21
 https://pccd.dites.cat/p/Era_forta_i_aplanada%2C_batuda_multiplicada
 https://pccd.dites.cat/p/Era_petita_o_era_grandassa%2C_per%C3%B2_sempre_la_de_casa
+https://pccd.dites.cat/p/Era_tan_prim%2C_tan_prim%2C_tan_prim_que_dormia_en_un_filferro_i_es_tapava_amb_un_cordill%E2%80%A6
 https://pccd.dites.cat/p/Era%E2%80%A6_i_no_batien_en_ella
 https://pccd.dites.cat/p/Erectament
 https://pccd.dites.cat/p/%C3%89rem_pocs_i_par%C3%AD_la_burra_o_la_gata%2C_o_l%27auela
@@ -37226,6 +37398,7 @@ https://pccd.dites.cat/p/Eres_de_fora_o_has_vingut_a_festes%3F
 https://pccd.dites.cat/p/Eri%C3%A7ar-li_els_cabells
 https://pccd.dites.cat/p/Er%C3%B2ticament
 https://pccd.dites.cat/p/Erra_que_erra
+https://pccd.dites.cat/p/Errada
 https://pccd.dites.cat/p/Erradament
 https://pccd.dites.cat/p/Errant%2C_errant%2C_els_homes_es_moren_i_no_saben_quan
 https://pccd.dites.cat/p/Errar_el_cop
@@ -37241,6 +37414,7 @@ https://pccd.dites.cat/p/Erro_de_compte%2C_sempre_se_troba
 https://pccd.dites.cat/p/Err%C3%B2niament
 https://pccd.dites.cat/p/Error_de_comptes_no_fa_pagament
 https://pccd.dites.cat/p/Error_de_ploma
+https://pccd.dites.cat/p/Error_oral
 https://pccd.dites.cat/p/Ert_com_un_tito
 https://pccd.dites.cat/p/Erta%2C_terra_deserta
 https://pccd.dites.cat/p/Eruditament
@@ -37279,6 +37453,7 @@ https://pccd.dites.cat/p/%C3%89s_cert
 https://pccd.dites.cat/p/%C3%89s_clar%21
 https://pccd.dites.cat/p/Es_cobrombos%21
 https://pccd.dites.cat/p/Es_consol_de_ses_donades
+https://pccd.dites.cat/p/%C3%89s_cosa_feta
 https://pccd.dites.cat/p/%C3%89s_cosa_que_no_pot_ser%2C_ben_guardar_a_una_muller
 https://pccd.dites.cat/p/Es_cranc_diu%3A%E2%80%94Camina_dret%21%E2%80%94Fa%C3%A7_com_feis%2C%E2%80%94diu_es_cranquet
 https://pccd.dites.cat/p/Es_crema_m%C3%A9s_llenya_per_Nadal_que_en_tota_la_resta_de_l%27any
@@ -37457,6 +37632,7 @@ https://pccd.dites.cat/p/Escalfacigales
 https://pccd.dites.cat/p/Escalfada_d%27orelles
 https://pccd.dites.cat/p/Escalfadament
 https://pccd.dites.cat/p/Escalfapedrissos
+https://pccd.dites.cat/p/Escalfapixes
 https://pccd.dites.cat/p/Escalfar_cadires
 https://pccd.dites.cat/p/Escalfar_el_forn
 https://pccd.dites.cat/p/Escalfar_motors
@@ -37491,6 +37667,7 @@ https://pccd.dites.cat/p/Escanyat_de_llet
 https://pccd.dites.cat/p/Escanyat_de_pit
 https://pccd.dites.cat/p/Escapar_de_golondro
 https://pccd.dites.cat/p/Escapar_de_la_mort
+https://pccd.dites.cat/p/Escapar_de_llet_d%27ametlla
 https://pccd.dites.cat/p/Escapar-li_una_paraula
 https://pccd.dites.cat/p/Escapar-se_d%27una_bona
 https://pccd.dites.cat/p/Escapar-se_els_punts
@@ -37636,6 +37813,7 @@ https://pccd.dites.cat/p/Escorxar_el_gat
 https://pccd.dites.cat/p/Escorxar_la_guilla
 https://pccd.dites.cat/p/Escotar-se_la_butxaca
 https://pccd.dites.cat/p/Escreballat_com_una_figa_verdal
+https://pccd.dites.cat/p/Escrit_despr%C3%A9s
 https://pccd.dites.cat/p/Escriu_i_dona%2C_rep_i_escriu
 https://pccd.dites.cat/p/Escriure_a_l%27aigua
 https://pccd.dites.cat/p/Escriure_abans_de_donar_i_abans_d%27escriure%2C_cobrar
@@ -37844,6 +38022,7 @@ https://pccd.dites.cat/p/Especulativament
 https://pccd.dites.cat/p/Espeegadament
 https://pccd.dites.cat/p/Espera_el_festejador
 https://pccd.dites.cat/p/Espera_i_aguarda
+https://pccd.dites.cat/p/Espera_que_esperar%C3%A0s
 https://pccd.dites.cat/p/Espera_que_llampi%21
 https://pccd.dites.cat/p/Espera%2C_pera%21
 https://pccd.dites.cat/p/Espera%2C_t%27aixicar%C3%A9
@@ -38067,6 +38246,7 @@ https://pccd.dites.cat/p/Estar_a_la_creu
 https://pccd.dites.cat/p/Estar_a_la_darrera_edat
 https://pccd.dites.cat/p/Estar_a_la_figuera
 https://pccd.dites.cat/p/Estar_a_la_gl%C3%B2ria
+https://pccd.dites.cat/p/Estar_a_la_in%C3%B2pia
 https://pccd.dites.cat/p/Estar_a_la_lluna
 https://pccd.dites.cat/p/Estar_a_la_pell
 https://pccd.dites.cat/p/Estar_a_la_que_salta
@@ -38092,6 +38272,7 @@ https://pccd.dites.cat/p/Estar_a_un_tomb_de_dau
 https://pccd.dites.cat/p/Estar_a_una_vista
 https://pccd.dites.cat/p/Estar_a_veure_venir
 https://pccd.dites.cat/p/Estar_a_vint-i-un_plaers
+https://pccd.dites.cat/p/Estar_abatut
 https://pccd.dites.cat/p/Estar_acabat
 https://pccd.dites.cat/p/Estar_acollonit
 https://pccd.dites.cat/p/Estar_aconseguit
@@ -38265,6 +38446,7 @@ https://pccd.dites.cat/p/Estar_d%27acord_amb
 https://pccd.dites.cat/p/Estar_d%27alba
 https://pccd.dites.cat/p/Estar_d%27alta
 https://pccd.dites.cat/p/Estar_d%27auba
+https://pccd.dites.cat/p/Estar_d%27espera
 https://pccd.dites.cat/p/Estar_d%27humor
 https://pccd.dites.cat/p/Estar_d%27humor_negre
 https://pccd.dites.cat/p/Estar_d%27orgues
@@ -38342,10 +38524,12 @@ https://pccd.dites.cat/p/Estar_desguitarrat
 https://pccd.dites.cat/p/Estar_desmaduixat
 https://pccd.dites.cat/p/Estar_desmaiat
 https://pccd.dites.cat/p/Estar_desmanegat
+https://pccd.dites.cat/p/Estar_desnerit
 https://pccd.dites.cat/p/Estar_despert
 https://pccd.dites.cat/p/Estar_dess%C3%BAs
 https://pccd.dites.cat/p/Estar_destarifat
 https://pccd.dites.cat/p/Estar_destarotat
+https://pccd.dites.cat/p/Estar_destirotat
 https://pccd.dites.cat/p/Estar_destrempat_l%27orgue
 https://pccd.dites.cat/p/Estar_dins_el_fang
 https://pccd.dites.cat/p/Estar_dins_l%27ou_ple
@@ -38372,6 +38556,7 @@ https://pccd.dites.cat/p/Estar_empapussat
 https://pccd.dites.cat/p/Estar_empastrat
 https://pccd.dites.cat/p/Estar_empatxat
 https://pccd.dites.cat/p/Estar_empeltat_de_cirerer
+https://pccd.dites.cat/p/Estar_empeltat_de_presseguer
 https://pccd.dites.cat/p/Estar_empiocat
 https://pccd.dites.cat/p/Estar_empipat
 https://pccd.dites.cat/p/Estar_emprenyat
@@ -38484,7 +38669,9 @@ https://pccd.dites.cat/p/Estar_enlaire
 https://pccd.dites.cat/p/Estar_enlluernat
 https://pccd.dites.cat/p/Estar_ennurriat
 https://pccd.dites.cat/p/Estar_enravenat
+https://pccd.dites.cat/p/Estar_enravenxinat
 https://pccd.dites.cat/p/Estar_enredat_amb_l%27escota_del_floc
+https://pccd.dites.cat/p/Estar_enrevenxinat
 https://pccd.dites.cat/p/Estar_ensapat
 https://pccd.dites.cat/p/Estar_ensinistrat
 https://pccd.dites.cat/p/Estar_entre_Ares_i_Benassal
@@ -38577,7 +38764,10 @@ https://pccd.dites.cat/p/Estar_la_lluna_endret_del_sol
 https://pccd.dites.cat/p/Estar_la_mar_molt_alborotada
 https://pccd.dites.cat/p/Estar_llampat
 https://pccd.dites.cat/p/Estar_llest
+https://pccd.dites.cat/p/Estar_llomat
+https://pccd.dites.cat/p/Estar_lluent
 https://pccd.dites.cat/p/Estar_lluny_de_ve%C3%AFns
+https://pccd.dites.cat/p/Estar_llustr%C3%B3s
 https://pccd.dites.cat/p/Estar_macali%C3%A0
 https://pccd.dites.cat/p/Estar_madur
 https://pccd.dites.cat/p/Estar_mal_decatit
@@ -38608,6 +38798,7 @@ https://pccd.dites.cat/p/Estar_moix
 https://pccd.dites.cat/p/Estar_moll
 https://pccd.dites.cat/p/Estar_molt_atrapat
 https://pccd.dites.cat/p/Estar_molt_calafatejat
+https://pccd.dites.cat/p/Estar_molt_content
 https://pccd.dites.cat/p/Estar_molt_d%27ossos
 https://pccd.dites.cat/p/Estar_molt_envant
 https://pccd.dites.cat/p/Estar_molt_espanyat
@@ -38682,6 +38873,7 @@ https://pccd.dites.cat/p/Estar_que_trina
 https://pccd.dites.cat/p/Estar_quetxo
 https://pccd.dites.cat/p/Estar_quiet
 https://pccd.dites.cat/p/Estar_quilis
+https://pccd.dites.cat/p/Estar_rabi%C3%BCt
 https://pccd.dites.cat/p/Estar_ras
 https://pccd.dites.cat/p/Estar_rascant-se_la_bossa
 https://pccd.dites.cat/p/Estar_rebentat
@@ -38808,6 +39000,7 @@ https://pccd.dites.cat/p/Estar-se
 https://pccd.dites.cat/p/Estar-se_a_m%C3%A0nia
 https://pccd.dites.cat/p/Estar-se_badabadoc
 https://pccd.dites.cat/p/Estar-se_de_pa_i_de_dones_mentre_es_tingui_coca_i_noies
+https://pccd.dites.cat/p/Estar-se_florint
 https://pccd.dites.cat/p/Estar-se%27n
 https://pccd.dites.cat/p/Estar-se%27n_de
 https://pccd.dites.cat/p/Estar%C3%A0s%3A_sota_G%C3%A0ver_el_trobar%C3%A0s
@@ -38991,6 +39184,7 @@ https://pccd.dites.cat/p/Estrenar-se_en_un_ofici
 https://pccd.dites.cat/p/Estr%C3%A8nuament
 https://pccd.dites.cat/p/Estr%C3%A8nyer_de_passos
 https://pccd.dites.cat/p/Estr%C3%A8nyer_el_cul
+https://pccd.dites.cat/p/Estr%C3%A8nyer_el_ganyot
 https://pccd.dites.cat/p/Estr%C3%A8nyer_el_joc
 https://pccd.dites.cat/p/Estr%C3%A8nyer_el_pas_de_la_salivera
 https://pccd.dites.cat/p/Estr%C3%A8nyer_el_piny%C3%B3
@@ -39035,6 +39229,7 @@ https://pccd.dites.cat/p/Estudi%2C_per_a_saber%3B_per_a_ser_bo%2C_voler
 https://pccd.dites.cat/p/Estudia_i_crema_oli
 https://pccd.dites.cat/p/Estudia_les_lleis_divines_si_saber_vols_les_humanes
 https://pccd.dites.cat/p/Estudiadament
+https://pccd.dites.cat/p/Estudiant_bergant%2C_cara_de_ganyota%2C_quan_no_t%C3%A9_diners%2C_fa_mala_carota
 https://pccd.dites.cat/p/Estudiant_de_foc_i_de_sol_no_val_un_caragol
 https://pccd.dites.cat/p/Estudiant_de_la_sopa
 https://pccd.dites.cat/p/Estudiant_de_llat%C3%AD%2C_mai_entens_el_que_vol_dir
@@ -39093,6 +39288,7 @@ https://pccd.dites.cat/p/Ets_homos_manden%2C_per%C3%B2_ses_dones_comanden
 https://pccd.dites.cat/p/Ets_un_cap_de_porc_amb_orelles%21
 https://pccd.dites.cat/p/Ets_una_puta_mula_cotxera%21
 https://pccd.dites.cat/p/Etxem%21
+https://pccd.dites.cat/p/Etxem%21_%E2%80%94Jo_i_la_majordona_tamb%C3%A9_en_bevem
 https://pccd.dites.cat/p/Eu%21
 https://pccd.dites.cat/p/Euai%21
 https://pccd.dites.cat/p/Euf%C3%A8micament
@@ -39140,6 +39336,7 @@ https://pccd.dites.cat/p/Excuses_de_mal_pagador
 https://pccd.dites.cat/p/Excuseu-me%2C_som_d%27Arles%21
 https://pccd.dites.cat/p/Execrablement
 https://pccd.dites.cat/p/Executar_en_ef%C3%ADgie
+https://pccd.dites.cat/p/Executar-ho
 https://pccd.dites.cat/p/Executar-li_els_b%C3%A9ns
 https://pccd.dites.cat/p/Executivament
 https://pccd.dites.cat/p/Exemplarment
@@ -39657,6 +39854,7 @@ https://pccd.dites.cat/p/Fer_aigua_moraleta
 https://pccd.dites.cat/p/Fer_aigua_pels_alts
 https://pccd.dites.cat/p/Fer_aig%C3%BCes
 https://pccd.dites.cat/p/Fer_aire_o_vent
+https://pccd.dites.cat/p/Fer_ais_i_paiais
 https://pccd.dites.cat/p/Fer_aixadius
 https://pccd.dites.cat/p/Fer_aixereta
 https://pccd.dites.cat/p/Fer_al_cas
@@ -39668,6 +39866,7 @@ https://pccd.dites.cat/p/Fer_al%C3%A7ada
 https://pccd.dites.cat/p/Fer_alcaldades
 https://pccd.dites.cat/p/Fer_al%C3%A7aprem
 https://pccd.dites.cat/p/Fer_al%C3%A7ar_la_ca%C3%A7a
+https://pccd.dites.cat/p/Fer_aldarull
 https://pccd.dites.cat/p/Fer_alei
 https://pccd.dites.cat/p/Fer_alera
 https://pccd.dites.cat/p/Fer_aleta
@@ -39700,6 +39899,7 @@ https://pccd.dites.cat/p/Fer_amor_de_son_cos
 https://pccd.dites.cat/p/Fer_anar
 https://pccd.dites.cat/p/Fer_anar_a_les_g%C3%A0bies
 https://pccd.dites.cat/p/Fer_anar_arri-arri
+https://pccd.dites.cat/p/Fer_anar_b%C3%A9
 https://pccd.dites.cat/p/Fer_anar_com_una_botxa
 https://pccd.dites.cat/p/Fer_anar_com_una_escombra
 https://pccd.dites.cat/p/Fer_anar_com_una_pilota
@@ -40124,6 +40324,7 @@ https://pccd.dites.cat/p/Fer_comptes_a_l%27aire
 https://pccd.dites.cat/p/Fer_comptes_de_fer-ho
 https://pccd.dites.cat/p/Fer_comuna
 https://pccd.dites.cat/p/Fer_concreure
+https://pccd.dites.cat/p/Fer_condemnar
 https://pccd.dites.cat/p/Fer_coneixen%C3%A7a
 https://pccd.dites.cat/p/Fer_confer%C3%A8ncia
 https://pccd.dites.cat/p/Fer_conflinca
@@ -40429,6 +40630,7 @@ https://pccd.dites.cat/p/Fer_el_dejuni_dels_sis_dies
 https://pccd.dites.cat/p/Fer_el_desent%C3%A8s
 https://pccd.dites.cat/p/Fer_el_desmenjat
 https://pccd.dites.cat/p/Fer_el_desmenjat_amb_talent
+https://pccd.dites.cat/p/Fer_el_diable_de_la_cama
 https://pccd.dites.cat/p/Fer_el_diable_menut
 https://pccd.dites.cat/p/Fer_el_didot
 https://pccd.dites.cat/p/Fer_el_dilluns
@@ -41604,6 +41806,7 @@ https://pccd.dites.cat/p/Fer_noni-noni
 https://pccd.dites.cat/p/Fer_norris
 https://pccd.dites.cat/p/Fer_nosa
 https://pccd.dites.cat/p/Fer_nota
+https://pccd.dites.cat/p/Fer_notar
 https://pccd.dites.cat/p/Fer_nou
 https://pccd.dites.cat/p/Fer_nou-hores
 https://pccd.dites.cat/p/Fer_novenes
@@ -41856,9 +42059,11 @@ https://pccd.dites.cat/p/Fer_porgueres
 https://pccd.dites.cat/p/Fer_porra
 https://pccd.dites.cat/p/Fer_portar
 https://pccd.dites.cat/p/Fer_portar_banyes
+https://pccd.dites.cat/p/Fer_posar_la_ra%C3%B3
 https://pccd.dites.cat/p/Fer_posar_pell
 https://pccd.dites.cat/p/Fer_posar_pell_a_les_llagues
 https://pccd.dites.cat/p/Fer_posar_vermell
+https://pccd.dites.cat/p/Fer_posats_de_ximple
 https://pccd.dites.cat/p/Fer_p%C3%B2sit
 https://pccd.dites.cat/p/Fer_postures
 https://pccd.dites.cat/p/Fer_pot_com%C3%BA
@@ -41884,6 +42089,7 @@ https://pccd.dites.cat/p/Fer_prossebos
 https://pccd.dites.cat/p/Fer_prou
 https://pccd.dites.cat/p/Fer_prova
 https://pccd.dites.cat/p/Fer_pru%C3%AFja
+https://pccd.dites.cat/p/Fer_p%C3%BAblic
 https://pccd.dites.cat/p/Fer_puces
 https://pccd.dites.cat/p/Fer_pudor
 https://pccd.dites.cat/p/Fer_pudor_de_cremat
@@ -41941,10 +42147,12 @@ https://pccd.dites.cat/p/Fer_ratlla
 https://pccd.dites.cat/p/Fer_ratlles
 https://pccd.dites.cat/p/Fer_rebequeries
 https://pccd.dites.cat/p/Fer_rebombori
+https://pccd.dites.cat/p/Fer_recan%C3%A7a
 https://pccd.dites.cat/p/Fer_recapte
 https://pccd.dites.cat/p/Fer_recau
 https://pccd.dites.cat/p/Fer_recranques
 https://pccd.dites.cat/p/Fer_refer%C3%A8ncia
+https://pccd.dites.cat/p/Fer_refilets
 https://pccd.dites.cat/p/Fer_refredar
 https://pccd.dites.cat/p/Fer_regateres
 https://pccd.dites.cat/p/Fer_reginnar
@@ -42123,6 +42331,7 @@ https://pccd.dites.cat/p/Fer_tanta_de_carrera_com_s%27ase_d%27en_Ballester%2C_qu
 https://pccd.dites.cat/p/Fer_tanta_falta_com_els_gossos_a_missa
 https://pccd.dites.cat/p/Fer_taparada
 https://pccd.dites.cat/p/Fer_taquilla
+https://pccd.dites.cat/p/Fer_tarar%C3%AD
 https://pccd.dites.cat/p/Fer_tard
 https://pccd.dites.cat/p/Fer_tarongeta
 https://pccd.dites.cat/p/Fer_tarumba
@@ -42163,6 +42372,8 @@ https://pccd.dites.cat/p/Fer_tocar
 https://pccd.dites.cat/p/Fer_t%C3%B3mbala
 https://pccd.dites.cat/p/Fer_tombarelles
 https://pccd.dites.cat/p/Fer_top_i_top
+https://pccd.dites.cat/p/Fer_topo-topo
+https://pccd.dites.cat/p/Fer_torb
 https://pccd.dites.cat/p/Fer_toris
 https://pccd.dites.cat/p/Fer_torna
 https://pccd.dites.cat/p/Fer_tornar_agre
@@ -42263,7 +42474,6 @@ https://pccd.dites.cat/p/Fer_un_aderg
 https://pccd.dites.cat/p/Fer_un_aire_o_un_fred_que_talla_la_cara
 https://pccd.dites.cat/p/Fer_un_aire_que_s%27enduu_els_sants
 https://pccd.dites.cat/p/Fer_un_aire_que_talla
-https://pccd.dites.cat/p/Fer_un_aire_que_talla_la_cara
 https://pccd.dites.cat/p/Fer_un_aire_que_tomba
 https://pccd.dites.cat/p/Fer_un_albat
 https://pccd.dites.cat/p/Fer_un_al%C3%A8
@@ -42341,7 +42551,10 @@ https://pccd.dites.cat/p/Fer_un_frare
 https://pccd.dites.cat/p/Fer_un_fred_d%27isard
 https://pccd.dites.cat/p/Fer_un_fred_que_arronsa_la_tita
 https://pccd.dites.cat/p/Fer_un_fred_que_arronsa_les_mamelles
+https://pccd.dites.cat/p/Fer_un_fred_que_clasca_la_closca
 https://pccd.dites.cat/p/Fer_un_fred_que_el_dimoni_es_peteja
+https://pccd.dites.cat/p/Fer_un_fred_que_escarrufa_les_mamelles_de_les_velles
+https://pccd.dites.cat/p/Fer_un_fred_que_fa_caure_la_cua_dels_moixons
 https://pccd.dites.cat/p/Fer_un_fred_que_gela_la_paraula
 https://pccd.dites.cat/p/Fer_un_fred_que_gla%C3%A7a_el_pensament
 https://pccd.dites.cat/p/Fer_un_fred_que_gla%C3%A7a_la_cua_dels_gossos
@@ -42374,6 +42587,7 @@ https://pccd.dites.cat/p/Fer_un_merder
 https://pccd.dites.cat/p/Fer_un_Miravet
 https://pccd.dites.cat/p/Fer_un_mol%C3%AD_i_no_saber_l%27aigua_d%27on_ha_de_venir
 https://pccd.dites.cat/p/Fer_un_mom
+https://pccd.dites.cat/p/Fer_un_monument_a_cada_cantonada
 https://pccd.dites.cat/p/Fer_un_morret
 https://pccd.dites.cat/p/Fer_un_mos
 https://pccd.dites.cat/p/Fer_un_mossec
@@ -42462,6 +42676,7 @@ https://pccd.dites.cat/p/Fer_un_tomb
 https://pccd.dites.cat/p/Fer_un_torcebra%C3%A7
 https://pccd.dites.cat/p/Fer_un_Tortosa
 https://pccd.dites.cat/p/Fer_un_tripijoc
+https://pccd.dites.cat/p/Fer_un_trist_paperet
 https://pccd.dites.cat/p/Fer_un_tro
 https://pccd.dites.cat/p/Fer_un_truc
 https://pccd.dites.cat/p/Fer_un_tut
@@ -42549,6 +42764,7 @@ https://pccd.dites.cat/p/Fer_una_giragonsa
 https://pccd.dites.cat/p/Fer_una_gorra
 https://pccd.dites.cat/p/Fer_una_horeta
 https://pccd.dites.cat/p/Fer_una_jugada_de_cacauero
+https://pccd.dites.cat/p/Fer_una_juguesca
 https://pccd.dites.cat/p/Fer_una_llepada
 https://pccd.dites.cat/p/Fer_una_llepassa
 https://pccd.dites.cat/p/Fer_una_llossada
@@ -42571,6 +42787,7 @@ https://pccd.dites.cat/p/Fer_una_pagesada
 https://pccd.dites.cat/p/Fer_una_palla
 https://pccd.dites.cat/p/Fer_una_panxa
 https://pccd.dites.cat/p/Fer_una_pardalada
+https://pccd.dites.cat/p/Fer_una_partida
 https://pccd.dites.cat/p/Fer_una_passada
 https://pccd.dites.cat/p/Fer_una_pasterada
 https://pccd.dites.cat/p/Fer_una_patinada
@@ -42721,6 +42938,7 @@ https://pccd.dites.cat/p/Fer_zub-zub
 https://pccd.dites.cat/p/Fer_zuc-zuc
 https://pccd.dites.cat/p/Fer_zum-zum
 https://pccd.dites.cat/p/Fer_zup
+https://pccd.dites.cat/p/Fer_zup_a_zup
 https://pccd.dites.cat/p/Fer_zup-zup
 https://pccd.dites.cat/p/Fer-hi_adot
 https://pccd.dites.cat/p/Fer-hi_bo
@@ -42756,6 +42974,7 @@ https://pccd.dites.cat/p/Fer-ho_sense_com_ni_qu%C3%A8
 https://pccd.dites.cat/p/Fer-ho_sense_taruta
 https://pccd.dites.cat/p/Fer-ho_servir
 https://pccd.dites.cat/p/Fer-ho_tot_ascles
+https://pccd.dites.cat/p/Fer-ho_un_cam%C3%AD
 https://pccd.dites.cat/p/Fer-l%27hi_cabre_al_cap
 https://pccd.dites.cat/p/Fer-l%27hi_entenent
 https://pccd.dites.cat/p/Fer-l%27hi_for%C3%A7a
@@ -43068,6 +43287,7 @@ https://pccd.dites.cat/p/Fer-li_un_tort
 https://pccd.dites.cat/p/Fer-li_un_trau
 https://pccd.dites.cat/p/Fer-li_un_trenc
 https://pccd.dites.cat/p/Fer-li_un_ventre
+https://pccd.dites.cat/p/Fer-li_un_vestit
 https://pccd.dites.cat/p/Fer-li_un_vestit_de_blavet
 https://pccd.dites.cat/p/Fer-li_un_xiquet_mascle
 https://pccd.dites.cat/p/Fer-li_una_boca_nova
@@ -43076,6 +43296,7 @@ https://pccd.dites.cat/p/Fer-li_una_cabronada
 https://pccd.dites.cat/p/Fer-li_una_capa_mal_tallada
 https://pccd.dites.cat/p/Fer-li_una_cara_de_mans
 https://pccd.dites.cat/p/Fer-li_una_cara_nova
+https://pccd.dites.cat/p/Fer-li_una_clucada_d%27ull
 https://pccd.dites.cat/p/Fer-li_una_criatura
 https://pccd.dites.cat/p/Fer-li_una_enramada
 https://pccd.dites.cat/p/Fer-li_una_fel%C2%B7laci%C3%B3
@@ -43234,6 +43455,7 @@ https://pccd.dites.cat/p/Fer-se_bona_la_pasta
 https://pccd.dites.cat/p/Fer-se_bons_bigots
 https://pccd.dites.cat/p/Fer-se_cabdells
 https://pccd.dites.cat/p/Fer-se_caca
+https://pccd.dites.cat/p/Fer-se_capell%C3%A0
 https://pccd.dites.cat/p/Fer-se_carn
 https://pccd.dites.cat/p/Fer-se_castells_de_borumballes
 https://pccd.dites.cat/p/Fer-se_clar
@@ -43360,6 +43582,7 @@ https://pccd.dites.cat/p/Fer-se_pregar
 https://pccd.dites.cat/p/Fer-se_prendre
 https://pccd.dites.cat/p/Fer-se_prenyada
 https://pccd.dites.cat/p/Fer-se_present
+https://pccd.dites.cat/p/Fer-se_prestar
 https://pccd.dites.cat/p/Fer-se_pur%C3%A9
 https://pccd.dites.cat/p/Fer-se_realitat
 https://pccd.dites.cat/p/Fer-se_repicar
@@ -43384,6 +43607,7 @@ https://pccd.dites.cat/p/Fer-se_un_colpet
 https://pccd.dites.cat/p/Fer-se_un_deu
 https://pccd.dites.cat/p/Fer-se_un_dit
 https://pccd.dites.cat/p/Fer-se_un_embolic
+https://pccd.dites.cat/p/Fer-se_un_esquin%C3%A7
 https://pccd.dites.cat/p/Fer-se_un_fart_de_plorar
 https://pccd.dites.cat/p/Fer-se_un_garbuix
 https://pccd.dites.cat/p/Fer-se_un_lloc
@@ -43532,6 +43756,7 @@ https://pccd.dites.cat/p/Ferreriencs_i_migjorners%2C_gent_d%27es_barranc_d%27en_
 https://pccd.dites.cat/p/Ferreries%2C_terra_roja
 https://pccd.dites.cat/p/Ferro_amb_ferro_s%27esmola%2C_ferro_amb_ferro_s%27emmotlla
 https://pccd.dites.cat/p/Ferro_amb_ferro%2C_lliga%3B_ferro_amb_bronze%2C_no
+https://pccd.dites.cat/p/Ferro_colat
 https://pccd.dites.cat/p/Ferro_contra_acer
 https://pccd.dites.cat/p/Ferro_fort%2C_amb_ferro_fort%2C_no_lliga
 https://pccd.dites.cat/p/Ferro%2C_llenya_i_paret
@@ -43650,6 +43875,7 @@ https://pccd.dites.cat/p/Festosament
 https://pccd.dites.cat/p/Fet_a_mida
 https://pccd.dites.cat/p/Fet_amb_fusta_de_xiulets
 https://pccd.dites.cat/p/Fet_amb_la_destral_grossa_i_manejada_pels_manobres
+https://pccd.dites.cat/p/Fet_amb_lla%C3%B3_de_cuidadosos
 https://pccd.dites.cat/p/Fet_caldo
 https://pccd.dites.cat/p/Fet_d%27armes
 https://pccd.dites.cat/p/Fet_de_mantega
@@ -43657,6 +43883,7 @@ https://pccd.dites.cat/p/Fet_de_pasta_de_bunyols
 https://pccd.dites.cat/p/Fet_de_pasta_de_coca_bamba
 https://pccd.dites.cat/p/Fet_de_pell_de_fava_de_cotxero
 https://pccd.dites.cat/p/Fet_el_tracte%2C_fet_l%27engany
+https://pccd.dites.cat/p/Fet_i_amanit
 https://pccd.dites.cat/p/Fet_i_deixat_estar
 https://pccd.dites.cat/p/Fet_i_fet
 https://pccd.dites.cat/p/Fet_i_fotut
@@ -43787,6 +44014,7 @@ https://pccd.dites.cat/p/Fiar_%C3%A9s_perdre_el_parroqui%C3%A0
 https://pccd.dites.cat/p/Fiar-se_d%27ase_negre
 https://pccd.dites.cat/p/Fiar-se_%C3%A9s_ferro_i_no_fiar-se_%C3%A9s_or
 https://pccd.dites.cat/p/Fiar-se%27n_tant_com_d%27unes_cases_que_cauen
+https://pccd.dites.cat/p/Fiblada_de_mal_de_v%C3%A8ntre
 https://pccd.dites.cat/p/Fiblar_com_una_abella
 https://pccd.dites.cat/p/Fica-li_el_dit_a_la_boca_i_veur%C3%A0s_si_mossega
 https://pccd.dites.cat/p/Fica-m%27ho_aqu%C3%AD%2C_que_no_tinc_butxaques%21
@@ -43960,6 +44188,7 @@ https://pccd.dites.cat/p/Filaborres
 https://pccd.dites.cat/p/Filadora_molt_callada_no_pot_fer_bona_filada
 https://pccd.dites.cat/p/Filadora_que_calla%2C_filada_llarga
 https://pccd.dites.cat/p/Filadora_que_no_canta%2C_la_filada_fa_amarganta
+https://pccd.dites.cat/p/Filant%2C_filant%2C_me%27n_vaig_al_camp%2C_a_veure_els_pollets_si_tenen_fam
 https://pccd.dites.cat/p/Filant%2C_la_vella_enganya_la_vida
 https://pccd.dites.cat/p/Filantr%C3%B2picament
 https://pccd.dites.cat/p/Filar_m%C3%A9s_que_les_aranyes
@@ -44232,6 +44461,8 @@ https://pccd.dites.cat/p/Flaira%2C_nas%2C_que_no_en_tastar%C3%A0s
 https://pccd.dites.cat/p/Flairim-flairam
 https://pccd.dites.cat/p/Flairosament
 https://pccd.dites.cat/p/Flaix%21
+https://pccd.dites.cat/p/Flama_a_l%27hivern%2C_encara_que_sigui_de_l%27infern
+https://pccd.dites.cat/p/Flamarada_de_rames%2C_molt_de_fum_i_poques_brases
 https://pccd.dites.cat/p/Flamejar-li_els_ulls
 https://pccd.dites.cat/p/Flap-flap
 https://pccd.dites.cat/p/Flas%21
@@ -44252,6 +44483,7 @@ https://pccd.dites.cat/p/Flipa%2C_tulipa%21
 https://pccd.dites.cat/p/Flist-flast
 https://pccd.dites.cat/p/Flisto%2C_flasto%2C_la_farina_fina
 https://pccd.dites.cat/p/Flistos%21
+https://pccd.dites.cat/p/Flizt
 https://pccd.dites.cat/p/Floca%27t_aquesta%21
 https://pccd.dites.cat/p/Flocs_i_banderetes
 https://pccd.dites.cat/p/Flocs_i_castanyetes%2C_omplen_la_terra_d%27herbetes
@@ -44656,6 +44888,7 @@ https://pccd.dites.cat/p/Fotre_pels_morros
 https://pccd.dites.cat/p/Fotre_un_bac
 https://pccd.dites.cat/p/Fotre_un_bisnoc
 https://pccd.dites.cat/p/Fotre_un_cacauet
+https://pccd.dites.cat/p/Fotre_un_canyardo
 https://pccd.dites.cat/p/Fotre_un_clau
 https://pccd.dites.cat/p/Fotre_un_gec
 https://pccd.dites.cat/p/Fotre_un_panot
@@ -44725,7 +44958,6 @@ https://pccd.dites.cat/p/Franciscans%2C_morts_de_fam%2C_donen_la_sopa_als_pobres
 https://pccd.dites.cat/p/Fran%C3%A7osament
 https://pccd.dites.cat/p/Franquejar_la_casa
 https://pccd.dites.cat/p/Franquejar_una_carta
-https://pccd.dites.cat/p/Frare_de_missa_d%27onze
 https://pccd.dites.cat/p/Frare_observant_no_deixa_res_per_davant
 https://pccd.dites.cat/p/Frare_que_demana_per_D%C3%A9u_demana_per_dos
 https://pccd.dites.cat/p/Frare_que_ha_estat_soldat%2C_surt_m%C3%A9s_encertat
@@ -44856,6 +45088,8 @@ https://pccd.dites.cat/p/Fruita%2C_per%C3%B2_no_molta
 https://pccd.dites.cat/p/Fruita%2C_poca_i_ben_madura
 https://pccd.dites.cat/p/Fruits_secs
 https://pccd.dites.cat/p/Fss%21
+https://pccd.dites.cat/p/Fsssssa
+https://pccd.dites.cat/p/Fst_fst
 https://pccd.dites.cat/p/Fufa
 https://pccd.dites.cat/p/Fuga%C3%A7ment
 https://pccd.dites.cat/p/Fugi_de_la_mar_qui_no_sap_nedar
@@ -44916,6 +45150,7 @@ https://pccd.dites.cat/p/Fuig_gos%2C_que_portes_puces%21
 https://pccd.dites.cat/p/Fuig-me_de_davant%21
 https://pccd.dites.cat/p/Fuig%2C_d%27aqu%C3%AD%2C_fuig_d%27aqu%C3%AD%2C_fuig_d%27aqu%C3%AD%2C_que_em_fas_mania%3B_antes_de_casar-me_amb_tu%2C_primer_m%27afusellaria
 https://pccd.dites.cat/p/Fuig%2C_faena%2C_fuig%21
+https://pccd.dites.cat/p/Fuig%2C_irrecuperable%2C_el_temps
 https://pccd.dites.cat/p/Fuig%21
 https://pccd.dites.cat/p/Fulano%2C_sutano_i_mengano
 https://pccd.dites.cat/p/F%C3%BAlgidament
@@ -44958,6 +45193,7 @@ https://pccd.dites.cat/p/F%C3%BAmer-se%27n_de_la_virolla
 https://pccd.dites.cat/p/F%C3%BAmere%21
 https://pccd.dites.cat/p/Fums_de_general_i_jornal_de_tambor
 https://pccd.dites.cat/p/Fumudament
+https://pccd.dites.cat/p/Funcionar_de_meravella
 https://pccd.dites.cat/p/Fundadament
 https://pccd.dites.cat/p/Fundar_un_llit
 https://pccd.dites.cat/p/F%C3%BAnebrement
@@ -45016,6 +45252,7 @@ https://pccd.dites.cat/p/Gaireb%C3%A9_no
 https://pccd.dites.cat/p/Gaiter%2C_bon_manifasser
 https://pccd.dites.cat/p/Gala_dels_fadrins%3A_les_polseres_llises_i_els_polls_com_a_garrofins
 https://pccd.dites.cat/p/Galanament
+https://pccd.dites.cat/p/Galandinc-galandonc
 https://pccd.dites.cat/p/Galant
 https://pccd.dites.cat/p/Galant_allunyat%2C_galant_oblidat
 https://pccd.dites.cat/p/Galant_de_cos%2C_lleig_d%27%C3%A0nima
@@ -45028,6 +45265,7 @@ https://pccd.dites.cat/p/Galeria_d%27art
 https://pccd.dites.cat/p/Galeria_de_protecci%C3%B3
 https://pccd.dites.cat/p/Galeta_picada
 https://pccd.dites.cat/p/Galilea%2C_lloc_vent%C3%B3s%2C_garrida%2C_si_et_cal_pujar%2C_dia_de_vent_hau_d%27anar_aferrats_de_dos_en_dos
+https://pccd.dites.cat/p/Galinc-galonc
 https://pccd.dites.cat/p/Gall_aqu%C3%AD%2C_gall_all%C3%A0%2C_la_cua_queda_en_la_m%C3%A0
 https://pccd.dites.cat/p/Gall_d%27esperons_grossos%2C_la_carn_m%C3%A9s_dura_que_els_ossos
 https://pccd.dites.cat/p/Gall_de_brega
@@ -45081,7 +45319,6 @@ https://pccd.dites.cat/p/Galtes_bufarelles
 https://pccd.dites.cat/p/Galtes_d%27espet
 https://pccd.dites.cat/p/Galtes_de_cony%21
 https://pccd.dites.cat/p/Galtes_de_farro
-https://pccd.dites.cat/p/Galtes_de_ferro
 https://pccd.dites.cat/p/Galtes_de_formatge
 https://pccd.dites.cat/p/Galtes_de_pa_tou
 https://pccd.dites.cat/p/Galv%C3%A0nicament
@@ -45110,6 +45347,7 @@ https://pccd.dites.cat/p/Gansonerament
 https://pccd.dites.cat/p/Ganxet%2C_ganxet%2C_si_m%27enganyes%2C_a_l%27infernet
 https://pccd.dites.cat/p/Ganxudament
 https://pccd.dites.cat/p/Ganya-ganya
+https://pccd.dites.cat/p/Ganyanyic-ganyanyac
 https://pccd.dites.cat/p/Ganyonament
 https://pccd.dites.cat/p/Gara%21
 https://pccd.dites.cat/p/Garaning-garaneng
@@ -45140,11 +45378,13 @@ https://pccd.dites.cat/p/Garranyac%21
 https://pccd.dites.cat/p/Garranyau%21
 https://pccd.dites.cat/p/Garranyec%21
 https://pccd.dites.cat/p/Garranyeu%21
+https://pccd.dites.cat/p/Garranyic-garranyac
 https://pccd.dites.cat/p/Garranyic-garranyec
 https://pccd.dites.cat/p/Garranyic%21
 https://pccd.dites.cat/p/Garranyiu
 https://pccd.dites.cat/p/Garranyoc
 https://pccd.dites.cat/p/Garrec%21
+https://pccd.dites.cat/p/Garri-garric
 https://pccd.dites.cat/p/Garric-garrac
 https://pccd.dites.cat/p/Garric-garroc
 https://pccd.dites.cat/p/Garridament
@@ -45547,6 +45787,7 @@ https://pccd.dites.cat/p/Germans%2C_quan_s%C3%B3n_petits%3B_quan_s%C3%B3n_grans%
 https://pccd.dites.cat/p/Gerra_de_la_confitura
 https://pccd.dites.cat/p/Gerra_sense_coll_no_est%C3%A0_acabada
 https://pccd.dites.cat/p/Gerretes_a_Manacor%2C_n%27hi_ha_de_grosses_i_petites%2C_i_ses_dones_qui_fan_pipes
+https://pccd.dites.cat/p/Geu-geu
 https://pccd.dites.cat/p/Ggg%21
 https://pccd.dites.cat/p/Giar_per_la_senda
 https://pccd.dites.cat/p/Gic-gic
@@ -45589,6 +45830,7 @@ https://pccd.dites.cat/p/Girar_full
 https://pccd.dites.cat/p/Girar_l%27aigua
 https://pccd.dites.cat/p/Girar_l%27andana
 https://pccd.dites.cat/p/Girar_l%27esquena
+https://pccd.dites.cat/p/Girar_l%27herba
 https://pccd.dites.cat/p/Girar_l%27oraci%C3%B3_per_passiva
 https://pccd.dites.cat/p/Girar_la_batuda
 https://pccd.dites.cat/p/Girar_la_casaca
@@ -45660,6 +45902,7 @@ https://pccd.dites.cat/p/Gitar_fora_de_seny
 https://pccd.dites.cat/p/Gitar-se_amb_la_c%C3%A0rrega
 https://pccd.dites.cat/p/Giu-giu
 https://pccd.dites.cat/p/Glac-glac
+https://pccd.dites.cat/p/Glac%2C_glac%2C_glac
 https://pccd.dites.cat/p/Gla%C3%A7ada_blanca
 https://pccd.dites.cat/p/Gla%C3%A7ada_negra
 https://pccd.dites.cat/p/Gla%C3%A7ades_de_gener_la_terra_estoven_b%C3%A9
@@ -45678,8 +45921,10 @@ https://pccd.dites.cat/p/Glinc%21
 https://pccd.dites.cat/p/Gling-gling-gling
 https://pccd.dites.cat/p/Glo-glo
 https://pccd.dites.cat/p/Glo-glo-glo
+https://pccd.dites.cat/p/Gl%C3%B3%2C_gl%C3%B3%2C_gl%C3%B3
 https://pccd.dites.cat/p/Globalment
 https://pccd.dites.cat/p/Gloc-gloc
+https://pccd.dites.cat/p/Gloc%2C_gloc%2C_gloc
 https://pccd.dites.cat/p/Glop-glop
 https://pccd.dites.cat/p/Glopejar_%C3%A9s_parent_de_l%27enviar
 https://pccd.dites.cat/p/Gl%C3%B2ria_eterna
@@ -45704,6 +45949,7 @@ https://pccd.dites.cat/p/Glotonia_%C3%A9s_pecat_que_consum_sanitat
 https://pccd.dites.cat/p/Glu-glu
 https://pccd.dites.cat/p/Glu%2C_glu%2C_glu
 https://pccd.dites.cat/p/Gluc-gluc
+https://pccd.dites.cat/p/Gluc%2C_gluc%2C_gluc
 https://pccd.dites.cat/p/Glups%21
 https://pccd.dites.cat/p/Gnyorrc
 https://pccd.dites.cat/p/Godall_i_godall%C3%B3%21
@@ -45751,7 +45997,9 @@ https://pccd.dites.cat/p/Gos_falder
 https://pccd.dites.cat/p/Gos_fart_no_ca%C3%A7a
 https://pccd.dites.cat/p/Gos_fart_no_vol_rossegons
 https://pccd.dites.cat/p/Gos_massa_tip_no_ca%C3%A7a
+https://pccd.dites.cat/p/Gos_perdiguer
 https://pccd.dites.cat/p/Gos_perdiguer%2C_truja_de_forner_i_ase_de_moliner%2C_mantenir-los_no_costa_res
+https://pccd.dites.cat/p/Gos_petaner
 https://pccd.dites.cat/p/Gos_pigall
 https://pccd.dites.cat/p/Gos_pobre%2C_ple_de_ronya
 https://pccd.dites.cat/p/Gos_punter%2C_destorbador_i_mal_feiner
@@ -45765,6 +46013,7 @@ https://pccd.dites.cat/p/Gosar_una_dona
 https://pccd.dites.cat/p/G%C3%B3sol%2C_el_cor_del_Pirineu_catal%C3%A0
 https://pccd.dites.cat/p/Gossos_i_gats_es_mengen_el_mal_desat
 https://pccd.dites.cat/p/Gossos_per_a_ca%C3%A7ar_costen_m%C3%A9s_del_que_porten
+https://pccd.dites.cat/p/Got
 https://pccd.dites.cat/p/Got_que_toca%2C_plat_que_peta
 https://pccd.dites.cat/p/Gota_a_gota
 https://pccd.dites.cat/p/Gota_a_gota_el_mar_s%27esgota
@@ -45977,6 +46226,7 @@ https://pccd.dites.cat/p/Groc_com_un_ciri
 https://pccd.dites.cat/p/Groc_com_un_mort
 https://pccd.dites.cat/p/Groc_com_un_pergam%C3%AD
 https://pccd.dites.cat/p/Groc_com_un_pet
+https://pccd.dites.cat/p/Groc%2C_color_d%27albercoc
 https://pccd.dites.cat/p/Groc%2C_vermell%2C_taronja_i_marr%C3%B3_s%C3%B3n_els_colors_de_la_tardor
 https://pccd.dites.cat/p/Grocs_a_Albons
 https://pccd.dites.cat/p/Grogament
@@ -45989,13 +46239,16 @@ https://pccd.dites.cat/p/Grop_de_vent
 https://pccd.dites.cat/p/Gropada_a_Mallorca%2C_aigua_a_la_costa
 https://pccd.dites.cat/p/Grops_en_terra%2C_bonan%C3%A7a_a_la_mar
 https://pccd.dites.cat/p/Gros_com_el_puny
+https://pccd.dites.cat/p/Gros_com_la_soca_d%27un_ametller
 https://pccd.dites.cat/p/Gros_com_la_torratxa_de_la_torre_Pardalera
+https://pccd.dites.cat/p/Gros_com_un_albercoc
 https://pccd.dites.cat/p/Gros_com_un_bac%C3%B3
 https://pccd.dites.cat/p/Gros_com_un_bou
 https://pccd.dites.cat/p/Gros_com_un_campanar
 https://pccd.dites.cat/p/Gros_com_un_farcell_de_quinze_canes
 https://pccd.dites.cat/p/Gros_com_un_marr%C3%A0
 https://pccd.dites.cat/p/Gros_com_un_missal
+https://pccd.dites.cat/p/Gros_com_un_perdigot
 https://pccd.dites.cat/p/Gros_com_un_teix%C3%B3
 https://pccd.dites.cat/p/Gros_com_una_campana
 https://pccd.dites.cat/p/Gros_de_cara
@@ -46028,6 +46281,7 @@ https://pccd.dites.cat/p/Guai%21
 https://pccd.dites.cat/p/Guaita_al_balc%C3%B3_primer_ans_de_sortir_al_carrer
 https://pccd.dites.cat/p/Guaita%2C_miny%C3%B3%2C_la_gaita_de_nyigui-nyogui
 https://pccd.dites.cat/p/Guaita%2C_qui_hi_ha_aqu%C3%AD%21
+https://pccd.dites.cat/p/Guaita%21
 https://pccd.dites.cat/p/Guaitar_a_bona_finestra
 https://pccd.dites.cat/p/Guaitar_com_si_una_borromba_li_hagu%C3%A9s_caigut_sus_de_la_closca
 https://pccd.dites.cat/p/Gualta%2C_com_cap_altre%21
@@ -46243,12 +46497,15 @@ https://pccd.dites.cat/p/Guineu_que_dorm_no_menja_gallina
 https://pccd.dites.cat/p/Guineu%2C_sardina_i_dona%2C_no_n%27hi_ha_cap_de_bona
 https://pccd.dites.cat/p/Guineuetes_d%27Alberola
 https://pccd.dites.cat/p/Guinyar-la_pel_corbat%C3%AD
+https://pccd.dites.cat/p/Guipar-hi
 https://pccd.dites.cat/p/Guitarra_descordada_i_monocord_sense_cordes%2C_poc_importa_que_es_perdin
 https://pccd.dites.cat/p/Guitarra_pagada%2C_mal_tocada
 https://pccd.dites.cat/p/Guitarra_sense_cordes_no_val_un_diner
 https://pccd.dites.cat/p/Guitarres%2C_g%C3%A0bies_i_dones%2C_si_es_deixen_es_perden
 https://pccd.dites.cat/p/Guitza%21
 https://pccd.dites.cat/p/Guixa_de_mal_caure
+https://pccd.dites.cat/p/Guixar_el_full
+https://pccd.dites.cat/p/Guixar_la_paret
 https://pccd.dites.cat/p/Guixes_a_grapats%2C_mengetes_a_cabassos_i_faves_a_sacs
 https://pccd.dites.cat/p/Guixes_tendres_en_arr%C3%B2s_i_entremig_un_conillet_arreglen_un_dinaret_que_ni_fet_a_Vinar%C3%B2s
 https://pccd.dites.cat/p/Gurb_i_Tona%2C_el_millor_d%27Osona%3B_mes_si_pots_triar%2C_ves_a_Baleny%C3%A0
@@ -46456,6 +46713,7 @@ https://pccd.dites.cat/p/Haver-hi_m%C3%A9s_lladres_que_a_Soneixa
 https://pccd.dites.cat/p/Haver-hi_m%C3%A9s_m%C3%A0nigues_que_jaquetes
 https://pccd.dites.cat/p/Haver-hi_m%C3%A9s_moixons_que_perdigons
 https://pccd.dites.cat/p/Haver-hi_m%C3%A9s_refranys_que_pans
+https://pccd.dites.cat/p/Haver-hi_molt_fil_a_coure
 https://pccd.dites.cat/p/Haver-hi_molt_plom_d%27aigua
 https://pccd.dites.cat/p/Haver-hi_molt_que_traure_de_rama
 https://pccd.dites.cat/p/Haver-hi_molt_que_treballar
@@ -46532,7 +46790,6 @@ https://pccd.dites.cat/p/Haver-li_tallat_moltes_lliurades_en_el_mercat
 https://pccd.dites.cat/p/Haver-li_tret_la_merda_del_cul
 https://pccd.dites.cat/p/Haver-lo_abatanat
 https://pccd.dites.cat/p/Haver-lo_mossegat_el_gos_d%27en_Mandra
-https://pccd.dites.cat/p/Haver-n%27hi_bon_boci
 https://pccd.dites.cat/p/Haver-n%27hi_bon_gruix
 https://pccd.dites.cat/p/Haver-n%27hi_com_de_cabells_en_el_cap
 https://pccd.dites.cat/p/Haver-n%27hi_davall_es_terr%C3%B2s
@@ -46690,6 +46947,7 @@ https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_paraules_en_un_got_de_vi_que_en_un_sac_d
 https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_passos_que_diners
 https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_pobres_que_marquesos
 https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_raons_dintre_un_got_de_vi_que_en_un_rentador_de_cent_dones
+https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_rucs_a_la_Seu_que_a_Martinet
 https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_setmanes_que_sobrassades
 https://pccd.dites.cat/p/Hi_ha_m%C3%A9s_treballs_a_ser_dolent_que_a_ser_bo
 https://pccd.dites.cat/p/Hi_ha_metges_i_matxos
@@ -46720,6 +46978,7 @@ https://pccd.dites.cat/p/Hi_ha_tants_afortunats%2C_amb_set_vides_com_els_gats
 https://pccd.dites.cat/p/Hi_ha_tants_d%27ases_amb_lletra%2C_com_sense
 https://pccd.dites.cat/p/Hi_ha_temps_d%27obrar_i_temps_de_reposar
 https://pccd.dites.cat/p/Hi_ha_temps_de_matar_un_ase_a_pessics
+https://pccd.dites.cat/p/Hi_ha_trens_que_nom%C3%A9s_passen_un_cop
 https://pccd.dites.cat/p/Hi_ha_tres_b%C3%A8sties_de_mal_menar%3A_la_dona%2C_la_cabra_i_el_capell%C3%A0
 https://pccd.dites.cat/p/Hi_ha_tres_maneres_d%27amor%3A_virtuosa%2C_profitosa_i_viciosa
 https://pccd.dites.cat/p/Hi_ha_tres_maneres_de_no_fer_res%3A_fer_una_cosa_malament%2C_fer_una_cosa_que_no_serveixi_per_a_res%2C_i_no_fer_res_en_absolut
@@ -47132,6 +47391,9 @@ https://pccd.dites.cat/p/Hop%21
 https://pccd.dites.cat/p/Hora_b%C3%A8stia
 https://pccd.dites.cat/p/Hora_captada
 https://pccd.dites.cat/p/Hora_de_bona_paraula
+https://pccd.dites.cat/p/Hora_de_dormir
+https://pccd.dites.cat/p/Hora_de_fer_nones
+https://pccd.dites.cat/p/Hora_de_gitar-se
 https://pccd.dites.cat/p/Hora_de_llum_encendre
 https://pccd.dites.cat/p/Hora_de_pag%C3%A8s
 https://pccd.dites.cat/p/Hora_de_visita
@@ -47575,6 +47837,7 @@ https://pccd.dites.cat/p/Indigestament
 https://pccd.dites.cat/p/Indignadament
 https://pccd.dites.cat/p/Indignament
 https://pccd.dites.cat/p/Indign%C3%ADssimament
+https://pccd.dites.cat/p/Indiot
 https://pccd.dites.cat/p/Indirectament
 https://pccd.dites.cat/p/Indiscerniblement
 https://pccd.dites.cat/p/Indisciplinablement
@@ -47801,6 +48064,7 @@ https://pccd.dites.cat/p/Intent%C3%ADvolment
 https://pccd.dites.cat/p/Inter%C3%A8s_i_amistat_mai_no_s%27han_ajuntat
 https://pccd.dites.cat/p/Interessadament
 https://pccd.dites.cat/p/Interessantment
+https://pccd.dites.cat/p/Interin
 https://pccd.dites.cat/p/Interinament
 https://pccd.dites.cat/p/Interiorment
 https://pccd.dites.cat/p/Interjectivament
@@ -48009,7 +48273,7 @@ https://pccd.dites.cat/p/Ja_ho_s%C3%A9%2C_cunyat%2C_que_dorms_amb_ma_germana
 https://pccd.dites.cat/p/Ja_ho_sentirem_a_dir
 https://pccd.dites.cat/p/Ja_ho_trobarem%21
 https://pccd.dites.cat/p/Ja_ho_val%21
-https://pccd.dites.cat/p/Ja_ho_veurem_vol_dir_No_en_fiis
+https://pccd.dites.cat/p/Ja_ho_veurem_vol_dir_no_en_fi%C3%AFs
 https://pccd.dites.cat/p/Ja_ho_veurem%2C_en_Gelat%2C_a_on_s%27ajaur%C3%A0
 https://pccd.dites.cat/p/Ja_ho_veurem%21
 https://pccd.dites.cat/p/Ja_ho_veus
@@ -48075,6 +48339,7 @@ https://pccd.dites.cat/p/Ja_t%27adobar%C3%A9_es_bus%21
 https://pccd.dites.cat/p/Ja_t%27adre%C3%A7ar%C3%A9%21
 https://pccd.dites.cat/p/Ja_t%27agaf_ja_no_t%27agaf
 https://pccd.dites.cat/p/Ja_t%27ajustar%C3%A9_el_compte%21
+https://pccd.dites.cat/p/Ja_t%27apanyar%C3%A0s
 https://pccd.dites.cat/p/Ja_t%27arranjar%C3%A9%2C_jo
 https://pccd.dites.cat/p/Ja_t%27he_atrapat
 https://pccd.dites.cat/p/Ja_t%27he_filat%21
@@ -48134,6 +48399,7 @@ https://pccd.dites.cat/p/Jaumet_de_Cabra
 https://pccd.dites.cat/p/Jaumet_del_cul_estret
 https://pccd.dites.cat/p/Jaure_en_oblit
 https://pccd.dites.cat/p/Jaure-li_com_un_esquell%C3%AD_a_una_truja
+https://pccd.dites.cat/p/Jejejeje
 https://pccd.dites.cat/p/Jer%C3%A0rquicament
 https://pccd.dites.cat/p/Jes%21
 https://pccd.dites.cat/p/Jesu%C3%ADticament
@@ -48163,6 +48429,8 @@ https://pccd.dites.cat/p/Jeure_com_un_porc
 https://pccd.dites.cat/p/Jeure_el_gat_dins_els_fogons
 https://pccd.dites.cat/p/Jeure_junts
 https://pccd.dites.cat/p/Jeure-hi
+https://pccd.dites.cat/p/Jijijiji
+https://pccd.dites.cat/p/Jip-jap
 https://pccd.dites.cat/p/Jo_a_sa_goretada%2C_tu_a_sa_femada
 https://pccd.dites.cat/p/Jo_com_tu%2C_i_tu_com_jo%3A_el_diable_ho_va_fer%2C_aix%C3%B2
 https://pccd.dites.cat/p/Jo_content%2C_tots_pagats
@@ -48181,6 +48449,7 @@ https://pccd.dites.cat/p/Jo_ja_m%27entenc%21
 https://pccd.dites.cat/p/Jo_li_demano_de_gr%C3%A0cia_si_me%27n_vol_donar_l%27amor._Ella_me%27n_fa_la_resposta%3A_%E2%80%94No_em_pentino_per_a_v%C3%B3s%2C_que_em_pentino_per_un_altre_que_%C3%A9s_un_poc_m%C3%A9s_graci%C3%B3s
 https://pccd.dites.cat/p/Jo_m%27entenc_i_D%C3%A9u_m%27ent%C3%A9n
 https://pccd.dites.cat/p/Jo_me%27n_vaig_a_Montserrat_a_cavall_d%27un_escarabat%3B_el_caragol_ve_al_darrere_si_el_volia_per_criat._Jo_me%27n_vaig_a_Montserrat_a_cavall_d%27un_mosquit%3B_tota_la_gent_que_trobava%3A_%E2%80%94Quin_cavall_tan_eixerit%21
+https://pccd.dites.cat/p/Jo_no_s%C3%B3c_un_soc
 https://pccd.dites.cat/p/Jo_no_som_jo
 https://pccd.dites.cat/p/Jo_no_som_llamp%21
 https://pccd.dites.cat/p/Jo_no_tinc_ambici%C3%B3%3A_vull_el_meu_i_el_que_no
@@ -48199,7 +48468,7 @@ https://pccd.dites.cat/p/Jo_s%C3%B3c_fill_de_Benigembla%2C_batejat_en_Xal%C3%B3%
 https://pccd.dites.cat/p/Jo_soc_fill_de_l%27Olleria%2C_sempre_vaig_de_saragata_venent_palletes_i_mistos%2C_vidre_trencat_qui_barata
 https://pccd.dites.cat/p/Jo_s%C3%B3c_filla_del_Palau%2C_en_ses_fonts_s%C3%B3c_batejada%3B_la_padrina_i_el_padr%C3%AD_Maria_me_n%27han_posada
 https://pccd.dites.cat/p/Jo_s%C3%B3c_mallerenga%2C_nom%C3%A9s_tinc_que_llenga%2C_i_en_faig_vuit_o_nou%3B_i_tu%2C_cucut%C3%A0s%2C_que_n%27ets_tan_gross%C3%A0s%2C_nom%C3%A9s_fas_un_ou
-https://pccd.dites.cat/p/Jo_s%C3%B3c_m%C3%BAsic%21
+https://pccd.dites.cat/p/Jo_soc_m%C3%BAsic%21
 https://pccd.dites.cat/p/Jo_soc_un_pobre_ma%2C_me%2C_mi%2C_mo%2C_m%C3%BAsic_de_carrer%2C_que_sempre_que_jo_pac%2C_pec%2C_pic%2C_poc%2C_puc_toco_el_que_s%C3%A9._D%27un_lloc_a_l%27altre_bas%2C_bes%2C_bis%2C_bos%2C_busco_algun_diner._Si_em_feu_callar%2C_jo_ma%2C_me_mi%2C_mo%2C_mu%2C_jo_morir%C3%A9
 https://pccd.dites.cat/p/Jo_som_anada_a_espadar_avui_per_la_Mare_de_D%C3%A9u%3B_pensant_en_s%27estimat_meu%2C_m%27he_pegat_damunt_sa_m%C3%A0
 https://pccd.dites.cat/p/Jo_som_en_Jordi%21
@@ -48688,6 +48957,7 @@ https://pccd.dites.cat/p/L%27aigua_de_Caldes_ajuda_a_passar_els_mals_i_les_recan
 https://pccd.dites.cat/p/L%27aigua_de_Caldes_cura_i_escura
 https://pccd.dites.cat/p/L%27aigua_de_Caldes_cura_les_panses%2C_els_ulls_de_poll_i_els_mals_de_panxa
 https://pccd.dites.cat/p/L%27aigua_de_Card%C3%B3_fa_animar_el_moix%C3%B3
+https://pccd.dites.cat/p/L%27aigua_de_farigola_tot_ho_consola
 https://pccd.dites.cat/p/L%27aigua_de_febrer_escalda_l%27oliver
 https://pccd.dites.cat/p/L%27aigua_de_febrer_treu_el_blat_del_terrer
 https://pccd.dites.cat/p/L%27aigua_de_Fornells_quasi_%C3%A9s_vi
@@ -48877,6 +49147,7 @@ https://pccd.dites.cat/p/L%27amo_nostro_mos_comanda_i_tots_hem_d%27estar_per_ell
 https://pccd.dites.cat/p/L%27amo_nou_tot_ho_remou
 https://pccd.dites.cat/p/L%27amo_sempre_%C3%A9s_amo
 https://pccd.dites.cat/p/L%27amor_callant_demana
+https://pccd.dites.cat/p/L%27amor_corresposta_creix_com_la_flama_amb_el_vent
 https://pccd.dites.cat/p/L%27amor_crema_m%C3%A9s_que_cent_focs
 https://pccd.dites.cat/p/L%27amor_de_D%C3%A9u_basta_per_a_tothom
 https://pccd.dites.cat/p/L%27amor_de_dona_%C3%A9s_com_el_fred%2C_que_no_sap_on_es_met
@@ -48966,7 +49237,6 @@ https://pccd.dites.cat/p/L%27any_de_bona_collita_fins_va_b%C3%A9_la_mula_guita
 https://pccd.dites.cat/p/L%27any_de_la_guerra
 https://pccd.dites.cat/p/L%27any_de_la_manta
 https://pccd.dites.cat/p/L%27any_de_la_pesta
-https://pccd.dites.cat/p/L%27any_de_la_Quica
 https://pccd.dites.cat/p/L%27any_de_la_ximbamba
 https://pccd.dites.cat/p/L%27any_de_molt_vi%2C_guarda_vi
 https://pccd.dites.cat/p/L%27any_de_trasp%C3%A0s%2C_ni_vinya%2C_ni_hort%2C_ni_camp
@@ -49462,6 +49732,8 @@ https://pccd.dites.cat/p/L%27Hospitalet%2C_f%C3%A0briques_i_escombriaires
 https://pccd.dites.cat/p/L%27hostaler_a_la_porta%2C_poca_gent_a_dins
 https://pccd.dites.cat/p/L%27hostaler_es_el_lladre_del_carreter
 https://pccd.dites.cat/p/L%27hoste_i_el_peix_menut%2C_al_cap_de_tres_dies%2C_put
+https://pccd.dites.cat/p/L%27important_no_%C3%A9s_el_dest%C3%AD%2C_sin%C3%B3_gaudir_del_cam%C3%AD
+https://pccd.dites.cat/p/L%27important_s%C3%B3n_les_paraules%2C_no_pas_els_fets
 https://pccd.dites.cat/p/L%27incr%C3%A8dul_t%C3%A9_males_entranyes
 https://pccd.dites.cat/p/L%27infant_batejat_en_dimarts_o_divendres%2C_es_torna_bruixa_o_bruixot
 https://pccd.dites.cat/p/L%27infant_i_la_pasta%2C_pel_juliol_es_glacen
@@ -49725,275 +49997,3 @@ https://pccd.dites.cat/p/La_boca_%C3%A9s_per_a_menjar%2C_per_a_beure_i_per_a_cal
 https://pccd.dites.cat/p/La_boca_%C3%A9s_un_petit_portell_i_%C3%A9s_capa%C3%A7_de_destruir_un_gros_castell
 https://pccd.dites.cat/p/La_boca_fa_el_joc
 https://pccd.dites.cat/p/La_boca_fa_foc
-https://pccd.dites.cat/p/La_boca_i_la_bossa_oberta_donen_sempre_entrada_certa
-https://pccd.dites.cat/p/La_boca_li_%C3%A9s_mesura
-https://pccd.dites.cat/p/La_boca_pren_el_que_se_li_dona
-https://pccd.dites.cat/p/La_boca_que_diu_que_no%2C_diu_que_s%C3%AD
-https://pccd.dites.cat/p/La_bocana%2C_el_sol_se_la_mama
-https://pccd.dites.cat/p/La_bogeria_no_t%C3%A9_remei
-https://pccd.dites.cat/p/La_boineta_tot_ho_apreta
-https://pccd.dites.cat/p/La_boira_a_Galilon%2C_aigua_per_tot_el_m%C3%B3n
-https://pccd.dites.cat/p/La_boira_a_la_muntanya%2C_no_al_mat%C3%AD%2C_per%C3%B2_de_vespre%2C_s%C3%AD
-https://pccd.dites.cat/p/La_boira_al_Clap%C3%AD_Vell%2C_ja_tenim_l%27aigua_al_clatell
-https://pccd.dites.cat/p/La_boira_d%27en_Pallola%2C_que_ofegava_els_ases_a_l%27estable
-https://pccd.dites.cat/p/La_boira_de_desembre_duu_el_garb%C3%AD_al_ventre
-https://pccd.dites.cat/p/La_boira_de_desembre_porta_l%27aigua_en_el_ventre
-https://pccd.dites.cat/p/La_boira_de_n%27Illa%2C_que_se%27n_menava_els_ponts
-https://pccd.dites.cat/p/La_boira_en_eixut%2C_ja_hem_segat_i_batut
-https://pccd.dites.cat/p/La_boira_ve_llepant_i_marxa_mossegant
-https://pccd.dites.cat/p/La_boira%2C_eixuta%2C_eixuta
-https://pccd.dites.cat/p/La_boira%2C_pel_gener%2C_s%27hi_ajeu_com_un_gos_peter%2C_i_pel_febrer_fuig_com_un_gos_llebrer
-https://pccd.dites.cat/p/La_boirassa_al_mat%C3%AD_el_sol_amena%C3%A7a
-https://pccd.dites.cat/p/La_boirina_marina_%C3%A9s_d%27aigua_padrina
-https://pccd.dites.cat/p/La_boirina%2C_de_l%27aigua_%C3%A9s_padrina_i_del_sol_ve%C3%AFna
-https://pccd.dites.cat/p/La_Bolanguera_en_t%C3%A9_diners_que_no_li_costen_gaire%3B_se%27ls_ha_guanyat_filant_de_Ripoll_a_Riudaura
-https://pccd.dites.cat/p/La_bomba_d%27en_Budoi
-https://pccd.dites.cat/p/La_bomba_del_Tor%C3%ADn
-https://pccd.dites.cat/p/La_bona
-https://pccd.dites.cat/p/La_bona_botifarra_pel_mar%C3%A7_ha_de_ser_encetada
-https://pccd.dites.cat/p/La_bona_cara_del_metge_ajuda_a_curar_el_malalt
-https://pccd.dites.cat/p/La_bona_casa_la_fan_els_ve%C3%AFns
-https://pccd.dites.cat/p/La_bona_casada%2C_creient_el_seu_marit%2C_mana
-https://pccd.dites.cat/p/La_bona_casada%2C_neta%2C_sana_i_endre%C3%A7ada
-https://pccd.dites.cat/p/La_bona_collita_fa_la_bona_marmita
-https://pccd.dites.cat/p/La_bona_consci%C3%A8ncia_val_mil_testimonis
-https://pccd.dites.cat/p/La_bona_crian%C3%A7a_fa_la_sang_bona
-https://pccd.dites.cat/p/La_bona_dona_calla_i_la_dolenta_xerra
-https://pccd.dites.cat/p/La_bona_dona_ho_%C3%A9s_per_ventura_i_la_dolenta_ho_%C3%A9s_per_natura
-https://pccd.dites.cat/p/La_bona_dona_va_amb_la_cara_descoberta
-https://pccd.dites.cat/p/La_bona_donzella%2C_la_mare_al_costat_d%27ella
-https://pccd.dites.cat/p/La_bona_escudella_infla_la_mamella
-https://pccd.dites.cat/p/La_bona_esposa_la_fa_D%C3%A9u%2C_i_la_mala%2C_la_culpa
-https://pccd.dites.cat/p/La_bona_estatura_%C3%A9s_mitja_hermosura
-https://pccd.dites.cat/p/La_bona_filadora_de_mat%C3%AD_comen%C3%A7a_la_seva_obra
-https://pccd.dites.cat/p/La_bona_filadora_el_dissabte_despulla_la_filosa
-https://pccd.dites.cat/p/La_bona_filadora_fila_i_refila
-https://pccd.dites.cat/p/La_bona_filadora_o_filanera%2C_per_Sant_Bartomeu_o_Tots_Sants_comen%C3%A7a_la_vetlla_o_vela%2C_i_la_m%C3%A9s_o_molt_bona%2C_per_Santa_Magdalena
-https://pccd.dites.cat/p/La_bona_filadora_pel_mar%C3%A7_plega_el_fus_i_la_filosa
-https://pccd.dites.cat/p/La_bona_filla_creix_cosida_a_les_faldilles_de_sa_mare
-https://pccd.dites.cat/p/La_bona_filla%2C_dues_vegades_va_a_casa
-https://pccd.dites.cat/p/La_bona_font_es_coneix_quan_hi_ha_secada
-https://pccd.dites.cat/p/La_bona_fusta_per_obrar%2C_pel_setembre_l%27has_de_tallar%3B_per_la_lluna_nova_talla_la_soca_i_per_la_vella_talla_l%27estella
-https://pccd.dites.cat/p/La_bona_guerra_fa_la_bona_pau
-https://pccd.dites.cat/p/La_bona_Janota_menja_i_trota
-https://pccd.dites.cat/p/La_bona_just%C3%ADcia_t%C3%A9_compassi%C3%B3_i%2C_la_falsa%2C_t%C3%A9_indignaci%C3%B3
-https://pccd.dites.cat/p/La_bona_lectura_la_tristesa_cura
-https://pccd.dites.cat/p/La_bona_llengua_atrau_la_gent_i_l%27argent
-https://pccd.dites.cat/p/La_bona_lloca%2C_pel_maig_deixa_els_polls_i_torna_a_pondre
-https://pccd.dites.cat/p/La_bona_mare_no_diu_al_fill_si_en_vols%2C_sin%C3%B3_t%C3%A9
-https://pccd.dites.cat/p/La_bona_mare%2C_tant_estima_un_fill_com_cent
-https://pccd.dites.cat/p/La_bona_mongeta_vol_aigua_al_mat%C3%AD_i_aigua_en_bullir
-https://pccd.dites.cat/p/La_bona_mossota%2C_si_no_menja%2C_no_trota
-https://pccd.dites.cat/p/La_bona_mula%2C_com_la_bona_viuda%2C_grassa_i_voltadora
-https://pccd.dites.cat/p/La_bona_muller_no_hi_ha_de_veure_ni_sentir
-https://pccd.dites.cat/p/La_bona_muller%2C_ben_poc_al_carrer
-https://pccd.dites.cat/p/La_bona_m%C3%BAsica_surt_de_la_barrica
-https://pccd.dites.cat/p/La_bona_obra%2C_al_mestre_honra
-https://pccd.dites.cat/p/La_bona_paraula_a_l%27enemic_calma
-https://pccd.dites.cat/p/La_bona_portalada_honra_la_casa
-https://pccd.dites.cat/p/La_bona_ra%C3%B3_sap_anar_sola_i_no_necessita_companyia
-https://pccd.dites.cat/p/La_bona_regleta_conserva_la_videta
-https://pccd.dites.cat/p/La_bona_rentadora%2C_ni_picador_ni_batedora
-https://pccd.dites.cat/p/La_bona_salsa%2C_cou
-https://pccd.dites.cat/p/La_bona_sang_mai_es_desdiu
-https://pccd.dites.cat/p/La_bona_satisfacci%C3%B3_es_fa_en_vida%2C_i_en_mort%E2%80%A6_no
-https://pccd.dites.cat/p/La_bona_segada%2C_amb_vi_ben_remullada
-https://pccd.dites.cat/p/La_bona_sembra_de_gener_en_bon_temps_s%27ha_de_fer
-https://pccd.dites.cat/p/La_bona_tardorada%2C_per_Sant_Bartomeu_la_primera_remullada
-https://pccd.dites.cat/p/La_bona_treballada_ajuda_la_mala_anyada
-https://pccd.dites.cat/p/La_bona_vella_mai_mata_el_porc_en_lluna_vella
-https://pccd.dites.cat/p/La_bona_vida%2C_a_tothom_prova
-https://pccd.dites.cat/p/La_bona_vista_amb_un_ull_en_t%C3%A9_prou
-https://pccd.dites.cat/p/La_bona_viuda_mai_s%27oblida_del_primer_marit
-https://pccd.dites.cat/p/La_borra_prop_del_foc_s%27enc%C3%A9n
-https://pccd.dites.cat/p/La_borra%2C_com_%C3%A9s_filada%2C_i_la_donzella%2C_com_%C3%A9s_criada
-https://pccd.dites.cat/p/La_borratxa_emborratxa
-https://pccd.dites.cat/p/La_borratxera_no_fa_res_dret
-https://pccd.dites.cat/p/La_borratxera_t%C3%A9_tres_graus%3A_tirlis%2C_mirlis_i_paternolis
-https://pccd.dites.cat/p/La_bossa_de_Judes
-https://pccd.dites.cat/p/La_bossa_de_l%27avar_mai_%C3%A9s_plena
-https://pccd.dites.cat/p/La_bossa_del_mesqu%C3%AD%2C_el_diable_l%27obr%C3%AD
-https://pccd.dites.cat/p/La_bossa_dels_ous
-https://pccd.dites.cat/p/La_bossa_o_la_vida%21
-https://pccd.dites.cat/p/La_bossa_tancada_i_la_vista_oberta
-https://pccd.dites.cat/p/La_bossa%2C_mai_ning%C3%BA_no_ha_de_saber_on_la_tens%2C_ni_com_la_tens
-https://pccd.dites.cat/p/La_bosseta%2C_la_boqueta_i_la_bragueta_s%C3%B3n_tres_coses_molt_importants
-https://pccd.dites.cat/p/La_bota_de_vi_s%27enceta_en_lluna_vella
-https://pccd.dites.cat/p/La_bota_dolenta_fa_malb%C3%A9_el_bon_vi
-https://pccd.dites.cat/p/La_bota_i_el_tasc%C3%B3_fan_el_bon_serrador
-https://pccd.dites.cat/p/La_bota_que_t%C3%A9_un_forat_es_buida_ben_aviat
-https://pccd.dites.cat/p/La_bota_sempre_t%C3%A9_gust_de_vi
-https://pccd.dites.cat/p/La_botifarra_del_budell_cular%2C_a_molts_l%27ofereixen_i_a_pocs_la_volen_donar
-https://pccd.dites.cat/p/La_botifarra_la_va_inventar_un_sord_i_el_seu_company_era_mut
-https://pccd.dites.cat/p/La_botifarra_m%C3%A9s_bona_encetada_per_Santa_Madrona
-https://pccd.dites.cat/p/La_botifarra_vol_ceba
-https://pccd.dites.cat/p/La_botifarra%2C_com_m%C3%A9s_gran_%C3%A9s_m%C3%A9s_f%C3%A0cil_es_rebenta
-https://pccd.dites.cat/p/La_brasa_del_foc%2C_baix_la_cendra_crema
-https://pccd.dites.cat/p/La_brevetat_%C3%A9s_l%27%C3%A0nima_de_la_intel%C2%B7lig%C3%A8ncia
-https://pccd.dites.cat/p/La_broma_i_la_muller%2C_quan_n%27hagis_de_menester
-https://pccd.dites.cat/p/La_broma_puja%2C_senyal_de_pluja
-https://pccd.dites.cat/p/La_brossa_a_l%27ull_d%27un_altre
-https://pccd.dites.cat/p/La_brossa%2C_pels_bous
-https://pccd.dites.cat/p/La_bruixa_que_m%C3%A9s_enverina_%C3%A9s_la_de_sota_la_tina
-https://pccd.dites.cat/p/La_bufetada_de_Malcus
-https://pccd.dites.cat/p/La_bugada_de_Gandesa%2C_molta_roba_i_poca_estesa
-https://pccd.dites.cat/p/La_bugada_de_la_Ballarusca%2C_que_mata_el_poll_i_deixa_la_pu%C3%A7a
-https://pccd.dites.cat/p/La_bugada_de_la_Fonoll%2C_que_mata_la_pu%C3%A7a_i_deixa_el_poll
-https://pccd.dites.cat/p/La_bugada_de_la_Rius
-https://pccd.dites.cat/p/La_bugada_de_la_Xesca%2C_que_si_no_la_deixa_neta%2C_la_deixa_fresca
-https://pccd.dites.cat/p/La_bugada_de_Nadal_costa_m%C3%A9s_que_ella_no_val
-https://pccd.dites.cat/p/La_bugada_de_Nadal_s%27eixuga_en_el_fumeral
-https://pccd.dites.cat/p/La_bugada_del_diumenge_el_dimoni_se_la_menja
-https://pccd.dites.cat/p/La_bum-bum
-https://pccd.dites.cat/p/La_bunya_a_gregal%C3%B3%2C_mal_temps_per_al_pescador
-https://pccd.dites.cat/p/La_butxaca_del_pobre_amb_pocs_diners_s%27eixampla
-https://pccd.dites.cat/p/La_butxaca_foradada_no_pot_ser_acabalada
-https://pccd.dites.cat/p/La_cabra_del_meu_ve%C3%AD_t%C3%A9_m%C3%A9s_llet_que_la_meva
-https://pccd.dites.cat/p/La_cabra_del_veremar_fa_de_mal_engreixar
-https://pccd.dites.cat/p/La_cabra_i_el_porc_no_els_deixis_entrar_a_l%27hort
-https://pccd.dites.cat/p/La_cabra_on_neix%2C_l%27ovella_on_peix
-https://pccd.dites.cat/p/La_cabra_que_coixa_sia%2C_que_no_pari_en_tot_lo_dia
-https://pccd.dites.cat/p/La_cabra_sempre_tira_a_la_muntanya
-https://pccd.dites.cat/p/La_cabra%2C_pel_seu_desaire%2C_porta_el_cul_a_l%27aire
-https://pccd.dites.cat/p/La_cabra%2C_pels_seus_pecats%2C_porta_els_genolls_pelats
-https://pccd.dites.cat/p/La_cabra%2C_pels_seus_pensament%2C_t%C3%A9_la_barba_davall_les_dents
-https://pccd.dites.cat/p/La_cabra%2C_per_la_seva_culpa%2C_t%C3%A9_la_cua_curta
-https://pccd.dites.cat/p/La_cabra%2C_per_la_seva_pena%2C_t%C3%A9_la_panxa_sota_l%27esquena
-https://pccd.dites.cat/p/La_cabra%2C_per_sa_mala_vida%2C_t%C3%A9_la_pota_partida
-https://pccd.dites.cat/p/La_ca%C3%A7a_no_et_ve_a_trobar_a_casa
-https://pccd.dites.cat/p/La_ca%C3%A7a_no_la_porten_a_casa
-https://pccd.dites.cat/p/La_ca%C3%A7a_que_far%C3%A0s%2C_la_vull_coure_al_pla_de_la_m%C3%A0
-https://pccd.dites.cat/p/La_cacera_de_la_perdiu%2C_quan_la_fem_ella_%C3%A9s_al_niu
-https://pccd.dites.cat/p/La_cadelleta_de_Buger%2C_per_voler_dinar_a_dos_llocs%2C_qued%C3%A0_dejuna
-https://pccd.dites.cat/p/La_caiguda_del_primer_fa_anar_dret_el_darrer
-https://pccd.dites.cat/p/La_caixa_de_les_eines
-https://pccd.dites.cat/p/La_caixa_de_les_volanderes
-https://pccd.dites.cat/p/La_caixa_de_sant_Pere
-https://pccd.dites.cat/p/La_cal%C3%A7_fa_miracles
-https://pccd.dites.cat/p/La_cal%C3%A7a_al_garr%C3%B3%2C_senyal_de_cabr%C3%B3
-https://pccd.dites.cat/p/La_cal%C3%A7ada_de_Sant_Miquel_fa_arribar_l%27oliver_al_cel
-https://pccd.dites.cat/p/La_calor_de_juny_t%C3%A9_la_pluja_per_enemic
-https://pccd.dites.cat/p/La_calor_de_la_Canonja_i_el_fred_de_Masricart
-https://pccd.dites.cat/p/La_calor_de_maig_regeix_per_tot_l%27any
-https://pccd.dites.cat/p/La_calor_greu%2C_de_Mare_de_D%C3%A9u_a_Mare_de_D%C3%A9u
-https://pccd.dites.cat/p/La_cal%C3%BAmnia_%C3%A9s_com_el_cuc%2C_que_rosega_el_millor_fruit
-https://pccd.dites.cat/p/La_cal%C3%BAmnia_%C3%A9s_com_el_cul_de_la_paella%2C_que_no_mata%2C_per%C3%B2_embruta
-https://pccd.dites.cat/p/La_cal%C3%BAmnia_%C3%A9s_com_l%27aigua_per_terra
-https://pccd.dites.cat/p/La_cama_al_llit_i_el_bra%C3%A7_o_la_m%C3%A0_al_pit
-https://pccd.dites.cat/p/La_Cama-seca
-https://pccd.dites.cat/p/La_camamilla_de_Linyola_cura_tota_sola
-https://pccd.dites.cat/p/La_camamilla_pel_mal_de_ventre
-https://pccd.dites.cat/p/La_cambra_de_dormir_ni_ha_de_fer_olor_ni_ha_de_pudir
-https://pccd.dites.cat/p/La_caminada_m%C3%A9s_llarga_comen%C3%A7a_amb_un_pas
-https://pccd.dites.cat/p/La_camisa_d%27en_Cotna%3A_pitrera_bona_i_faldars_de_Liorna
-https://pccd.dites.cat/p/La_camisa_%C3%A9s_tan_poca%2C_que_el_cul_no_em_toca
-https://pccd.dites.cat/p/La_camisa_m%C3%A9s_llarga_que_el_fasset
-https://pccd.dites.cat/p/La_campana_d%27Osca%2C_que_per_tot_el_m%C3%B3n_ressona
-https://pccd.dites.cat/p/La_campana_de_Lled%C3%B3_s%27ha_obert_com_una_magrana_perqu%C3%A8_les_castelloneses_festegen_de_mala_gana
-https://pccd.dites.cat/p/La_campana_de_Sarri%C3%A0_ressona_fins_a_Puigcerd%C3%A0
-https://pccd.dites.cat/p/La_campana_no_sona_si_el_batall_no_la_colpeja
-https://pccd.dites.cat/p/La_campana_no_va_a_missa_per%C3%B2_a_tots_avisa
-https://pccd.dites.cat/p/La_canalla_de_la_palla
-https://pccd.dites.cat/p/La_canalla_no_ment
-https://pccd.dites.cat/p/La_canalla_que_no_%C3%A9s_d%27un_hom%2C_sota_l%27aixella_els_porta_tothom
-https://pccd.dites.cat/p/La_canalla%2C_mal_faixada_i_ben_mamada
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_d%27en_Perot%3A_avui_no_paga_i_dem%C3%A0_tampoc
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_d%27en_Tocason
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_de_l%27enfad%C3%B3s
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_de_la_Lileta_%C3%A9s_can%C3%A7%C3%B3_que_mai_s%27acaba%2C_comen%C3%A7a_per_la_lileta_i_acaba_per_la_lilada
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_de_la_nana%2C_ja_nostra_mare_Eva_la_cantava
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_de_mai_no_acabar
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_de_sempre
-https://pccd.dites.cat/p/La_can%C3%A7%C3%B3_del_rebot
-https://pccd.dites.cat/p/La_candela_que_va_davant_fa_m%C3%A9s_llum_que_la_que_va_darrere
-https://pccd.dites.cat/p/La_Candelera_els_ous_adinera
-https://pccd.dites.cat/p/La_Candelera_%C3%A9s_feinera_o_jornalera
-https://pccd.dites.cat/p/La_Candelera_espessa%2C_guarda%27t_la_cabe%C3%A7a%3B_la_Candelera_clara%2C_fred_hi_ha_encara
-https://pccd.dites.cat/p/La_Candelera_ja_%C3%A9s_tomaquera
-https://pccd.dites.cat/p/La_Candelera_la_neu_espera%3B_si_ja_ha_nevat%2C_l%27hivern_ha_passat%2C_si_no_ha_nevat%2C_ja_nevar%C3%A0
-https://pccd.dites.cat/p/La_can%C3%ADcula%2C_la_monja_la_porta_i_el_frare_se_l%27emporta
-https://pccd.dites.cat/p/La_Canonja_i_Masricard%2C_Vila-seca_i_Constant%C3%AD%2C_tots_vindreu_a_cremar_amb_mi_perqu%C3%A8_no_teniu_bondat
-https://pccd.dites.cat/p/La_cansalada_no_%C3%A9s_de_pollastre
-https://pccd.dites.cat/p/La_canya_de_casa%2C_primer_trencada_que_sonada
-https://pccd.dites.cat/p/La_canya_no_vol_companys
-https://pccd.dites.cat/p/La_capa_del_diable%2C_el_que_per_un_costat_tapa%2C_per_altre_destapa
-https://pccd.dites.cat/p/La_capa_no_sempre_tapa
-https://pccd.dites.cat/p/La_capa_que_es_deu_no_abriga_gaire
-https://pccd.dites.cat/p/La_capa_tot_ho_tapa
-https://pccd.dites.cat/p/La_cara_bona
-https://pccd.dites.cat/p/La_cara_de_dalt
-https://pccd.dites.cat/p/La_cara_de_sota
-https://pccd.dites.cat/p/La_cara_del_metge_agrada_al_malalt
-https://pccd.dites.cat/p/La_cara_dolenta
-https://pccd.dites.cat/p/La_cara_%C3%A9s_el_mirall_de_l%27%C3%A0nima
-https://pccd.dites.cat/p/La_cara_i_el_cor_net
-https://pccd.dites.cat/p/La_cara_la_t%C3%A9_d%27%C3%A0ngel%2C_per%C3%B2_els_fets_s%C3%B3n_de_dimoni
-https://pccd.dites.cat/p/La_cara_li_diu
-https://pccd.dites.cat/p/La_cara_li_fa_proc%C3%A9s
-https://pccd.dites.cat/p/La_cara_li_guarda_el_cul
-https://pccd.dites.cat/p/La_cara_parla
-https://pccd.dites.cat/p/La_cara_real
-https://pccd.dites.cat/p/La_cara_tingui_neta%2C_que_el_cul_no_ix_a_la_finestra
-https://pccd.dites.cat/p/La_carabassa_embafa
-https://pccd.dites.cat/p/La_carabassa_embarassa
-https://pccd.dites.cat/p/La_carabassa_ni_engreixa_ni_embarassa
-https://pccd.dites.cat/p/La_carabassa_no_embarassa
-https://pccd.dites.cat/p/La_carabassa_va_anar_i_venir_de_Roma_i_encara_era_calenta
-https://pccd.dites.cat/p/La_carabassa%2C_tan_dolenta_%C3%A9s_al_mercat_com_a_la_panxa
-https://pccd.dites.cat/p/La_carabassera_creix_m%C3%A9s_de_pressa_i_m%C3%A9s_ufanosa_que_cap_altra%2C_per%C3%B2_la_gla%C3%A7ada_m%C3%A9s_feble_la_fa_caure
-https://pccd.dites.cat/p/La_cardina_sempre_refila
-https://pccd.dites.cat/p/La_caritat_augmenta_la_casa_i_esborra_el_pecat
-https://pccd.dites.cat/p/La_caritat_ben_entesa_comen%C3%A7a_per_un_mateix
-https://pccd.dites.cat/p/La_caritat_ennobleix
-https://pccd.dites.cat/p/La_caritat_no_empobreix
-https://pccd.dites.cat/p/La_caritat_no_vol_publicitat
-https://pccd.dites.cat/p/La_caritat_que_es_fa_a_la_porta%2C_torna_a_entrar_per_la_finestra
-https://pccd.dites.cat/p/La_caritat_sempre_torna_a_casa
-https://pccd.dites.cat/p/La_carn_a_les_brases_fa_caure_les_cases
-https://pccd.dites.cat/p/La_carn_al_dimoni%2C_els_ossos_a_D%C3%A9u
-https://pccd.dites.cat/p/La_carn_amb_os_%C3%A9s_la_millor
-https://pccd.dites.cat/p/La_carn_atipa_i_el_peix_dissipa
-https://pccd.dites.cat/p/La_carn_d%27olla_d%27en_Lau%2C_trumfes%2C_cols_i_marramau
-https://pccd.dites.cat/p/La_carn_d%27olla_de_carn%3B_la_de_cols_i_trumfes%2C_adeu-siau
-https://pccd.dites.cat/p/La_carn_de_burro_no_%C3%A9s_transparent
-https://pccd.dites.cat/p/La_carn_de_calceta_per_a_qui_l%27ha_feta
-https://pccd.dites.cat/p/La_carn_de_dona_%C3%A9s_dolenta_i_s%27ha_de_pagar_per_bona
-https://pccd.dites.cat/p/La_carn_de_verro_rev%C3%A9
-https://pccd.dites.cat/p/La_carn_de_xai_no_deixis_mai%2C_que%2C_com_ella%2C_sols_hi_ha_la_de_vedella
-https://pccd.dites.cat/p/La_carn_del_carp%C3%B3_fa_el_brou_millor
-https://pccd.dites.cat/p/La_carn_%C3%A9s_el_millor_adob_dels_ossos
-https://pccd.dites.cat/p/La_carn_%C3%A9s_feble
-https://pccd.dites.cat/p/La_carn_fa_carn_i_el_vi_fa_sang
-https://pccd.dites.cat/p/La_carn_m%C3%A9s_tendra%2C_la_de_la_perna
-https://pccd.dites.cat/p/La_carn_millor_%C3%A9s_la_de_garr%C3%B3
-https://pccd.dites.cat/p/La_carn_que_no_es_remou_per_Carnestoltes%2C_no_%C3%A9s_carn%2C_que_%C3%A9s_fang
-https://pccd.dites.cat/p/La_carn_que_no_fa_moguda_per_Carnestoltes%2C_tira-la_al_rec
-https://pccd.dites.cat/p/La_carn_restreny%3B_la_verdura_allarga
-https://pccd.dites.cat/p/La_carn_rostida_i_la_dona_quan_xiscla_%C3%A9s_bona
-https://pccd.dites.cat/p/La_carn_viva_fa_oblidar_la_morta
-https://pccd.dites.cat/p/La_carn%2C_de_corder
-https://pccd.dites.cat/p/La_carn%2C_on_est%C3%A0%2C_llueix
-https://pccd.dites.cat/p/La_carrabina_de_l%27Ambr%C3%B2s_era_carregada_amb_seg%C3%B3
-https://pccd.dites.cat/p/La_carretera_%C3%A9s_del_rei_i_qui_l%27agafa_%C3%A9s_per_ell
-https://pccd.dites.cat/p/La_Carroja%2C_l%27haca_roja
-https://pccd.dites.cat/p/La_carta_que_fa_perdre_%C3%A9s_la_pitjor_i_la_que_fa_guanyar_%C3%A9s_la_millor
-https://pccd.dites.cat/p/La_carta_que_no_tens_sempre_%C3%A9s_la_millor
-https://pccd.dites.cat/p/La_carta_verda
-https://pccd.dites.cat/p/La_carxofa_de_Silla
-https://pccd.dites.cat/p/La_casa_acabada_i_la_bossa_buidada_fan_l%27home_savi_i_prudent
-https://pccd.dites.cat/p/La_casa_ben_governada_pel_febrer_fa_escabetxada
-https://pccd.dites.cat/p/La_casa_ben_regida%2C_a_migdia_escudella_i_al_vespre_amanida
-https://pccd.dites.cat/p/La_casa_bruta_i_el_carrer_net
-https://pccd.dites.cat/p/La_casa_consistorial
-https://pccd.dites.cat/p/La_casa_de_l%27honrat_no_t%C3%A9_portes
-https://pccd.dites.cat/p/La_casa_del_com%C3%BA
-https://pccd.dites.cat/p/La_casa_del_llaurador%2C_com_m%C3%A9s_bruta_est%C3%A0%2C_millor
-https://pccd.dites.cat/p/La_casa_dels_altres_fa_de_mal_arranjar
-https://pccd.dites.cat/p/La_casa_en_qu%C3%A8_governa_la_muller_no_sol_anar_b%C3%A9
-https://pccd.dites.cat/p/La_casa_en_que_la_dona_hi_mana%2C_mal_acaba
-https://pccd.dites.cat/p/La_casa_%C3%A9s_de_la_dona_i_el_carrer_de_l%27home
-https://pccd.dites.cat/p/La_casa_%C3%A9s_la_gl%C3%B2ria
-https://pccd.dites.cat/p/La_casa_ho_pot_dur
-https://pccd.dites.cat/p/La_casa_i_el_galliner_cadasc%C3%BA_sap_com_se%27ls_t%C3%A9
-https://pccd.dites.cat/p/La_casa_mai_no_%C3%A9s_tra%C3%AFdora%2C_que_primer_s%27ensorra
-https://pccd.dites.cat/p/La_casa_o_el_llit_%C3%A9s_el_cel_d%27aquest_m%C3%B3n

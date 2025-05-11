@@ -22,7 +22,7 @@ final class PageRenderer
     private static string $metaDescription = '';
     private static string $metaImage = '';
     private static string $ogAudioUrl = '';
-    private static string $ogType = 'article';
+    private static OgType $ogType = OgType::ARTICLE;
 
     public function __construct()
     {
@@ -46,9 +46,7 @@ final class PageRenderer
             $meta_tags[] = '<meta name="robots" content="noindex">';
         }
 
-        if (self::$ogType !== '') {
-            $meta_tags[] = '<meta property="og:type" content="' . self::$ogType . '">';
-        }
+        $meta_tags[] = '<meta property="og:type" content="' . self::$ogType->value . '">';
 
         if (self::$metaDescription !== '') {
             $meta_tags[] = '<meta name="description" property="og:description" content="' . self::$metaDescription . '">';
@@ -100,9 +98,9 @@ final class PageRenderer
         self::$ogAudioUrl = $audio_url;
     }
 
-    public static function setOgType(string $type): void
+    public static function setOgType(OgType $og_type): void
     {
-        self::$ogType = $type;
+        self::$ogType = $og_type;
     }
 
     public static function render(): void
@@ -302,6 +300,29 @@ final readonly class Book
 
         return $html;
     }
+}
+
+/**
+ * Enum for Open Graph types.
+ */
+enum OgType: string
+{
+    case ARTICLE = 'article';
+    case WEBSITE = 'website';
+    case BOOK = 'book';
+}
+
+/**
+ * Enum for search modes.
+ */
+enum SearchMode: string
+{
+    case CONTAINS = 'conté';
+    case STARTS_WITH = 'comença';
+    case ENDS_WITH = 'acaba';
+    case EXACT = 'coincident';
+    case WHOLE_SENTENCE = 'whole_sentence';
+    case WILDCARD = 'wildcard';
 }
 
 /**
@@ -660,9 +681,9 @@ function get_idioma_iso_code(string $input_code): string
 /**
  * Remove special characters from a string, especially for matching paremiotipus.
  *
- * @param string $search_mode The search mode to normalize for. If provided, the string is processed for search.
+ * @param ?SearchMode $search_mode The search mode to normalize for. If provided, the string is processed for search.
  */
-function normalize_search(string $input_string, string $search_mode = ''): string
+function normalize_search(string $input_string, ?SearchMode $search_mode = null): string
 {
     // Remove useless characters in search that may affect syntax, or that are not useful.
     $string = str_replace(
@@ -678,13 +699,13 @@ function normalize_search(string $input_string, string $search_mode = ''): strin
     $string = preg_replace('/\s+/', ' ', $string);
     assert(is_string($string));
     // Fix characters for search.
-    if ($search_mode === 'whole_sentence') {
+    if ($search_mode === SearchMode::WHOLE_SENTENCE) {
         // Remove wildcards and unnecessary characters.
         $string = str_replace(['*', '?'], '', $string);
-    } elseif ($search_mode === 'wildcard') {
+    } elseif ($search_mode === SearchMode::WILDCARD) {
         // Replace wildcard characters.
         $string = str_replace(['*', '?'], ['.*', '.'], $string);
-    } elseif ($search_mode === 'conté') {
+    } elseif ($search_mode === SearchMode::CONTAINS) {
         // Remove characters that may affect FULL-TEXT search syntax.
         $string = str_replace(['*', '?'], '', $string);
 

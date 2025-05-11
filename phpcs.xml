@@ -2,7 +2,6 @@
 <ruleset name="PCCD" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
   <description>Based on PSR-12 with selected rules disabled, and many additional rules from Slevomat Coding Standard.</description>
   <arg name="extensions" value="php" />
-  <exclude-pattern>*.generated.php</exclude-pattern>
   <exclude-pattern>*/node_modules/*</exclude-pattern>
   <exclude-pattern>*/third_party/*</exclude-pattern>
   <exclude-pattern>*/tmp/*</exclude-pattern>

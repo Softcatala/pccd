@@ -11,22 +11,27 @@
  */
 
 const PAGER_DEFAULT = 10;
+const PAGER_ALL = 999999;
 
 /**
  * Returns the search mode.
  */
-function get_search_mode(): string
+function get_search_mode(): SearchMode
 {
-    $allowed_input_modes = ['comença', 'acaba', 'coincident'];
-    $search_mode = isset($_GET['mode']) && is_string($_GET['mode']) ? $_GET['mode'] : '';
-    $search_mode = in_array($search_mode, $allowed_input_modes, true) ? $search_mode : 'conté';
+    $input_search_mode = isset($_GET['mode']) && is_string($_GET['mode']) ? $_GET['mode'] : '';
+    $search_mode = SearchMode::tryFrom($input_search_mode) ?? SearchMode::CONTAINS;
 
     // Switch to internal search modes based on conditions.
-    if ($search_mode === 'conté' && isset($_GET['cerca']) && $_GET['cerca'] !== '' && is_string($_GET['cerca'])) {
+    if (
+        $search_mode === SearchMode::CONTAINS
+        && isset($_GET['cerca'])
+        && $_GET['cerca'] !== ''
+        && is_string($_GET['cerca'])
+    ) {
         $trimmed_search = mb_trim($_GET['cerca']);
         if (str_starts_with($trimmed_search, '"') && str_ends_with($trimmed_search, '"')) {
             // Simple custom search mode for whole sentence search.
-            $search_mode = 'whole_sentence';
+            $search_mode = SearchMode::WHOLE_SENTENCE;
         } elseif (
             !str_contains($trimmed_search, ' ')
             && (
@@ -35,7 +40,7 @@ function get_search_mode(): string
             )
         ) {
             // Simple custom search mode for using wildcards in single-word searches.
-            $search_mode = 'wildcard';
+            $search_mode = SearchMode::WILDCARD;
         }
     }
 
@@ -45,7 +50,7 @@ function get_search_mode(): string
 /**
  * Gets the search input normalized, for the SQL query.
  */
-function get_search_normalized(string $search_mode): string
+function get_search_normalized(SearchMode $search_mode): string
 {
     if (isset($_GET['cerca']) && $_GET['cerca'] !== '' && is_string($_GET['cerca'])) {
         $trimmed_search = mb_trim($_GET['cerca']);
@@ -71,13 +76,13 @@ function get_search_clean(): string
 }
 
 /**
- * Returns the pagination limit from query string. Defaults to 10.
+ * Returns the pagination limit from query string.
  */
-function get_search_page_limit(): int
+function get_search_pagination_limit(): int
 {
     if (isset($_GET['font'])) {
         // If a specific font is requested, return all entries.
-        return 999999;
+        return PAGER_ALL;
     }
 
     if (isset($_GET['mostra'])) {
@@ -86,7 +91,7 @@ function get_search_page_limit(): int
             return (int) $mostra;
         }
         if ($mostra === 'infinit') {
-            return 999999;
+            return PAGER_ALL;
         }
     }
 
@@ -127,7 +132,7 @@ function checkbox_checked(string $checkbox): bool
  */
 function get_search_pager_url(int $page_number): string
 {
-    $mostra = get_search_page_limit();
+    $mostra = get_search_pagination_limit();
     if (!isset($_GET['cerca']) || $_GET['cerca'] === '' || !is_string($_GET['cerca'])) {
         // Simplify links to the homepage as much as possible.
         if ($page_number === 1) {
@@ -253,11 +258,11 @@ function render_search_pager(int $page_number, int $page_count): string
 }
 
 /**
- * Returns whether the provided number needs an apostrophe in Catalan.
+ * Determines if the given number requires an apostrophe in Catalan.
  */
 function number_needs_apostrophe(int $num): bool
 {
-    // We do not have records bigger or equal than 11M, so this should be fine.
+    // A result count of 11M or biggger is not expected, so this logic is sufficient.
     return $num === 1 || $num === 11 || ($num >= 11000 && $num < 12000);
 }
 
@@ -288,7 +293,7 @@ function render_search_summary(int $offset, int $results_per_page, int $result_c
  *
  * @return array{0: string, 1: list<string>} Returns a tuple where the first element is the SQL where clause and the second element is the list of query arguments
  */
-function build_search_sql_query(string $search_query, string $search_mode): array
+function build_search_sql_query(string $search_query, SearchMode $search_mode): array
 {
     $checkboxes = [
         'equivalent' => '`EQUIVALENT`',
@@ -297,19 +302,19 @@ function build_search_sql_query(string $search_query, string $search_mode): arra
     ];
 
     $arguments = [$search_query];
-    if ($search_mode === 'whole_sentence' || $search_mode === 'wildcard') {
+    if ($search_mode === SearchMode::WHOLE_SENTENCE || $search_mode === SearchMode::WILDCARD) {
         $where_clause = " WHERE `PAREMIOTIPUS` REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
-    } elseif ($search_mode === 'comença') {
+    } elseif ($search_mode === SearchMode::STARTS_WITH) {
         $where_clause = " WHERE `PAREMIOTIPUS` LIKE CONCAT(?, '%')";
-    } elseif ($search_mode === 'acaba') {
+    } elseif ($search_mode === SearchMode::ENDS_WITH) {
         $where_clause = " WHERE `PAREMIOTIPUS` LIKE CONCAT('%', ?)";
-    } elseif ($search_mode === 'coincident') {
+    } elseif ($search_mode === SearchMode::EXACT) {
         $where_clause = ' WHERE `PAREMIOTIPUS` = ?';
     } elseif (isset($_GET['font']) && $_GET['font'] !== '' && is_string($_GET['font'])) {
         $arguments = [path_to_name($_GET['font'])];
         $where_clause = ' WHERE `ID_FONT` = ?';
     } else {
-        // 'conté' (default) search mode uses full-text.
+        // SearchMode::CONTAINS (default) search mode uses full-text.
         $columns = '`PAREMIOTIPUS`';
 
         foreach ($checkboxes as $checkbox => $column) {
@@ -323,16 +328,16 @@ function build_search_sql_query(string $search_query, string $search_mode): arra
 
     foreach ($checkboxes as $checkbox => $column) {
         if (isset($_GET[$checkbox])) {
-            if ($search_mode === 'whole_sentence' || $search_mode === 'wildcard') {
+            if ($search_mode === SearchMode::WHOLE_SENTENCE || $search_mode === SearchMode::WILDCARD) {
                 $where_clause .= " OR {$column} REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
                 $arguments[] = $search_query;
-            } elseif ($search_mode === 'comença') {
+            } elseif ($search_mode === SearchMode::STARTS_WITH) {
                 $where_clause .= " OR {$column} LIKE CONCAT(?, '%')";
                 $arguments[] = $search_query;
-            } elseif ($search_mode === 'acaba') {
+            } elseif ($search_mode === SearchMode::ENDS_WITH) {
                 $where_clause .= " OR {$column} LIKE CONCAT('%', ?)";
                 $arguments[] = $search_query;
-            } elseif ($search_mode === 'coincident') {
+            } elseif ($search_mode === SearchMode::EXACT) {
                 $where_clause .= " OR {$column} = ?";
                 $arguments[] = $search_query;
             }

@@ -8,7 +8,6 @@ variables:
 stages:
   - build
   - deploy
-  - update
 
 build:
   image: docker:latest
@@ -29,10 +28,6 @@ build:
     - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
     - docker push $DOCKER_IMAGE:$DATETAG
     - docker push $DOCKER_IMAGE:latest
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 .setup:
   before_script:
@@ -44,7 +39,7 @@ build:
 .php_lint_template:
   stage: build
   script:
-    - apt-get update && apt-get upgrade -y && apt-get install --no-install-recommends -y git unzip wget
+    - apk --no-cache --update add curl git unzip wget
     - curl -L https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions > /usr/local/bin/install-php-extensions
     - chmod +x /usr/local/bin/install-php-extensions
     - install-php-extensions gd intl pdo_mysql
@@ -64,13 +59,9 @@ php_lint:
   parallel:
     matrix:
       - PHP_VERSION: "8.4"
-  image: php:${PHP_VERSION}
+  image: php:${PHP_VERSION}-alpine
   before_script:
     - echo "Running in PHP version ${PHP_VERSION}"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 .npm_lint_template:
   stage: build
@@ -89,13 +80,10 @@ npm_lint:
     matrix:
       - NODE_VERSION: 20
       - NODE_VERSION: 22
-  image: node:${NODE_VERSION}
+      - NODE_VERSION: 24
+  image: node:${NODE_VERSION}-alpine
   before_script:
     - echo "Running in Node.js version ${NODE_VERSION}"
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 .check_code_template:
   extends: .setup
@@ -107,51 +95,10 @@ npm_lint:
 check_code_ubuntu:
   extends: .check_code_template
   image: ubuntu:devel
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "master"'
 
 check_code_debian:
   extends: .check_code_template
   image: debian:testing
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-      when: never
-    - if: '$CI_COMMIT_BRANCH == "master"'
-
-nightly_update:
-  extends: .setup
-  image: debian:testing
-  stage: update
-  script:
-    - npm run update
-    - |
-      if [ -n "$(git status --porcelain)" ]; then
-        git config --global user.email "ci@softcatala.org"
-        git config --global user.name "PCCD Bot"
-        git remote set-url origin https://oauth2:$GITLAB_TOKEN@gitlab.softcatala.org/pere/pccd.git
-        git branch -D nightly-update || true
-        git checkout -b nightly-update
-        git add .
-        HUSKY=0 git commit -m "chore(deps): update dependencies"
-        git push origin nightly-update --force
-        MR_EXISTS=$(curl --header "PRIVATE-TOKEN: $GITLAB_TOKEN" "https://gitlab.softcatala.org/api/v4/projects/14/merge_requests?state=opened&source_branch=nightly-update")
-        if [ "$MR_EXISTS" == "[]" ]; then
-          curl --request POST --header "PRIVATE-TOKEN: $GITLAB_TOKEN" \
-            --data "title=chore(deps): update dependencies&source_branch=nightly-update&target_branch=master" \
-            "https://gitlab.softcatala.org/api/v4/projects/14/merge_requests"
-        else
-          echo "Merge request already exists"
-        fi
-      else
-        echo "No changes to commit"
-        exit 0
-      fi
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "schedule"'
-    - when: manual
-  needs: []
 
 deploy:
   stage: deploy

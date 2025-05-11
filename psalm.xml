@@ -1,6 +1,6 @@
 <?xml version="1.0" ?>
 <psalm
-  autoloader="src/common.php"
+  allFunctionsGlobal="true"
   errorLevel="4"
   findUnusedPsalmSuppress="true"
   strictBinaryOperands="false"

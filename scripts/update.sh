@@ -22,16 +22,10 @@ cd "$(dirname "$0")/.."
 usage() {
     echo "Usage: ./$(basename "$0") COMMAND"
     echo ""
-    echo "    apc-gui"
-    echo "      Updates apc.php file to latest revision"
     echo "    composer"
     echo "      Updates all Composer dependencies to latest release, including non-direct dependencies, repositories and Composer itself"
     echo "    docker"
     echo "      Updates Docker images in Docker files and docker-compose.yml to next release"
-    echo "    oxipng"
-    echo "      Updates oxipng cargo package in Docker files"
-    echo "    opcache-gui"
-    echo "      Updates OPcache GUI to latest revision"
     echo "    npm"
     echo "      Updates all npm dev packages to latest release"
 }
@@ -80,25 +74,40 @@ export -f increment_version
 
 ##############################################################################
 # Tries to check for a newer version of a hub.docker.com image specified in a Docker file, and updates it.
+# If a reference tag is provided, also checks if the current version matches that tag.
 # Arguments:
 #   A Docker file path (e.g. ".docker/Dockerfile")
 #   An image name (e.g. "php")
+#   [Optional] A reference tag to compare with (e.g. "latest")
 ##############################################################################
 check_version_docker_file() {
     local -r DOCKER_FILE="$1"
     local -r IMAGE_NAME="$2"
-    local current_version current_image next_version next_image
+    local reference_tag=""
 
+    # Handle optional third argument (reference tag)
+    if [[ $# -ge 3 ]]; then
+        reference_tag="$3"
+    fi
+
+    local current_version current_image next_version next_image
     current_version=$(grep -F "${IMAGE_NAME}:" "${DOCKER_FILE}" | grep -E -o '[0-9\.]+')
     current_image=$(grep -F "${IMAGE_NAME}:" "${DOCKER_FILE}" | sed -e "s/FROM ${IMAGE_NAME}://")
     next_version=$(increment_version "${current_version}")
     next_image=$(echo "${current_image}" | sed -e "s/${current_version}/${next_version}/")
+
     if version_exists_dockerhub "${IMAGE_NAME}" "${next_image}"; then
         echo "${IMAGE_NAME} Docker image is out of date, updating to ${next_image}..."
         sed -i'.original' -e "s/${current_image}/${next_image}/" "${DOCKER_FILE}"
         rm "${DOCKER_FILE}.original"
+        current_image=${next_image}
     else
         echo "OK: ${IMAGE_NAME} Docker image is up to date in ${DOCKER_FILE}."
+    fi
+
+    # If reference tag is provided, check if the current version matches it
+    if [[ -n "${reference_tag}" ]]; then
+        compare_docker_tags "${IMAGE_NAME}" "${current_image}" "${reference_tag}"
     fi
 }
 
@@ -107,20 +116,33 @@ check_version_docker_file() {
 # Arguments:
 #   A Docker Compose file path (e.g. "docker-compose.yml")
 #   An image name (e.g. "mariadb")
+#   [Optional] A reference tag to compare with (e.g. "lts")
 ##############################################################################
 check_version_docker_compose() {
     local -r COMPOSE_FILE="$1"
     local -r IMAGE_NAME="$2"
-    local current_version next_version
+    local reference_tag=""
 
+    # Handle optional third argument (reference tag)
+    if [[ $# -ge 3 ]]; then
+        reference_tag="$3"
+    fi
+
+    local current_version next_version
     current_version=$(grep -F 'image:' "${COMPOSE_FILE}" | grep -F "${IMAGE_NAME}:" | grep -E -o '[0-9\.]+')
     next_version=$(increment_version "${current_version}")
     if version_exists_dockerhub "${IMAGE_NAME}" "${next_version}"; then
         echo "${IMAGE_NAME} Docker image is out of date, updating to ${next_version}..."
         sed -i'.original' -e "s/${current_version}/${next_version}/" "${COMPOSE_FILE}"
         rm "${COMPOSE_FILE}.original"
+        current_version=${next_version}
     else
         echo "OK: ${IMAGE_NAME} Docker image is up to date in ${COMPOSE_FILE}."
+    fi
+
+    # If reference tag is provided, check if the current version matches it
+    if [[ -n "${reference_tag}" ]]; then
+        compare_docker_tags "${IMAGE_NAME}" "${current_version}" "${reference_tag}"
     fi
 }
 
@@ -131,11 +153,19 @@ check_version_docker_compose() {
 #   A Dockerfile path (e.g., "./Dockerfile")
 #   An image name (e.g., "php")
 #   The ARG name used to specify the image tag (e.g., "PHP_IMAGE_TAG")
+#   [Optional] A reference tag to compare with (e.g. "8-apache", defaults to empty)
 ##############################################################################
 update_dockerfile_arg_image_version() {
     local -r DOCKERFILE="$1"
     local -r IMAGE_NAME="$2"
     local -r ARG_NAME="$3"
+    local reference_tag=""
+
+    # Handle optional fourth argument (reference tag)
+    if [[ $# -ge 4 ]]; then
+        reference_tag="$4"
+    fi
+
     local current_tag numeric_version suffix next_numeric_version next_tag updated_line
 
     # Extract the current image tag from the ARG directive
@@ -168,11 +198,63 @@ update_dockerfile_arg_image_version() {
         updated_line="ARG ${ARG_NAME}=${next_tag}"
         sed -i'.original' -E "s/^ARG ${ARG_NAME}=.*/${updated_line}/" "${DOCKERFILE}"
         rm "${DOCKERFILE}.original"
+        current_tag=${next_tag}
     else
         echo "OK: ${IMAGE_NAME} Docker image is up to date in ${DOCKERFILE}."
     fi
+
+    # If reference tag is provided, check if the current tag matches it
+    if [[ -n "${reference_tag}" ]]; then
+        compare_docker_tags "${IMAGE_NAME}" "${current_tag}" "${reference_tag}"
+    fi
 }
 export -f update_dockerfile_arg_image_version
+
+##############################################################################
+# Compares two Docker Hub tags of the same image to check if they are identical.
+# Arguments:
+#   An image name (e.g. "mariadb")
+#   First tag (e.g. "11.4.5-noble")
+#   Second tag (e.g. "lts")
+# Returns:
+#   0 if the tags match (same digest), 1 otherwise.
+##############################################################################
+compare_docker_tags() {
+    local -r IMAGE_NAME="$1"
+    local -r TAG1="$2"
+    local -r TAG2="$3"
+
+    # Use simple Docker Hub API v2 endpoints
+    local tag1_info tag2_info
+    tag1_info=$(curl -s "https://hub.docker.com/v2/repositories/library/${IMAGE_NAME}/tags/${TAG1}")
+    tag2_info=$(curl -s "https://hub.docker.com/v2/repositories/library/${IMAGE_NAME}/tags/${TAG2}")
+
+    # Check if we got valid responses
+    if [[ -z "${tag1_info}" || "${tag1_info}" == *"\"detail\":\"Not found.\""* ]]; then
+        echo "Error: Tag ${TAG1} not found for image ${IMAGE_NAME}" >&2
+        return 2
+    fi
+
+    if [[ -z "${tag2_info}" || "${tag2_info}" == *"\"detail\":\"Not found.\""* ]]; then
+        echo "Error: Tag ${TAG2} not found for image ${IMAGE_NAME}" >&2
+        return 2
+    fi
+
+    # Extract the digests using grep and cut for simple parsing without jq
+    local digest1 digest2
+    digest1=$(echo "${tag1_info}" | grep -o '"digest":"[^"]*' | head -1 | cut -d'"' -f4)
+    digest2=$(echo "${tag2_info}" | grep -o '"digest":"[^"]*' | head -1 | cut -d'"' -f4)
+
+    # Compare the digests
+    if [[ "${digest1}" == "${digest2}" ]]; then
+        echo "OK: ${IMAGE_NAME}:${TAG1} and ${IMAGE_NAME}:${TAG2} refer to the same image."
+        return 0
+    else
+        echo "❌ Tags don't match. ${IMAGE_NAME}:${TAG1} and ${IMAGE_NAME}:${TAG2} refer to different images."
+        return 1
+    fi
+}
+export -f compare_docker_tags
 
 ##############################################################################
 # Installs newest versions of Composer packages. See https://stackoverflow.com/a/74760024/1391963
@@ -236,40 +318,6 @@ update_npm() {
     npm ci
 }
 
-##############################################################################
-# Updates a cargo package to the latest version in a Dockerfile.
-# Arguments:
-#   A Docker file path (e.g. "Dockerfile")
-#   A cargo package name (e.g. "oxipng")
-##############################################################################
-update_cargo_dockerfile() {
-    local -r DOCKER_FILE="$1"
-    local -r PACKAGE_NAME="$2"
-
-    echo "Updating ${DOCKER_FILE} to use latest ${PACKAGE_NAME}..."
-
-    # Fetch the latest version from crates.io
-    local latest_version
-    latest_version=$(curl --silent "https://crates.io/api/v1/crates/${PACKAGE_NAME}" | jq -r '.crate.max_version')
-
-    if [[ -z ${latest_version} ]]; then
-        echo "Error: Could not fetch the latest version of ${PACKAGE_NAME}."
-        exit 1
-    fi
-
-    if grep -q -r -F -m 1 "${latest_version}" "${DOCKER_FILE}"; then
-        echo "Latest ${PACKAGE_NAME} version is already set (${latest_version})."
-    else
-        echo "Updating ${PACKAGE_NAME} version to ${latest_version}."
-        sed -i'.original' -e "s/RUN cargo install ${PACKAGE_NAME} --version .*/RUN cargo install ${PACKAGE_NAME} --version ${latest_version}/" "${DOCKER_FILE}" || {
-            echo "Failed to update ${PACKAGE_NAME} version in ${DOCKER_FILE}."
-            exit 1
-        }
-        echo "${PACKAGE_NAME} version updated in ${DOCKER_FILE}."
-        rm "${DOCKER_FILE}.original"
-    fi
-}
-
 if [[ $# != 1 ]]; then
     usage
     exit 1
@@ -285,27 +333,12 @@ if [[ $1 == "composer" ]]; then
     exit 0
 fi
 
-if [[ $1 == "apc-gui" ]]; then
-    curl --silent --fail https://raw.githubusercontent.com/krakjoe/apcu/master/apc.php > src/third_party/apc.php
-    exit 0
-fi
-
-if [[ $1 == "opcache-gui" ]]; then
-    curl --silent --fail https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php > src/third_party/opcache-gui.php
-    exit 0
-fi
-
 if [[ $1 == "docker" ]]; then
-    update_dockerfile_arg_image_version .docker/debian.dev.Dockerfile php PHP_IMAGE_TAG
-    check_version_docker_file .docker/alpine.dev.Dockerfile alpine
-    check_version_docker_file .docker/web-alpine.prod.Dockerfile alpine
-    check_version_docker_file .docker/sql.prod.Dockerfile mariadb
-    check_version_docker_compose docker-compose.yml mariadb
-    exit 0
-fi
-
-if [[ $1 == "oxipng" ]]; then
-    update_cargo_dockerfile .docker/ubuntu.build.Dockerfile oxipng
+    update_dockerfile_arg_image_version .docker/debian.dev.Dockerfile php PHP_IMAGE_TAG apache
+    check_version_docker_file .docker/alpine.dev.Dockerfile alpine latest
+    check_version_docker_file .docker/web-alpine.prod.Dockerfile alpine latest
+    check_version_docker_file .docker/sql.prod.Dockerfile mariadb lts
+    check_version_docker_compose docker-compose.yml mariadb lts
     exit 0
 fi
 

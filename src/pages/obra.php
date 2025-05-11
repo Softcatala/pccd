@@ -35,7 +35,7 @@ PageRenderer::setTitle(htmlspecialchars($obra->Títol));
 
 $is_book = $obra->ISBN !== '';
 if ($is_book) {
-    PageRenderer::setOgType('book');
+    PageRenderer::setOgType(OgType::BOOK);
     $output = '<div class="row" vocab="http://schema.org/" typeof="Book">';
 } else {
     $output = '<div class="row" vocab="http://schema.org/" typeof="Thing">';

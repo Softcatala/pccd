@@ -87,9 +87,6 @@ audit_url() {
             elif [[ "${category}" == "seo" && "${score_int}" -eq 92 && "${URL}" == ${BASE_URL}/obra/* ]]; then
                 # Obra pages may not have a meta description.
                 continue
-            elif [[ "${category}" == "[\"best-practices\"]" && "${score_int}" -eq 96 && "${URL}" == "${BASE_URL}/" ]]; then
-                # TODO: see https://github.com/GoogleChrome/lighthouse/issues/16114.
-                continue
             elif [[ "${DEVICE}" == "small-mobile" && "${score_int}" -eq 99 && "${URL}" == "${BASE_URL}/" ]]; then
                 # Ingore this.
                 continue

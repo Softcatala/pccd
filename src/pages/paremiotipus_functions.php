@@ -68,10 +68,8 @@ function get_paremiotipus_by_modisme(string $modisme): string
     $stmt->execute([':modisme' => $modisme]);
 
     $paremiotipus = $stmt->fetchColumn();
-    $paremiotipus = $paremiotipus !== false ? $paremiotipus : '';
-    assert(is_string($paremiotipus));
 
-    return $paremiotipus;
+    return is_string($paremiotipus) ? $paremiotipus : '';
 }
 
 /**
@@ -127,7 +125,7 @@ function get_paremiotipus_best_match(string $input_modisme): string
     $modisme = trim($modisme);
 
     $paremiotipus = false;
-    $modisme = normalize_search($modisme, 'conté');
+    $modisme = normalize_search($modisme, SearchMode::CONTAINS);
     if ($modisme !== '') {
         $stmt = get_db()->prepare('SELECT
             `PAREMIOTIPUS`

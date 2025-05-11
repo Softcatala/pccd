@@ -1,4 +1,4 @@
-ARG PHP_IMAGE_TAG=8.4.6-apache-bookworm
+ARG PHP_IMAGE_TAG=8.4.7-apache-bookworm
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
