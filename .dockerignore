@@ -1,0 +1,29 @@
+# Developer files
+.git
+.github
+.husky
+.idea
+.vscode
+
+# Database, provided zips and original images
+*.accdb
+*.zip
+src/images
+
+# Local dependencies and scripts
+*.phar
+node_modules
+scripts/SentenceSimilarityGroup
+# Composer is used to add git repositories as dev dependencies
+vendor
+# php-spx needs to be available
+!vendor/noisebynorthwest/php-spx
+
+# Temporary files
+.php-cs-fixer.cache
+.phpunit.result.cache
+tmp/*.html
+tmp/*.json
+tmp/*.tar
+tmp/github
+test-results

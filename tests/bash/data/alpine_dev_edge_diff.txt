@@ -1,0 +1,9 @@
+-FROM alpine:3.22
++FROM alpine:edge
+-LABEL description="Alpine-based image with Apache and mod_php that mimics production."
++LABEL description="Alpine edge-based image, with PHP 8.4."
++# Enable the testing repository
+-RUN apk --no-cache --update add \
++RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
++    apk --no-cache --update add \
+

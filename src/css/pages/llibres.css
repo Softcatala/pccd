@@ -1,0 +1,24 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+.books {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 30px 0;
+    align-items: center;
+    margin-top: 1.5rem;
+    margin-left: -1.5rem;
+    text-align: center;
+}
+
+.books img {
+    width: auto;
+    max-height: 160px;
+    border: 1px solid #dee2e6;
+}

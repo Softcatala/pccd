@@ -1,0 +1,19 @@
+# Generated and optimized files
+*.min.*
+*.sql
+*.sublime-project
+*.svg
+/tmp
+composer.lock
+package-lock.json
+
+# HTML pages
+/docroot/*.html
+
+# Binary files
+*.jpg
+*.png
+*.avif
+*.webp
+*.gif
+*.mp3
