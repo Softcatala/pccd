@@ -1,0 +1,90 @@
+{
+  "name": "dites.cat/pccd",
+  "description": "Paremiologia catalana comparada digital",
+  "license": "AGPL-3.0-or-later",
+  "type": "project",
+  "keywords": [
+    "catalan",
+    "català",
+    "common voice",
+    "diccionari",
+    "dites populars",
+    "frases fetes",
+    "idioms",
+    "locucions",
+    "online dictionary",
+    "paremiologia",
+    "paremiotipus",
+    "parèmies",
+    "proverbs",
+    "proverbis",
+    "refranys"
+  ],
+  "readme": "README.md",
+  "authors": [
+    {
+      "name": "Pere Orga Esteve",
+      "email": "pere@orga.cat",
+      "homepage": "https://orga.cat",
+      "role": "Developer"
+    }
+  ],
+  "homepage": "https://pccd.dites.cat",
+  "require": {
+    "php": ">=8.4",
+    "ext-mbstring": "*"
+  },
+  "require-dev": {
+    "ext-curl": "*",
+    "ext-intl": "*",
+    "ergebnis/composer-normalize": "^2.47",
+    "guzzlehttp/guzzle": "^7.9",
+    "pereorga/phpstan-rules": "^1.0",
+    "php-cs-fixer/shim": "^3.75",
+    "phpstan/phpstan": "^2.1",
+    "phpstan/phpstan-deprecation-rules": "^2.0",
+    "phpstan/phpstan-strict-rules": "^2.0",
+    "phpunit/phpunit": "^12.2",
+    "psalm/phar": "^6.12",
+    "rector/rector": "^2.0",
+    "slevomat/coding-standard": "^8.19",
+    "squizlabs/php_codesniffer": "^3.13"
+  },
+  "suggest": {
+    "ext-apcu": "Optional: used for caching SQL queries, and for the search stats. Strongly encouraged in the web server",
+    "ext-curl": "Dev: used for some offline reports generated after install",
+    "ext-gd": "Required in the web server for generating OG images, and optionally by apc.php in admin pages",
+    "ext-intl": "Dev: used in a few offline reports",
+    "ext-pdo-mysql": "Required in the web server for connecting to the database",
+    "ext-session": "Required in the web server for the admin page",
+    "ext-zend-opcache": "Optional: encouraged in the web server",
+    "guzzlehttp/guzzle": "Dev, optional: used by the (currently unused) sentence-tagger-openai script"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "ergebnis/composer-normalize": true
+    },
+    "sort-packages": true
+  },
+  "scripts": {
+    "post-update-cmd": [
+      "curl -s https://raw.githubusercontent.com/krakjoe/apcu/master/apc.php > src/third_party/apc.php",
+      "curl -s https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php > src/third_party/opcache-gui.php"
+    ],
+    "composer-normalize": "./composer.phar normalize --no-interaction --ansi",
+    "composer-normalize-lint": "./composer.phar normalize --dry-run --no-interaction --ansi",
+    "php-cs-fixer": "vendor/bin/php-cs-fixer.phar fix --diff --no-interaction --ansi --show-progress=none",
+    "php-cs-fixer-lint": "vendor/bin/php-cs-fixer.phar fix --dry-run --verbose --stop-on-violation --no-interaction --ansi --show-progress=none",
+    "php-l": "php -l *.php docroot/*.php docroot/**/*.php scripts/*.php scripts/**/*.php src/*.php src/**/*.php tests/**/*.php",
+    "phpcbf": "vendor/bin/phpcbf --standard=phpcs.xml .",
+    "phpcs": "vendor/bin/phpcs -s --standard=phpcs.xml .",
+    "phpstan": "vendor/bin/phpstan analyse --memory-limit=256M --no-progress",
+    "phpunit": "vendor/bin/phpunit --fail-on-warning --display-warnings",
+    "psalm": "vendor/bin/psalm.phar --threads=1 --no-cache --no-progress",
+    "rector": "vendor/bin/rector process --no-progress-bar --ansi",
+    "rector-lint": "vendor/bin/rector process --dry-run --no-progress-bar --ansi"
+  }
+}

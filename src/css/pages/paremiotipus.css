@@ -1,0 +1,202 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+h2 {
+    font-size: 1.125rem;
+}
+
+#share {
+    min-width: 110px;
+}
+
+#share svg {
+    width: 0.875rem;
+    vertical-align: top;
+}
+
+.share-wrapper {
+    position: relative;
+    margin-left: auto;
+}
+
+.share-icons {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    min-width: 110px;
+    padding: 0.5rem;
+    font-size: 0.875rem;
+    background: #fff;
+    border-top: 1px solid #dee2e6;
+}
+
+.share-icon {
+    display: flex;
+    padding: 0.25rem;
+    color: #000;
+}
+
+.share-icon:hover {
+    text-decoration: none;
+}
+
+.share-icon[href]:hover {
+    color: #36c;
+}
+
+.share-icon.facebook:hover {
+    color: #0866ff;
+}
+
+.share-icon.twitter:hover {
+    color: #1da1f2;
+}
+
+.share-icon.whatsapp:hover {
+    color: #00d757;
+}
+
+.share-icon.telegram:hover {
+    color: #3290ec;
+}
+
+.share-image {
+    width: 2.5rem;
+    padding: 0.25rem;
+    margin: 1px;
+}
+
+.share-title {
+    margin: auto;
+    margin-left: 0;
+}
+
+.close {
+    float: right;
+    width: 2rem;
+    margin: 0 0 1rem 1rem;
+    cursor: pointer;
+}
+
+.description {
+    margin-bottom: 0.5rem;
+}
+
+.shortcuts {
+    display: flex;
+    margin-top: -0.25rem;
+}
+
+.shortcuts:has(#toggle-all) {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.shortcuts button {
+    padding: 5px;
+    font-size: 0.875rem;
+    line-height: 1;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 0.25rem;
+}
+
+.shortcuts > * {
+    margin-bottom: 0.5rem;
+}
+
+.shortcuts button:hover {
+    outline: 1px solid #e3e3e3;
+}
+
+.shortcuts button:active {
+    outline: 1px solid #aaa;
+}
+
+.entry {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    overflow-wrap: anywhere;
+    border: 1px solid #dee2e6;
+}
+
+.entry div {
+    padding: 0.25rem;
+}
+
+.entry .footer {
+    background: #f9f9f9;
+}
+
+details,
+.summary {
+    margin-bottom: 30px;
+}
+
+summary,
+.summary {
+    font-size: 0.875rem;
+}
+
+summary {
+    cursor: pointer;
+}
+
+.bloc-image {
+    padding: 7px;
+}
+
+figcaption {
+    margin-top: 7px;
+    font-size: 0.875rem;
+    text-align: left;
+}
+
+a.audio {
+    display: inline-block;
+    padding: 0.5rem;
+    opacity: 0.6;
+}
+
+a.audio:hover {
+    opacity: 1;
+    filter: brightness(75%);
+}
+
+/* Medium devices */
+@media (min-width: 576px) {
+    .share-wrapper:has(.share-icons:not([hidden])) button {
+        border-radius: 0.25rem 0.25rem 0 0;
+    }
+
+    .share-icons {
+        position: absolute;
+        right: auto;
+        bottom: auto;
+        left: auto;
+        padding: 0;
+        border: 1px solid #dee2e6;
+        border-top: 0;
+        border-radius: 0 0 0.25rem 0.25rem;
+    }
+
+    .share-icon {
+        padding: 0;
+    }
+
+    .share-image {
+        width: 2rem;
+    }
+
+    .close {
+        display: none;
+    }
+}

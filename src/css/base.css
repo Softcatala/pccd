@@ -1,0 +1,388 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+*,
+::after,
+::before {
+    box-sizing: border-box;
+}
+
+::selection {
+    color: #fff;
+    background: #3191ff;
+}
+
+/* Show only outline when needed for accessibilty */
+:focus:not(:focus-visible) {
+    outline: 0;
+}
+
+/* See https://stackoverflow.com/a/45675761/1391963 */
+/* stylelint-disable declaration-no-important */
+[hidden] {
+    display: none !important;
+}
+/* stylelint-enable declaration-no-important */
+
+/* Remove annoying scrolling effect on iOS. See https://stackoverflow.com/a/47818418/1391963 and
+    https://stackoverflow.com/a/76012628/1391963 */
+@supports (-webkit-touch-callout: none) {
+    html {
+        overscroll-behavior-y: none;
+    }
+}
+
+/* stylelint-disable property-no-vendor-prefix */
+body {
+    font:
+        1rem/1.5 system-ui,
+        sans-serif;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-text-size-adjust: 100%;
+}
+/* stylelint-enable property-no-vendor-prefix */
+
+body,
+figure,
+ul {
+    margin: 0;
+}
+
+p {
+    margin: 0 0 1rem;
+}
+
+header nav {
+    display: flex;
+    font-size: 4vw;
+}
+
+a {
+    color: #551a8b;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+a.external {
+    padding-right: 1em;
+    background: url("/img/external.svg") no-repeat center right / 0.857em;
+}
+
+.bloc-credits a {
+    font-size: 1.5rem;
+}
+
+/* stylelint-disable no-descending-specificity */
+header nav a {
+    margin: 0.5em 1em 0.5em 0;
+    color: #fff;
+}
+
+header nav a:last-child {
+    margin-right: 0;
+}
+/* stylelint-enable no-descending-specificity */
+
+.brand {
+    display: block;
+    margin: 0.5rem 0;
+    font-size: 4.5vw;
+    color: #fff;
+    touch-action: manipulation;
+}
+
+.brand:hover,
+header nav a:hover {
+    color: #dee2e7;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    vertical-align: middle;
+}
+
+svg {
+    overflow: hidden;
+    vertical-align: middle;
+}
+
+input {
+    overflow: visible;
+}
+
+button {
+    touch-action: manipulation;
+    cursor: pointer;
+}
+
+input,
+button,
+select {
+    font-family: inherit;
+}
+
+button::-moz-focus-inner {
+    padding: 0;
+    border-style: none;
+}
+
+h1,
+h2,
+h3 {
+    margin: 0 0 0.5em;
+    font-weight: 500;
+    line-height: 1.2;
+}
+
+h1 {
+    font-size: 1.5rem;
+}
+
+h2 {
+    font-size: 1.25rem;
+}
+
+h3 {
+    font-size: 1rem;
+}
+
+main {
+    margin-top: 30px;
+}
+
+footer {
+    padding: 30px 15px 20px;
+    margin-top: 30px;
+    font-size: 0.875rem;
+    text-align: center;
+    text-wrap: balance;
+    border-top: 1px solid #dee2e6;
+}
+
+main,
+header > div {
+    max-width: 1140px;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+header > div {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+.row > * {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+header {
+    padding: 0.5rem 0;
+    background: #2b5797;
+}
+
+.text-balance {
+    text-wrap: balance;
+}
+
+.text-break {
+    overflow-wrap: anywhere;
+}
+
+.text-monospace {
+    padding: 0 0.25rem 0.2rem;
+    font-family: monospace;
+    background: #eff1f2;
+    border-radius: 0.25rem;
+}
+
+.text-nowrap {
+    white-space: nowrap;
+}
+
+.bloc {
+    max-width: 400px;
+    padding: 10px;
+    margin: 0 auto 30px;
+    overflow: hidden;
+    text-align: center;
+    background: #f9f9f9;
+    border: 1px solid #dee2e6;
+}
+
+.bloc p {
+    margin: 10px 0;
+}
+
+.bloc .footer {
+    font-size: 0.875rem;
+    font-style: italic;
+    text-align: right;
+}
+
+.bloc-white {
+    background: #fff;
+    border: 0;
+}
+
+.bloc:first-child {
+    margin-top: 30px;
+}
+
+.bloc.bloc-credits {
+    margin-top: 45px;
+}
+
+#cookie-banner {
+    position: fixed;
+    bottom: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    background: #3c4043;
+}
+
+#cookie-banner button {
+    padding: 1.5rem;
+    font-size: 1rem;
+    color: #eeff41;
+    text-transform: uppercase;
+    background: transparent;
+    border: 0;
+}
+
+#cookie-banner p {
+    padding: 1.5rem 1.5rem 0;
+    margin: 0;
+    font-size: 0.875rem;
+    color: #fff;
+}
+
+/* Very (not extreme) small devices */
+@media (min-width: 330px) {
+    header nav {
+        font-size: 0.875rem;
+    }
+
+    .brand {
+        font-size: 1rem;
+    }
+}
+
+/* Small devices */
+@media (min-width: 400px) {
+    header nav {
+        font-size: 1rem;
+    }
+
+    header nav a {
+        margin-right: 1.25rem;
+    }
+
+    header nav a:last-child {
+        margin-right: 0;
+    }
+
+    .brand {
+        font-size: 1.25rem;
+    }
+}
+
+/* Medium devices */
+@media (min-width: 576px) {
+    .brand {
+        margin-right: 1rem;
+    }
+
+    #cookie-banner {
+        margin: 15px;
+    }
+}
+
+/* Large devices */
+@media (min-width: 768px) {
+    aside {
+        flex: 0 0 15rem;
+    }
+
+    article {
+        flex: 1;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+    }
+
+    h2 {
+        font-size: 1.5rem;
+    }
+
+    .bloc-white {
+        border: 1px solid #dee2e6;
+    }
+
+    .bloc:first-child,
+    .bloc.bloc-credits {
+        margin-top: 0;
+    }
+}
+
+/* XL devices */
+@media (min-width: 992px) {
+    aside {
+        flex: 0 0 18rem;
+    }
+
+    main,
+    header > div {
+        padding-right: 30px;
+        padding-left: 30px;
+    }
+
+    .brand {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
+
+@page {
+    size: a4 portrait;
+}
+
+@media print {
+    footer,
+    img,
+    .bloc,
+    .entry {
+        page-break-inside: avoid;
+    }
+
+    h2,
+    h3,
+    summary {
+        page-break-after: avoid;
+    }
+}
