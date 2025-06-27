@@ -1,0 +1,252 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+h1 {
+    display: none;
+}
+
+main {
+    margin-top: 20px;
+}
+
+select,
+input[type="search"] {
+    height: 2.5rem;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    color: #495057;
+    background: #fff;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+}
+
+select {
+    width: 100%;
+    padding-right: 2rem;
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-appearance: none;
+    /* stylelint-enable property-no-vendor-prefix */
+    appearance: none;
+    background: #fff
+        url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDk1MDU3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0ibTIgNSA2IDYgNi02Ii8+PC9zdmc+")
+        no-repeat right 0.75rem center / 0.75rem;
+}
+
+select:focus {
+    outline: 2px solid #cbd5e7;
+}
+
+.pager select {
+    width: auto;
+    margin-left: auto;
+}
+
+label {
+    display: inline-block;
+}
+
+form[role="search"] ol {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+form[role="search"] ol li {
+    border: 1px solid #dee2e6;
+    border-top: none;
+}
+
+form[role="search"] ol li:first-child {
+    border-top: 1px solid #dee2e6;
+}
+
+form[role="search"] ol li:nth-of-type(odd) {
+    background: #f9f9f9;
+}
+
+form[role="search"] ol a {
+    display: block;
+    padding: 0.75rem;
+}
+
+input[type="search"] {
+    flex: 1 1 auto;
+    min-width: 0;
+    /* stylelint-disable property-no-vendor-prefix */
+    -webkit-appearance: textfield;
+    /* stylelint-enable property-no-vendor-prefix */
+    appearance: textfield;
+    background-clip: padding-box;
+    border-right: none;
+    border-radius: 0.25rem 0 0 0.25rem;
+}
+
+input[type="search"]:focus {
+    padding-left: 13px;
+    outline: 3px solid #cbd5e7;
+    border: 0;
+    clip-path: inset(-3px 0 -3px -3px);
+}
+
+.input,
+.options {
+    flex-grow: 1;
+    flex-basis: 0;
+}
+
+.input {
+    display: flex;
+    order: 1;
+}
+
+.mode {
+    order: 2;
+}
+
+.label {
+    display: none;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.options div {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.75rem;
+}
+
+.options div:last-child {
+    margin-right: 0;
+}
+
+.options input {
+    margin: 0 5px 0 0;
+}
+
+.filters .row {
+    margin-right: -5px;
+    margin-left: -5px;
+}
+
+.filters .row > * {
+    padding-right: 5px;
+    padding-left: 5px;
+    margin-bottom: 1rem;
+}
+
+.input button {
+    display: inline-block;
+    padding: 0 0.75rem;
+    font-size: 1rem;
+    color: #fff;
+    text-align: center;
+    background: #2b5797;
+    border: 1px solid #2b5797;
+    border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.input button:focus {
+    outline: 3px solid #cbd5e7;
+}
+
+input[type="search"]:focus + button {
+    box-shadow: 0 0 0 3px #cbd5e7;
+    clip-path: inset(-3px -3px -3px 0);
+}
+
+.input button svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.pager {
+    display: flex;
+    margin: 1.5rem 0 1rem;
+}
+
+.pager ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+}
+
+.pager ul svg {
+    width: 1rem;
+    height: 1rem;
+    vertical-align: -2px;
+}
+
+/* stylelint-disable no-descending-specificity */
+.pager ul a,
+.pager ul strong {
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+}
+
+.pager ul a {
+    display: none;
+}
+/* stylelint-enable no-descending-specificity */
+
+.pager ul strong,
+.pager ul a[rel="prev"],
+.pager ul a[rel="next"] {
+    display: block;
+}
+
+.pager ul a:focus {
+    outline: 3px solid #cbd5e7;
+}
+
+.pager ul a[rel="prev"] {
+    padding-left: 0;
+}
+
+.pager ul a[rel="next"] {
+    padding-right: 0;
+}
+
+.bloc-books img {
+    padding: 10px 30px;
+}
+
+/* Medium devices */
+@media (min-width: 576px) {
+    .pager ul a,
+    .label {
+        display: block;
+    }
+
+    .mode,
+    .label {
+        flex: 0 0 25%;
+        max-width: 25%;
+    }
+
+    .mode {
+        order: 1;
+    }
+
+    .input {
+        order: 2;
+    }
+}
+
+/* Large devices */
+@media (min-width: 768px) {
+    main {
+        margin-top: 30px;
+    }
+
+    .filters {
+        margin-bottom: 1rem;
+    }
+}

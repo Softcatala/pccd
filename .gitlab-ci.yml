@@ -1,0 +1,133 @@
+include:
+  - project: "docker/process-webhooks"
+    file: "/gitlab/deploy.yml"
+
+variables:
+  PROJECT_TO_BE_DEPLOYED: "docker/pccd"
+
+stages:
+  - build
+  - deploy
+
+build:
+  image: docker:latest
+  services:
+    - docker:dind
+  before_script:
+    - export DATETAG=$(date +%Y%m%d-%H%M%S)
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  stage: build
+  script:
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-web
+    - |
+      docker build -f .docker/web-alpine.prod.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_DB=$MYSQL_DB \
+        --build-arg ARG_MYSQL_USER=$MYSQL_USER \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        --build-arg ARG_WEB_ADMIN_PWD=$WEB_ADMIN_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-sql
+    - |
+      docker build -f .docker/sql.prod.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_ROOT_PWD=$MYSQL_ROOT_PWD \
+        --build-arg ARG_MYSQL_DB=$MYSQL_DB \
+        --build-arg ARG_MYSQL_USER=$MYSQL_USER \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+
+.setup:
+  before_script:
+    - export PHP_CS_FIXER_IGNORE_ENV=1
+    - apt-get update && xargs apt-get install --no-install-recommends -y < apt_packages.txt
+    - npm ci --ignore-scripts
+    - ./composer.phar install --no-interaction
+
+.php_lint_template:
+  stage: build
+  script:
+    - apk --no-cache --update add curl git unzip wget
+    - curl -L https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions > /usr/local/bin/install-php-extensions
+    - chmod +x /usr/local/bin/install-php-extensions
+    - install-php-extensions gd intl pdo_mysql
+    - php ./composer.phar install --no-interaction
+    - php ./composer.phar run php-l
+    - php ./composer.phar run composer-normalize-lint
+    - php ./composer.phar run phpcs
+    - PHP_CS_FIXER_IGNORE_ENV=1 php ./composer.phar run php-cs-fixer-lint
+    - php ./composer.phar run phpstan
+    - php ./composer.phar run rector-lint
+    - php ./composer.phar run psalm
+    - php ./composer.phar run phpunit
+  allow_failure: true
+
+php_lint:
+  extends: .php_lint_template
+  parallel:
+    matrix:
+      - PHP_VERSION: "8.4"
+  image: php:${PHP_VERSION}-alpine
+  before_script:
+    - echo "Running in PHP version ${PHP_VERSION}"
+
+.npm_lint_template:
+  stage: build
+  script:
+    - npm ci --ignore-scripts
+    - npm run lint:eslint
+    - npm run lint:ls
+    - npm run lint:markdown
+    - npm run lint:stylelint
+    - npm run lint:prettier
+  allow_failure: true
+
+npm_lint:
+  extends: .npm_lint_template
+  parallel:
+    matrix:
+      - NODE_VERSION: 20
+      - NODE_VERSION: 22
+      - NODE_VERSION: 24
+  image: node:${NODE_VERSION}-alpine
+  before_script:
+    - echo "Running in Node.js version ${NODE_VERSION}"
+
+.check_code_template:
+  extends: .setup
+  stage: build
+  script:
+    - npm run check:code
+  allow_failure: true
+
+check_code_ubuntu:
+  extends: .check_code_template
+  image: ubuntu:rolling
+
+check_code_debian:
+  extends: .check_code_template
+  image: debian:testing
+
+deploy:
+  stage: deploy
+  when: manual
+  extends:
+    - .default-deploy
+
+reset:
+  stage: deploy
+  when: manual
+  extends:
+    - .reset

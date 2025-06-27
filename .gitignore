@@ -1,0 +1,37 @@
+# Unnecessary developer files
+*.sublime-workspace
+.DS_Store
+.idea/
+.vscode/
+sftp-config.json
+
+# The original database file (MS Access) and provided zipped files
+/*.accdb
+/*.zip
+
+# Unnecessary provided files
+.picasa.ini
+
+# Local settings files
+.env
+db_settings.local.php
+*.override.yml
+
+# Local dependencies
+*Brewfile.lock.json
+node_modules/
+vendor/
+
+# Temporary files
+*.generated.sh
+*.report.html
+.php-cs-fixer.cache
+.phpunit.result.cache
+/test-results/
+/tmp/*.html
+/tmp/og/
+/tmp/*.json
+!/tmp/assets-sizes.json
+/tmp/cv/
+/tmp/github/
+/tmp/test_tmp_*.txt

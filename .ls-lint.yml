@@ -1,0 +1,25 @@
+ls:
+  .css: kebab-case
+  .js: kebab-case
+  .json: kebab-case
+  .php: snake_case
+  .sh: snake_case
+  .sql: snake_case
+  .svg: kebab-case
+  .txt: snake_case | SCREAMING_SNAKE_CASE
+  .xml: kebab-case
+  .yml: kebab-case
+  tests:
+    .json: kebab-case
+    .php: PascalCase
+    .sh: snake_case
+    .spec.js: kebab-case
+    .txt: snake_case
+ignore:
+  - .idea
+  - .vscode
+  - node_modules
+  - src/third_party
+  - test-results
+  - tmp
+  - vendor

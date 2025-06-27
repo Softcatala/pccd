@@ -1,0 +1,8 @@
+{
+  "extends": ["stylelint-config-standard", "stylelint-config-recess-order"],
+  "rules": {
+    "color-named": "never",
+    "declaration-no-important": true,
+    "media-feature-range-notation": "prefix"
+  }
+}

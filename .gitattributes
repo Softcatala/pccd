@@ -1,0 +1,38 @@
+* text=auto eol=lf
+
+*.css diff=css
+*.html diff=html
+*.php diff=php
+*.sql diff=sql
+
+*.avif -text diff
+*.gif -text diff
+*.ico -text diff
+*.jpg -text diff
+*.mp3 -text
+*.png -text diff
+*.ttf -text
+*.webp -text diff
+
+*.generated.* linguist-generated -diff
+*.min.* linguist-generated -diff
+
+*.phar linguist-vendored -diff
+/src/third_party/* linguist-vendored
+
+.mailmap export-ignore
+/docroot/google*.html export-ignore
+/docroot/img/imatges export-ignore
+/docroot/img/obres export-ignore
+/docroot/mp3 export-ignore
+/docroot/sitemap*.txt export-ignore
+/install/db/*.sql export-ignore
+/scripts/common-voice-export/*.txt export-ignore
+/scripts/languagetool-checker/*.txt export-ignore
+/scripts/SentenceSimilarityGroup export-ignore
+/scripts/sinonims-export/*.txt export-ignore
+/src/images export-ignore
+/src/reports/*.txt export-ignore
+/src/third_party export-ignore
+/tests/playwright/data/historic export-ignore
+/tmp/test* export-ignore
