@@ -1,0 +1,25 @@
+{
+    "folders": [
+        {
+            "path": ".",
+            "folder_exclude_patterns": [".git", "node_modules", "vendor", "docroot/js", "docroot/css"],
+            "file_exclude_patterns": ["*.zip", "*.accdb", "*.mp3", "*.jpg", "*.png", "*.gif", "*.webp", "*.avif", ".DS_Store", "*.sublime-workspace", ".php-cs-fixer.cache"]
+        }
+    ],
+    "settings": {
+        "auto_match_enabled": false,
+        "default_line_ending": "unix",
+        "ensure_newline_at_eof_on_save": true,
+        "fallback_encoding": "UTF-8",
+        "rulers": [
+            120
+        ],
+        "shift_tab_unindent": true,
+        "show_files": false,
+        "tab_size": 4,
+        "translate_tabs_to_spaces": true,
+        "trim_automatic_white_space": true,
+        "trim_trailing_white_space_on_save": true,
+        "use_tab_stops": true
+    }
+}

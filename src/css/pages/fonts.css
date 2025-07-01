@@ -1,0 +1,116 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+/* Move the sidebar down like in mobile */
+main aside {
+    flex: unset;
+}
+
+aside .bloc.bloc-credits {
+    margin-top: 45px;
+}
+
+.bloc.bloc-white {
+    border: 0;
+}
+
+table {
+    font-size: 0.875rem;
+    border-spacing: 0;
+}
+
+.datatable-input {
+    width: 100%;
+}
+
+th {
+    text-align: left;
+}
+
+tr:nth-of-type(even) {
+    background: #f9f9f9;
+}
+
+thead tr:first-child {
+    position: sticky;
+    top: 0;
+    background: #fff;
+}
+
+.datatable-top {
+    display: none;
+}
+
+h1 + table,
+.datatable-wrapper {
+    margin: 0 -8px;
+}
+
+.datatable-wrapper.no-footer .datatable-container {
+    border-bottom: 1px solid #dee2e6;
+}
+
+button.datatable-sorter {
+    padding: 0;
+}
+
+.datatable-sorter::after,
+.datatable-sorter::before {
+    right: 0;
+}
+
+input[type="search"] {
+    appearance: textfield;
+    border: 1px solid #ccc;
+}
+
+input[type="search"]:focus {
+    outline: 1px solid #cbd5e7;
+}
+
+table td,
+table th {
+    display: none;
+    padding: 8px 10px;
+}
+
+/* Show only the title column on the smallest devices */
+table td:nth-child(3),
+table th:nth-child(3) {
+    display: table-cell;
+}
+
+/* For screens that are a bit bigger, show the author column too */
+@media (min-width: 400px) {
+    table td:nth-child(1),
+    table th:nth-child(1) {
+        display: table-cell;
+    }
+}
+
+/* For larger screens, show all columns */
+@media (min-width: 640px) {
+    table td,
+    table th {
+        display: table-cell;
+    }
+}
+
+/* Make sure these column headers are fully visible */
+th.registres {
+    min-width: 100px;
+}
+
+th.varietat {
+    min-width: 150px;
+}
+
+.datatable-table > thead > tr > th {
+    border: 0;
+}

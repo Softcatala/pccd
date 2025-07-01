@@ -1,0 +1,39 @@
+# Data
+*.csv
+*.sql
+*.svg
+/docroot/sitemap*.txt
+/scripts/*/*.json
+/scripts/*/*.txt
+/src/reports/*.txt
+/tests/playwright/data/
+/tmp/
+
+# Vendor directories and files
+node_modules/
+third_party/
+vendor/
+LICENSE
+
+# Generated files
+*.sublime-workspace
+*Brewfile.lock.json
+composer.lock
+package-lock.json
+
+# Compiled assets and binaries
+*.generated.*
+*.min.*
+/docroot/img/
+/docroot/mp3/
+/src/images/
+
+# Include hidden files by default, but ignore some
+!.*
+.DS_Store
+.git/
+.idea/
+.php-cs-fixer.cache
+.phpunit.result.cache
+.picasa.ini
+.vscode/

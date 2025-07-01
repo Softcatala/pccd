@@ -1,0 +1,3 @@
+INSERT INTO `00_PAREMIOTIPUS` VALUES (1,'R','No hi ha cap refrany que menteixi','No hi ha cap refrany que menteixi',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'Autor desconegut',1987,NULL,'Obra desconeguda','Obra desconeguda',NULL,'65',NULL,'1987-02-21',NULL);
+
+INSERT INTO `00_OBRESVPR` VALUES (1,'Pàmies i Riudor, Víctor (2011): Amb cara i ulls. Diccionari de dites i refranys sobre l\'ull','Pàmies i Riudor, Víctor','2011','Diccionari de dites i refranys sobre l\'ull','978-84-614-8353-2','AUT','Autoedició','Vallromanes','Primera',2011,'Enciclopèdia paremiològica del cos humà','1',143,'Català',20,'PAMIES_I_RIUDOR,_VICTOR_2011_AMB_CARA_I_ULLS_DICCIONARI_DE_DITES_I_REFRANYS_SOBRE_L\'ULL.jpg','https://ulls.dites.cat/',0,0)

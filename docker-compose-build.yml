@@ -1,0 +1,8 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: .docker/ubuntu.build.Dockerfile
+    container_name: pccd-build
+    volumes:
+      - "./:/srv/app"
