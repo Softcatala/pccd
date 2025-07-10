@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+if [ -n "${IN_NIX_SHELL}" ]; then
+    echo "You are in a Nix shell. Commits are disabled."
+    exit 1
+fi
+
+if ! npm run check:code; then
+    exit 1
+fi

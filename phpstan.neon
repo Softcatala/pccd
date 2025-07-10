@@ -1,0 +1,25 @@
+includes:
+  - vendor/phpstan/phpstan/conf/bleedingEdge.neon
+  - vendor/phpstan/phpstan-deprecation-rules/rules.neon
+  - vendor/phpstan/phpstan-strict-rules/rules.neon
+  # Enforce snake case and other opinionated rules
+  - vendor/pereorga/phpstan-rules/rules.neon
+parameters:
+  level: 9
+  checkBenevolentUnionTypes: true
+  reportAlwaysTrueInLastCondition: true
+  reportAnyTypeWideningInVarTag: true
+  reportPossiblyNonexistentConstantArrayOffset: true
+  paths:
+    - docroot
+    - scripts
+    - src
+  excludePaths:
+    - */third_party/*
+    - docroot/admin/apc.conf.php
+  ignoreErrors:
+    # Some objects are filled via PDO, so readonly properties may appear uninitialized/unused
+    - identifier: property.onlyRead
+    - identifier: property.uninitializedReadonly
+    # Ignore if PDO fails, as recovery would not be straightforward anyway
+    - message: '#Cannot call method (execute|fetch|fetchAll|fetchColumn|fetchObject)\(\) on PDOStatement\|false#'

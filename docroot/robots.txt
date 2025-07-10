@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+Sitemap: https://pccd.dites.cat/sitemap_00.txt
+Sitemap: https://pccd.dites.cat/sitemap_01.txt

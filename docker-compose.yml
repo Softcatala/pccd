@@ -1,0 +1,30 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE_PATH:-.docker/debian.dev.Dockerfile}
+    container_name: pccd-web
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-pccd}
+      MYSQL_USER: ${MYSQL_USER:-pccd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOSTNAME: mysql
+      WEB_ADMIN_PASSWORD: ${WEB_ADMIN_PASSWORD}
+      OPENAI_KEY: ${OPENAI_KEY}
+    ports:
+      - ${APACHE_HTTP_PORT:-8080}:80
+    restart: unless-stopped
+    depends_on:
+      - mysql
+  mysql:
+    image: mariadb:11.8.2-noble
+    container_name: pccd-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-pccd}
+      MYSQL_USER: ${MYSQL_USER:-pccd}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    restart: unless-stopped
+    volumes:
+      - "./.docker/mysql:/etc/mysql/conf.d"
+      - "./install/db:/docker-entrypoint-initdb.d"

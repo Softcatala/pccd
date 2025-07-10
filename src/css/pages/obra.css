@@ -1,0 +1,60 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+dl,
+dt,
+dd {
+    margin: 0;
+}
+
+dt:not([hidden]) {
+    display: inline-block;
+}
+
+dd {
+    display: inline;
+}
+
+dt:not([hidden]) + dd {
+    margin-left: 0.4rem;
+}
+
+dd::after {
+    display: block;
+    margin-bottom: 0.5rem;
+    content: "";
+}
+
+.col-image {
+    order: 2;
+    text-align: center;
+}
+
+.col-work {
+    order: 1;
+}
+
+.col-work .footer {
+    margin: 1rem 0 2rem;
+}
+
+/* Medium devices */
+@media (min-width: 576px) {
+    .col-image {
+        flex: 0 0 41.6667%;
+        order: 1;
+        max-width: 41.6667%;
+    }
+
+    .col-image + .col-work {
+        flex: 0 0 58.3333%;
+        order: 2;
+        max-width: 58.3333%;
+    }
+}
