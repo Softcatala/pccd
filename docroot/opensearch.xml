@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/" xmlns:moz="http://www.mozilla.org/2006/browser/search/">
+  <ShortName>PCCD</ShortName>
+  <LongName>Paremiologia catalana comparada digital</LongName>
+  <Description>La Paremiologia catalana comparada digital (PCCD) és una eina que dona accés a la cerca i consulta d'un gran ventall de fonts fraseològiques escrites, orals i digitals sobre parèmies en general (locucions, frases fetes, refranys, proverbis, citacions, etc.)</Description>
+  <Tags>dites populars refranys català parèmies frases locucions proverbis paremiotipus</Tags>
+  <Url type="text/html" method="get" template="https://pccd.dites.cat/?mode=&amp;cerca={searchTerms}&amp;variant=&amp;mostra=10" />
+  <Image width="16" height="16" type="image/x-icon">https://pccd.dites.cat/favicon.ico</Image>
+  <Query role="example" searchTerms="gener" />
+  <Attribution>Víctor Pàmies i Riudor</Attribution>
+  <Developer>Pere Orga Esteve</Developer>
+  <Language>ca-es</Language>
+  <OutputEncoding>UTF-8</OutputEncoding>
+  <InputEncoding>UTF-8</InputEncoding>
+  <moz:SearchForm>https://pccd.dites.cat</moz:SearchForm>
+</OpenSearchDescription>
