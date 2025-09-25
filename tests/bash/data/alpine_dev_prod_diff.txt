@@ -1,0 +1,12 @@
+-LABEL description="Alpine-based image with Apache and mod_php that mimics production."
++LABEL description="Alpine-based image with Apache and mod_php. Used in production."
++
++ARG ARG_MYSQL_DB
++ARG ARG_MYSQL_PWD
++ARG ARG_MYSQL_USER
++ARG ARG_WEB_ADMIN_PWD
++
++ENV MYSQL_DATABASE=${ARG_MYSQL_DB}
++ENV MYSQL_PASSWORD=${ARG_MYSQL_PWD}
++ENV MYSQL_USER=${ARG_MYSQL_USER}
++ENV WEB_ADMIN_PASSWORD=${ARG_WEB_ADMIN_PWD}

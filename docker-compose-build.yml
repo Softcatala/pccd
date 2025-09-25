@@ -1,0 +1,8 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: .docker/debian.local.Dockerfile
+    container_name: pccd-build
+    volumes:
+      - "./:/srv/app"

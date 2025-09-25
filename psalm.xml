@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<psalm
+  allFunctionsGlobal="true"
+  errorLevel="4"
+  findUnusedPsalmSuppress="true"
+  strictBinaryOperands="false"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns="https://getpsalm.org/schema/config"
+  xsi:schemaLocation="https://getpsalm.org/schema/config vendor/vimeo/psalm/config.xsd"
+>
+  <projectFiles>
+    <directory name="docroot"/>
+    <directory name="scripts"/>
+    <directory name="src"/>
+    <ignoreFiles>
+      <directory name="src/third_party"/>
+      <file name="docroot/admin/apc.conf.php"/>
+      <file name="src/xhprof.php"/>
+    </ignoreFiles>
+  </projectFiles>
+  <enableExtensions>
+    <extension name="apcu"/>
+    <extension name="pdo"/>
+  </enableExtensions>
+</psalm>
