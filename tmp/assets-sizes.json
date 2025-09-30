@@ -1,0 +1,26 @@
+[
+  {
+    "name": "docroot/css/base.min.css",
+    "size": 1199
+  },
+  {
+    "name": "docroot/css/pages/search.min.css",
+    "size": 1979
+  },
+  {
+    "name": "docroot/css/pages/paremiotipus.min.css",
+    "size": 1682
+  },
+  {
+    "name": "docroot/js/app.min.js",
+    "size": 393
+  },
+  {
+    "name": "docroot/js/pages/search.min.js",
+    "size": 405
+  },
+  {
+    "name": "docroot/js/pages/paremiotipus.min.js",
+    "size": 659
+  }
+]
