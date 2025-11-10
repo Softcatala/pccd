@@ -1,0 +1,115 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+@import url("../base.css");
+@import url("../../../node_modules/simple-datatables/dist/style.css");
+
+/* Move the sidebar down like in mobile */
+main aside {
+  flex: unset;
+}
+
+aside .bloc.bloc-credits {
+  margin-top: 45px;
+}
+
+.bloc.bloc-white {
+  border: 0;
+}
+
+table {
+  font-size: 0.875rem;
+  border-spacing: 0;
+
+  th {
+    text-align: left;
+  }
+
+  td,
+  th {
+    display: none;
+    padding: 8px 10px;
+
+    &:nth-child(3) {
+      display: table-cell;
+    }
+
+    @media (width >= 400px) {
+      &:nth-child(1) {
+        display: table-cell;
+      }
+    }
+
+    @media (width >= 640px) {
+      display: table-cell;
+    }
+  }
+}
+
+.datatable-input {
+  width: 100%;
+}
+
+tr {
+  &:nth-of-type(even) {
+    background: var(--color-bg-alt);
+  }
+}
+
+thead tr:first-child {
+  position: sticky;
+  top: 0;
+  background: #fff;
+}
+
+.datatable-top {
+  display: none;
+}
+
+h1 + table,
+.datatable-wrapper {
+  margin: 0 -8px;
+}
+
+.datatable-wrapper.no-footer .datatable-container {
+  border-bottom: 1px solid var(--color-border);
+}
+
+button.datatable-sorter {
+  padding: 0;
+}
+
+.datatable-sorter {
+  &::after,
+  &::before {
+    right: 0;
+  }
+}
+
+input[type="search"] {
+  appearance: textfield;
+  border: 1px solid var(--color-border-light);
+
+  &:focus {
+    outline: 1px solid var(--color-focus);
+  }
+}
+
+/* Make sure these column headers are fully visible */
+th.registres {
+  min-width: 100px;
+}
+
+th.varietat {
+  min-width: 150px;
+}
+
+.datatable-table > thead > tr > th {
+  border: 0;
+}
