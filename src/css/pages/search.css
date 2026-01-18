@@ -1,0 +1,252 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+@import url("../base.css");
+
+h1 {
+  display: none;
+}
+
+main {
+  margin-top: 20px;
+
+  @media (width >= 768px) {
+    margin-top: var(--gutter-lg);
+  }
+}
+
+select,
+input[type="search"] {
+  height: 2.5rem;
+  padding: 0 0.75rem;
+  color: #495057;
+  background: #fff;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+select {
+  width: 100%;
+  padding-right: 2rem;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: none;
+  /* stylelint-enable property-no-vendor-prefix */
+  appearance: none;
+  background: #fff
+    url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNiAxNiI+PHBhdGggZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDk1MDU3IiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiIHN0cm9rZS13aWR0aD0iMiIgZD0ibTIgNSA2IDYgNi02Ii8+PC9zdmc+")
+    no-repeat right 0.75rem center / 0.75rem;
+
+  &:focus {
+    outline: 2px solid var(--color-focus);
+  }
+}
+
+.pager select {
+  width: auto;
+  margin-left: auto;
+}
+
+label {
+  display: inline-block;
+}
+
+form[role="search"] ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  li {
+    border: 1px solid var(--color-border);
+    border-top: none;
+
+    &:first-child {
+      border-top: 1px solid var(--color-border);
+    }
+
+    &:nth-of-type(odd) {
+      background: var(--color-bg-alt);
+    }
+  }
+
+  a {
+    display: block;
+    padding: 0.75rem;
+  }
+}
+
+input[type="search"] {
+  flex: 1 1 auto;
+  min-width: 0;
+  /* stylelint-disable property-no-vendor-prefix */
+  -webkit-appearance: textfield;
+  /* stylelint-enable property-no-vendor-prefix */
+  appearance: textfield;
+  background-clip: padding-box;
+  border-right: none;
+  border-radius: 0.25rem 0 0 0.25rem;
+
+  &:focus {
+    padding-left: 13px;
+    outline: 3px solid var(--color-focus);
+    border: 0;
+    clip-path: inset(-3px 0 -3px -3px);
+  }
+}
+
+.input,
+.options {
+  flex: 1;
+}
+
+.input {
+  display: flex;
+  order: 1;
+
+  button {
+    display: inline-block;
+    padding: 0 0.75rem;
+    color: #fff;
+    text-align: center;
+    background: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 0 0.25rem 0.25rem 0;
+
+    &:focus {
+      outline: 3px solid var(--color-focus);
+    }
+
+    svg {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  }
+}
+
+input[type="search"]:focus + button {
+  box-shadow: 0 0 0 3px var(--color-focus);
+  clip-path: inset(-3px -3px -3px 0);
+}
+
+.mode {
+  order: 2;
+}
+
+.label {
+  display: none;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.options {
+  div {
+    display: inline-flex;
+    align-items: center;
+    margin-right: 0.75rem;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  input {
+    margin: 0 5px 0 0;
+  }
+}
+
+.filters .row {
+  margin-inline: -5px;
+
+  > * {
+    padding-inline: 5px;
+    margin-bottom: 1rem;
+  }
+}
+
+.pager {
+  display: flex;
+  margin: 1.5rem 0 1rem;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    padding-left: 0;
+    list-style: none;
+
+    svg {
+      width: 1rem;
+      height: 1rem;
+      vertical-align: -2px;
+    }
+
+    a,
+    strong {
+      padding: 0.5rem 0.75rem;
+      border-radius: 0.25rem;
+    }
+
+    a {
+      display: none;
+
+      @media (width >= 576px) {
+        display: block;
+      }
+
+      &:focus {
+        outline: 3px solid var(--color-focus);
+      }
+
+      &[rel="prev"] {
+        padding-left: 0;
+      }
+
+      &[rel="next"] {
+        padding-right: 0;
+      }
+    }
+
+    strong,
+    a[rel="prev"],
+    a[rel="next"] {
+      display: block;
+    }
+  }
+}
+
+.bloc-books img {
+  padding: 10px var(--gutter-lg);
+}
+
+/* Medium devices */
+@media (width >= 576px) {
+  .label {
+    display: block;
+  }
+
+  .mode,
+  .label {
+    flex: 0 0 25%;
+    max-width: 25%;
+  }
+
+  .mode {
+    order: 1;
+  }
+
+  .input {
+    order: 2;
+  }
+}
+
+/* Large devices */
+@media (width >= 768px) {
+  .filters {
+    margin-bottom: 1rem;
+  }
+}

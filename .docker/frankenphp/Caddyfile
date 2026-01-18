@@ -1,0 +1,35 @@
+{
+    auto_https off
+    admin off
+    frankenphp
+}
+
+:80 {
+    root * /srv/app/docroot
+
+    encode zstd gzip
+
+    header {
+        Cross-Origin-Opener-Policy "same-origin"
+        Strict-Transport-Security "max-age=31536000"
+        X-Content-Type-Options "nosniff"
+        -ETag
+    }
+
+    @static path *.avif *.css *.gif *.ico *.jpg *.jpeg *.js *.mp3 *.png *.svg *.webp
+    header @static Cache-Control "public, max-age=31536000, immutable"
+
+    handle_errors {
+        @400 expression {err.status_code} == 400
+        rewrite @400 /400.html
+        @401-403 expression {err.status_code} in [401, 403]
+        rewrite @401-403 /401_403.html
+        @404 expression {err.status_code} == 404
+        rewrite @404 /404.html
+        @500 expression {err.status_code} == 500
+        rewrite @500 /500.html
+        file_server
+    }
+
+    php_server
+}
