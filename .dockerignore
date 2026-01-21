@@ -1,0 +1,24 @@
+# Developer files
+.git
+.github
+.idea
+.vscode
+
+# Database, provided zips and original images
+*.accdb
+*.zip
+src/images
+
+# Local dev dependencies and scripts
+*.phar
+node_modules
+vendor
+
+# Temporary files
+.php-cs-fixer.cache
+.phpunit.result.cache
+tmp/*.html
+tmp/*.json
+tmp/*.tar
+tmp/github
+test-results
