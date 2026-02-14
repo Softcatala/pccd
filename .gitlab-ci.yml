@@ -1,0 +1,181 @@
+include:
+  - project: "docker/process-webhooks"
+    file: "/gitlab/deploy.yml"
+
+variables:
+  PROJECT_TO_BE_DEPLOYED: "docker/pccd"
+  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.9.30"
+
+stages:
+  - build
+  - deploy
+
+build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  before_script:
+    - export DATETAG=$(date +%Y%m%d-%H%M%S)
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    # Build PHP-FPM image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-php
+    - |
+      docker build -f .docker/fpm.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_DB=$MYSQL_DB \
+        --build-arg ARG_MYSQL_USER=$MYSQL_USER \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        --build-arg ARG_WEB_ADMIN_PWD=$WEB_ADMIN_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+    # Build Nginx image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-nginx
+    - |
+      docker build -f .docker/nginx.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+    # Build SQL image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-sql
+    - |
+      docker build -f .docker/sql.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_ROOT_PWD=$MYSQL_ROOT_PWD \
+        --build-arg ARG_MYSQL_DB=$MYSQL_DB \
+        --build-arg ARG_MYSQL_USER=$MYSQL_USER \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+
+deploy:
+  stage: deploy
+  when: manual
+  needs: [build]
+  extends:
+    - .default-deploy
+
+reset:
+  stage: deploy
+  when: manual
+  needs: [build]
+  extends:
+    - .reset
+
+# Run php-based code quality scripts
+.check_code_php_template:
+  stage: build
+  script:
+    # curl: to download install-php-extensions script
+    # git, unzip: required by Composer (see https://github.com/composer/composer/discussions/12278)
+    - apk --no-cache --update add curl git unzip
+    - curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
+    - chmod +x /usr/local/bin/install-php-extensions
+    - install-php-extensions gd intl pdo_mysql
+    - ./composer.phar install --no-interaction
+    - ./composer.phar validate --strict
+    - ./composer.phar run php-l
+    - ./composer.phar run composer-normalize-lint
+    - ./composer.phar run phpcs
+    - ./composer.phar run php-cs-fixer-lint
+    - ./composer.phar run phpstan
+    - ./composer.phar run psalm
+    - ./composer.phar run phpunit
+  allow_failure: true
+
+check_code_php:
+  extends: .check_code_php_template
+  parallel:
+    matrix:
+      - PHP_VERSION: "8.4"
+      - PHP_VERSION: "8.5"
+  image: php:${PHP_VERSION}-alpine
+  before_script:
+    - echo "Running in PHP version ${PHP_VERSION}"
+
+# Run NPM-based code quality scripts
+.check_code_js_template:
+  stage: build
+  script:
+    - npm ci --ignore-scripts
+    - npm audit
+    - npm run lint:case-sensitive-filenames
+    - npm run lint:eslint
+    - npm run lint:htmlhint-completeness
+    - npm run lint:htmlvalidate-redundancy
+    - npm run lint:ls
+    - npm run lint:markdown
+    - npm run lint:prettier
+    - npm run lint:stylelint
+    - npm run lint:stylelint-redundancy
+    - npm run test:node
+  allow_failure: true
+
+check_code_js:
+  extends: .check_code_js_template
+  parallel:
+    matrix:
+      - NODE_VERSION: 22
+      - NODE_VERSION: 24
+      - NODE_VERSION: 25
+  image: node:${NODE_VERSION}-alpine
+  before_script:
+    - echo "Running in Node.js version ${NODE_VERSION}"
+
+.check_code_debian_template:
+  stage: build
+  before_script:
+    # Install dev dependencies
+    - apt-get update && apt-get install --no-install-recommends -y $(cat apt_dev_deps.txt)
+    - npm ci --ignore-scripts
+    - ./composer.phar install --no-interaction
+  script:
+    - npm run check:code
+  allow_failure: true
+
+check_code_debian:
+  extends: .check_code_debian_template
+  parallel:
+    matrix:
+      # Test only upcoming releases
+      # - IMAGE: "debian:stable-slim"
+      # - IMAGE: "ubuntu:rolling"
+      - IMAGE: "debian:sid-slim"
+      - IMAGE: "ubuntu:devel"
+  image: ${IMAGE}
+
+.check_code_alpine_template:
+  stage: build
+  before_script:
+    - apk --no-cache --update add $(cat apk_dev_deps.txt)
+    - ln -s /usr/bin/$(grep '^php[0-9]*$' apk_dev_deps.txt | head -1) /usr/bin/php
+    - npm ci --ignore-scripts
+    - ./composer.phar install --no-interaction
+  script:
+    - npm run check:code
+  allow_failure: true
+
+check_code_alpine:
+  extends: .check_code_alpine_template
+  parallel:
+    matrix:
+      # Test only upcoming release
+      # - IMAGE: "alpine:latest"
+      - IMAGE: "alpine:edge"
+  image: ${IMAGE}

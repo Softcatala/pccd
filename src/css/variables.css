@@ -1,0 +1,38 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+:root {
+  /*
+   * Breakpoints
+   *
+   * CSS variables cannot currently be used in @media query conditions.
+   * Breakpoint values are hardcoded in the CSS files. Also, some are available
+   * as PHP constants in src/common.php.
+   *
+   * --breakpoint-xs: 330px;
+   * --breakpoint-sm: 400px;
+   * --breakpoint-md: 576px;
+   * --breakpoint-lg: 768px;
+   * --breakpoint-xl: 992px;
+   */
+
+  /* Spacing */
+  --gutter: 15px;
+  --gutter-lg: 30px;
+
+  /* Colors */
+
+  /* Primary color is also available as COLOR_PRIMARY constant in src/common.php */
+  --color-primary: #2b5797;
+  --color-primary-hover: #dee2e7;
+  --color-bg-alt: #f9f9f9;
+  --color-border-light: #ccc;
+  --color-border: #dee2e6;
+  --color-focus: #cbd5e7;
+}

@@ -1,0 +1,54 @@
+{
+  "js": [
+    {
+      "path": "app.min.js",
+      "size": 797
+    },
+    {
+      "path": "pages/fonts.min.js",
+      "size": 80419
+    },
+    {
+      "path": "pages/paremiotipus.min.js",
+      "size": 1740
+    },
+    {
+      "path": "pages/search.min.js",
+      "size": 941
+    }
+  ],
+  "css": [
+    {
+      "path": "base.min.css",
+      "size": 4046
+    },
+    {
+      "path": "pages/fonts.min.css",
+      "size": 9220
+    },
+    {
+      "path": "pages/llibres.min.css",
+      "size": 4297
+    },
+    {
+      "path": "pages/obra.min.css",
+      "size": 4452
+    },
+    {
+      "path": "pages/paremiotipus.min.css",
+      "size": 6141
+    },
+    {
+      "path": "pages/search.min.css",
+      "size": 6984
+    },
+    {
+      "path": "pages/top100.min.css",
+      "size": 4068
+    },
+    {
+      "path": "pages/top10000.min.css",
+      "size": 4068
+    }
+  ]
+}
