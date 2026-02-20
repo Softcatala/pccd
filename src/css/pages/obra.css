@@ -1,0 +1,61 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+@import url("../base.css");
+
+dl,
+dt,
+dd {
+  margin: 0;
+}
+
+dd {
+  display: inline;
+
+  &::after {
+    display: block;
+    margin-bottom: 0.5rem;
+    content: "";
+  }
+}
+
+dt {
+  &:not([hidden]) {
+    display: inline-block;
+
+    + dd {
+      margin-left: 0.4rem;
+    }
+  }
+}
+
+.col-image {
+  order: 2;
+  text-align: center;
+
+  @media (width >= 576px) {
+    flex: 0 0 41.6667%;
+    order: 1;
+    max-width: 41.6667%;
+
+    + .col-work {
+      flex: 0 0 58.3333%;
+      order: 2;
+      max-width: 58.3333%;
+    }
+  }
+}
+
+.col-work {
+  order: 1;
+
+  .footer {
+    margin: 1rem 0 2rem;
+  }
+}
