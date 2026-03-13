@@ -1,0 +1,66 @@
+name: Docker Startup Test
+
+# yamllint disable-line rule:truthy
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+permissions:
+  contents: read
+
+jobs:
+  test-docker-startup:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@main
+
+      - name: Setup Node.js
+        uses: actions/setup-node@main
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Install npm dependencies
+        run: npm ci --ignore-scripts
+
+      - name: Verify committed assets are up to date
+        run: |
+          npm run build:assets
+          if ! git diff --quiet -- docroot/css docroot/js data/assets/assets-sizes.json; then
+            echo "Committed assets are out of date. Run 'npm run build:assets' and commit generated files."
+            git status --short -- docroot/css docroot/js data/assets/assets-sizes.json
+            exit 1
+          fi
+
+      - name: Setup environment
+        run: |
+          cp .env.sample .env
+          cp data/db/schema.sql install/db/
+          cp data/db/schema_init_sample.sql install/db/
+
+      - name: Start Docker Compose services
+        run: docker compose up -d
+
+      - name: Wait for web server
+        run: |
+          timeout 300 sh -c 'until docker compose exec -T web curl --fail http://localhost > /dev/null 2>&1; do echo "Waiting for web..."; sleep 2; done'
+
+      - name: Test homepage loads inside the container
+        run: docker compose exec -T web curl --fail http://localhost --output /dev/null
+
+      - name: Test homepage loads outside the container
+        run: |
+          source .env
+          curl --fail http://localhost:${HTTP_PORT} --output /dev/null
+
+      - name: Show logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v

@@ -1,0 +1,35 @@
+/*
+ * This file is part of PCCD.
+ *
+ * (c) Pere Orga Esteve <pere@orga.cat>
+ *
+ * This source file is subject to the AGPL license that is bundled with this
+ * source code in the file LICENSE.
+ */
+
+@custom-media --breakpoint-xs (width >= 330px);
+@custom-media --breakpoint-sm (width >= 400px);
+@custom-media --breakpoint-md (width >= 576px); /* BREAKPOINT_MD constant in src/common.php */
+@custom-media --breakpoint-lg (width >= 768px); /* BREAKPOINT_LG constant in src/common.php */
+@custom-media --breakpoint-xl (width >= 992px);
+
+:root {
+  /* Max-widths */
+  --page-max-width: 1140px;
+
+  /* Spacing */
+  --gutter: 15px;
+  --gutter-lg: 30px;
+
+  /* Typography */
+  --font-size-sm: 0.875rem;
+
+  /* Colors */
+  --color-link: #551a8b;
+  --color-primary: #2b5797; /* COLOR_PRIMARY constant in src/common.php */
+  --color-primary-hover: #dee2e7;
+  --color-bg-alt: #f9f9f9;
+  --color-border-light: #ccc;
+  --color-border: #dee2e6;
+  --color-focus: #cbd5e7;
+}
