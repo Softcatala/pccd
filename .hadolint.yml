@@ -1,0 +1,7 @@
+ignored:
+  # Disable enforcing explicit versions in apt-get (we pin the base image)
+  - DL3008
+  # Disable enforcing explicit versions in apk (we pin the base image)
+  - DL3018
+trustedRegistries:
+  - docker.io

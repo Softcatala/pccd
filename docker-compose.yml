@@ -1,0 +1,45 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: ${DOCKERFILE_PATH:-.docker/dev.Dockerfile}
+    environment:
+      MYSQL_DATABASE: pccd
+      MYSQL_USER: pccd
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_HOSTNAME: mysql
+      WEB_ADMIN_PASSWORD: ${WEB_ADMIN_PASSWORD}
+    ports:
+      - ${HTTP_PORT:-8092}:80
+    restart: unless-stopped
+    depends_on:
+      mysql:
+        condition: service_healthy
+    volumes:
+      - "./:/srv/app"
+
+  mysql:
+    image: mariadb:12.3.2-noble
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: true
+      MYSQL_DATABASE: pccd
+      MYSQL_USER: pccd
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      start_period: 120s
+      interval: 10s
+      timeout: 5s
+      retries: 60
+    restart: unless-stopped
+    volumes:
+      - "./.docker/mysql:/etc/mysql/conf.d:ro"
+      - "./install/db:/docker-entrypoint-initdb.d:ro"
+      - "pccd-mysql-data:/var/lib/mysql"
+
+volumes:
+  pccd-mysql-data:
+
+networks:
+  default:
+    name: pccd-net

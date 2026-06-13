@@ -1,0 +1,5 @@
+enable=all
+disable=SC2129
+disable=SC2310
+disable=SC2312
+disable=SC3043

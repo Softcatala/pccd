@@ -1,0 +1,12 @@
+[mysqld]
+binlog_expire_logs_seconds = 0
+character_set_server = utf8mb4
+collation_server = utf8mb4_uca1400_ai_ci
+innodb_buffer_pool_size = 2G
+innodb_doublewrite = 0
+innodb_flush_log_at_trx_commit = 0
+innodb_ft_cache_size = 1G
+innodb_ft_enable_stopword = 0
+innodb_ft_min_token_size = 1
+performance_schema = 0
+skip_log_bin

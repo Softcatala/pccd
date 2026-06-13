@@ -1,0 +1,235 @@
+include:
+  - project: "docker/process-webhooks"
+    file: "/gitlab/deploy.yml"
+
+variables:
+  PROJECT_TO_BE_DEPLOYED: "docker/pccd"
+  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.11.9"
+
+stages:
+  - build
+  - deploy
+
+build:
+  image: docker:latest
+  services:
+    - docker:dind
+  stage: build
+  when: manual
+  before_script:
+    - export DATETAG=$(date +%Y%m%d-%H%M%S)
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" --password-stdin $CI_REGISTRY
+  script:
+    # Build php-fpm image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-php
+    - |
+      docker build -f .docker/fpm.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        --build-arg ARG_WEB_ADMIN_PWD=$WEB_ADMIN_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+    # Build nginx image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-nginx
+    - |
+      docker build -f .docker/nginx.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+    # Build database image
+    - DOCKER_IMAGE=${CI_REGISTRY_IMAGE}/pccd-sql
+    - |
+      docker build -f .docker/sql.Dockerfile \
+        --cache-from $DOCKER_IMAGE:latest \
+        --tag $DOCKER_IMAGE:$CI_COMMIT_SHA \
+        --tag $DOCKER_IMAGE:$DATETAG \
+        --tag $DOCKER_IMAGE:latest \
+        --build-arg ARG_MYSQL_PWD=$MYSQL_PWD \
+        .
+    - docker push $DOCKER_IMAGE:$CI_COMMIT_SHA
+    - docker push $DOCKER_IMAGE:$DATETAG
+    - docker push $DOCKER_IMAGE:latest
+
+deploy:
+  stage: deploy
+  when: manual
+  needs: [build]
+  extends:
+    - .default-deploy
+
+reset:
+  stage: deploy
+  when: manual
+  needs: [build]
+  extends:
+    - .reset
+
+# Run php-based code quality scripts
+.check_code_php_template:
+  stage: build
+  script:
+    # curl: to download install-php-extensions script
+    # git, unzip: required by Composer (see https://github.com/composer/composer/discussions/12278)
+    - apk --no-cache --update add curl git unzip
+    - curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
+    - chmod +x /usr/local/bin/install-php-extensions
+    - install-php-extensions gd intl pdo_mysql
+    - ./composer.phar install --no-interaction
+    - ./composer.phar validate --strict
+    - ./composer.phar run php-l
+    - ./composer.phar run composer-normalize-lint
+    - ./composer.phar run phpcs
+    - ./composer.phar run php-cs-fixer-lint
+    - ./composer.phar run phpstan
+    - ./composer.phar run psalm
+    - ./composer.phar run phpunit
+    # Run phpstan with the latest development version
+    - PHPSTAN_DEV=$(./composer.phar show phpstan/phpstan --available --format=json | grep -oE '"2\.[0-9]+\.x-dev"' | sort -t. -k2 -n | tail -1 | tr -d '"')
+    - ./composer.phar require --dev "phpstan/phpstan:${PHPSTAN_DEV}" -W
+  allow_failure: true
+
+check_php:
+  extends: .check_code_php_template
+  parallel:
+    matrix:
+      - PHP_VERSION: "8.4"
+      - PHP_VERSION: "8.5"
+  image: php:${PHP_VERSION}-alpine
+  before_script:
+    - php --version
+    - ./composer.phar --version
+
+# Run npm-based code quality scripts
+.check_code_npm_template:
+  stage: build
+  script:
+    - npm ci --ignore-scripts
+    - npm run lint:case-sensitive-filenames
+    - npm run lint:css
+    - npm run lint:eslint
+    - npm run lint:eslint-redundancy
+    - npm run lint:htmlhint-completeness
+    - npm run lint:htmlvalidate-redundancy
+    - npm run lint:ls
+    - npm run lint:markdown
+    - npm run lint:prettier
+    - npm run lint:stylelint-redundancy
+    - npm run lint:xml
+    - npm run lint:yaml
+    - npm run test:node
+  allow_failure: true
+
+check_npm:
+  extends: .check_code_npm_template
+  parallel:
+    matrix:
+      - NODE_VERSION: 22
+      - NODE_VERSION: 24
+      - NODE_VERSION: 26
+  image: node:${NODE_VERSION}-alpine
+  before_script:
+    - node --version
+    - npm --version
+
+.check_code_debian_template:
+  stage: build
+  before_script:
+    # Install dev dependencies
+    - apt-get update && apt-get install --no-install-recommends -y $(cat apt_dev_deps.txt)
+    # Ignore npm lifecycle scripts: postinstall also runs Playwright setup,
+    # which is unnecessary and problematic in these CI jobs.
+    - npm ci --ignore-scripts
+    - ./composer.phar install --no-interaction
+    - grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"'
+    - node --version
+    - npm --version
+    - php --version
+    - ./composer.phar --version
+  script:
+    - npm run check
+  allow_failure: true
+
+validate_debian:
+  extends: .check_code_debian_template
+  when: manual
+  parallel:
+    matrix:
+      - IMAGE: "debian:sid-slim"
+      - IMAGE: "debian:stable-slim"
+      - IMAGE: "ubuntu:devel"
+      - IMAGE: "ubuntu:latest"
+      - IMAGE: "ubuntu:rolling"
+  image: ${IMAGE}
+
+.check_code_alpine_template:
+  stage: build
+  before_script:
+    - apk --no-cache --update add $(cat apk_dev_deps.txt)
+    - ln -sf /usr/bin/$(grep '^php[0-9]*$' apk_dev_deps.txt | head -1) /usr/bin/php
+    # Ignore npm lifecycle scripts: postinstall also runs Playwright setup,
+    # which is unnecessary and problematic in these CI jobs.
+    - npm ci --ignore-scripts
+    - ./composer.phar install --no-interaction
+    - grep PRETTY_NAME /etc/os-release | cut -d= -f2 | tr -d '"'
+    - node --version
+    - npm --version
+    - php --version
+    - ./composer.phar --version
+  script:
+    - npm run check
+  allow_failure: true
+
+validate_alpine:
+  extends: .check_code_alpine_template
+  parallel:
+    matrix:
+      - IMAGE: "alpine:latest"
+      - IMAGE: "alpine:edge"
+  image: ${IMAGE}
+
+check_hadolint:
+  stage: build
+  image:
+    name: hadolint/hadolint:latest-alpine
+    entrypoint: [""]
+  script:
+    - hadolint .docker/*Dockerfile
+  allow_failure: true
+
+check_dockerfmt:
+  image: golang:alpine
+  stage: build
+  script:
+    - go install github.com/reteps/dockerfmt@latest
+    - dockerfmt --check .docker/*Dockerfile
+  allow_failure: true
+
+scan_secrets_trufflehog:
+  stage: build
+  when: manual
+  image:
+    name: trufflesecurity/trufflehog:latest
+    entrypoint: [""]
+  script:
+    - trufflehog git file://. --only-verified --fail
+  allow_failure: true
+
+scan_secrets_gitleaks:
+  stage: build
+  when: manual
+  image:
+    name: zricethezav/gitleaks:latest
+    entrypoint: [""]
+  script:
+    - gitleaks detect --source .
+  allow_failure: true

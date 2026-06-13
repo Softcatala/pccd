@@ -1,0 +1,7 @@
+services:
+  build:
+    build:
+      context: .
+      dockerfile: .docker/build.Dockerfile
+    volumes:
+      - "./:/srv/app"

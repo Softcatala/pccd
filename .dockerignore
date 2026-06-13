@@ -1,0 +1,31 @@
+# This file filters what gets sent to the Docker daemon as build context during
+# image builds, improving build performance.
+#
+# Impact:
+# - Volume mounts: NOT affected (dev/frankenphp/build get full project access at runtime)
+# - COPY commands: Files/dirs listed here cannot be copied (build would fail)
+#
+# The entries below are safe because no Dockerfile tries to COPY them. They significantly
+# speed up builds by excluding large directories (node_modules, vendor, .git).
+
+# Developer files
+.git
+.github
+.idea
+.vscode
+
+# Database, provided zips and original images
+*.accdb
+*.zip
+images
+
+# Local dev dependencies and scripts
+*.phar
+node_modules
+vendor
+
+# Temporary files
+.php-cs-fixer.cache
+.phpunit.result.cache
+test-results
+tmp/github
