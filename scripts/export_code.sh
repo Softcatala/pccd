@@ -11,19 +11,14 @@ set -eu
 
 cd "$(dirname "$0")/.."
 
-if [ -d tmp/github ]; then
-  rm -rf tmp/github
-fi
-
-mkdir -p tmp/github
+rm -rf tmp/github
+git clone git@github.com:Softcatala/pccd.git tmp/github
 git archive --format=tar HEAD | (cd tmp/github && tar xf -)
 (
   cd tmp/github &&
-    git init --initial-branch=master &&
-    git remote add origin git@github.com:Softcatala/pccd.git &&
     git add . &&
     git commit -m "export source code" &&
-    git push --force origin master
+    git push origin master
 )
 
-echo "Source code pushed to GitHub with rewritten history."
+echo "Source code pushed to GitHub."

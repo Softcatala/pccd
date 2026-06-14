@@ -108,7 +108,7 @@
   "devDependencies": {
     "@eslint/js": "10.0.1",
     "@ls-lint/ls-lint": "2.3.1",
-    "@owenlamont/ryl": "0.16.0",
+    "@owenlamont/ryl": "0.17.0",
     "@pccd/lt-filter": "7.8.0",
     "@playwright/test": "1.60.0",
     "chart.js": "4.5.1",
