@@ -13,6 +13,12 @@
 use Pdo\Mysql;
 
 /**
+ * Default characters to trim, including whitespace and null byte.
+ * Use this when providing additional characters to trim(), rtrim(), or ltrim().
+ */
+const DEFAULT_TRIM_CHARS = " \f\n\r\t\v\x00";
+
+/**
  * CSS breakpoints for responsive design.
  * These values should match the breakpoints defined in src/css/variables.css.
  */
@@ -570,24 +576,14 @@ function cache_get(string $key, callable $callback): mixed
  *
  * The text parameter contains the input text to escape and linkify.
  * The property parameter specifies the property attribute to add to links.
- * Set debug to true to write debug information to a file.
  */
-function html_escape_and_link_urls(string $text, string $property = '', bool $debug = false): string
+function html_escape_and_link_urls(string $text, string $property = ''): string
 {
     $escaped = htmlspecialchars($text, ENT_COMPAT | ENT_SUBSTITUTE | ENT_HTML5);
     $pattern = '/(https?:\/\/[^\s]+?)(?=[.,;:!?)"\']*(?:\s|&gt;|$))/';
 
-    $output = preg_replace_callback($pattern, static function (array $matches) use ($debug, $property): string {
+    $output = preg_replace_callback($pattern, static function (array $matches) use ($property): string {
         $url = $matches[1];
-
-        if ($debug) {
-            file_put_contents(
-                __DIR__ . '/../data/reports/test_tmp_debug_html_escape_and_link_urls.txt',
-                $url . "\n",
-                FILE_APPEND
-            );
-        }
-
         $attributes = 'class="external" target="_blank" rel="noopener" href="' . $url . '"';
         if ($property !== '') {
             $attributes .= ' property="' . $property . '"';
@@ -673,7 +669,7 @@ function prepare_field(string $input, bool $escape_html = true, bool $end_with_d
 
     if ($end_with_dot) {
         // Remove any existing trailing dot character.
-        $text = rtrim($text, ". \n\r\t\v\x00");
+        $text = rtrim($text, '.' . DEFAULT_TRIM_CHARS);
 
         $ending_punctuation = ['?', '!', '…', ';', '*'];
         $needs_dot = true;

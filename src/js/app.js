@@ -8,14 +8,14 @@
  */
 
 // Google Tag Manager code.
-// eslint-disable-next-line unicorn/prefer-global-this -- Google-provided
+/* eslint-disable unicorn/prefer-global-this, no-undef, prefer-rest-params, unicorn/no-invalid-argument-count, unicorn/logical-assignment-operators */
 window.dataLayer = window.dataLayer || [];
 const gtag = function () {
-  // eslint-disable-next-line no-undef, prefer-rest-params -- Google-provided
   dataLayer.push(arguments);
 };
 gtag("js", new Date());
 gtag("config", "G-CP42Y3NK1R");
+/* eslint-enable unicorn/prefer-global-this, no-undef, prefer-rest-params, unicorn/no-invalid-argument-count, unicorn/logical-assignment-operators */
 
 if (!localStorage.getItem("accept_cookies")) {
   const cookieBanner = document.createElement("div");
@@ -35,13 +35,15 @@ if (!localStorage.getItem("accept_cookies")) {
 // Inspired by https://github.com/instantpage/instant.page/blob/master/instantpage.js
 const preloadedLinks = new Set();
 const prefetchLink = (href) => {
-  if (!preloadedLinks.has(href)) {
-    preloadedLinks.add(href);
-    const link = document.createElement("link");
-    link.rel = "prefetch";
-    link.href = href;
-    document.head.append(link);
+  if (preloadedLinks.has(href)) {
+    return;
   }
+
+  preloadedLinks.add(href);
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.href = href;
+  document.head.append(link);
 };
 
 for (const a of document.querySelectorAll("a")) {

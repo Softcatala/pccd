@@ -61,13 +61,13 @@ try {
       // Compare rule values.
       const customString = JSON.stringify(customValue);
       const extendedString = JSON.stringify(extendedValue);
-      const normalizedCustomString = JSON.stringify(normalizedCustom);
-      const normalizedExtendedString = JSON.stringify(normalizedExtended);
-
       if (customString === extendedString) {
         console.log(`${ruleName}: identical to extended config (${extendedString})`);
         return true;
       }
+
+      const normalizedCustomString = JSON.stringify(normalizedCustom);
+      const normalizedExtendedString = JSON.stringify(normalizedExtended);
 
       if (normalizedCustomString === normalizedExtendedString && customString !== extendedString) {
         console.log(

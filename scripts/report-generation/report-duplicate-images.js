@@ -20,12 +20,13 @@ import process from "node:process";
  * @param {string} [customPath] - Optional custom directory path to search.
  * @returns {Promise<string>} Newline-separated list of duplicate image groups.
  */
-const findDuplicateImages = async (customPath) => {
+const findDuplicateImages = async (customPath = "") => {
   const directoryPath = customPath || path.join(import.meta.dirname, "/../../images/paremies/");
   const files = {};
   const duplicates = [];
 
-  for (const file of await readdir(directoryPath)) {
+  const filesInDirectory = await readdir(directoryPath);
+  for (const file of filesInDirectory) {
     const filePath = path.join(directoryPath, file);
     const fileStat = await stat(filePath);
 
@@ -33,7 +34,7 @@ const findDuplicateImages = async (customPath) => {
       const fileSize = fileStat.size;
 
       // Group files by size as a quick pre-check.
-      if (!files[fileSize]) {
+      if (!Object.hasOwn(files, fileSize)) {
         files[fileSize] = [];
       }
       files[fileSize].push(filePath);
@@ -42,22 +43,24 @@ const findDuplicateImages = async (customPath) => {
 
   // Compare files with the same size.
   for (const sameSizeFiles of Object.values(files)) {
-    if (sameSizeFiles.length > 1) {
-      // Group files by hash.
-      const fileHashes = await Promise.all(
-        sameSizeFiles.map(async (file) => {
-          const fileBuffer = await readFile(file);
-          const hash = crypto.createHash("md5").update(fileBuffer).digest("hex");
-          return { file, hash };
-        }),
-      );
+    if (sameSizeFiles.length < 2) {
+      continue;
+    }
 
-      const hashedGroups = Object.groupBy(fileHashes, ({ hash }) => hash);
+    // Group files by hash.
+    const fileHashes = await Promise.all(
+      sameSizeFiles.map(async (file) => {
+        const fileBuffer = await readFile(file);
+        const hash = crypto.createHash("md5").update(fileBuffer).digest("hex");
+        return { file, hash };
+      }),
+    );
 
-      for (const duplicateGroup of Object.values(hashedGroups)) {
-        if (duplicateGroup.length > 1) {
-          duplicates.push(duplicateGroup.map(({ file }) => file));
-        }
+    const hashedGroups = Object.groupBy(fileHashes, ({ hash }) => hash);
+
+    for (const duplicateGroup of Object.values(hashedGroups)) {
+      if (duplicateGroup.length > 1) {
+        duplicates.push(duplicateGroup.map(({ file }) => file));
       }
     }
   }

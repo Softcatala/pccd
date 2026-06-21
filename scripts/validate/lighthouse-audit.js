@@ -101,7 +101,7 @@ const auditUrl = async (url, targetBaseUrl, device = "desktop") => {
     // lhr is the Lighthouse Result object.
     const { lhr } = runnerResult;
 
-    let allScoresPerfect = true;
+    let isAllScoresPerfect = true;
     for (const category of Object.values(lhr.categories)) {
       const score = Math.floor(category.score * PERFECT_SCORE);
 
@@ -123,12 +123,12 @@ const auditUrl = async (url, targetBaseUrl, device = "desktop") => {
           continue;
         }
 
-        allScoresPerfect = false;
+        isAllScoresPerfect = false;
         console.error(`[${device.toUpperCase()}] ${url}\n   Category '${category.title}' failed with score ${score}`);
       }
     }
 
-    if (allScoresPerfect) {
+    if (isAllScoresPerfect) {
       console.log(`All essential audits score 100% for ${url} on ${device}.`);
     } else {
       console.error(`   Re-run with: npx lighthouse "${url}" --view --chrome-flags="--headless"`);

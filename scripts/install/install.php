@@ -62,7 +62,7 @@ foreach ($paremies as $p) {
         $last = end($matches[0]);
         if (is_string($last)) {
             $last_number = trim($last);
-            $modisme = rtrim($modisme, "{$last_number} \n\r\t\v\x00");
+            $modisme = rtrim($modisme, $last_number . DEFAULT_TRIM_CHARS);
             $add_accepcio_stmt->execute([$modisme, $last_number, $p['Id']]);
         }
     }

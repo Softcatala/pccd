@@ -39,7 +39,12 @@ const outputFormatFile = path.join(rootDirectory, "data/reports/test_imatges_for
 const checkImageExtensions = async (category) => {
   const results = [];
   const categoryPath = path.join(imageDirectory, category);
-  const files = await readdir(categoryPath).catch(() => []);
+  let files;
+  try {
+    files = await readdir(categoryPath);
+  } catch {
+    files = [];
+  }
 
   for (const file of files) {
     if (IGNORED_FILES.has(file)) {
@@ -79,9 +84,10 @@ const checkImageIntegrity = async (category) => {
 
   for (const { cmd, output, checkErrorStderr } of toolConfigs) {
     try {
-      const result = await execAsync(cmd, { cwd: rootDirectory });
-      if (result[output]) {
-        results.push(result[output]);
+      const { stdout, stderr } = await execAsync(cmd, { cwd: rootDirectory });
+      const outputValue = output === "stdout" ? stdout : stderr;
+      if (outputValue) {
+        results.push(outputValue);
       }
     } catch (error) {
       if (checkErrorStderr && error.stderr) {

@@ -31,7 +31,7 @@ const rootDirectory = path.join(import.meta.dirname, "../..");
 const MAX_CONCURRENT = 10;
 const EXIT_CODE_ERROR = 255;
 
-let httpErrorCount = 0;
+const state = { httpErrorCount: 0 };
 
 process.loadEnvFile();
 if (!process.env.BASE_URL) {
@@ -54,15 +54,14 @@ const localToProductionUrl = (url) => url.replace(baseUrl, "https://pccd.dites.c
 /**
  * Gets the current date in Catalan format.
  */
-const getCatalanDate = () =>
-  new Intl.DateTimeFormat("ca-ES", {
+const getCatalanDate = () => {
+  const formatter = new Intl.DateTimeFormat("ca-ES", {
     day: "numeric",
     month: "long",
     year: "numeric",
-  })
-    .format(new Date())
-    .replaceAll("’", "'")
-    .replaceAll(" del ", " de ");
+  });
+  return formatter.format(new Date()).replaceAll("’", "'").replaceAll(" del ", " de ");
+};
 
 /**
  * Validates URL using curl, htmlhint, html-validate, and Tidy HTML.
@@ -82,14 +81,14 @@ const validateHtmlUrl = async (url, reportFiles) => {
   } catch (error) {
     console.error(`ERROR: Failed to fetch ${localUrl}: ${error.message}`);
     await appendFile(htmlErrorsFile, `\nERROR: Failed to fetch ${localUrl}: ${error.message}\n`);
-    httpErrorCount++;
+    state.httpErrorCount++;
     return;
   }
 
   if (!response.ok) {
     console.error(`ERROR: ${localUrl} returned status code HTTP ${response.status}.`);
     await appendFile(htmlErrorsFile, `\nERROR: ${localUrl} returned status code HTTP ${response.status}.\n`);
-    httpErrorCount++;
+    state.httpErrorCount++;
     return;
   }
 
@@ -169,8 +168,8 @@ await processUrlsBatch(urls, {
   },
 });
 
-if (httpErrorCount > 0) {
-  console.error(`Validation failed with ${httpErrorCount} HTTP errors.`);
+if (state.httpErrorCount > 0) {
+  console.error(`Validation failed with ${state.httpErrorCount} HTTP errors.`);
 } else {
   console.log("All URLs in the sitemap file returned HTTP 200.");
 }
@@ -183,6 +182,6 @@ if (zeroFontsContent.trim() === `Informe actualitzat el dia: ${catalanDate}`) {
 
 // Exit with error code if any errors were found.
 const htmlErrorsContent = await readFile(htmlErrorsFile, "utf8");
-if (httpErrorCount > 0 || htmlErrorsContent.trim() !== "") {
+if (state.httpErrorCount > 0 || htmlErrorsContent.trim() !== "") {
   process.exit(EXIT_CODE_ERROR);
 }

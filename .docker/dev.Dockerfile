@@ -4,7 +4,7 @@ FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Debian-based image with Apache and mod_php. Used for development."
 
-ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.11.9
+ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.11.12
 ARG profiler
 
 WORKDIR /srv/app

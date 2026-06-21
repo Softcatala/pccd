@@ -131,6 +131,35 @@ const processGif = (sourceFile, targetFile) => {
   execFileSync(GIF2WEBP, ["-q", "100", "-mt", "-m", "6", "-o", targetFileWebp, targetFile]);
 };
 
+const processFile = async ({ file, sourceDirectory, targetDirectory, width }) => {
+  const sourceFile = path.join(sourceDirectory, file);
+  const targetFile = path.join(targetDirectory, file);
+
+  // Process file only once.
+  if (fs.existsSync(targetFile)) {
+    return;
+  }
+
+  const extension = path.extname(file).toLowerCase();
+  switch (extension) {
+    case ".gif": {
+      processGif(sourceFile, targetFile);
+      break;
+    }
+    case ".jpg": {
+      await processJpg(sourceFile, targetFile, width);
+      break;
+    }
+    case ".png": {
+      await processPng(sourceFile, targetFile, width);
+      break;
+    }
+    default: {
+      break;
+    }
+  }
+};
+
 const resizeAndOptimizeImagesBulk = async (sourceDirectory, targetDirectory, width) => {
   if (!fs.existsSync(targetDirectory)) {
     fs.mkdirSync(targetDirectory, { recursive: true });
@@ -142,32 +171,7 @@ const resizeAndOptimizeImagesBulk = async (sourceDirectory, targetDirectory, wid
       continue;
     }
 
-    const sourceFile = path.join(sourceDirectory, file);
-    const targetFile = path.join(targetDirectory, file);
-
-    // Process file only once.
-    if (fs.existsSync(targetFile)) {
-      continue;
-    }
-
-    const extension = path.extname(file).toLowerCase();
-    switch (extension) {
-      case ".gif": {
-        processGif(sourceFile, targetFile);
-        break;
-      }
-      case ".jpg": {
-        await processJpg(sourceFile, targetFile, width);
-        break;
-      }
-      case ".png": {
-        await processPng(sourceFile, targetFile, width);
-        break;
-      }
-      default: {
-        break;
-      }
-    }
+    await processFile({ file, sourceDirectory, targetDirectory, width });
   }
 };
 

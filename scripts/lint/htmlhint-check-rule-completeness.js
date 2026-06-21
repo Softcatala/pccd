@@ -16,8 +16,8 @@ import process from "node:process";
 import config from "../../.htmlhintrc.json" with { type: "json" };
 
 try {
-  const configuredRules = Object.keys(config).toSorted();
-  const availableRules = Object.keys(HTMLHint.rules).toSorted();
+  const configuredRules = Object.keys(config).toSorted((a, b) => a.localeCompare(b));
+  const availableRules = Object.keys(HTMLHint.rules).toSorted((a, b) => a.localeCompare(b));
   const missingRules = availableRules.filter((rule) => !Object.hasOwn(config, rule));
   const extraRules = configuredRules.filter((rule) => !availableRules.includes(rule));
 

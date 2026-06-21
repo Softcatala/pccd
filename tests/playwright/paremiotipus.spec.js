@@ -41,9 +41,9 @@ test.describe("Paremiotipus", () => {
     // Extract the path from the full URL and create a new URL with baseURL.
     const originalUrl = new URL(twitterImage);
     const imagePath = originalUrl.pathname;
-    const testImageUrl = new URL(imagePath, baseURL).toString();
+    const testImageUrl = new URL(imagePath, baseURL);
 
-    const response = await page.request.get(testImageUrl);
+    const response = await page.request.get(testImageUrl.href);
     expect(response.status()).toBe(HTTP_OK_STATUS);
     expect(response.headers()["content-type"]).toContain("image");
   });
@@ -58,9 +58,9 @@ test.describe("Paremiotipus", () => {
     // Extract the path from the full URL and create a new URL with baseURL.
     const originalUrl = new URL(ogImage);
     const imagePath = originalUrl.pathname;
-    const testImageUrl = new URL(imagePath, baseURL).toString();
+    const testImageUrl = new URL(imagePath, baseURL);
 
-    const response = await page.request.get(testImageUrl);
+    const response = await page.request.get(testImageUrl.href);
     expect(response.status()).toBe(HTTP_OK_STATUS);
     expect(response.headers()["content-type"]).toContain("image");
   });

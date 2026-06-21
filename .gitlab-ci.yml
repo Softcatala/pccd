@@ -4,7 +4,7 @@ include:
 
 variables:
   PROJECT_TO_BE_DEPLOYED: "docker/pccd"
-  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.11.9"
+  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.11.12"
 
 stages:
   - build

@@ -86,15 +86,14 @@ if (toggleTranslations) {
 
 // Play Common Voice files on click.
 // TODO: remove the counter RML easter egg.
-let cvCounter = 0;
+const state = { cvCounter: 0 };
 for (const audio of document.querySelectorAll(".audio")) {
-  // eslint-disable-next-line no-loop-func -- each listener needs its own audio reference
   audio.addEventListener("click", (event) => {
     event.preventDefault();
     audio.firstElementChild.play();
-    cvCounter++;
+    state.cvCounter++;
 
-    if (cvCounter > CV_COUNTER_THRESHOLD && toggleTranslations) {
+    if (state.cvCounter > CV_COUNTER_THRESHOLD && toggleTranslations) {
       toggleTranslations.removeAttribute("hidden");
     }
   });
@@ -103,9 +102,11 @@ for (const audio of document.querySelectorAll(".audio")) {
 // Make elements with role="button" to behave consistently with buttons.
 for (const button of document.querySelectorAll('[role="button"]')) {
   button.addEventListener("keydown", (event) => {
-    if (event.key === " ") {
-      event.preventDefault();
-      button.click();
+    if (event.key !== " ") {
+      return;
     }
+
+    event.preventDefault();
+    button.click();
   });
 }

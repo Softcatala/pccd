@@ -91,8 +91,8 @@ const expirationDateDays = Math.floor((expirationDate - currentDate) / DAYS_IN_M
 
 // Color output based on days remaining.
 const isWarning = expirationDateDays < WARNING_DAYS;
-const color = isWarning ? "\u001B[0;31m" : "\u001B[0;32m";
-const nc = "\u001B[0m";
+const color = isWarning ? "\u{1B}[0;31m" : "\u{1B}[0;32m";
+const nc = "\u{1B}[0m";
 
 const location = originIp ? `${remoteEnvironmentUrl} (${originIp})` : remoteEnvironmentUrl;
 console.log(`${color}${location} certificate expires in ${expirationDateDays} days.${nc}`);

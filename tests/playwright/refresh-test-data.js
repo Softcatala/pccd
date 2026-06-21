@@ -6,13 +6,12 @@ import { writeFile } from "node:fs/promises";
 
 import data from "../../data/playwright/data.json" with { type: "json" };
 
-const JSON_INDENT_SPACES = 2;
-
 process.loadEnvFile();
 if (!process.env.BASE_URL) {
   throw new Error("BASE_URL variable is not set.");
 }
 
+const JSON_INDENT_SPACES = 2;
 const baseUrl = process.env.BASE_URL;
 
 const extractNumber = (text, regex) => {

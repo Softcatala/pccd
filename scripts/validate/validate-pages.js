@@ -113,8 +113,10 @@ const validateUrl = async (url, options = {}) => {
     console.log("==============");
     const htmlValidateInstance = new HtmlValidate(htmlValidateConfig);
     const htmlValidateResult = await htmlValidateInstance.validateString(html);
+
     if (!htmlValidateResult.valid) {
-      for (const message of htmlValidateResult.results[0].messages) {
+      const messages = htmlValidateResult.results[0].messages;
+      for (const message of messages) {
         console.error(`${outputFilename}:${message.line}:${message.column}: ${message.message} (${message.ruleId})`);
       }
 

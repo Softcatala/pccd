@@ -110,7 +110,7 @@ final readonly class ParemiotipusVariant
         }
 
         if ($this->ARTICLE !== '') {
-            $citation .= ' «' . html_escape_and_link_urls($this->ARTICLE) . '»';
+            $citation .= ' ' . html_escape_and_link_urls(quote_unquoted($this->ARTICLE));
         }
 
         if ($this->PAGINA !== '') {
@@ -536,15 +536,16 @@ function render_image_caption(string $autor, string $any, string $diari, string 
     }
 
     if ($article !== '') {
-        if (str_contains($article, 'http')) {
-            $article_html = html_escape_and_link_urls($article);
+        $article_quoted = quote_unquoted($article);
+        if (str_contains($article_quoted, 'http')) {
+            $article_html = html_escape_and_link_urls($article_quoted);
         } else {
-            $article_html = htmlspecialchars($article);
+            $article_html = htmlspecialchars($article_quoted);
             if ($link !== '') {
                 $article_html = '<a href="' . $link . '" class="external" target="_blank" rel="noopener">' . $article_html . '</a>';
             }
         }
-        $image_caption .= " «{$article_html}»";
+        $image_caption .= ' ' . $article_html;
     }
 
     // Remove potentially introduced leading spaces and punctuation.
@@ -555,6 +556,18 @@ function render_image_caption(string $autor, string $any, string $diari, string 
     }
 
     return '<figcaption class="small">' . $image_caption . '</figcaption>';
+}
+
+/**
+ * Gets the text quoted with guillemets, unless they are already quoted.
+ */
+function quote_unquoted(string $text): string
+{
+    if (str_starts_with($text, '«')) {
+        return $text;
+    }
+
+    return '«' . $text . '»';
 }
 
 /**

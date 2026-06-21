@@ -7,9 +7,6 @@
  * source code in the file LICENSE.
  */
 
-const MANUALLY_ENABLED = "1";
-const MANUALLY_DISABLED = "2";
-
 const checkboxDefaults = [
   { key: "variant", defaultChecked: true },
   { key: "sinonim", defaultChecked: false },
@@ -30,7 +27,10 @@ if (isHomepage && !previousButton) {
   }
 }
 
-globalThis.addEventListener("keydown", (event) => {
+const MANUALLY_ENABLED = "1";
+const MANUALLY_DISABLED = "2";
+
+addEventListener("keydown", (event) => {
   if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") {
     return;
   }
@@ -78,9 +78,10 @@ pager.addEventListener("change", () => {
 });
 
 // Ensure the following is executed with browser back/forward navigation.
-window.addEventListener("pageshow", () => {
+addEventListener("pageshow", () => {
   // Ensure browser does not try to remember last form value, as it doesn't help.
-  searchBox.value = new URLSearchParams(location.search).get("cerca") || "";
+  const urlSearchParameters = new URLSearchParams(location.search);
+  searchBox.value = urlSearchParameters.get("cerca") || "";
 
   // On desktop, select the searched value, so it can be replaced by simply typing.
   if (searchBox.value && !/Android|iPad|iPhone/u.test(navigator.userAgent)) {

@@ -39,7 +39,7 @@ foreach ($lines as $i => $line) {
     }
 
     [, $path, $sentence, $up_votes, $down_votes] = explode("\t", $line);
-    $sentence = trim($sentence, ". \n\r\t\v\x00");
+    $sentence = trim($sentence, '.' . DEFAULT_TRIM_CHARS);
     $votes = (int) $up_votes - (int) $down_votes;
 
     // Discard pronunciations with less than 1 positive votes.

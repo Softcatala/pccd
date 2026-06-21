@@ -59,7 +59,7 @@ try {
 
       // Track which preset each rule comes from.
       for (const ruleName of Object.keys(presetRules)) {
-        if (!presetSources[ruleName]) {
+        if (!Object.hasOwn(presetSources, ruleName)) {
           presetSources[ruleName] = [];
         }
         presetSources[ruleName].push(`html-validate:${presetName}`);

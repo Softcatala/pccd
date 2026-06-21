@@ -18,7 +18,7 @@ const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 const OG_TEXT_MAX_LINES = 4;
 const OG_FONT_PATH = __DIR__ . '/fonts/Roboto-Regular.ttf';
-const OG_TRIM_CHARS = "[](),?!:;«»º-–—―─'\"“”‘’….¡¿* \n\r\t\v\0\x95";
+const OG_TRIM_CHARS = "[](),?!:;«»º-–—―─'\"“”‘’….¡¿*\x95" . DEFAULT_TRIM_CHARS;
 
 /**
  * Renders an OG image for the provided paremiotipus slug and exits.

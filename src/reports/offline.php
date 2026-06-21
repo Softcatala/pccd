@@ -248,39 +248,6 @@ function background_test_paremiotipus_accents(): string
     return $output;
 }
 
-function background_test_html_escape_and_link_urls(): string
-{
-    require_once __DIR__ . '/../common.php';
-
-    @unlink(__DIR__ . '/../../data/reports/test_tmp_debug_html_escape_and_link_urls.txt');
-
-    $records = get_db()->query('SELECT DISTINCT `Observacions` FROM `00_FONTS` WHERE `Observacions` IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($records as $r) {
-        html_escape_and_link_urls(text: $r, debug: true);
-    }
-
-    $records = get_db()->query('SELECT DISTINCT `URL` FROM `00_FONTS` WHERE `URL` IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($records as $r) {
-        html_escape_and_link_urls(text: $r, debug: true);
-    }
-
-    $records = get_db()->query('SELECT DISTINCT `URL_ENLLAÇ` FROM `00_IMATGES` WHERE `URL_ENLLAÇ` IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($records as $r) {
-        html_escape_and_link_urls(text: $r, debug: true);
-    }
-
-    $records = get_db()->query('SELECT DISTINCT `ARTICLE` FROM `00_PAREMIOTIPUS` WHERE `ARTICLE` IS NOT NULL')->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($records as $r) {
-        html_escape_and_link_urls(text: $r, debug: true);
-    }
-
-    // This file is created by html_escape_and_link_urls() when debug mode is enabled.
-    $string = file_get_contents(__DIR__ . '/../../data/reports/test_tmp_debug_html_escape_and_link_urls.txt');
-    assert($string !== false);
-
-    return $string;
-}
-
 function background_test_imatges_no_existents(): string
 {
     require_once __DIR__ . '/../common.php';

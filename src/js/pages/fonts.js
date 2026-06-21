@@ -36,13 +36,14 @@ new DataTable("#fonts", {
       return table;
     }
 
-    const tHead = table.firstChild;
+    /* eslint-disable unicorn/better-dom-traversing -- simple-datatables uses a virtual DOM structure */
+    const tHead = table.childNodes[0];
     const filterHeaders = {
-      childNodes: tHead.firstChild.childNodes.map((th, index) => {
+      childNodes: tHead.childNodes[0].childNodes.map((th, index) => {
         const buttonNode = th.childNodes.find((node) => node.nodeName === "BUTTON");
         const labelText =
-          buttonNode && buttonNode.childNodes.length > 0 && buttonNode.firstChild.nodeName === "#text"
-            ? buttonNode.firstChild.data
+          buttonNode && buttonNode.childNodes.length > 0 && buttonNode.childNodes[0].nodeName === "#text"
+            ? buttonNode.childNodes[0].data
             : index + 1;
         return {
           childNodes: [

@@ -15,7 +15,12 @@ import process from "node:process";
 import { validateXML } from "xmllint-wasm";
 
 const globXml = async (directory) => {
-  const entries = await readdir(directory).catch(() => []);
+  let entries;
+  try {
+    entries = await readdir(directory);
+  } catch {
+    entries = [];
+  }
   return entries.filter((f) => f.endsWith(".xml")).map((f) => (directory === "." ? f : path.join(directory, f)));
 };
 
