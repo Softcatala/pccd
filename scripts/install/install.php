@@ -22,8 +22,6 @@ require __DIR__ . '/../../src/common.php';
 
 require __DIR__ . '/../../src/install_common.php';
 
-$pdo = get_db();
-
 // Check that latest table has already been created to know if we are ready to proceed with the installation process.
 if (!table_exists('paremiotipus_display')) {
     echo "Not ready to install\n";
@@ -40,19 +38,19 @@ if (table_exists('pccd_is_installed')) {
 
 // TODO: DRY.
 echo date('[H:i:s]') . ' standarizing quotes...' . "\n";
-$pdo->exec("UPDATE `00_PAREMIOTIPUS` SET `MODISME` = REPLACE(REPLACE(REPLACE(REPLACE(`MODISME`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\''), `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
-$pdo->exec("UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
-$pdo->exec("UPDATE `RML` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
+get_db()->exec("UPDATE `00_PAREMIOTIPUS` SET `MODISME` = REPLACE(REPLACE(REPLACE(REPLACE(`MODISME`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\''), `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
+get_db()->exec("UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
+get_db()->exec("UPDATE `RML` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
 
 echo date('[H:i:s]') . ' preprocessing columns for improved sorting and display...' . "\n";
-$insert_display_stmt = $pdo->prepare('INSERT IGNORE INTO `paremiotipus_display`(`Paremiotipus`, `Display`) VALUES(?, ?)');
-$paremiotipus = $pdo->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+$insert_display_stmt = db_prepare('INSERT IGNORE INTO `paremiotipus_display`(`Paremiotipus`, `Display`) VALUES(?, ?)');
+$paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $p) {
     $insert_display_stmt->execute([clean_paremiotipus_for_sorting($p), $p]);
 }
-$add_accepcio_stmt = $pdo->prepare('UPDATE `00_PAREMIOTIPUS` SET `MODISME` = ?, `ACCEPCIO` = ? WHERE `Id` = ?');
-$improve_sorting_stmt = $pdo->prepare('UPDATE `00_PAREMIOTIPUS` SET `PAREMIOTIPUS` = ? WHERE `Id` = ?');
-$paremies = $pdo->query('SELECT `Id`, `PAREMIOTIPUS`, `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
+$add_accepcio_stmt = db_prepare('UPDATE `00_PAREMIOTIPUS` SET `MODISME` = ?, `ACCEPCIO` = ? WHERE `Id` = ?');
+$improve_sorting_stmt = db_prepare('UPDATE `00_PAREMIOTIPUS` SET `PAREMIOTIPUS` = ? WHERE `Id` = ?');
+$paremies = db_query('SELECT `Id`, `PAREMIOTIPUS`, `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
 foreach ($paremies as $p) {
     // Try to clean phrases ending with numbers and fill ACCEPCIO field instead.
     // TODO: ideally this should be handled in the DB side.
@@ -72,21 +70,21 @@ foreach ($paremies as $p) {
 }
 
 echo date('[H:i:s]') . ' normalizing paremiotipus in images table...' . "\n";
-$normalize_paremiotipus_images_stmt = $pdo->prepare('UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = ? WHERE `Comptador` = ?');
-$images = $pdo->query('SELECT `Comptador`, `PAREMIOTIPUS` FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
+$normalize_paremiotipus_images_stmt = db_prepare('UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = ? WHERE `Comptador` = ?');
+$images = db_query('SELECT `Comptador`, `PAREMIOTIPUS` FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
 foreach ($images as $image) {
     $normalize_paremiotipus_images_stmt->execute([clean_paremiotipus_for_sorting($image['PAREMIOTIPUS']), $image['Comptador']]);
 }
 echo date('[H:i:s]') . ' normalizing paremiotipus in multilingüe...' . "\n";
-$normalize_paremiotipus_rml_stmt = $pdo->prepare('UPDATE `RML` SET `PAREMIOTIPUS` = ? WHERE `NUM_ORDRE` = ?');
-$rml = $pdo->query('SELECT `NUM_ORDRE`, `PAREMIOTIPUS` FROM `RML`')->fetchAll(PDO::FETCH_ASSOC);
+$normalize_paremiotipus_rml_stmt = db_prepare('UPDATE `RML` SET `PAREMIOTIPUS` = ? WHERE `NUM_ORDRE` = ?');
+$rml = db_query('SELECT `NUM_ORDRE`, `PAREMIOTIPUS` FROM `RML`')->fetchAll(PDO::FETCH_ASSOC);
 foreach ($rml as $record) {
     $normalize_paremiotipus_rml_stmt->execute([clean_paremiotipus_for_sorting($record['PAREMIOTIPUS']), $record['NUM_ORDRE']]);
 }
 
 echo date('[H:i:s]') . ' importing top 10000 paremiotipus...' . "\n";
-$insert_stmt = $pdo->prepare('INSERT INTO `common_paremiotipus`(`Paremiotipus`, `Compt`) VALUES(?, ?)');
-$records = $pdo->query('SELECT
+$insert_stmt = db_prepare('INSERT INTO `common_paremiotipus`(`Paremiotipus`, `Compt`) VALUES(?, ?)');
+$records = db_query('SELECT
         `PAREMIOTIPUS`,
         COUNT(1) AS `POPULAR`
     FROM
@@ -107,4 +105,4 @@ store_image_dimensions('00_FONTS', 'Imatge', 'docroot/img/obres');
 store_image_dimensions('00_OBRESVPR', 'Imatge', 'docroot/img/obres');
 
 echo date('[H:i:s]') . ' database installation has finished!' . "\n";
-$pdo->exec('CREATE TABLE `pccd_is_installed`(`id` int)');
+get_db()->exec('CREATE TABLE `pccd_is_installed`(`id` int)');

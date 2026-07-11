@@ -20,10 +20,12 @@ function test_paremiotipus_accents(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus amb diferències de majúscules, accents, o espais al principi/final</h3>';
-    echo '<pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_paremiotipus_accents.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_paremiotipus_accents.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$output}</pre></details>";
+    }
 }
 
 function test_paremiotipus_modismes_diferents(): void
@@ -31,10 +33,9 @@ function test_paremiotipus_modismes_diferents(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus diferents que contenen exactament el mateix modisme</h3>';
-    echo '<pre>';
     $accents = '';
-    $found = false;
-    $paremiotipus = get_db()->query('
+    $output = '';
+    $paremiotipus = db_query('
         SELECT
             `a`.`PAREMIOTIPUS`   as `P_A`,
             `a`.`MODISME`        as `M_A`,
@@ -55,10 +56,9 @@ function test_paremiotipus_modismes_diferents(): void
         if (!isset($seen_pairs[$pair_key])) {
             $seen_pairs[$pair_key] = true;
             if ($m['M_A'] === $m['M_B']) {
-                echo get_paremiotipus_display($m['P_A'], escape_html: false) . ' (modisme: ' . $m['M_A'] . ")\n";
-                echo get_paremiotipus_display($m['P_B'], escape_html: false) . ' (modisme: ' . $m['M_B'] . ")\n";
-                echo "\n";
-                $found = true;
+                $output .= get_paremiotipus_display($m['P_A'], escape_html: false) . ' (modisme: ' . $m['M_A'] . ")\n";
+                $output .= get_paremiotipus_display($m['P_B'], escape_html: false) . ' (modisme: ' . $m['M_B'] . ")\n";
+                $output .= "\n";
             } else {
                 // Rely on DB Collation to detect these and show them below.
                 $accents .= get_paremiotipus_display($m['P_A'], escape_html: false) . ' (modisme: ' . $m['M_A'] . ")\n";
@@ -67,15 +67,18 @@ function test_paremiotipus_modismes_diferents(): void
             }
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$output}</pre></details>";
     }
-    echo '</pre>';
 
     echo '<h3>Paremiotipus diferents que contenen un mateix modisme amb diferències de majúscules o accents (o espais al principi/final)</h3>';
-    echo '<pre>';
-    echo $accents !== '' ? $accents : '(cap resultat)';
-    echo '</pre>';
+    if ($accents === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$accents}</pre></details>";
+    }
 }
 
 function test_paremiotipus_repetits(): void
@@ -83,11 +86,10 @@ function test_paremiotipus_repetits(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus molt semblants (consecutius)</h3>';
-    echo '<details><pre>';
     $prev = '';
     $prev_normalized = '';
-    $modismes = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
-    $found = false;
+    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $output = '';
     foreach ($modismes as $m) {
         $normalized = strtolower(substr($m, 0, SIMILAR_TEXT_MAX_LENGTH));
         if ($prev_normalized !== '') {
@@ -99,29 +101,30 @@ function test_paremiotipus_repetits(): void
                     && strlen($normalized) > SIMILAR_TEXT_MIN_LENGTH
                 )
             ) {
-                echo get_paremiotipus_display($prev, escape_html: false) . "\n";
-                echo get_paremiotipus_display($m, escape_html: false) . "\n\n";
-                $found = true;
+                $output .= get_paremiotipus_display($prev, escape_html: false) . "\n";
+                $output .= get_paremiotipus_display($m, escape_html: false) . "\n\n";
             }
         }
         $prev = $m;
         $prev_normalized = $normalized;
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
     }
-    echo '</pre></details>';
 
     echo '<h3>Paremiotipus amb diferències de caràcters que es poden confondre visualment (consecutius)</h3>';
-    echo '<pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_paremiotipus_repetits.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_paremiotipus_repetits.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$output}</pre></details>";
+    }
 
     echo "<h3>Nous paremiotipus molt semblants des de l'última actualització (Levenshtein)</h3>";
-    echo '<pre>';
     $lines = file(__DIR__ . '/../../data/reports/test_repetits_new.txt');
-    $found = false;
+    $output = '';
     if ($lines !== false) {
         $prev = '';
         foreach ($lines as $line) {
@@ -134,22 +137,24 @@ function test_paremiotipus_repetits(): void
                     || str_starts_with($line, '+')
                 )
             ) {
-                echo ltrim($prev, '+') . "\n";
-                echo ltrim($line, '+') . "\n";
-                echo "\n";
-                $found = true;
+                $output .= ltrim($prev, '+') . "\n";
+                $output .= ltrim($line, '+') . "\n";
+                $output .= "\n";
             }
             $prev = $line;
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$output}</pre></details>";
     }
-    echo '</pre>';
 
     echo '<h3>Paremiotipus molt semblants (Levenshtein)</h3>';
-    echo '<details><pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_repetits.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre></details>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_repetits.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
+    }
 }

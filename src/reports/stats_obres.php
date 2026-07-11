@@ -25,7 +25,7 @@ function stats_obres(): void
     echo get_chart('line', $fonts_number_data, 'fonts', 'Mesos (2023-)', 'Nombre de fonts', style: 'width:800px;');
 
     echo "<h3>Obres ordenades pel nombre d'entrades a la base de dades</h3>";
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             00_FONTS.`Identificador` as Font,
             00_FONTS.`Registres` as Registres,
             COUNT(00_PAREMIOTIPUS.`ID_FONT`) AS NumberOfReferences

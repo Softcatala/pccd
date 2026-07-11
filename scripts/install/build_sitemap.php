@@ -27,13 +27,13 @@ foreach ($discoverable_static_pages as $page) {
     $urls .= "{$site}/{$page}\n";
 }
 
-$stmt = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`');
+$stmt = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`');
 $paremiotipus = $stmt->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $p) {
     $urls .= get_paremiotipus_url($p, absolute: true) . "\n";
 }
 
-$stmt = get_db()->query('SELECT DISTINCT `Identificador` FROM `00_FONTS`');
+$stmt = db_query('SELECT DISTINCT `Identificador` FROM `00_FONTS`');
 $obres = $stmt->fetchAll(PDO::FETCH_COLUMN);
 foreach ($obres as $o) {
     $urls .= get_obra_url($o, absolute: true) . "\n";

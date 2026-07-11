@@ -23,7 +23,7 @@ function background_test_llibres_urls(): string
 
     $output = '';
     $urls = [];
-    $llibres = get_db()->query('SELECT * FROM `00_OBRESVPR`')->fetchAll(PDO::FETCH_ASSOC);
+    $llibres = db_query('SELECT * FROM `00_OBRESVPR`')->fetchAll(PDO::FETCH_ASSOC);
     foreach ($llibres as $llibre) {
         if ($llibre['URL'] === '') {
             $output .= 'URL buida (Identificador ' . $llibre['Títol'] . ")\n";
@@ -63,7 +63,7 @@ function background_test_fonts_urls(): string
 
     $output = '';
     $urls = [];
-    $fonts = get_db()->query('SELECT * FROM `00_FONTS`')->fetchAll(PDO::FETCH_ASSOC);
+    $fonts = db_query('SELECT * FROM `00_FONTS`')->fetchAll(PDO::FETCH_ASSOC);
     foreach ($fonts as $font) {
         assert(is_string($font['URL']));
         $url = trim($font['URL']);
@@ -95,7 +95,7 @@ function background_test_imatges_urls(int $start = 0, int $end = 0): string
 
     $output = '';
     $urls = [];
-    $fonts = get_db()->query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
+    $fonts = db_query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
 
     $limit = $end;
     if ($limit === 0) {
@@ -134,7 +134,7 @@ function background_test_imatges_links(int $start = 0, int $end = 0): string
 
     $output = '';
     $urls = [];
-    $fonts = get_db()->query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
+    $fonts = db_query('SELECT * FROM `00_IMATGES`')->fetchAll(PDO::FETCH_ASSOC);
 
     $limit = $end;
     if ($limit === 0) {
@@ -190,7 +190,7 @@ function background_test_paremiotipus_repetits(int $start = 0, int $end = 0): st
 {
     require_once __DIR__ . '/../common.php';
 
-    $modismes = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     $total = count($modismes);
 
     $limit = $end;
@@ -229,7 +229,7 @@ function background_test_paremiotipus_accents(): string
 {
     require_once __DIR__ . '/../common.php';
 
-    $paremiotipus = get_db()->query('SELECT DISTINCT BINARY
+    $paremiotipus = db_query('SELECT DISTINCT BINARY
         `a`.`PAREMIOTIPUS`
     FROM
         `00_PAREMIOTIPUS` `a`,
@@ -254,7 +254,7 @@ function background_test_imatges_no_existents(): string
 
     $output = '';
 
-    $stmt = get_db()->query('SELECT `Identificador` FROM `00_IMATGES`');
+    $stmt = db_query('SELECT `Identificador` FROM `00_IMATGES`');
     $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
     foreach ($imatges as $imatge) {
         if ($imatge === '') {
@@ -268,7 +268,7 @@ function background_test_imatges_no_existents(): string
         $output .= 'paremies/' . $imatge . "\n";
     }
 
-    $stmt = get_db()->query('SELECT `Imatge` FROM `00_FONTS`');
+    $stmt = db_query('SELECT `Imatge` FROM `00_FONTS`');
     $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
     foreach ($imatges as $i) {
         if ($i === '') {
@@ -294,7 +294,7 @@ function background_test_imatges_no_referenciades(): string
     $ignored_files = ['.', '..', '.picasa.ini'];
 
     $output = '';
-    $images = get_db()->query('SELECT `Identificador`, 1 FROM `00_IMATGES`')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $images = db_query('SELECT `Identificador`, 1 FROM `00_IMATGES`')->fetchAll(PDO::FETCH_KEY_PAIR);
     $dir = new DirectoryIterator(__DIR__ . '/../../docroot/img/imatges/');
     foreach ($dir as $file_info) {
         $filename = $file_info->getFilename();
@@ -313,8 +313,8 @@ function background_test_imatges_no_referenciades(): string
         $output .= "{$filename}\n";
     }
 
-    $fonts = get_db()->query('SELECT `Imatge`, 1 FROM `00_FONTS`')->fetchAll(PDO::FETCH_KEY_PAIR);
-    $llibres = get_db()->query('SELECT `Imatge`, 1 FROM `00_OBRESVPR`')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $fonts = db_query('SELECT `Imatge`, 1 FROM `00_FONTS`')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $llibres = db_query('SELECT `Imatge`, 1 FROM `00_OBRESVPR`')->fetchAll(PDO::FETCH_KEY_PAIR);
     $dir = new DirectoryIterator(__DIR__ . '/../../docroot/img/obres/');
     foreach ($dir as $file_info) {
         $filename = $file_info->getFilename();
@@ -347,7 +347,7 @@ function background_test_intl_paremiotipus_sospitosos(): string
     $checker = new Spoofchecker();
 
     $output = '';
-    $modismes = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     foreach ($modismes as $m) {
         assert(is_string($m));
         if ($checker->isSuspicious($m)) {
@@ -365,7 +365,7 @@ function background_test_intl_modismes_sospitosos(): string
     $checker = new Spoofchecker();
 
     $output = '';
-    $modismes = get_db()->query('SELECT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $modismes = db_query('SELECT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     foreach ($modismes as $modisme) {
         if ($checker->isSuspicious($modisme)) {
             $output .= $modisme . "\n";
@@ -383,7 +383,7 @@ function background_test_intl_paremiotipus_repetits(): string
 
     $output = '';
     $prev = '';
-    $paremiotipus = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     foreach ($paremiotipus as $p) {
         if ($checker->areConfusable($p, $prev)) {
             $output .= get_paremiotipus_display($prev, escape_html: false) . "\n";
@@ -402,7 +402,7 @@ function background_test_intl_modismes_repetits(): string
     $checker = new Spoofchecker();
 
     $output = '';
-    $results = get_db()->query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
+    $results = db_query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
     $grouped_results = [];
     foreach ($results as $row) {
         $grouped_results[$row['PAREMIOTIPUS']][] = $row['MODISME'];
@@ -430,7 +430,7 @@ function background_test_intl_modismes_molt_diferents(): string
     $words_exclude = ['a', 'amb', 'de', 'el', 'els', 'en', 'i', 'la', 'les', 'ni', 'o', 'per', 'que'];
     $prev_paremiotipus = '';
     $output = '';
-    $results = get_db()->query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
+    $results = db_query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_ASSOC);
     foreach ($results as $row) {
         if ($row['MODISME'] === $row['PAREMIOTIPUS']) {
             continue;

@@ -13,16 +13,21 @@
 function test_languagetool(): void
 {
     echo "<h3>Nous paremiotipus detectats amb LanguageTool des de l'última actualització</h3>";
-    $text = @file_get_contents(__DIR__ . '/../../data/reports/excluded_new.txt');
-    if ($text !== false) {
+    $text = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/excluded_new.txt'));
+    if ($text === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
         echo 'Total: ' . format_nombre(substr_count($text, "\n"));
-        $text = $text !== '' ? $text : '(cap resultat)';
         echo "<details open><pre>{$text}</pre></details>";
     }
 
     echo '<h3>Paremiotipus detectats amb LanguageTool</h3>';
-    $text = (string) @file_get_contents(__DIR__ . '/../../data/reports/excluded.txt');
+    $text = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/excluded.txt'));
     echo '<i>A causa d\'errors tipogràfics, ortogràfics, per incloure paraules malsonants, noms propis, localismes o falsos positius.</i>';
     echo '<br>Total: ' . format_nombre(substr_count($text, "\n"));
-    echo '<details><pre>' . ($text !== '' ? $text : '(cap resultat)') . '</pre></details>';
+    if ($text === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$text}</pre></details>";
+    }
 }

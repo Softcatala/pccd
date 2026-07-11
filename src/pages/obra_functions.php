@@ -19,7 +19,7 @@
  */
 function get_obra(string $obra_title): false|Obra
 {
-    $stmt = get_db()->prepare('SELECT
+    $stmt = db_prepare('SELECT
         `Any_edició`,
         `Any`,
         `Autor`,
@@ -73,7 +73,7 @@ function isbn_is_valid(string $input_isbn): bool
  */
 function get_paremiotipus_count_by_font(string $font_id): int
 {
-    $stmt = get_db()->prepare('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `ID_FONT` = :id');
+    $stmt = db_prepare('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `ID_FONT` = :id');
     $stmt->execute([':id' => $font_id]);
 
     return (int) $stmt->fetchColumn();

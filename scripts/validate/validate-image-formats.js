@@ -10,16 +10,8 @@
 
 import { readdir, writeFile } from "node:fs/promises";
 import console from "node:console";
-import { exec } from "node:child_process";
 import path from "node:path";
-import { promisify } from "node:util";
 import sharp from "sharp";
-
-// TODO: consider removing these packages to reduce the number of system dependencies.
-const GREP = "grep";
-const GIFSICLE = "gifsicle";
-const JPEGINFO = "jpeginfo";
-const PNGCHECK = "pngcheck";
 
 const IGNORED_FILES = new Set([".picasa.ini"]);
 const EXTENSION_TO_FORMAT = {
@@ -30,15 +22,23 @@ const EXTENSION_TO_FORMAT = {
   webp: "webp",
 };
 
-const execAsync = promisify(exec);
 const rootDirectory = path.join(import.meta.dirname, "../..");
 const imageDirectory = path.join(rootDirectory, "images");
 const outputExtensionsFile = path.join(rootDirectory, "data/reports/test_imatges_extensions.txt");
 const outputFormatFile = path.join(rootDirectory, "data/reports/test_imatges_format.txt");
 
-const checkImageExtensions = async (category) => {
-  const results = [];
+const formatOutput = (title, results) => {
+  if (results.length === 0) {
+    return "";
+  }
+  return `${title}\n=============================\n${results.join("\n")}\n=============================\n\n`;
+};
+
+const checkImages = async (category) => {
+  const extensionResults = [];
+  const integrityResults = [];
   const categoryPath = path.join(imageDirectory, category);
+
   let files;
   try {
     files = await readdir(categoryPath);
@@ -51,64 +51,45 @@ const checkImageExtensions = async (category) => {
       continue;
     }
 
-    const extension = path.extname(file).slice(1);
+    const extension = path.extname(file).slice(1).toLowerCase();
     const expectedFormat = EXTENSION_TO_FORMAT[extension];
     const filePath = path.join(categoryPath, file);
 
     try {
-      const { format } = await sharp(filePath).metadata();
-      if (format !== expectedFormat) {
-        results.push(`${file} has format '${format || "unknown"}'`);
+      const image = sharp(filePath);
+
+      // 1. Check Extension vs Actual Format.
+      const metadata = await image.metadata();
+      if (metadata.format !== expectedFormat) {
+        extensionResults.push(`${file} has format '${metadata.format || "unknown"}'`);
       }
+
+      // 2. Check Integrity.
+      await image.stats();
     } catch (error) {
-      results.push(`${file}: ${error.message}`);
+      integrityResults.push(`${file}: ${error.message}`);
     }
   }
 
-  let content = `${category}\n=============================\n`;
-  content += results.join("\n");
-  content += "\n=============================\n\n";
-
-  return content;
-};
-
-const checkImageIntegrity = async (category) => {
-  const relativePath = path.join("images", category);
-  const results = [];
-
-  const toolConfigs = [
-    { cmd: `${JPEGINFO} -c "${relativePath}"/*.jpg | ${GREP} -w ERROR`, output: "stdout" },
-    { cmd: `${PNGCHECK} -q "${relativePath}"/*.png`, output: "stdout" },
-    { cmd: `${GIFSICLE} --info "${relativePath}"/*.gif`, output: "stderr", checkErrorStderr: true },
-  ];
-
-  for (const { cmd, output, checkErrorStderr } of toolConfigs) {
-    try {
-      const { stdout, stderr } = await execAsync(cmd, { cwd: rootDirectory });
-      const outputValue = output === "stdout" ? stdout : stderr;
-      if (outputValue) {
-        results.push(outputValue);
-      }
-    } catch (error) {
-      if (checkErrorStderr && error.stderr) {
-        results.push(error.stderr);
-      }
-    }
-  }
-
-  return results.join("");
+  return {
+    extensionsContent: formatOutput(category, extensionResults),
+    integrityContent: formatOutput(category, integrityResults),
+  };
 };
 
 console.log("Checking image extensions and formats...");
+
 const categories = ["cobertes", "paremies"];
-let extensionsContent = "";
-let formatContent = "";
+let finalExtensionsContent = "";
+let finalIntegrityContent = "";
+
 for (const category of categories) {
-  extensionsContent += await checkImageExtensions(category);
-  formatContent += await checkImageIntegrity(category);
+  const { extensionsContent, integrityContent } = await checkImages(category);
+  finalExtensionsContent += extensionsContent;
+  finalIntegrityContent += integrityContent;
 }
 
-await writeFile(outputExtensionsFile, extensionsContent);
-await writeFile(outputFormatFile, formatContent);
+await writeFile(outputExtensionsFile, finalExtensionsContent);
+await writeFile(outputFormatFile, finalIntegrityContent);
 
 console.log("Image validation finished.");

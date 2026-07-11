@@ -177,7 +177,7 @@ if (state.httpErrorCount > 0) {
 // Add final message if no zero fonts found.
 const zeroFontsContent = await readFile(zeroFontsFile, "utf8");
 if (zeroFontsContent.trim() === `Informe actualitzat el dia: ${catalanDate}`) {
-  await appendFile(zeroFontsFile, "<em>No hi ha parèmies amb 0 fonts.</em>\n");
+  await appendFile(zeroFontsFile, "(no hi ha parèmies amb 0 fonts).\n");
 }
 
 // Exit with error code if any errors were found.

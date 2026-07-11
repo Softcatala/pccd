@@ -17,34 +17,34 @@ function stats_mysql(): void
     echo '<h2>MariaDB Statistics</h2>';
 
     echo '<h3>InnoDB Buffer Pool Stats</h3>';
-    $buffer_pool_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool%';")->fetchAll(PDO::FETCH_ASSOC);
+    $buffer_pool_stats = db_query("SHOW GLOBAL STATUS LIKE 'Innodb_buffer_pool%';")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($buffer_pool_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Query Cache Stats</h3>';
-    $query_cache_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Qcache%';")->fetchAll(PDO::FETCH_ASSOC);
+    $query_cache_stats = db_query("SHOW GLOBAL STATUS LIKE 'Qcache%';")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($query_cache_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Performance Metrics</h3>';
-    $slow_queries = get_db()->query("SHOW GLOBAL STATUS LIKE 'Slow_queries';")->fetch(PDO::FETCH_ASSOC);
+    $slow_queries = db_query("SHOW GLOBAL STATUS LIKE 'Slow_queries';")->fetch(PDO::FETCH_ASSOC);
     assert(is_array($slow_queries) && is_string($slow_queries['Value']));
     echo "Slow Queries: {$slow_queries['Value']}<br>";
 
     echo '<h3>Thread Statistics</h3>';
-    $thread_stats = get_db()->query("SHOW GLOBAL STATUS LIKE 'Threads%';")->fetchAll(PDO::FETCH_ASSOC);
+    $thread_stats = db_query("SHOW GLOBAL STATUS LIKE 'Threads%';")->fetchAll(PDO::FETCH_ASSOC);
     foreach ($thread_stats as $stat) {
         echo "{$stat['Variable_name']}: {$stat['Value']}<br>";
     }
 
     echo '<h3>Table Cache</h3>';
-    $table_cache = get_db()->query("SHOW GLOBAL STATUS LIKE 'Open_tables';")->fetch(PDO::FETCH_ASSOC);
+    $table_cache = db_query("SHOW GLOBAL STATUS LIKE 'Open_tables';")->fetch(PDO::FETCH_ASSOC);
     assert(is_array($table_cache) && is_string($table_cache['Value']));
     echo "Open Tables: {$table_cache['Value']}<br>";
 
-    $records = get_db()->query("
+    $records = db_query("
         SELECT
             table_name,
             ROUND((data_length + index_length) / 1024 / 1024, 2) AS size_mb,
@@ -67,7 +67,7 @@ function stats_mysql(): void
     }
 
     echo '<h3>Database Summary</h3>';
-    $total_size_mb = get_db()->query("SELECT
+    $total_size_mb = db_query("SELECT
         ROUND(SUM(data_length + index_length) / 1024 / 1024, 2)
     FROM
         information_schema.tables
@@ -77,7 +77,7 @@ function stats_mysql(): void
         table_schema")->fetchColumn();
     echo "Total Database size: {$total_size_mb} MB<br>";
 
-    $tables_without_pk = get_db()->query("
+    $tables_without_pk = db_query("
             SELECT
                 t.table_name
             FROM

@@ -76,7 +76,7 @@ Avoid unnecessary frameworks and abstractions. Use procedural code when appropri
 
 Prefer npm/Composer packages over system binaries. `composer.phar` is committed to the repository to ensure reproducibility.
 
-Current system dependencies include tools for image optimization (gifsicle, jpegoptim), validation (jpeginfo, pngcheck), linting (shellcheck, shfmt), and data processing (mdbtools, icu-devtools).
+Current system dependencies include tools for image optimization (gifsicle, jpegoptim), linting (shellcheck, shfmt), and data processing (mdbtools, icu-devtools).
 
 ### Dependency Versioning
 

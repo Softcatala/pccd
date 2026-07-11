@@ -19,7 +19,7 @@ function stats_autors(): void
     echo '<script src="/admin/js/chart.min.js"></script>';
 
     echo '<h3>Principals autors pel nombre de paremiotipus</h3>';
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `AUTOR`,
             COUNT(DISTINCT `PAREMIOTIPUS`) AS `Paremiotipus`
         FROM
@@ -52,7 +52,7 @@ function stats_autors(): void
     echo '</details>';
 
     echo '<h3>Principals autors pel nombre de fitxes</h3>';
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `AUTOR`,
             COUNT(1) AS `Fitxes`
         FROM
@@ -85,7 +85,7 @@ function stats_autors(): void
     echo '</details>';
 
     echo "<h3>Principals autors pel nombre d'obres</h3>";
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `AUTOR`,
             COUNT(1) AS `Obres`
         FROM

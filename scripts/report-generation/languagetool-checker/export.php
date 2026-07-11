@@ -12,9 +12,7 @@
 
 require __DIR__ . '/../../../src/common.php';
 
-$pdo = get_db();
-
-$paremiotipus = $pdo->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+$paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $p) {
     $p_display = get_paremiotipus_display($p, escape_html: false);
 

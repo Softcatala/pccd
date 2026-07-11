@@ -10,11 +10,16 @@
  * source code in the file LICENSE.
  */
 
+const SEARCH_CHECKBOX_COLUMNS = [
+    'equivalent' => '`EQUIVALENT`',
+    'sinonim' => '`SINONIM`',
+    'variant' => '`MODISME`',
+];
 const MAX_SEARCH_QUERY_LENGTH = 255;
 const PAGINATION_ALL_RESULTS = 999999;
-const PAGINATION_RESULTS_PER_PAGE_DEFAULT = 10;
-const PAGINATION_RESULTS_PER_PAGE_OPTIONS = [10, 15, 25, 50];
 const PAGINATION_ELLIPSIS_JUMP_SIZE = 5;
+const PAGINATION_RESULTS_PER_PAGE_OPTIONS = [10, 15, 25, 50];
+const PAGINATION_RESULTS_PER_PAGE_DEFAULT = PAGINATION_RESULTS_PER_PAGE_OPTIONS[0];
 
 /**
  * Returns the search mode from the query string, or the default if not present or invalid.
@@ -134,41 +139,40 @@ function get_search_pager_url(int $page_number): string
     $results_per_page = get_search_pagination_limit();
     if (!isset($_GET['cerca']) || $_GET['cerca'] === '' || !is_string($_GET['cerca'])) {
         // Simplify links to the homepage as much as possible.
-        if ($page_number === 1) {
-            if ($results_per_page === PAGINATION_RESULTS_PER_PAGE_DEFAULT) {
-                return '/';
-            }
-
-            return '/?mostra=' . $results_per_page;
+        if ($page_number === 1 && $results_per_page === PAGINATION_RESULTS_PER_PAGE_DEFAULT) {
+            return '/';
         }
 
-        if ($results_per_page === PAGINATION_RESULTS_PER_PAGE_DEFAULT) {
-            return '/?pagina=' . $page_number;
+        $params = [];
+        if ($results_per_page !== PAGINATION_RESULTS_PER_PAGE_DEFAULT) {
+            $params['mostra'] = $results_per_page;
+        }
+        if ($page_number > 1) {
+            $params['pagina'] = $page_number;
         }
 
-        return '/?mostra=' . $results_per_page . '&amp;pagina=' . $page_number;
+        return '/?' . htmlspecialchars(http_build_query($params));
     }
 
     // Build the URL in the same format as it is when the search form is submitted, so the browser/CDN cache can be
     // reused.
-    $url = '/?mode=';
-    if (isset($_GET['mode']) && is_string($_GET['mode'])) {
-        $url .= htmlspecialchars(urlencode($_GET['mode']));
+    $params = [];
+    $params['mode'] = isset($_GET['mode']) && is_string($_GET['mode']) ? $_GET['mode'] : '';
+    $params['cerca'] = $_GET['cerca'];
+
+    foreach (array_keys(SEARCH_CHECKBOX_COLUMNS) as $checkbox) {
+        if (isset($_GET[$checkbox])) {
+            $params[$checkbox] = '';
+        }
     }
 
-    $url .= '&amp;cerca=' . htmlspecialchars(urlencode($_GET['cerca']));
-
-    $url .= isset($_GET['variant']) ? '&amp;variant=' : '';
-    $url .= isset($_GET['sinonim']) ? '&amp;sinonim=' : '';
-    $url .= isset($_GET['equivalent']) ? '&amp;equivalent=' : '';
-
-    $url .= '&amp;mostra=' . $results_per_page;
+    $params['mostra'] = $results_per_page;
 
     if ($page_number > 1) {
-        $url .= '&amp;pagina=' . $page_number;
+        $params['pagina'] = $page_number;
     }
 
-    return $url;
+    return '/?' . htmlspecialchars(http_build_query($params));
 }
 
 /**
@@ -178,7 +182,7 @@ function get_search_pager_url(int $page_number): string
  */
 function render_results_per_page_selector(int $pagination_limit): string
 {
-    $html = '<select name="mostra" aria-label="Nombre de resultats per pàgina" data-default="' . PAGINATION_RESULTS_PER_PAGE_DEFAULT . '">';
+    $html = '<select name="mostra" aria-label="Nombre de resultats per pàgina">';
     foreach (PAGINATION_RESULTS_PER_PAGE_OPTIONS as $option) {
         $selected = $pagination_limit === $option ? ' selected' : '';
         $html .= '<option value="' . $option . '"' . $selected . '>' . $option . '</option>';
@@ -326,7 +330,7 @@ function render_search_pager(int $current_page_number, int $page_count): string
  */
 function number_needs_apostrophe(int $num): bool
 {
-    // A result count of 11M or bigger is not expected, so this logic is sufficient.
+    // A result count of 1.000.000 or bigger is not expected, so this logic is sufficient.
     return $num === 1 || $num === 11 || ($num >= 11000 && $num < 12000);
 }
 
@@ -368,12 +372,6 @@ function build_search_sql_query(): array
 {
     $search_mode = get_internal_search_mode();
     $search_query = get_search_query_normalized();
-    $checkboxes = [
-        'equivalent' => '`EQUIVALENT`',
-        'sinonim' => '`SINONIM`',
-        'variant' => '`MODISME`',
-    ];
-
     $arguments = [$search_query];
     if ($search_mode === SearchMode::WHOLE_SENTENCE || $search_mode === SearchMode::WILDCARD) {
         $where_clause = " WHERE `PAREMIOTIPUS` REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
@@ -390,7 +388,7 @@ function build_search_sql_query(): array
         // SearchMode::CONTAINS (default) search mode uses full-text.
         $columns_to_search = '`PAREMIOTIPUS`';
 
-        foreach ($checkboxes as $checkbox_name => $column_name) {
+        foreach (SEARCH_CHECKBOX_COLUMNS as $checkbox_name => $column_name) {
             if (isset($_GET[$checkbox_name])) {
                 $columns_to_search .= ", {$column_name}";
             }
@@ -399,7 +397,7 @@ function build_search_sql_query(): array
         $where_clause = " WHERE MATCH({$columns_to_search}) AGAINST (? IN BOOLEAN MODE)";
     }
 
-    foreach ($checkboxes as $checkbox_name => $column_name) {
+    foreach (SEARCH_CHECKBOX_COLUMNS as $checkbox_name => $column_name) {
         if (isset($_GET[$checkbox_name])) {
             if ($search_mode === SearchMode::WHOLE_SENTENCE || $search_mode === SearchMode::WILDCARD) {
                 $where_clause .= " OR {$column_name} REGEXP CONCAT('[[:<:]]', ?, '[[:>:]]')";
@@ -446,7 +444,7 @@ function get_result_count(string $where_clause, array $arguments): int
     }
 
     try {
-        $stmt = get_db()->prepare("SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` {$where_clause}");
+        $stmt = db_prepare("SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` {$where_clause}");
         $stmt->execute($arguments);
         $count = (int) $stmt->fetchColumn();
     } catch (Exception $exception) {
@@ -475,7 +473,7 @@ function get_result_count(string $where_clause, array $arguments): int
  */
 function get_paremiotipus_search_results(string $where_clause, array $arguments, int $limit, int $offset): array
 {
-    $stmt = get_db()->prepare("SELECT DISTINCT
+    $stmt = db_prepare("SELECT DISTINCT
             `PAREMIOTIPUS`
         FROM
             `00_PAREMIOTIPUS`

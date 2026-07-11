@@ -31,7 +31,7 @@ $inappropriate_words = [
 // Valid ending punctuation.
 $valid_endings = ['.', '…', '!', '?', ',', ';', ':'];
 
-$paremiotipus = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+$paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $p) {
     assert(is_string($p));
 

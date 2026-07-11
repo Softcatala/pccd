@@ -20,7 +20,7 @@ function stats_editorials(): void
     echo '<script src="/admin/js/chart.min.js"></script>';
 
     echo '<h3>Principals editorials pel nombre de paremiotipus</h3>';
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `EDITORIAL`,
             COUNT(DISTINCT `PAREMIOTIPUS`) AS `Repetitions`
         FROM
@@ -56,7 +56,7 @@ function stats_editorials(): void
     echo '</details>';
 
     echo '<h3>Principals editorials pel nombre de fitxes</h3>';
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `EDITORIAL`,
             COUNT(1) AS `Repetitions`
         FROM
@@ -93,7 +93,7 @@ function stats_editorials(): void
     echo '</details>';
 
     echo "<h3>Principals editorials pel nombre d'obres</h3>";
-    $records = get_db()->query('SELECT
+    $records = db_query('SELECT
             `EDITORIAL`,
             COUNT(1) AS `Obres`
         FROM

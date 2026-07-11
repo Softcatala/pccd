@@ -4,7 +4,6 @@ default-jre-headless
 gifsicle
 git-core
 icu-devtools
-jpeginfo
 jpegoptim
 jq
 mdbtools
@@ -18,7 +17,6 @@ php-mbstring
 php-mysql
 php-xml
 php-zip
-pngcheck
 shellcheck
 shfmt
 tidy

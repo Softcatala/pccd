@@ -110,7 +110,7 @@ final readonly class ParemiotipusVariant
         }
 
         if ($this->ARTICLE !== '') {
-            $citation .= ' ' . html_escape_and_link_urls(quote_unquoted($this->ARTICLE));
+            $citation .= ' ' . quote_unquoted(html_escape_and_link_urls($this->ARTICLE));
         }
 
         if ($this->PAGINA !== '') {
@@ -248,7 +248,7 @@ function get_clean_url(string $input_url): string
  */
 function get_recurrences_by_variant(string $paremiotipus_id): array
 {
-    $stmt = get_db()->prepare('SELECT DISTINCT
+    $stmt = db_prepare('SELECT DISTINCT
         `MODISME`,
         `PAREMIOTIPUS`,
         `AUTOR`,
@@ -297,7 +297,7 @@ function get_recurrences_by_variant(string $paremiotipus_id): array
  */
 function get_paremiotipus_by_modisme(string $modisme): string
 {
-    $stmt = get_db()->prepare('SELECT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `MODISME` = :modisme LIMIT 1');
+    $stmt = db_prepare('SELECT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `MODISME` = :modisme LIMIT 1');
     $stmt->execute([':modisme' => $modisme]);
 
     $paremiotipus = $stmt->fetchColumn();
@@ -314,7 +314,7 @@ function get_paremiotipus_by_modisme(string $modisme): string
  */
 function get_paremiotipus_images(string $paremiotipus_id): array
 {
-    $stmt = get_db()->prepare('SELECT
+    $stmt = db_prepare('SELECT
         `Identificador`,
         `URL_ENLLAÇ`,
         `AUTOR`,
@@ -344,7 +344,7 @@ function get_paremiotipus_images(string $paremiotipus_id): array
  */
 function get_cv_files(string $paremiotipus_id): array
 {
-    $stmt = get_db()->prepare('SELECT `file` FROM `commonvoice` WHERE `paremiotipus` = :paremiotipus');
+    $stmt = db_prepare('SELECT `file` FROM `commonvoice` WHERE `paremiotipus` = :paremiotipus');
     $stmt->execute([':paremiotipus' => $paremiotipus_id]);
 
     /** @var list<string> */
@@ -366,7 +366,7 @@ function get_paremiotipus_best_match(string $input_modisme): string
     $paremiotipus = false;
     $modisme = normalize_search($modisme, SearchMode::CONTAINS);
     if ($modisme !== '') {
-        $stmt = get_db()->prepare('SELECT
+        $stmt = db_prepare('SELECT
             `PAREMIOTIPUS`
         FROM
             `00_PAREMIOTIPUS`
@@ -536,16 +536,15 @@ function render_image_caption(string $autor, string $any, string $diari, string 
     }
 
     if ($article !== '') {
-        $article_quoted = quote_unquoted($article);
-        if (str_contains($article_quoted, 'http')) {
-            $article_html = html_escape_and_link_urls($article_quoted);
+        if (str_contains($article, 'http')) {
+            $article_html = html_escape_and_link_urls($article);
         } else {
-            $article_html = htmlspecialchars($article_quoted);
+            $article_html = htmlspecialchars($article);
             if ($link !== '') {
                 $article_html = '<a href="' . $link . '" class="external" target="_blank" rel="noopener">' . $article_html . '</a>';
             }
         }
-        $image_caption .= ' ' . $article_html;
+        $image_caption .= ' ' . quote_unquoted($article_html);
     }
 
     // Remove potentially introduced leading spaces and punctuation.
@@ -559,15 +558,17 @@ function render_image_caption(string $autor, string $any, string $diari, string 
 }
 
 /**
- * Gets the text quoted with guillemets, unless they are already quoted.
+ * Gets the HTML text quoted with guillemets, unless they are already quoted.
  */
 function quote_unquoted(string $text): string
 {
-    if (str_starts_with($text, '«')) {
-        return $text;
+    $trimmed_text = trim($text);
+    $plain_text = trim(strip_tags($trimmed_text));
+    if (str_starts_with($plain_text, '«')) {
+        return $trimmed_text;
     }
 
-    return '«' . $text . '»';
+    return '«' . $trimmed_text . '»';
 }
 
 /**
@@ -589,7 +590,7 @@ function get_language_name_from_column(string $key): string
  */
 function get_paremiotipus_translations(string $paremiotipus_id): array
 {
-    $stmt = get_db()->prepare('SELECT * FROM `RML` WHERE `PAREMIOTIPUS` = :paremiotipus');
+    $stmt = db_prepare('SELECT * FROM `RML` WHERE `PAREMIOTIPUS` = :paremiotipus');
     $stmt->execute([':paremiotipus' => $paremiotipus_id]);
 
     $translations = [];

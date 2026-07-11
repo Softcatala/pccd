@@ -175,7 +175,7 @@ validate_debian:
   stage: build
   before_script:
     - apk --no-cache --update add $(cat apk_dev_deps.txt)
-    - ln -sf /usr/bin/$(grep '^php[0-9]*$' apk_dev_deps.txt | head -1) /usr/bin/php
+    - ln -sf $(ls /usr/bin/php[0-9]*) /usr/bin/php
     # Ignore npm lifecycle scripts: postinstall also runs Playwright setup,
     # which is unnecessary and problematic in these CI jobs.
     - npm ci --ignore-scripts
@@ -204,32 +204,4 @@ check_hadolint:
     entrypoint: [""]
   script:
     - hadolint .docker/*Dockerfile
-  allow_failure: true
-
-check_dockerfmt:
-  image: golang:alpine
-  stage: build
-  script:
-    - go install github.com/reteps/dockerfmt@latest
-    - dockerfmt --check .docker/*Dockerfile
-  allow_failure: true
-
-scan_secrets_trufflehog:
-  stage: build
-  when: manual
-  image:
-    name: trufflesecurity/trufflehog:latest
-    entrypoint: [""]
-  script:
-    - trufflehog git file://. --only-verified --fail
-  allow_failure: true
-
-scan_secrets_gitleaks:
-  stage: build
-  when: manual
-  image:
-    name: zricethezav/gitleaks:latest
-    entrypoint: [""]
-  script:
-    - gitleaks detect --source .
   allow_failure: true

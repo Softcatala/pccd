@@ -15,21 +15,20 @@ function test_editorials_no_referenciades(): void
     require_once __DIR__ . '/../common.php';
 
     $editorials = get_editorials();
-    $editorials_modismes = get_db()->query('SELECT DISTINCT `EDITORIAL`, 1 FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $editorials_modismes = db_query('SELECT DISTINCT `EDITORIAL`, 1 FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_KEY_PAIR);
 
     echo '<h3>Editorials de la taula 00_EDITORIA que no estan referenciades per cap paremiotipus</h3>';
-    echo '<details><pre>';
-    $found = false;
+    $output = '';
     foreach ($editorials as $ed_codi => $ed_title) {
         if (!isset($editorials_modismes[$ed_codi])) {
-            echo "{$ed_codi}: {$ed_title}\n";
-            $found = true;
+            $output .= "{$ed_codi}: {$ed_title}\n";
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
     }
-    echo '</pre></details>';
 }
 
 function test_editorials_no_existents(): void
@@ -37,20 +36,19 @@ function test_editorials_no_existents(): void
     require_once __DIR__ . '/../common.php';
 
     $editorials = get_editorials();
-    $editorials_paremiotipus = get_db()->query('SELECT `MODISME`, `EDITORIAL` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
+    $editorials_paremiotipus = db_query('SELECT `MODISME`, `EDITORIAL` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
 
     echo '<h3>Editorials que estan referenciades per parèmies, però que no existeixen a la taula 00_EDITORIA</h3>';
-    echo '<pre>';
-    $found = false;
+    $output = '';
     foreach ($editorials_paremiotipus as $ed_p) {
         assert(is_string($ed_p['EDITORIAL']));
         if ($ed_p['EDITORIAL'] !== '' && !isset($editorials[$ed_p['EDITORIAL']])) {
-            echo $ed_p['EDITORIAL'] . ' (' . $ed_p['MODISME'] . ")\n";
-            $found = true;
+            $output .= $ed_p['EDITORIAL'] . ' (' . $ed_p['MODISME'] . ")\n";
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
     }
-    echo '</pre>';
 }

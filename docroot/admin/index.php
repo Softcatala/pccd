@@ -77,6 +77,7 @@ if (isset($_SESSION['auth'])) {
         details a { cursor: pointer; }
         ul { margin: 0; }
         main { display: flex; gap: 3rem; flex-wrap: wrap; }
+        pre.empty { opacity: 0.5; font-style: italic; }
     </style>
 </head>
 <body>
@@ -186,10 +187,10 @@ if (isset($_GET['test']) && $_GET['test'] !== '' && is_string($_GET['test'])) {
 <?php
 $mysql_version = get_db()->getAttribute(PDO::ATTR_SERVER_VERSION);
 assert(is_string($mysql_version));
+
+/** @phpstan-var string $http_server - phpstan is less clever than psalm here */
 $http_server = $_SERVER['SERVER_SOFTWARE'];
 
-/** @psalm-suppress RedundantCondition */
-assert(is_string($http_server));
 $php_version = PHP_VERSION . (defined('PHP_BUILD_DATE') ? ' (' . PHP_BUILD_DATE . ')' : '');
 echo 'PHP ' . $php_version . ', ' . $http_server . ' (' . PHP_OS . '), ' . $mysql_version;
 echo '<br>Última base de dades: ' . get_latest_db_date();

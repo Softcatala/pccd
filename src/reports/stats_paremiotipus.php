@@ -19,22 +19,22 @@ function stats_paremiotipus(): void
 
     $paremiotipus_count = get_paremiotipus_count();
     $modisme_count = get_modisme_count();
-    $unique_modisme_diff = (int) get_db()->query('SELECT COUNT(DISTINCT `MODISME`) FROM `00_PAREMIOTIPUS`')->fetchColumn();
+    $unique_modisme_diff = (int) db_query('SELECT COUNT(DISTINCT `MODISME`) FROM `00_PAREMIOTIPUS`')->fetchColumn();
     echo '<script src="/admin/js/chart.min.js"></script>';
     echo '<h3>Paremiotipus per nombre de recurrències</h3>';
-    $stmt = get_db()->query('SELECT `PAREMIOTIPUS`, COUNT(1) AS `MODISME_COUNT` FROM `00_PAREMIOTIPUS` GROUP BY `PAREMIOTIPUS`');
+    $stmt = db_query('SELECT `PAREMIOTIPUS`, COUNT(1) AS `MODISME_COUNT` FROM `00_PAREMIOTIPUS` GROUP BY `PAREMIOTIPUS`');
     $grouped_data = group_data_stats($stmt->fetchAll(PDO::FETCH_ASSOC), 'MODISME_COUNT');
     echo get_chart('bar', $grouped_data, 'paremiotipus', x_title: 'Nombre de recurrències', y_title: 'Paremiotipus', style: 'width:1000px;');
 
     echo '<h3>Paremiotipus per nombre de variants</h3>';
-    $stmt = get_db()->query('SELECT `PAREMIOTIPUS`, COUNT(DISTINCT `MODISME`) AS `DISTINCT_MODISME_COUNT` FROM `00_PAREMIOTIPUS` GROUP BY `PAREMIOTIPUS`');
+    $stmt = db_query('SELECT `PAREMIOTIPUS`, COUNT(DISTINCT `MODISME`) AS `DISTINCT_MODISME_COUNT` FROM `00_PAREMIOTIPUS` GROUP BY `PAREMIOTIPUS`');
     $grouped_data = group_data_stats($stmt->fetchAll(PDO::FETCH_ASSOC), 'DISTINCT_MODISME_COUNT');
     echo get_chart('bar', $grouped_data, 'paremiotipus', x_title: 'Nombre de variants', y_title: 'Paremiotipus', style: 'width:1000px;');
 
     echo '<div style="display: flex; flex-wrap: wrap; gap: 3rem;">';
     echo '<article>';
     echo '<h3>Paremiotipus amb equivalents</h3>';
-    $stmt = get_db()->query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb equivalents' => $total,
@@ -45,7 +45,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Paremiotipus amb sinònims</h3>';
-    $stmt = get_db()->query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` WHERE `SINONIM` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_PAREMIOTIPUS` WHERE `SINONIM` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb sinònims' => $total,
@@ -56,7 +56,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Paremiotipus amb imatges</h3>';
-    $stmt = get_db()->query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_IMATGES`');
+    $stmt = db_query('SELECT COUNT(DISTINCT `PAREMIOTIPUS`) FROM `00_IMATGES`');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb imatges' => $total,
@@ -67,7 +67,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Paremiotipus / Common Voice</h3>';
-    $stmt = get_db()->query('SELECT COUNT(DISTINCT `paremiotipus`) FROM `commonvoice`');
+    $stmt = db_query('SELECT COUNT(DISTINCT `paremiotipus`) FROM `commonvoice`');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb veus' => $total,
@@ -93,7 +93,7 @@ function stats_paremiotipus(): void
     echo '<div style="display: flex; flex-wrap: wrap; gap: 3rem;">';
     echo '<article>';
     echo '<h3>Fitxes amb equivalents</h3>';
-    $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb equivalents' => $total,
@@ -104,7 +104,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Fitxes amb sinònims</h3>';
-    $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `SINONIM` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `SINONIM` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb sinònims' => $total,
@@ -115,7 +115,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Fitxes amb explicacions</h3>';
-    $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EXPLICACIO` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EXPLICACIO` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb explicacions' => $total,
@@ -126,7 +126,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Fitxes amb exemples</h3>';
-    $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EXEMPLES` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `EXEMPLES` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb exemples' => $total,
@@ -137,7 +137,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Fitxes amb llocs</h3>';
-    $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `LLOC` IS NOT NULL');
+    $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS` WHERE `LLOC` IS NOT NULL');
     $total = (int) $stmt->fetchColumn();
     $data = [
         'Amb llocs' => $total,
@@ -149,7 +149,7 @@ function stats_paremiotipus(): void
 
     echo '<article>';
     echo '<h3>Paremiotipus que no coincideixen amb cap dels seus modismes</h3>';
-    $records = get_db()->query('
+    $records = db_query('
         SELECT
             `Display`
         FROM

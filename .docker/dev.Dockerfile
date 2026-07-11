@@ -1,4 +1,4 @@
-ARG PHP_IMAGE_TAG=8.5.7-apache-trixie
+ARG PHP_IMAGE_TAG=8.5.8-apache-trixie
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"

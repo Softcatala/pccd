@@ -13,8 +13,10 @@
 function test_modismes_repetits(): void
 {
     echo '<h3>Modismes amb diferències de caràcters que es poden confondre visualment (consecutius)</h3>';
-    echo '<pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_modismes_repetits.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_modismes_repetits.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
 }

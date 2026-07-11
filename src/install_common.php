@@ -15,19 +15,17 @@
  */
 function table_exists(string $table): bool
 {
-    $pdo = get_db();
-
     // Try a select statement against the table.
     // Run it in try/catch in case PDO is in ERRMODE_EXCEPTION.
     try {
-        $result = $pdo->query("SELECT 1 FROM `{$table}` LIMIT 1");
+        db_query("SELECT 1 FROM `{$table}` LIMIT 1");
     } catch (Exception) {
         // If we got an exception it means that the table is not found.
         return false;
     }
 
-    // $result is either false or PDOStatement Object.
-    return $result !== false;
+    // Since db_query always returns a PDOStatement (or throws), we are sure the table exists if we reach here.
+    return true;
 }
 
 /**
@@ -35,11 +33,9 @@ function table_exists(string $table): bool
  */
 function store_image_dimensions(string $table, string $field, string $directory): void
 {
-    $pdo = get_db();
+    $update_stmt = db_prepare("UPDATE `{$table}` SET `WIDTH` = ?, `HEIGHT` = ? WHERE `{$field}` = ?");
 
-    $update_stmt = $pdo->prepare("UPDATE `{$table}` SET `WIDTH` = ?, `HEIGHT` = ? WHERE `{$field}` = ?");
-
-    $images = $pdo->query("SELECT `{$field}` FROM `{$table}`")->fetchAll(PDO::FETCH_COLUMN);
+    $images = db_query("SELECT `{$field}` FROM `{$table}`")->fetchAll(PDO::FETCH_COLUMN);
     foreach ($images as $image) {
         $filename = __DIR__ . '/../' . $directory . '/' . $image;
         if (!is_file($filename)) {

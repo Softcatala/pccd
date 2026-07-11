@@ -18,7 +18,15 @@ parameters:
     - */third_party/*
   ignoreErrors:
     # Some objects are filled via PDO, so readonly properties may appear uninitialized/unused
-    - identifier: property.onlyRead
-    - identifier: property.uninitializedReadonly
-    # Ignore if PDO fails, as recovery would not be straightforward anyway
-    - message: '#Cannot call method (execute|fetch|fetchAll|fetchColumn|fetchObject)\(\) on PDOStatement\|false#'
+    -
+      identifier: property.uninitializedReadonly
+      path: src/common.php
+    -
+      identifier: property.onlyRead
+      path: src/common.php
+    -
+      identifier: property.uninitializedReadonly
+      path: src/pages/paremiotipus_functions.php
+    -
+      identifier: property.onlyRead
+      path: src/pages/paremiotipus_functions.php

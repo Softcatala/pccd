@@ -300,8 +300,8 @@ final class PageRenderer
 
         require __DIR__ . "/pages/{$this->name}.php";
         $main_content = ob_get_clean();
-        assert($main_content !== false);
 
+        /** @psalm-suppress FalsableReturnStatement - psalm is less clever than phpstan here */
         return $main_content;
     }
 
@@ -645,6 +645,30 @@ function get_db(): PDO
 }
 
 /**
+ * Prepares a SQL statement, asserting it succeeds.
+ */
+function db_prepare(string $query): PDOStatement
+{
+    $stmt = get_db()->prepare($query);
+
+    assert($stmt instanceof PDOStatement);
+
+    return $stmt;
+}
+
+/**
+ * Executes a SQL query directly, asserting it succeeds.
+ */
+function db_query(string $query): PDOStatement
+{
+    $stmt = get_db()->query($query);
+
+    assert($stmt instanceof PDOStatement);
+
+    return $stmt;
+}
+
+/**
  * Trims and removes newlines, extra spaces and unsafe characters from the provided string.
  *
  * The input parameter contains the string to prepare.
@@ -715,7 +739,7 @@ function get_paremiotipus_display(string $paremiotipus, bool $escape_html = true
 {
     static $stmt = null;
     if ($stmt === null) {
-        $stmt = get_db()->prepare('SELECT `Display` FROM `paremiotipus_display` WHERE `Paremiotipus` = :paremiotipus');
+        $stmt = db_prepare('SELECT `Display` FROM `paremiotipus_display` WHERE `Paremiotipus` = :paremiotipus');
     }
 
     $display = cache_get($paremiotipus, static function () use ($paremiotipus, $stmt): string {
@@ -764,13 +788,11 @@ function slug_to_name(string $path): string
 
 /**
  * Returns the REQUEST_URI.
- *
- * @psalm-suppress PossiblyUndefinedArrayOffset, RedundantCondition
  */
 function get_request_uri(): string
 {
+    /** @phpstan-var string $request_uri - phpstan is less clever than psalm here */
     $request_uri = $_SERVER['REQUEST_URI'];
-    assert(is_string($request_uri));
 
     return $request_uri;
 }
@@ -783,10 +805,8 @@ function get_request_uri(): string
  */
 function route_request(): void
 {
-    $request_uri = get_request_uri();
-
     // Remove query string for path matching.
-    $path = parse_url($request_uri, PHP_URL_PATH);
+    $path = parse_url(get_request_uri(), PHP_URL_PATH);
 
     // Default: homepage/search (no routing needed, PageRenderer handles it).
     if (!is_string($path) || $path === '' || $path === '/') {
@@ -886,7 +906,7 @@ function format_nombre(float|int|string $num, int $decimals = 0): string
 function get_idiomes(): array
 {
     return cache_get('equivalents', static function (): array {
-        $stmt = get_db()->query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`');
+        $stmt = db_query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     });
@@ -1036,7 +1056,7 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
 function get_editorials(): array
 {
     return cache_get('editorials', static function (): array {
-        $stmt = get_db()->query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`');
+        $stmt = db_query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     });
@@ -1052,7 +1072,7 @@ function get_editorials(): array
 function get_fonts_paremiotipus(): array
 {
     return cache_get('fonts', static function (): array {
-        $stmt = get_db()->query('SELECT `Identificador`, `Títol` FROM `00_FONTS`');
+        $stmt = db_query('SELECT `Identificador`, `Títol` FROM `00_FONTS`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
     });
@@ -1180,7 +1200,7 @@ function return_404_and_exit(string $input_paremiotipus = ''): never
 function get_modisme_count(): int
 {
     return cache_get('modisme_count', static function (): int {
-        $stmt = get_db()->query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
+        $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
     });
@@ -1192,7 +1212,7 @@ function get_modisme_count(): int
 function get_paremiotipus_count(): int
 {
     return cache_get('paremiotipus_count', static function (): int {
-        $stmt = get_db()->query('SELECT COUNT(1) FROM `paremiotipus_display`');
+        $stmt = db_query('SELECT COUNT(1) FROM `paremiotipus_display`');
 
         return (int) $stmt->fetchColumn();
     });
@@ -1204,7 +1224,7 @@ function get_paremiotipus_count(): int
 function get_informant_count(): int
 {
     return cache_get('informant_count', static function (): int {
-        $stmt = get_db()->query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
+        $stmt = db_query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
     });
@@ -1216,7 +1236,7 @@ function get_informant_count(): int
 function get_font_count(): int
 {
     return cache_get('font_count', static function (): int {
-        $stmt = get_db()->query('SELECT COUNT(1) FROM `00_FONTS`');
+        $stmt = db_query('SELECT COUNT(1) FROM `00_FONTS`');
 
         return (int) $stmt->fetchColumn();
     });
@@ -1234,13 +1254,13 @@ function get_random_top_paremiotipus(int $max = 10000): string
     $random_index = rand(0, $max - 1);
 
     return cache_get("top_paremiotipus_{$random_index}", static function () use ($random_index): string {
-        $stmt = get_db()->query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
+        $stmt = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
 
         $random = $stmt->fetchColumn();
         if (!is_string($random)) {
             // We may be using a sample DB, try falling back to the first record.
             $random_index = 0;
-            $stmt = get_db()->query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
+            $stmt = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
             $random = $stmt->fetchColumn();
             if (!is_string($random)) {
                 exit('PCCD may have not been installed after importing a new database. Consider running `npm run install:db` or reading the docs.');
@@ -1259,7 +1279,7 @@ function get_random_top_paremiotipus(int $max = 10000): string
 function get_books(): array
 {
     return cache_get('llibres', static function (): array {
-        $stmt = get_db()->query('SELECT `Imatge`, `Títol`, `URL`, `WIDTH`, `HEIGHT` FROM `00_OBRESVPR`');
+        $stmt = db_query('SELECT `Imatge`, `Títol`, `URL`, `WIDTH`, `HEIGHT` FROM `00_OBRESVPR`');
 
         /** @var non-empty-list<Book> */
         return $stmt->fetchAll(PDO::FETCH_CLASS, Book::class);

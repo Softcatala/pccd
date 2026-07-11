@@ -20,7 +20,7 @@ function stats_equivalents(): void
 
     echo '<script src="/admin/js/chart.min.js"></script>';
     echo "<h3>Nombre d'equivalents dels idiomes amb més de " . MIN_RECORDS . ' registres</h3>';
-    $modismes = get_db()->query("SELECT
+    $modismes = db_query("SELECT
             COUNT(`EQUIVALENT`) AS `EQUIVALENTS`,
             IFNULL(`IDIOMA`, '(buit)') AS `IDIOMA`
         FROM

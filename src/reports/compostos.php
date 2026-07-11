@@ -15,16 +15,17 @@ function test_paremies_separar(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Parèmies que probablement es poden separar en dues</h3>';
+    $paremies = db_query("SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS` WHERE `MODISME` LIKE '%(o%' OR `MODISME` LIKE '%[o%' ORDER BY `MODISME`")->fetchAll(PDO::FETCH_COLUMN);
 
-    $paremies = get_db()->query("SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS` WHERE `MODISME` LIKE '%(o%' OR `MODISME` LIKE '%[o%' ORDER BY `MODISME`")->fetchAll(PDO::FETCH_COLUMN);
-    $n = 0;
-    $text = '';
+    $output = '';
     foreach ($paremies as $m) {
-        $text .= $m . "\n";
-        $n++;
+        $output .= $m . "\n";
     }
-    echo "<p>Total: {$n}</p>";
-    echo '<pre>';
-    echo $text !== '' ? $text : '(cap resultat)';
-    echo '</pre>';
+
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo '<p>Total: ' . count($paremies) . '</p>';
+        echo "<pre>{$output}</pre>";
+    }
 }

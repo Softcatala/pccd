@@ -22,7 +22,7 @@ const isHomepage = !searchBox.value;
 if (isHomepage && !previousButton) {
   const pagerStoredValue = localStorage.getItem("mostra");
   if (pagerStoredValue && pagerStoredValue !== pager.value) {
-    // Request the front page with the preferred pagination, if it is set and different.
+    // Request the front page with the preferred pagination, if it is different.
     location.assign("/?mostra=" + pagerStoredValue);
   }
 }
@@ -69,11 +69,7 @@ for (const { key, defaultChecked } of checkboxDefaults) {
 }
 
 pager.addEventListener("change", () => {
-  localStorage.setItem(
-    "mostra",
-    // For simplicity, store empty string for the default value.
-    pager.value === pager.dataset.default ? "" : pager.value,
-  );
+  localStorage.setItem("mostra", pager.value);
   document.querySelector("form[role=search]").submit();
 });
 

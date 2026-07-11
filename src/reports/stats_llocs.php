@@ -16,7 +16,7 @@ function stats_llocs(): void
 
     require_once __DIR__ . '/../reports_common.php';
 
-    $records = get_db()->query('
+    $records = db_query('
         SELECT
             `LLOC`,
             COUNT(`LLOC`) AS `Repetitions`

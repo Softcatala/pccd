@@ -13,26 +13,34 @@
 function test_urls(): void
 {
     echo '<h3>Adreces URL a 00_OBRESVPR.URL que responen un codi HTTP inesperat</h3>';
-    echo '<pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_llibres_url.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_llibres_url.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
 
     echo '<h3>Adreces URL a 00_FONTS.URL que responen un codi HTTP inesperat</h3>';
-    echo '<pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_fonts_url.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_fonts_url.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
 
     echo '<h3>Adreces URL a 00_IMATGES.URL_IMATGE que responen un codi HTTP inesperat</h3>';
-    echo '<details><pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_url_imatge.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre></details>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_url_imatge.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
+    }
 
     echo '<h3>Adreces URL a 00_IMATGES.URL_ENLLAÇ que responen un codi HTTP inesperat</h3>';
-    echo '<details><pre>';
-    $output = (string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_url_enllac.txt');
-    echo $output !== '' ? $output : '(cap resultat)';
-    echo '</pre></details>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_url_enllac.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
+    }
 }

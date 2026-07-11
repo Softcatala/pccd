@@ -38,34 +38,32 @@ function test_repeticio_caracters(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus amb una repetició de caràcters inusual</h3>';
-    echo '<details><pre>';
-    $modismes = get_db()->query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
-    $found = false;
+    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $output = '';
     foreach ($modismes as $m) {
         assert(is_string($m));
         if (string_has_consecutive_repeated_chars($m)) {
-            echo get_paremiotipus_display($m, escape_html: false) . "\n";
-            $found = true;
+            $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
     }
-    echo '</pre></details>';
 
     echo '<h3>Modismes amb una repetició de caràcters inusual</h3>';
-    echo '<details><pre>';
-    $modismes = get_db()->query('SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
-    $found = false;
+    $modismes = db_query('SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $output = '';
     foreach ($modismes as $m) {
         assert(is_string($m));
         if (string_has_consecutive_repeated_chars($m)) {
-            echo $m . "\n";
-            $found = true;
+            $output .= $m . "\n";
         }
     }
-    if (!$found) {
-        echo '(cap resultat)';
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details><pre>{$output}</pre></details>";
     }
-    echo '</pre></details>';
 }

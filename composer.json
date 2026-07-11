@@ -27,7 +27,7 @@
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpunit/phpunit": "^13.2",
     "psalm/phar": "^6.16",
-    "slevomat/coding-standard": "^8.29",
+    "slevomat/coding-standard": "^8.30",
     "squizlabs/php_codesniffer": "^4.0"
   },
   "suggest": {

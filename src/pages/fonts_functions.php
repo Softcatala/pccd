@@ -17,7 +17,7 @@
  */
 function get_fonts(): array
 {
-    $stmt = get_db()->prepare('SELECT
+    $stmt = db_prepare('SELECT
         `Any`,
         `Autor`,
         `Identificador`,
