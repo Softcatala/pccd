@@ -80,10 +80,11 @@ reset:
   script:
     # curl: to download install-php-extensions script
     # git, unzip: required by Composer (see https://github.com/composer/composer/discussions/12278)
-    - apk --no-cache --update add curl git unzip
+    # oniguruma-dev: required by mbstring since is no longer included by default in docker images (as per 8.6-alpha-2).
+    - apk --no-cache --update add curl git oniguruma-dev unzip
     - curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
     - chmod +x /usr/local/bin/install-php-extensions
-    - install-php-extensions gd intl pdo_mysql
+    - install-php-extensions gd intl mbstring pdo_mysql
     - ./composer.phar install --no-interaction
     - ./composer.phar validate --strict
     - ./composer.phar run php-l
@@ -104,6 +105,7 @@ check_php:
     matrix:
       - PHP_VERSION: "8.4"
       - PHP_VERSION: "8.5"
+      - PHP_VERSION: "8.6-rc"
   image: php:${PHP_VERSION}-alpine
   before_script:
     - php --version
@@ -175,7 +177,6 @@ validate_debian:
   stage: build
   before_script:
     - apk --no-cache --update add $(cat apk_dev_deps.txt)
-    - ln -sf $(ls /usr/bin/php[0-9]*) /usr/bin/php
     # Ignore npm lifecycle scripts: postinstall also runs Playwright setup,
     # which is unnecessary and problematic in these CI jobs.
     - npm ci --ignore-scripts

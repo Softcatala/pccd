@@ -93,7 +93,7 @@ for (const audio of document.querySelectorAll(".audio")) {
     audio.firstElementChild.play();
     state.cvCounter++;
 
-    if (state.cvCounter > CV_COUNTER_THRESHOLD && toggleTranslations) {
+    if (toggleTranslations && state.cvCounter > CV_COUNTER_THRESHOLD) {
       toggleTranslations.removeAttribute("hidden");
     }
   });

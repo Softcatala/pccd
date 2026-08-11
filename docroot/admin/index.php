@@ -25,9 +25,11 @@ if (isset($_POST['password']) && $_POST['password'] === getenv('WEB_ADMIN_PASSWO
     exit;
 }
 
-// Note: to update this, run composer update.
+// Note: to install and update these dependencies, run composer update.
 $opcache_gui_path = __DIR__ . '/../../src/third_party/opcache-gui.php';
 $apcu_gui_path = __DIR__ . '/../../src/third_party/apc.php';
+
+$is_test_page = isset($_GET['test']) && $_GET['test'] !== '' && is_string($_GET['test']);
 
 if (isset($_SESSION['auth'])) {
     if (isset($_GET['phpinfo'])) {
@@ -81,7 +83,7 @@ if (isset($_SESSION['auth'])) {
     </style>
 </head>
 <body>
-    <h2>Panell d'administració<?php echo isset($_GET['test']) ? ' - informes' : ''; ?></h2>
+    <h2>Panell d'administració<?php echo $is_test_page ? ' - informes' : ''; ?></h2>
     <hr>
 <?php if (!isset($_SESSION['auth'])) { ?>
     <form method="post">
@@ -103,12 +105,12 @@ if (isset($_GET['logout'])) {
 
 session_write_close();
 
-if (isset($_GET['test']) && $_GET['test'] !== '' && is_string($_GET['test'])) {
+if ($is_test_page) {
+    $test_file = $_GET['test'];
     $start_time = microtime(true);
 
     require __DIR__ . '/../../src/reports_common.php';
 
-    $test_file = $_GET['test'];
     $test_functions = get_test_functions();
     if (isset($test_functions[$test_file])) {
         require __DIR__ . '/../../src/reports/' . $test_file . '.php';

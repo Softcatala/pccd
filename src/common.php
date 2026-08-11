@@ -13,28 +13,33 @@
 use Pdo\Mysql;
 
 /**
- * Default characters to trim, including whitespace and null byte.
- * Use this when providing additional characters to trim(), rtrim(), or ltrim().
+ * Base URL of the site, used for absolute URLs in meta tags and canonical URLs.
  */
-const DEFAULT_TRIM_CHARS = " \f\n\r\t\v\x00";
-
-/**
- * CSS breakpoints for responsive design.
- * These values should match the breakpoints defined in src/css/variables.css.
- */
-const BREAKPOINT_MD = 576;
-const BREAKPOINT_LG = 768;
+const BASE_URL = 'https://pccd.dites.cat';
 
 /**
  * Primary color used throughout the site.
- * This value should match --color-primary defined in src/css/variables.css.
+ * Value matches --color-primary defined in src/css/variables.css.
  */
 const COLOR_PRIMARY = '#2b5797';
 
 /**
- * Base URL of the site, used for absolute URLs in meta tags and canonical links.
+ * CSS breakpoints for responsive design.
+ * Values match the breakpoints defined in src/css/variables.css.
  */
-const BASE_URL = 'https://pccd.dites.cat';
+const BREAKPOINT_MD = '(width >= 576px)';
+const BREAKPOINT_LG = '(width >= 768px)';
+
+/**
+ * Prefix for all APCu cache keys.
+ */
+const CACHE_KEY_PREFIX = 'pccd:';
+
+/**
+ * Default characters to trim, including whitespace and null byte.
+ * Used when providing additional characters to trim(), rtrim(), or ltrim().
+ */
+const DEFAULT_TRIM_CHARS = " \f\n\r\t\v\x00";
 
 /**
  * Handles rendering of pages, with their meta tags and side blocks.
@@ -247,6 +252,15 @@ final class PageRenderer
     public static function render(): void
     {
         header('Cache-Control: public, max-age=' . self::CACHE_MAX_AGE_DYNAMIC_PAGES);
+        header('Vary: X-Requested-With');
+
+        if (is_xhr()) {
+            $page = new self();
+            header('Content-Type: application/json; charset=utf-8');
+            echo json_encode(['mainContent' => $page->mainContent]);
+
+            return;
+        }
 
         // Include the page template.
         require __DIR__ . '/templates/main.php';
@@ -301,7 +315,8 @@ final class PageRenderer
         require __DIR__ . "/pages/{$this->name}.php";
         $main_content = ob_get_clean();
 
-        /** @psalm-suppress FalsableReturnStatement - psalm is less clever than phpstan here */
+        assert(is_string($main_content));
+
         return $main_content;
     }
 
@@ -312,7 +327,7 @@ final class PageRenderer
     {
         $block = '<div class="bloc bloc-books">';
         $block .= '<p><a href="/llibres">Llibres de l\'autor</a></p>';
-        $block .= get_random_book()->render(preload: true, preload_media: '(min-width: ' . BREAKPOINT_LG . 'px)');
+        $block .= get_random_book()->render(preload: true, preload_media: BREAKPOINT_LG);
         $block .= '</div>';
 
         return $block;
@@ -325,7 +340,7 @@ final class PageRenderer
     {
         $block = '<div class="bloc bloc-credits bloc-white">';
         $block .= '<p>Un projecte de:</p>';
-        $block .= '<p><a href="http://www.dites.cat">dites.cat</a></p>';
+        $block .= '<p><a href="https://vpamies.dites.cat">dites.cat</a></p>';
         $block .= '<p><a href="https://www.softcatala.org"><img alt="Softcatalà" width="120" height="80" src="/img/logo-softcatala.svg"></a></p>';
         $block .= '</div>';
 
@@ -559,14 +574,16 @@ function cache_get(string $key, callable $callback): mixed
         return $callback();
     }
 
+    $cache_key = CACHE_KEY_PREFIX . $key;
+
     /** @var T */
-    $cached = apcu_fetch($key, $success);
+    $cached = apcu_fetch($cache_key, $success);
     if ($success) {
         return $cached;
     }
 
     $value = $callback();
-    apcu_store($key, $value);
+    apcu_store($cache_key, $value);
 
     return $value;
 }
@@ -576,6 +593,14 @@ function cache_get(string $key, callable $callback): mixed
  *
  * The text parameter contains the input text to escape and linkify.
  * The property parameter specifies the property attribute to add to links.
+ *
+ * Uses ENT_COMPAT (not the PHP 8.1+ default ENT_QUOTES) so single quotes are
+ * left unescaped. That matters because this function escapes first, then
+ * matches URLs with a regex that treats ' as trailing punctuation, then puts
+ * the match into a double-quoted href. With ENT_QUOTES, a trailing &#039;
+ * entity can be partially absorbed into the URL (e.g. 'https://a.cat' becomes
+ * href="https://a.cat&#039"). Elsewhere in the codebase, htmlspecialchars()
+ * with default flags is used.
  */
 function html_escape_and_link_urls(string $text, string $property = ''): string
 {
@@ -635,7 +660,7 @@ function get_db(): PDO
     } catch (Exception) {
         ob_end_clean();
 
-        header('HTTP/1.1 500 Internal Server Error', response_code: 500);
+        http_response_code(500);
         header('Cache-Control: no-cache, no-store, must-revalidate');
 
         readfile(__DIR__ . '/../docroot/500.html');
@@ -742,7 +767,7 @@ function get_paremiotipus_display(string $paremiotipus, bool $escape_html = true
         $stmt = db_prepare('SELECT `Display` FROM `paremiotipus_display` WHERE `Paremiotipus` = :paremiotipus');
     }
 
-    $display = cache_get($paremiotipus, static function () use ($paremiotipus, $stmt): string {
+    $display = cache_get("display:{$paremiotipus}", static function () use ($paremiotipus, $stmt): string {
         $stmt->execute([':paremiotipus' => $paremiotipus]);
         $value = $stmt->fetchColumn();
         if ($value === false) {
@@ -795,6 +820,21 @@ function get_request_uri(): string
     $request_uri = $_SERVER['REQUEST_URI'];
 
     return $request_uri;
+}
+
+/**
+ * Returns wether the current request is XMLHttpRequest.
+ */
+function is_xhr(): bool
+{
+    /**
+     * @phpstan-var string $requested_with
+     *
+     * @psalm-suppress UnnecessaryVarAnnotation
+     */
+    $requested_with = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
+
+    return strtolower($requested_with) === 'xmlhttprequest';
 }
 
 /**
@@ -905,7 +945,7 @@ function format_nombre(float|int|string $num, int $decimals = 0): string
  */
 function get_idiomes(): array
 {
-    return cache_get('equivalents', static function (): array {
+    return cache_get('list:equivalents', static function (): array {
         $stmt = db_query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -947,7 +987,7 @@ function get_idioma_iso_code(string $input_code): string
         // `ne` is the ISO code Official Nepali Native, but in the database may be used for Dutch.
         // 'ne' => 'nl',
         'po' => 'pl',
-        // ISO code for Provençal is missing. "pro" is for Old Provençal, and "prv" is no longer recognised. In the
+        // ISO code for Provençal is missing. "pro" is for Old Provençal, and "prv" is no longer recognized. In the
         // database we have "pr", which is not assigned by ISO.
         'pr' => 'oc',
         'sa' => 'sc',
@@ -1055,7 +1095,7 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
  */
 function get_editorials(): array
 {
-    return cache_get('editorials', static function (): array {
+    return cache_get('list:editorials', static function (): array {
         $stmt = db_query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -1071,7 +1111,7 @@ function get_editorials(): array
  */
 function get_fonts_paremiotipus(): array
 {
-    return cache_get('fonts', static function (): array {
+    return cache_get('list:fonts', static function (): array {
         $stmt = db_query('SELECT `Identificador`, `Títol` FROM `00_FONTS`');
 
         return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -1149,6 +1189,11 @@ function render_image_tags(
  */
 function preload_image_header(string $url, string $media = '', string $type = ''): void
 {
+    if (is_xhr()) {
+        // No need to preload any image for XHR.
+        return;
+    }
+
     $header = "Link: <{$url}>; rel=preload; as=image";
     if ($type !== '') {
         $header .= "; type={$type}";
@@ -1182,9 +1227,10 @@ function preload_image_header(string $url, string $media = '', string $type = ''
  */
 function return_404_and_exit(string $input_paremiotipus = ''): never
 {
-    header('HTTP/1.1 404 Not Found', response_code: 404);
+    http_response_code(404);
 
     readfile(__DIR__ . '/../docroot/404.html');
+
     if ($input_paremiotipus !== '') {
         $url = get_paremiotipus_url($input_paremiotipus);
         $paremiotipus = get_paremiotipus_display($input_paremiotipus);
@@ -1199,7 +1245,7 @@ function return_404_and_exit(string $input_paremiotipus = ''): never
  */
 function get_modisme_count(): int
 {
-    return cache_get('modisme_count', static function (): int {
+    return cache_get('count:modisme', static function (): int {
         $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
@@ -1211,7 +1257,7 @@ function get_modisme_count(): int
  */
 function get_paremiotipus_count(): int
 {
-    return cache_get('paremiotipus_count', static function (): int {
+    return cache_get('count:paremiotipus', static function (): int {
         $stmt = db_query('SELECT COUNT(1) FROM `paremiotipus_display`');
 
         return (int) $stmt->fetchColumn();
@@ -1223,7 +1269,7 @@ function get_paremiotipus_count(): int
  */
 function get_informant_count(): int
 {
-    return cache_get('informant_count', static function (): int {
+    return cache_get('count:informant', static function (): int {
         $stmt = db_query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
 
         return (int) $stmt->fetchColumn();
@@ -1235,7 +1281,7 @@ function get_informant_count(): int
  */
 function get_font_count(): int
 {
-    return cache_get('font_count', static function (): int {
+    return cache_get('count:font', static function (): int {
         $stmt = db_query('SELECT COUNT(1) FROM `00_FONTS`');
 
         return (int) $stmt->fetchColumn();
@@ -1253,7 +1299,7 @@ function get_random_top_paremiotipus(int $max = 10000): string
     // random_int() would require exception handling for a theoretically unreachable entropy failure.
     $random_index = rand(0, $max - 1);
 
-    return cache_get("top_paremiotipus_{$random_index}", static function () use ($random_index): string {
+    return cache_get("top_paremiotipus:{$random_index}", static function () use ($random_index): string {
         $stmt = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
 
         $random = $stmt->fetchColumn();
@@ -1278,7 +1324,7 @@ function get_random_top_paremiotipus(int $max = 10000): string
  */
 function get_books(): array
 {
-    return cache_get('llibres', static function (): array {
+    return cache_get('list:llibres', static function (): array {
         $stmt = db_query('SELECT `Imatge`, `Títol`, `URL`, `WIDTH`, `HEIGHT` FROM `00_OBRESVPR`');
 
         /** @var non-empty-list<Book> */

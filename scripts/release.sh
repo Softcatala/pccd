@@ -130,7 +130,11 @@ echo "=== Release preparation complete ==="
 echo ""
 echo "Next steps:"
 echo "  1. Review changes and reports"
-echo "  2. Stop containers: docker compose down"
+if [ "${SKIP_TESTS}" -eq 0 ]; then
+  echo "  2. Stop containers: docker compose -f docker-compose.fpm.yml down"
+else
+  echo "  2. Stop containers: docker compose down"
+fi
 echo "  3. Commit: git add . && git commit -m 'new release'"
 echo "  4. Push: git push"
 echo "  5. Export to public repo: npm run export:code"

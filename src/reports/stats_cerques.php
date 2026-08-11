@@ -15,13 +15,15 @@
  */
 function stats_cerques(): void
 {
+    require_once __DIR__ . '/../common.php';
+
     require_once __DIR__ . '/../reports_common.php';
 
     if (function_exists('apcu_enabled') && apcu_enabled()) {
         $records = [];
         $records_assoc = [];
         $word_count_stats = [];
-        foreach (new APCUIterator('/^ WHERE/') as $entry) {
+        foreach (new APCUIterator('/^' . preg_quote(CACHE_KEY_PREFIX . 'search_count:', '/') . '/') as $entry) {
             if (!is_array($entry)) {
                 continue;
             }
@@ -64,7 +66,7 @@ function stats_cerques(): void
         }
 
         // Sort by number of records.
-        asort($records, \SORT_NUMERIC);
+        asort($records, SORT_NUMERIC);
         // Sort by key alphabetically, but only if values are equal.
         uksort($records, static function (string $key1, string $key2) use ($records): int {
             if ($records[$key1] === $records[$key2]) {
@@ -75,7 +77,7 @@ function stats_cerques(): void
         });
 
         // Sort by number of words, and keep 10+ at the end.
-        ksort($word_count_stats, \SORT_NATURAL);
+        ksort($word_count_stats, SORT_NATURAL);
 
         echo '<script src="/admin/js/chart.min.js"></script>';
 

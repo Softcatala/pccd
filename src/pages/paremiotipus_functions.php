@@ -476,7 +476,7 @@ function render_paremiotipus_images_and_set_og_tags(string $paremiotipus_id, str
             width: $image->WIDTH,
             height: $image->HEIGHT,
             preload: $is_first_processed_image,
-            preload_media: '(min-width: ' . BREAKPOINT_LG . 'px)'
+            preload_media: BREAKPOINT_LG
         );
 
         $image_link_url = get_clean_url($image->URL_ENLLAÇ);

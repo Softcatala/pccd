@@ -13,7 +13,7 @@
 /*
  * Installation script.
  *
- * This file is called by install.sh script.
+ * This file is called by scripts/install.sh.
  */
 
 ini_set('memory_limit', '1024M');
@@ -37,7 +37,7 @@ if (table_exists('pccd_is_installed')) {
 }
 
 // TODO: DRY.
-echo date('[H:i:s]') . ' standarizing quotes...' . "\n";
+echo date('[H:i:s]') . ' standardizing quotes...' . "\n";
 get_db()->exec("UPDATE `00_PAREMIOTIPUS` SET `MODISME` = REPLACE(REPLACE(REPLACE(REPLACE(`MODISME`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\''), `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
 get_db()->exec("UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
 get_db()->exec("UPDATE `RML` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");

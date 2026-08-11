@@ -324,46 +324,6 @@ function render_search_pager(int $current_page_number, int $page_count): string
 }
 
 /**
- * Determines if the given number requires an apostrophe in Catalan.
- *
- * The num parameter specifies the number to check.
- */
-function number_needs_apostrophe(int $num): bool
-{
-    // A result count of 1.000.000 or bigger is not expected, so this logic is sufficient.
-    return $num === 1 || $num === 11 || ($num >= 11000 && $num < 12000);
-}
-
-/**
- * Returns the search summary.
- *
- * The offset parameter specifies the current offset for pagination.
- * The results_per_page parameter specifies the number of results per page.
- * The result_count parameter specifies the total number of results.
- * The search_query parameter specifies the search query string.
- */
-function render_search_summary(int $offset, int $results_per_page, int $result_count, string $search_query): string
-{
-    if ($result_count === 1) {
-        return 'S\'ha trobat 1 paremiotipus per a la cerca <span class="text-monospace text-break">' . $search_query . '</span>.';
-    }
-
-    $output = "S'han trobat " . format_nombre($result_count) . ' paremiotipus per a la cerca <span class="text-monospace text-break">' . $search_query . '</span>.';
-
-    if ($result_count <= $results_per_page) {
-        return $output;
-    }
-
-    $first_result_number = $offset + 1;
-    $output .= (number_needs_apostrophe($first_result_number) ? " Registres de l'" : ' Registres del ') . format_nombre($first_result_number);
-
-    $last_result_number = min($offset + $results_per_page, $result_count);
-    $output .= (number_needs_apostrophe($last_result_number) ? " a l'" : ' al ') . format_nombre($last_result_number) . '.';
-
-    return $output;
-}
-
-/**
  * Builds the search query, storing it in $where_clause variable, and returns the search arguments.
  *
  * @return array{0: string, 1: list<string>} Returns a tuple where the first element is the SQL where clause and the second element is the list of query arguments
@@ -432,7 +392,7 @@ function get_result_count(string $where_clause, array $arguments): int
     $apcu = extension_loaded('apcu');
 
     // Create a unique cache key based on the query and arguments.
-    $cache_key = $where_clause . ' ' . implode('|', $arguments);
+    $cache_key = CACHE_KEY_PREFIX . 'search_count:' . $where_clause . ' ' . implode('|', $arguments);
 
     if ($apcu) {
         $cached = apcu_fetch($cache_key, $success);

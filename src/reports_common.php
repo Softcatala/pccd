@@ -170,7 +170,7 @@ function group_data_stats(array $data, string $key): array
         }
         $groups[$group_key]++;
     }
-    ksort($groups, \SORT_NATURAL);
+    ksort($groups, SORT_NATURAL);
 
     return $groups;
 }
@@ -227,15 +227,20 @@ function curl_get_response_code(string $url, bool $nobody = true): string
     if ($ch === null) {
         $ch = curl_init();
         assert($ch !== false);
-        curl_setopt($ch, \CURLOPT_HEADER, true);
-        curl_setopt($ch, \CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, \CURLOPT_CONNECTTIMEOUT, 3);
-        curl_setopt($ch, \CURLOPT_TIMEOUT, 3);
-        curl_setopt($ch, \CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36');
+        curl_setopt_array($ch, [
+            CURLOPT_CONNECTTIMEOUT => 3,
+            CURLOPT_HEADER => true,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 3,
+            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
+        ]);
     }
 
-    curl_setopt($ch, \CURLOPT_URL, $url);
-    curl_setopt($ch, \CURLOPT_NOBODY, $nobody);
+    curl_setopt_array($ch, [
+        CURLOPT_NOBODY => $nobody,
+        CURLOPT_URL => $url,
+    ]);
+
     if (curl_exec($ch) === false) {
         $err_no = curl_errno($ch);
         $error = curl_error($ch);
@@ -243,7 +248,7 @@ function curl_get_response_code(string $url, bool $nobody = true): string
         return "ERROR {$err_no}: {$error}";
     }
 
-    return (string) curl_getinfo($ch, \CURLINFO_HTTP_CODE);
+    return (string) curl_getinfo($ch, CURLINFO_HTTP_CODE);
 }
 
 /**

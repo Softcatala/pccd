@@ -54,7 +54,7 @@ if ($obra->Imatge !== '') {
         width: $obra->WIDTH,
         height: $obra->HEIGHT,
         preload: true,
-        preload_media: '(min-width: ' . BREAKPOINT_MD . 'px)'
+        preload_media: BREAKPOINT_MD
     );
     echo '</figure>';
 }

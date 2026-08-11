@@ -159,7 +159,7 @@ function background_test_imatges_links(int $start = 0, int $end = 0): string
         // Discard wrong URLs.
         if (
             (!str_starts_with($url, 'http://') && !str_starts_with($url, 'https://'))
-            || filter_var($url, \FILTER_SANITIZE_URL) !== $url
+            || filter_var($url, FILTER_VALIDATE_URL) === false
         ) {
             $output .= 'URL no vàlida o amb caràcters especials (Identificador ' . $font['Identificador'] . '): ' . $url . "\n";
 
@@ -181,10 +181,8 @@ function background_test_imatges_links(int $start = 0, int $end = 0): string
 /**
  * Tries to find similar strings using levenshtein().
  *
- * Ideally, we should be using a mb_levenshtein() function (like the one that
- * may be implemented in PHP 8.5) or all strings should be transliterated. But
- * both options would be too costly, performance-wise. The current solution is
- * OK for now, as minor inaccuracies in similarity can be tolerated.
+ * Ideally, we should be transliterating strings here, but minor inaccuracies
+ * in similarity can be tolerated.
  */
 function background_test_paremiotipus_repetits(int $start = 0, int $end = 0): string
 {

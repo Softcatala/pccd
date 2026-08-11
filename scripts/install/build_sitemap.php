@@ -13,7 +13,7 @@
 /*
  * Prints the sitemap contents to stdout.
  *
- * This file is called by install.sh script.
+ * This file is called by scripts/install.sh.
  */
 
 require __DIR__ . '/../../src/common.php';

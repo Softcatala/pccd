@@ -16,7 +16,7 @@ PageRenderer::setTitle('Fonts bibliogràfiques');
 PageRenderer::setMetaDescription('Llista de les fonts bibliogràfiques disponibles a la Paremiologia catalana comparada digital.');
 
 echo '<table id="fonts">';
-echo '<thead><tr><th scope="col">Autor</th><th scope="col">Any</th><th scope="col">Títol</th><th scope="col" class="tematica">Temàtica</th><th scope="col" class="registres">Registres</th><th scope="col" class="varietat">Varietat dialectal</th></tr></thead>';
+echo '<thead><tr><th scope="col">Autor</th><th scope="col" class="any">Any</th><th scope="col">Títol</th><th scope="col" class="tematica">Temàtica</th><th scope="col" class="registres">Registres</th><th scope="col" class="varietat">Varietat dialectal</th></tr></thead>';
 echo '<tbody>';
 $obres = get_fonts();
 foreach ($obres as $obra) {

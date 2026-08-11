@@ -49,6 +49,9 @@ $config
         'header_comment' => ['header' => $header, 'comment_type' => 'PHPDoc', 'location' => 'after_open'],
         'increment_style' => ['style' => 'post'],
         'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line'],
+        // No need of useless slashes.
+        'native_constant_invocation' => false,
+        'native_function_invocation' => false,
         // Conflicts with php-cs settings.
         'phpdoc_annotation_without_dot' => false,
         'phpdoc_to_comment' => false,

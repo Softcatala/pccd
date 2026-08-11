@@ -111,12 +111,12 @@ const auditUrl = async (url, targetBaseUrl, device = "desktop") => {
         if (
           (category.id === "performance" && url === `${targetBaseUrl}/fonts`) ||
           (category.id === "performance" && score > PERFORMANCE_SCORE_ACCEPTABLE) ||
-          (category.id === "seo" &&
-            score === SEO_SCORE_MISSING_META &&
+          (score === SEO_SCORE_MISSING_META &&
+            category.id === "seo" &&
             (url.startsWith(`${targetBaseUrl}/p/`) || url.startsWith(`${targetBaseUrl}/obra/`))) ||
           (device === "small-mobile" &&
-            category.id === "accessibility" &&
             score === ACCESSIBILITY_SCORE_MINOR &&
+            category.id === "accessibility" &&
             url === `${targetBaseUrl}/`)
         ) {
           // Ignore acceptable score.

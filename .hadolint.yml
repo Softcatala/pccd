@@ -3,5 +3,7 @@ ignored:
   - DL3008
   # Disable enforcing explicit versions in apk (we pin the base image)
   - DL3018
+  # Disable detecting potentially confidential data passed via arguments (images are private)
+  - DL3064
 trustedRegistries:
   - docker.io

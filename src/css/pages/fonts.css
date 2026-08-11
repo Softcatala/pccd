@@ -107,6 +107,7 @@ button.datatable-sorter {
 }
 
 input[type="search"] {
+  font-weight: normal;
   appearance: textfield;
   border: 1px solid var(--color-border-light);
 
@@ -116,6 +117,10 @@ input[type="search"] {
 }
 
 /* Make sure these column headers are fully visible */
+th.any {
+  min-width: 80px;
+}
+
 th.tematica,
 th.varietat {
   min-width: 120px;

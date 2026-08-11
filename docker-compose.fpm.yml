@@ -45,7 +45,3 @@ services:
 
 volumes:
   pccd-mysql-data:
-
-networks:
-  default:
-    name: pccd-net

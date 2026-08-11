@@ -45,7 +45,7 @@ if (!$is_homepage && $page_count > 1) {
         <div class="row">
             <div class="mode"><?php echo render_search_mode_selector(); ?></div>
             <div class="input">
-                <input type="search" name="cerca" autocapitalize="off" autocomplete="off" autofocus value="<?php echo $search_query_input_clean; ?>" placeholder="Introduïu un o diversos termes" aria-label="Introduïu un o diversos termes" pattern=".*[a-zA-Z]+.*" required>
+                <input type="search" name="cerca" autocapitalize="off" autocomplete="off" value="<?php echo $search_query_input_clean; ?>" placeholder="Introduïu un o diversos termes" aria-label="Introduïu un o diversos termes" pattern=".*[a-zA-Z]+.*" required>
                 <button type="submit" aria-label="Cerca">
                     <svg aria-hidden="true" viewBox="0 0 24 24"><path fill="currentColor" d="M15.5 14h-.8l-.3-.3A6.5 6.5 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.6 0 3-.6 4.2-1.6l.3.3v.8l5 5 1.5-1.5zm-6 0a4.5 4.5 0 1 1 0-9 4.5 4.5 0 0 1 0 9"/></svg>
                 </button>
@@ -74,14 +74,11 @@ if (!$is_homepage && $page_count > 1) {
 if ($result_count > 0) {
     $offset = ($current_page_number - 1) * $pagination_limit;
     if (!$is_homepage) {
-        echo '<p>';
-        echo render_search_summary(
-            offset: $offset,
-            results_per_page: $pagination_limit,
-            result_count: $result_count,
-            search_query: $search_query_input_clean
-        );
-        echo '</p>';
+        echo "<p>S'ha trobat ";
+        echo format_nombre($result_count);
+        echo ' paremiotipus per a la cerca <span class="text-monospace text-break">';
+        echo $search_query_input_clean;
+        echo '</span>.</p>';
     }
 
     $paremiotipus = get_paremiotipus_search_results(

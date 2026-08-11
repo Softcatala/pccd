@@ -108,4 +108,28 @@ final class HtmlEscapeAndLinkUrlsTest extends TestCase
         $expected = 'Check <a class="external" target="_blank" rel="noopener" href="https://example.com">https://example.com</a>. Ok';
         self::assertSame($expected, $result);
     }
+
+    public function testSingleQuotedUrlKeepsCleanHref(): void
+    {
+        require_once __DIR__ . '/../../src/common.php';
+
+        // ENT_COMPAT is required: with ENT_QUOTES the trailing &#039; entity is
+        // partially absorbed into the matched URL.
+        $text = "Article: 'https://exemple.cat/foo'";
+        $result = html_escape_and_link_urls($text);
+
+        $expected = "Article: '<a class=\"external\" target=\"_blank\" rel=\"noopener\" href=\"https://exemple.cat/foo\">https://exemple.cat/foo</a>'";
+        self::assertSame($expected, $result);
+    }
+
+    public function testApostropheInSurroundingTextIsPreserved(): void
+    {
+        require_once __DIR__ . '/../../src/common.php';
+
+        $text = "l'home va a https://exemple.cat/";
+        $result = html_escape_and_link_urls($text);
+
+        $expected = "l'home va a <a class=\"external\" target=\"_blank\" rel=\"noopener\" href=\"https://exemple.cat/\">https://exemple.cat/</a>";
+        self::assertSame($expected, $result);
+    }
 }

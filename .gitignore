@@ -2,7 +2,6 @@
 *.sublime-workspace
 .DS_Store
 .idea/
-.phpactor.json
 .vscode/
 
 # The original database file (MS Access) and provided zipped files

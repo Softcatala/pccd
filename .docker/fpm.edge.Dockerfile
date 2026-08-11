@@ -3,7 +3,7 @@ FROM alpine:edge
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Alpine edge-based image with PHP-FPM, for testing latest PHP."
 
-ARG PHP_VERSION=85
+ARG PHP_VERSION=86
 
 WORKDIR /srv/app
 

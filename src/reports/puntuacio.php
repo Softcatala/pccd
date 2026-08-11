@@ -373,7 +373,7 @@ function test_paremiotipus_caracters_inusuals(): void
     }
     $output = '';
     foreach ($guions as $guio => $guio_array) {
-        if (count($guio_array) === 0) {
+        if ($guio_array === []) {
             continue;
         }
         $output .= "<strong>Caràcter {$guio}</strong>\n";
@@ -407,7 +407,7 @@ function test_paremiotipus_caracters_inusuals(): void
     }
     $output = '';
     foreach ($guions as $guio => $guio_array) {
-        if (count($guio_array) === 0) {
+        if ($guio_array === []) {
             continue;
         }
         $output .= "<strong>Caràcter {$guio}</strong>\n";

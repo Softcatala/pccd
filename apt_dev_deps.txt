@@ -3,9 +3,7 @@ curl
 default-jre-headless
 gifsicle
 git-core
-icu-devtools
 jpegoptim
-jq
 mdbtools
 nodejs
 npm

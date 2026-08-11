@@ -1,6 +1,6 @@
 # Architecture
 
-This document describes the architectural principles and design decisions for the Paremiologia catalana comparada digital (PCCD) project.
+This document describes the architectural principles and design decisions for the PCCD project.
 
 ## Core Philosophy
 
@@ -10,7 +10,7 @@ This project prioritizes **simplicity, performance, and long-term maintainabilit
 
 ### Backend
 
-- **PHP** - No framework, pure PHP with utility functions. Uses PDO for database access (no ORM). Modern features preferred.
+- **PHP** - No framework, pure PHP with utility functions. Uses PDO for database access (no ORM).
 - **MariaDB** - Database. Latest LTS preferred.
 - **Web server** - Apache with mod_php (dev), Nginx + PHP-FPM (prod), or FrankenPHP.
 
@@ -31,9 +31,9 @@ Compiled assets in `docroot/css/` and `docroot/js/` are committed to version con
 
 ### Script Language Conventions
 
-- **Node.js (ESM)** - Default for build tools, validation, testing, and complex text processing. Prefer Node.js over sed/awk/perl for anything beyond trivial one-liners.
+- **Node.js (ESM)** - Default for build tools, validation, testing, and complex text processing. Prefer Node.js over sed/awk/perl.
 - **POSIX sh** - Used for system operations (Docker, DB migrations, CI tasks). Target `/bin/sh` and maintain compatibility between macOS and Linux. Keep logic simple; use Node.js for anything complex.
-- **PHP** - Used for database-dependent operations like report generation or data integrity checks.
+- **PHP** - Used for database-dependent operations like report generation.
 
 Node.js is preferred for maintainability and portability. Shell scripts are reserved for operations where shell execution is a natural fit.
 
@@ -41,11 +41,11 @@ Node.js is preferred for maintainability and portability. Shell scripts are rese
 
 **Input formats**: `.jpg`, `.png`, `.gif` only.
 
-The optimization pipeline resizes, quantizes, and compresses images, generating modern variants (AVIF, and WebP for animated GIFs). Output formats are `.avif` and `.webp`.
+The optimization pipeline resizes, quantizes, and compresses images, generating modern variants (AVIF, and WebP for animated GIFs).
 
 ### Code Quality
 
-Standard tooling (PHPStan level 9, Psalm, ESLint, Prettier, Stylelint, ShellCheck) enforces code quality.
+Standard tooling (PHPStan, Psalm, ESLint, Prettier, Stylelint, ShellCheck) enforces code quality.
 
 - **PHPStan custom rules** - Project-specific quality checks.
 - **Data integrity reports** - Custom PHP scripts in `scripts/report-generation/` validate links, detect duplicates, and check asset integrity. These run offline via `npm run generate:reports`.
@@ -54,7 +54,6 @@ Standard tooling (PHPStan level 9, Psalm, ESLint, Prettier, Stylelint, ShellChec
 
 - **No emojis** - Never use emojis in code, comments, or documentation.
 - **No SCREAMING CASE** - Avoid all-caps text in prose and messages (except for constants/env vars).
-- **Professional tone** - Keep language clear, direct, and technical.
 
 ## Design Principles
 
@@ -66,17 +65,11 @@ Avoid unnecessary frameworks and abstractions. Use procedural code when appropri
 - No runtime Composer dependencies.
 - No JavaScript or CSS frameworks; targeted libraries are acceptable (e.g., Chart.js).
 
-### Right Tool for the Job
-
-- Node.js: File processing, HTTP requests, build tools.
-- Shell scripts: Docker operations and system commands.
-- PHP: Database-dependent operations.
-
 ### Minimize System Dependencies
 
 Prefer npm/Composer packages over system binaries. `composer.phar` is committed to the repository to ensure reproducibility.
 
-Current system dependencies include tools for image optimization (gifsicle, jpegoptim), linting (shellcheck, shfmt), and data processing (mdbtools, icu-devtools).
+Current system dependencies include tools for image optimization (gifsicle, jpegoptim), linting (shellcheck, shfmt), and data processing (mdbtools).
 
 ### Dependency Versioning
 
@@ -119,11 +112,11 @@ Multi-stage validation in `.gitlab-ci.yml` includes code quality checks, testing
 
 ## Performance
 
-- **Caching**: 1-year immutable cache for static assets, 15 minutes for HTML. APCu (64MB) and Opcache (32MB) are used for expensive operations and scripts.
-- **HTTP requests**: CSS and JavaScript are inlined where appropriate to minimize round trips.
-- **Optimization**: Lazy loading, link prefetching, and Brotli/zstd compression are employed.
+- **Caching**: In the browser: 1-year immutable cache for static assets, 15 minutes for HTML. In the server: APCu (64MB) is recommended.
+- **HTTP requests**: CSS and JavaScript usually inlined to minimize round trips.
+- **Optimization**: Lazy loading, link prefetching, and compression are employed.
 
-The slowest pages load in under 100ms without complex caching layers like Varnish.
+The slowest pages render in under 100ms.
 
 ## Project Structure
 

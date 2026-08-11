@@ -1,0 +1,48 @@
+{
+  "target": "next",
+  "files": [".docker/*Dockerfile", "docker-compose.yml", "docker-compose.fpm.yml"],
+  "packageRules": [
+    {
+      "matchImages": ["alpine"],
+      "matchFiles": [".docker/fpm.Dockerfile"],
+      "referenceTag": "latest"
+    },
+    {
+      "matchImages": ["mariadb"],
+      "referenceTag": "lts"
+    },
+    {
+      "matchImages": ["php"],
+      "matchArgs": ["PHP_IMAGE_TAG"],
+      "referenceTag": "apache"
+    }
+  ],
+  "sync": [
+    {
+      "image": "mariadb",
+      "from": "docker-compose.yml",
+      "to": ["docker-compose.fpm.yml", ".docker/sql.Dockerfile"]
+    },
+    {
+      "image": "alpine",
+      "from": ".docker/fpm.Dockerfile",
+      "to": [".docker/nginx.Dockerfile"]
+    }
+  ],
+  "githubReleases": [
+    {
+      "owner": "mlocati",
+      "repo": "docker-php-extension-installer",
+      "files": [
+        {
+          "path": ".docker/dev.Dockerfile",
+          "line": "ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION={version}"
+        },
+        {
+          "path": ".gitlab-ci.yml",
+          "line": "DOCKER_PHP_EXTENSION_INSTALLER_VERSION: \"{version}\""
+        }
+      ]
+    }
+  ]
+}

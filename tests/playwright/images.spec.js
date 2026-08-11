@@ -54,7 +54,7 @@ test.describe("Homepage <picture> tag", () => {
     const linkHeader = response.headers().link;
 
     expect(linkHeader).toMatch(
-      /<[^>]+>; rel=preload; as=image; type=image\/(?:avif|webp|jpeg|png|gif); media="\(min-width: \d+px\)"/u,
+      /<[^>]+>; rel=preload; as=image; type=image\/(?:avif|webp|jpeg|png|gif); media="\(width >= \d+px\)"/u,
     );
   });
 });
