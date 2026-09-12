@@ -20,12 +20,6 @@ window.addEventListener = function (event, listener, options) {
 
 // eslint-disable-next-line no-new -- DataTable constructor has side effects
 new DataTable("#fonts", {
-  columns: [
-    {
-      select: 2,
-      sort: "asc",
-    },
-  ],
   labels: {
     noResults: "No s'ha trobat cap resultat",
   },

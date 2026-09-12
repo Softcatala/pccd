@@ -11,30 +11,25 @@
 import { HtmlValidate } from "html-validate";
 import htmlhintPkg from "htmlhint";
 const { HTMLHint } = htmlhintPkg;
-import console from "node:console";
 import { exec } from "node:child_process";
 import path from "node:path";
-import process from "node:process";
 import { promisify } from "node:util";
 import { writeFile } from "node:fs/promises";
 
 import htmlValidateConfig from "../../.htmlvalidate.json" with { type: "json" };
 import htmlhintConfig from "../../.htmlhintrc.json" with { type: "json" };
 
-const TIDY = "tidy";
-
-const execAsync = promisify(exec);
-const rootDirectory = path.join(import.meta.dirname, "../..");
-
-const EXIT_CODE_ERROR = 255;
-const HTTP_STATUS_NOT_FOUND = 404;
-
 process.loadEnvFile();
 if (!process.env.BASE_URL) {
   console.error("ERROR: BASE_URL variable is not set.");
-  process.exit(EXIT_CODE_ERROR);
+  process.exit(255);
 }
 
+const EXIT_CODE_ERROR = 255;
+const TIDY = "tidy";
+const execAsync = promisify(exec);
+const rootDirectory = path.join(import.meta.dirname, "../..");
+const HTTP_STATUS_NOT_FOUND = 404;
 const baseUrl = process.env.BASE_URL;
 
 /**

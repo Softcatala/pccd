@@ -36,6 +36,11 @@ h2 {
   border-top: 1px solid var(--color-border);
 }
 
+.share-wrapper:has(.share-icons:not([hidden])) button,
+.share-wrapper:has(.share-icons:not([hidden])) .share-icons {
+  outline: 1px solid #e3e3e3;
+}
+
 .share-icon {
   display: flex;
   padding: 0.25rem;

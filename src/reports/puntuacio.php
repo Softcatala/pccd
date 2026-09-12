@@ -14,6 +14,33 @@ function test_puntuacio(): void
 {
     require_once __DIR__ . '/../common.php';
 
+    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $modismes = db_query('SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS` ORDER BY `MODISME`')->fetchAll(PDO::FETCH_COLUMN);
+    $show_paremiotipus_check = static function (string $title, callable $matches, array $details = []) use ($paremiotipus, $modismes): void {
+        foreach (
+            [
+                ['Paremiotipus', $paremiotipus, true],
+                ['Modismes', $modismes, false],
+            ] as [$type, $values, $display]
+        ) {
+            echo "<h3>{$type} {$title}</h3>";
+            $output = '';
+            foreach ($values as $value) {
+                assert(is_string($value));
+                if ($matches($value)) {
+                    $output .= ($display ? get_paremiotipus_display($value, escape_html: false) : $value) . "\n";
+                }
+            }
+            if ($output === '') {
+                echo '<pre class="empty">(cap resultat)</pre>';
+            } elseif (in_array($type, $details, true)) {
+                echo "<details><pre>{$output}</pre></details>";
+            } else {
+                echo "<pre>{$output}</pre>";
+            }
+        }
+    };
+
     echo '<h3>Paremiotipus amb parèntesis o claudàtors no tancats</h3>';
     $paremiotipus = db_query("SELECT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE LENGTH(REPLACE(`PAREMIOTIPUS`, '(', '')) != LENGTH(REPLACE(`PAREMIOTIPUS`, ')', '')) OR LENGTH(REPLACE(`PAREMIOTIPUS`, '[', '')) != LENGTH(REPLACE(`PAREMIOTIPUS`, ']', ''))")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
@@ -158,6 +185,75 @@ function test_puntuacio(): void
         echo "<pre>{$output}</pre>";
     }
 
+    $show_paremiotipus_check(
+        'amb espai després d\'un apòstrof d\'elisió',
+        static fn (string $p): bool => preg_match("/(?:^|[^A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç])(?:[LldDnNsSmMtT]|[Qq]u)'\\s/u", $p) === 1,
+        ['Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb espai abans d\'un apòstrof',
+        static fn (string $p): bool => preg_match("/[A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç]\\s'/u", $p) === 1,
+        ['Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb coma sense espai posterior',
+        static fn (string $p): bool => preg_match('/,[^\s\])\'".…]/u', $p) === 1,
+        ['Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb punts suspensius mal formats',
+        static fn (string $p): bool => preg_match('/\.\s\.\s\.|\.{4,}|,\.\.\.|\.{3}(?=[A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç])/u', $p) === 1
+    );
+
+    $show_paremiotipus_check(
+        'amb puntuació incorrecta després de signe d\'exclamació o interrogació',
+        static fn (string $p): bool => preg_match('/[!?]-/u', $p) === 1,
+        ['Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb claudàtors o parèntesis buits o adjacents',
+        static fn (string $p): bool => preg_match('/\[\s*\]|\(\s*\)|\)[[(]|\][[(]/u', $p) === 1
+    );
+
+    $show_paremiotipus_check(
+        'amb tres lletres idèntiques seguides',
+        static fn (string $p): bool => preg_match('/([A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç])\1\1/ui', preg_replace('/\b[IVXLCDM]+\b/ui', '', $p) ?? '') === 1,
+        ['Paremiotipus', 'Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb més d\'un accent gràfic en una paraula',
+        static function (string $p): bool {
+            $words = preg_split('/[\s,.;:!?()[\]"\'\-–—\/]+/u', $p, -1, PREG_SPLIT_NO_EMPTY);
+            if ($words === false) {
+                return false;
+            }
+            foreach ($words as $word) {
+                if (preg_match_all('/[àèéíòóúÀÈÉÍÒÓÚ]/u', $word) > 1) {
+                    return true;
+                }
+            }
+
+            return false;
+        },
+        ['Paremiotipus', 'Modismes']
+    );
+
+    $show_paremiotipus_check(
+        'amb entitats HTML en text pla',
+        static fn (string $p): bool => preg_match('/&(?:amp|lt|gt|quot|apos|nbsp);|&#\d+;/iu', $p) === 1
+    );
+
+    $show_paremiotipus_check(
+        'amb l\'abreviatura etc sense punt',
+        static fn (string $p): bool => preg_match('/\betc(?!\.)\b/iu', $p) === 1,
+        ['Modismes']
+    );
+
     echo '<h3>Modismes amb possible confusió del caràcter <code>l</code> amb <code>I</code></h3>';
     $modismes = db_query("SELECT `MODISME` FROM `00_PAREMIOTIPUS` WHERE `MODISME` LIKE BINARY '%I\\'%' OR `MODISME` REGEXP BINARY '[a-z]+I'")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
@@ -203,7 +299,7 @@ function test_puntuacio(): void
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
-        echo "<pre>{$output}</pre>";
+        echo "<details><pre>{$output}</pre></details>";
     }
 
     echo '<h3>Modismes amb 2 punts seguits</h3>';
@@ -263,7 +359,7 @@ function test_puntuacio(): void
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
-        echo "<pre>{$output}</pre>";
+        echo "<details><pre>{$output}</pre></details>";
     }
 
     echo '<h3>Modismes amb una combinació de signes de puntuació inusual</h3>';
@@ -351,7 +447,7 @@ function test_paremiotipus_caracters_inusuals(): void
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
-        echo "<pre>{$output}</pre>";
+        echo "<details><pre>{$output}</pre></details>";
     }
 
     echo '<h3>Paremiotipus amb caràcters de guió o guionet no estàndards (ni — ni -)</h3>';

@@ -30,7 +30,7 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
         return_404_and_exit();
     }
 
-    $text = get_paremiotipus_display(paremiotipus: $paremiotipus, escape_html: false, use_fallback_string: false);
+    $text = get_paremiotipus_display($paremiotipus, escape_html: false, use_fallback_string: false);
     if ($text === '') {
         return_404_and_exit();
     }
@@ -38,17 +38,23 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
     $text_length = mb_strlen($text);
 
     $image = imagecreatetruecolor(OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT);
-    assert($image !== false, 'Failed to create image');
-    imagetruecolortopalette($image, true, 2);
+    if ($image === false) {
+        return_500_and_exit();
+    }
+    imagetruecolortopalette($image, dither: true, num_colors: 2);
 
-    $bg_color = imagecolorallocate(image: $image, red: 43, green: 87, blue: 151);
-    assert($bg_color !== false, 'Failed to allocate background color');
+    $bg_color = imagecolorallocate($image, 43, 87, 151);
+    if ($bg_color === false) {
+        return_500_and_exit();
+    }
     imagefilledrectangle($image, 0, 0, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, $bg_color);
 
-    $text_color = imagecolorallocate(image: $image, red: 255, green: 255, blue: 255);
-    assert($text_color !== false, 'Failed to allocate text color');
+    $text_color = imagecolorallocate($image, 255, 255, 255);
+    if ($text_color === false) {
+        return_500_and_exit();
+    }
 
-    $wrapped_text = wordwrap(string: $text, width: OG_TEXT_MAX_LENGTH / OG_TEXT_MAX_LINES, cut_long_words: true);
+    $wrapped_text = wordwrap($text, width: OG_TEXT_MAX_LENGTH / OG_TEXT_MAX_LINES, cut_long_words: true);
     $n_lines = substr_count($wrapped_text, "\n") + 1;
 
     if ($n_lines > OG_TEXT_MAX_LINES) {
@@ -78,8 +84,10 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
 
     // Calculate text box size and position to center it.
     do {
-        $bbox = imagettfbbox($font_size, 0, OG_FONT_PATH, $wrapped_text);
-        assert($bbox !== false, 'Failed to calculate text bounding box');
+        $bbox = imagettfbbox(size: $font_size, angle: 0, font_filename: OG_FONT_PATH, string: $wrapped_text);
+        if ($bbox === false) {
+            return_500_and_exit();
+        }
 
         $text_width = $bbox[4] - $bbox[0];
         $text_height = $bbox[5] - $bbox[1];

@@ -10,16 +10,19 @@
 
 // eslint-disable-next-line n/no-extraneous-import -- chrome-launcher is a transitive dependency from lighthouse
 import * as chromeLauncher from "chrome-launcher";
-import console from "node:console";
 import lighthouse from "lighthouse";
-import process from "node:process";
+
+process.loadEnvFile();
+if (!process.env.BASE_URL) {
+  console.error("ERROR: BASE_URL variable is not set.");
+  process.exit(255);
+}
 
 const EXIT_CODE_ERROR = 255;
 const PERFECT_SCORE = 100;
 const PERFORMANCE_SCORE_ACCEPTABLE = 90;
 const SEO_SCORE_MISSING_META = 92;
 const ACCESSIBILITY_SCORE_MINOR = 99;
-
 const URLS = [
   "/",
   "/p/A_Agramunt_comerciants_i_a_T%C3%A0rrega_comediants",
@@ -30,15 +33,7 @@ const URLS = [
   "/obra/Carol%2C_Roser_%281978-2021%29%3A_Frases_fetes_dels_Pa%C3%AFsos_Catalans",
   "/fonts",
 ];
-
 const DEVICES = ["desktop", "mobile", "tablet", "small-mobile", "experimental"];
-
-process.loadEnvFile();
-if (!process.env.BASE_URL) {
-  console.error("ERROR: BASE_URL variable is not set.");
-  process.exit(EXIT_CODE_ERROR);
-}
-
 const baseUrl = process.env.BASE_URL;
 
 const getLighthouseConfig = (device) => {
@@ -74,9 +69,6 @@ const getLighthouseConfig = (device) => {
       config.settings.screenEmulation.height = 1024;
       config.settings.screenEmulation.deviceScaleFactor = 2;
 
-      break;
-    }
-    default: {
       break;
     }
   }

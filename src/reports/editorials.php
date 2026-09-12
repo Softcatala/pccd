@@ -14,12 +14,11 @@ function test_editorials_no_referenciades(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    $editorials = get_editorials();
     $editorials_modismes = db_query('SELECT DISTINCT `EDITORIAL`, 1 FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_KEY_PAIR);
 
     echo '<h3>Editorials de la taula 00_EDITORIA que no estan referenciades per cap paremiotipus</h3>';
     $output = '';
-    foreach ($editorials as $ed_codi => $ed_title) {
+    foreach (get_editorials() as $ed_codi => $ed_title) {
         if (!isset($editorials_modismes[$ed_codi])) {
             $output .= "{$ed_codi}: {$ed_title}\n";
         }

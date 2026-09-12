@@ -19,7 +19,7 @@ services:
       - "./:/srv/app"
 
   mysql:
-    image: mariadb:12.3.2-noble
+    image: mariadb:12.3.3-noble
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: true
       MYSQL_DATABASE: pccd
@@ -32,6 +32,8 @@ services:
       timeout: 5s
       retries: 60
     restart: unless-stopped
+    security_opt:
+      - seccomp:unconfined
     volumes:
       - "./.docker/mysql:/etc/mysql/conf.d:ro"
       - "./install/db:/docker-entrypoint-initdb.d:ro"

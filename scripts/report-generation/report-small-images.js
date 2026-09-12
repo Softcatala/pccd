@@ -8,9 +8,7 @@
  * source code in the file LICENSE.
  */
 
-import console from "node:console";
 import path from "node:path";
-import process from "node:process";
 import { readdir } from "node:fs/promises";
 import sharp from "sharp";
 

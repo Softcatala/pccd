@@ -34,7 +34,6 @@ function get_test_functions(): array
             'test_fonts_buides',
             'test_fonts_sense_paremia',
             'test_paremies_sense_font_existent',
-            'test_fonts_zero',
         ],
         'imatges' => [
             'test_imatges_buides',
@@ -60,6 +59,7 @@ function get_test_functions(): array
         ],
         'majuscules' => ['test_majuscules'],
         'multilingue' => ['test_multilingue'],
+        'ortografia' => ['test_ortografia'],
         'puntuacio' => [
             'test_paremiotipus_caracters_inusuals',
             'test_paremiotipus_final',
@@ -197,14 +197,20 @@ function get_data_from_files(array $files, string $directory_path, string $attri
         $month = substr($matches[1], 4, 2);
         $formatted_date = $month . '-' . $year;
         $json_content = file_get_contents($directory_path . $file);
-        assert(is_string($json_content));
-        $decoded = json_decode(json: $json_content, associative: true, flags: JSON_THROW_ON_ERROR);
-        assert(is_array($decoded));
-        if (!isset($decoded[$attribute])) {
+        if ($json_content === false) {
             continue;
         }
 
-        assert(is_int($decoded[$attribute]));
+        try {
+            $decoded = json_decode($json_content, associative: true, flags: JSON_THROW_ON_ERROR);
+        } catch (JsonException) {
+            continue;
+        }
+
+        if (!is_array($decoded) || !isset($decoded[$attribute]) || !is_int($decoded[$attribute])) {
+            continue;
+        }
+
         $data[$formatted_date] = $decoded[$attribute];
     }
 
@@ -226,7 +232,9 @@ function curl_get_response_code(string $url, bool $nobody = true): string
     static $ch = null;
     if ($ch === null) {
         $ch = curl_init();
-        assert($ch !== false);
+        if ($ch === false) {
+            throw new RuntimeException('Failed to initialize cURL');
+        }
         curl_setopt_array($ch, [
             CURLOPT_CONNECTTIMEOUT => 3,
             CURLOPT_HEADER => true,
@@ -259,12 +267,7 @@ function curl_get_response_code(string $url, bool $nobody = true): string
 function has_supported_image_extension(string $filename): bool
 {
     $supported_extensions = ['.gif', '.jpg', '.png'];
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
-    foreach ($supported_extensions as $extension) {
-        if (str_ends_with($filename, $extension)) {
-            return true;
-        }
-    }
-
-    return false;
+    return in_array($extension, $supported_extensions, strict: true);
 }

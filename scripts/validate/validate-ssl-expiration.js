@@ -14,27 +14,9 @@
  */
 
 import { URL } from "node:url";
-import console from "node:console";
 import https from "node:https";
-import process from "node:process";
-
-const DAYS_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
-const WARNING_DAYS = 10;
-const EXPECTED_ARGUMENTS = 2;
 
 process.loadEnvFile();
-
-/**
- * Shows the usage of this command.
- */
-const usage = () => {
-  console.log("Usage: ./validate-ssl-expiration.js [ENVIRONMENT_URL] [IP]\n");
-  console.log("Optional arguments:");
-  console.log("  ENVIRONMENT_URL       The website URL, without trailing slash (default: https://pccd.dites.cat)");
-  console.log(
-    "  IP                    The IP address to connect to. Use when you want to resolve the domain to a specific IP.",
-  );
-};
 
 /**
  * Gets the SSL certificate expiration date.
@@ -67,13 +49,23 @@ const getCertificateExpiration = (url, ip) =>
   });
 
 // Main execution.
-const userArguments = process.argv.slice(EXPECTED_ARGUMENTS);
+const userArguments = process.argv.slice(2);
 
-if (userArguments.length > EXPECTED_ARGUMENTS) {
+if (userArguments.length > 2) {
+  const usage = () => {
+    console.log("Usage: ./validate-ssl-expiration.js [ENVIRONMENT_URL] [IP]\n");
+    console.log("Optional arguments:");
+    console.log("  ENVIRONMENT_URL       The website URL, without trailing slash (default: https://pccd.dites.cat)");
+    console.log(
+      "  IP                    The IP address to connect to. Use when you want to resolve the domain to a specific IP.",
+    );
+  };
   usage();
   process.exit(1);
 }
 
+const DAYS_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+const WARNING_DAYS = 10;
 const remoteEnvironmentUrl = userArguments[0] || "https://pccd.dites.cat";
 let originIp = userArguments[1];
 

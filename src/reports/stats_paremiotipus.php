@@ -200,7 +200,10 @@ function stats_paremiotipus(): void
     echo '<h3>Creixement històric de la base de dades</h3>';
     $directory_path = __DIR__ . '/../../data/playwright/historic/';
     $files = scandir($directory_path);
-    assert(is_array($files));
+    if ($files === false) {
+        return_500_and_exit();
+    }
+
     $paremiotipus_number_data = get_data_from_files($files, $directory_path, 'paremiotipusNumber');
     $fitxes_number_data = get_data_from_files($files, $directory_path, 'fitxesNumber');
     echo get_chart('line', $paremiotipus_number_data, 'paremiotipus', 'Mesos (2023-)', 'Nombre de registres', style: 'width:800px;');

@@ -423,7 +423,9 @@ function background_test_intl_modismes_molt_diferents(): string
     require_once __DIR__ . '/../common.php';
 
     $transliterator = Transliterator::create('Any-Latin; Latin-ASCII; [\u0100-\u7fff] remove');
-    assert($transliterator instanceof Transliterator);
+    if (!$transliterator instanceof Transliterator) {
+        throw new RuntimeException('Failed to initialize transliterator');
+    }
 
     $words_exclude = ['a', 'amb', 'de', 'el', 'els', 'en', 'i', 'la', 'les', 'ni', 'o', 'per', 'que'];
     $prev_paremiotipus = '';
@@ -436,8 +438,9 @@ function background_test_intl_modismes_molt_diferents(): string
 
         $modisme_ascii = $transliterator->transliterate($row['MODISME']);
         $paremiotipus_ascii = $transliterator->transliterate($row['PAREMIOTIPUS']);
-        assert(is_string($modisme_ascii));
-        assert(is_string($paremiotipus_ascii));
+        if ($modisme_ascii === false || $paremiotipus_ascii === false) {
+            continue;
+        }
 
         $words_modisme = array_unique(array_diff(str_word_count(strtolower($modisme_ascii), 1), $words_exclude));
         $words_paremiotipus = array_unique(array_diff(str_word_count(strtolower($paremiotipus_ascii), 1), $words_exclude));

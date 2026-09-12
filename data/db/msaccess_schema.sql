@@ -133,43 +133,35 @@ ALTER TABLE `00_MATRIU2019` ADD INDEX `ID_FONT` (`ID_FONT`);
 ALTER TABLE `00_MATRIU2019` ADD INDEX `IDIOMA` (`IDIOMA`);
 ALTER TABLE `00_MATRIU2019` ADD PRIMARY KEY (`Id`);
 
-CREATE TABLE `00_OBRESVPR`
+CREATE TABLE `00_PAREMIOTIPUS`
  (
-	`Comptador`			int NOT NULL, 
-	`Identificador`			varchar (255), 
-	`Autor`			varchar (255), 
-	`Any`			varchar (10), 
-	`Títol`			varchar (255), 
-	`ISBN`			varchar (50), 
-	`Codi_edit`			varchar (3), 
-	`Editorial`			varchar (255), 
-	`Municipi`			varchar (255), 
-	`Edició`			varchar (25), 
-	`Any_edició`			int, 
-	`Collecció`			varchar (255), 
-	`Núm_collecció`			varchar (255), 
-	`Pàgines`			int, 
-	`Idioma`			varchar (255), 
-	`Preu`			float, 
-	`Imatge`			varchar (255), 
-	`URL`			varchar (255)
+	`Id`			int not null auto_increment unique, 
+	`TIPUS`			varchar (1), 
+	`MODISME`			varchar (255), 
+	`PAREMIOTIPUS`			varchar (255), 
+	`SINONIM`			varchar (255), 
+	`IDIOMA`			varchar (255), 
+	`EQUIVALENT`			varchar (255), 
+	`LLOC`			varchar (255), 
+	`AUTORIA`			varchar (255), 
+	`FONT`			varchar (255), 
+	`EXPLICACIO`			varchar (255), 
+	`EXPLICACIO2`			varchar (255), 
+	`EXEMPLES`			varchar (255), 
+	`AUTOR`			varchar (255), 
+	`ANY`			double, 
+	`EDITORIAL`			varchar (3), 
+	`ID_FONT`			varchar (255), 
+	`DIARI`			varchar (255), 
+	`ARTICLE`			varchar (200), 
+	`PAGINA`			varchar (10), 
+	`NUM_ORDRE`			varchar (255), 
+	`DATA`			date
 );
 
 -- CREATE INDEXES ...
-ALTER TABLE `00_OBRESVPR` ADD INDEX `Identificador` (`Identificador`);
-ALTER TABLE `00_OBRESVPR` ADD INDEX `Idioma` (`Idioma`);
-ALTER TABLE `00_OBRESVPR` ADD INDEX `Núm_collecció` (`Núm_collecció`);
-ALTER TABLE `00_OBRESVPR` ADD PRIMARY KEY (`Comptador`);
-
-CREATE TABLE `MSysCompactError`
- (
-	`ErrorCode`			int, 
-	`ErrorDescription`			text, 
-	`ErrorTable`			varchar (255), 
-	`ErrorRecid`			blob
-);
-
--- CREATE INDEXES ...
+ALTER TABLE `00_PAREMIOTIPUS` ADD INDEX `ID_FONT` (`ID_FONT`);
+ALTER TABLE `00_PAREMIOTIPUS` ADD INDEX `IDIOMA` (`IDIOMA`);
 
 CREATE TABLE `RML`
  (
@@ -229,35 +221,33 @@ CREATE TABLE `RML`
 -- CREATE INDEXES ...
 ALTER TABLE `RML` ADD PRIMARY KEY (`NUM_ORDRE`);
 
-CREATE TABLE `00_PAREMIOTIPUS`
+CREATE TABLE `00_OBRESVPR`
  (
-	`Id`			int not null auto_increment unique, 
-	`TIPUS`			varchar (1), 
-	`MODISME`			varchar (255), 
-	`PAREMIOTIPUS`			varchar (255), 
-	`SINONIM`			varchar (255), 
-	`IDIOMA`			varchar (255), 
-	`EQUIVALENT`			varchar (255), 
-	`LLOC`			varchar (255), 
-	`AUTORIA`			varchar (255), 
-	`FONT`			varchar (255), 
-	`EXPLICACIO`			varchar (255), 
-	`EXPLICACIO2`			varchar (255), 
-	`EXEMPLES`			varchar (255), 
-	`AUTOR`			varchar (255), 
-	`ANY`			double, 
-	`EDITORIAL`			varchar (3), 
-	`ID_FONT`			varchar (255), 
-	`DIARI`			varchar (255), 
-	`ARTICLE`			varchar (200), 
-	`PAGINA`			varchar (10), 
-	`NUM_ORDRE`			varchar (255), 
-	`DATA`			date
+	`Comptador`			int NOT NULL, 
+	`Identificador`			varchar (255), 
+	`Autor`			varchar (255), 
+	`Any`			varchar (10), 
+	`Títol`			varchar (255), 
+	`ISBN`			varchar (50), 
+	`Codi_edit`			varchar (3), 
+	`Editorial`			varchar (255), 
+	`Municipi`			varchar (255), 
+	`Edició`			varchar (25), 
+	`Any_edició`			int, 
+	`Collecció`			varchar (255), 
+	`Núm_collecció`			varchar (255), 
+	`Pàgines`			int, 
+	`Idioma`			varchar (255), 
+	`Preu`			float, 
+	`Imatge`			varchar (255), 
+	`URL`			varchar (255)
 );
 
 -- CREATE INDEXES ...
-ALTER TABLE `00_PAREMIOTIPUS` ADD INDEX `ID_FONT` (`ID_FONT`);
-ALTER TABLE `00_PAREMIOTIPUS` ADD INDEX `IDIOMA` (`IDIOMA`);
+ALTER TABLE `00_OBRESVPR` ADD INDEX `Identificador` (`Identificador`);
+ALTER TABLE `00_OBRESVPR` ADD INDEX `Idioma` (`Idioma`);
+ALTER TABLE `00_OBRESVPR` ADD INDEX `Núm_collecció` (`Núm_collecció`);
+ALTER TABLE `00_OBRESVPR` ADD PRIMARY KEY (`Comptador`);
 
 
 -- CREATE Relationships ...

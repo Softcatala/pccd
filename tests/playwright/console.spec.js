@@ -23,7 +23,6 @@ test.describe("Console errors", () => {
 
       await page.goto(url);
 
-      // Wait for any potential async console errors that might happen shortly after load
       await page.waitForTimeout(500);
 
       expect(errors, `Found console errors or exceptions on ${url}:\n${errors.join("\n")}`).toEqual([]);

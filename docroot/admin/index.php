@@ -107,7 +107,7 @@ session_write_close();
 
 if ($is_test_page) {
     $test_file = $_GET['test'];
-    $start_time = microtime(true);
+    $start_time = microtime(as_float: true);
 
     require __DIR__ . '/../../src/reports_common.php';
 
@@ -125,10 +125,10 @@ if ($is_test_page) {
 
     echo "<p>[<a href='/admin/'>Torna endarrere</a>]</p>";
 
-    $end_time = microtime(true);
-    $total_time = format_nombre(round($end_time - $start_time, 4), decimals: 4);
-    $memory_current = format_nombre(round(memory_get_usage(true) / 1024 / 1024, 2));
-    $memory_peak = format_nombre(round(memory_get_peak_usage(true) / 1024 / 1024, 2));
+    $end_time = microtime(as_float: true);
+    $total_time = format_nombre(round($end_time - $start_time, precision: 4), decimals: 4);
+    $memory_current = format_nombre(round(memory_get_usage(real_usage: true) / 1024 / 1024, precision: 2));
+    $memory_peak = format_nombre(round(memory_get_peak_usage(real_usage: true) / 1024 / 1024, precision: 2));
     echo '<hr>';
     echo "<footer><small>Pàgina generada en {$total_time} segons. Memòria: {$memory_current} MB (pic de {$memory_peak} MB).</small></footer>";
     echo '</body>';
@@ -151,6 +151,7 @@ if ($is_test_page) {
         <li><a href="?test=longitud">Longitud</a></li>
         <li><a href="?test=majuscules">Majúscules</a></li>
         <li><a href="?test=multilingue">Multilingüe</a></li>
+        <li><a href="?test=ortografia">Ortografia</a></li>
         <li><a href="?test=puntuacio">Puntuació</a></li>
         <li><a href="?test=repeticions_caracters">Repeticions de caràcters</a></li>
         <li><a href="?test=repeticions_modismes">Repeticions de modismes</a></li>
@@ -188,7 +189,7 @@ if ($is_test_page) {
 <small>
 <?php
 $mysql_version = get_db()->getAttribute(PDO::ATTR_SERVER_VERSION);
-assert(is_string($mysql_version));
+$mysql_version = is_string($mysql_version) ? $mysql_version : 'desconeguda';
 
 /** @phpstan-var string $http_server - phpstan is less clever than psalm here */
 $http_server = $_SERVER['SERVER_SOFTWARE'];
@@ -198,39 +199,46 @@ echo 'PHP ' . $php_version . ', ' . $http_server . ' (' . PHP_OS . '), ' . $mysq
 echo '<br>Última base de dades: ' . get_latest_db_date();
 
 if (function_exists('opcache_get_status')) {
-    $status = opcache_get_status(false);
-    assert($status !== false);
-    assert(is_int($status['opcache_statistics']['start_time']));
-    echo '<br>Última arrencada: ' . date('Y/m/d H:i:s', $status['opcache_statistics']['start_time']);
+    $status = opcache_get_status(include_scripts: false);
+    if (
+        is_array($status)
+        && isset($status['opcache_statistics']['start_time'])
+        && is_int($status['opcache_statistics']['start_time'])
+    ) {
+        echo '<br>Última arrencada: ' . date('Y/m/d H:i:s', $status['opcache_statistics']['start_time']);
 
-    if (isset($status['opcache_statistics']['hits'], $status['opcache_statistics']['misses'])) {
-        $hits = $status['opcache_statistics']['hits'];
-        $misses = $status['opcache_statistics']['misses'];
-        assert(is_int($hits) && is_int($misses));
-        $hit_rate = $hits > 0 ? round($hits / ($hits + $misses) * 100, 2) : 0;
-        echo '<br>OPcache hit rate: ' . $hit_rate . '%';
+        if (
+            isset($status['opcache_statistics']['hits'], $status['opcache_statistics']['misses'])
+            && is_int($status['opcache_statistics']['hits'])
+            && is_int($status['opcache_statistics']['misses'])
+        ) {
+            $hits = $status['opcache_statistics']['hits'];
+            $misses = $status['opcache_statistics']['misses'];
+            $hit_rate = $hits > 0 ? round($hits / ($hits + $misses) * 100, precision: 2) : 0;
+            echo '<br>OPcache hit rate: ' . $hit_rate . '%';
+        }
     }
 }
 
 if (function_exists('apcu_sma_info')) {
-    $mem = apcu_sma_info(true);
-    if (is_array($mem) && isset($mem['avail_mem'])) {
-        assert(is_numeric($mem['avail_mem']));
-        echo '<br>APCu memòria lliure: ' . round((float) $mem['avail_mem'] / 1024 / 1024, 1) . ' MB';
+    $mem = apcu_sma_info(limited: true);
+    if (is_array($mem) && isset($mem['avail_mem']) && is_numeric($mem['avail_mem'])) {
+        echo '<br>APCu memòria lliure: ' . round((float) $mem['avail_mem'] / 1024 / 1024, precision: 1) . ' MB';
     }
 }
 
 $free = disk_free_space('/');
 $total = disk_total_space('/');
 if ($free !== false && $total !== false) {
-    $percent = round($free / $total * 100, 1);
-    echo '<br>Disc lliure: ' . round($free / 1024 / 1024 / 1024, 1) . ' GB (' . $percent . '%)';
+    $percent = round($free / $total * 100, precision: 1);
+    echo '<br>Disc lliure: ' . round($free / 1024 / 1024 / 1024, precision: 1) . ' GB (' . $percent . '%)';
 }
 
 echo '<br>Límit de memòria PHP: ' . ini_get('memory_limit');
 $mysql_info = get_db()->getAttribute(PDO::ATTR_SERVER_INFO);
-assert(is_string($mysql_info));
-echo '<br>MariaDB ' . $mysql_info;
+if (is_string($mysql_info)) {
+    echo '<br>MariaDB ' . $mysql_info;
+}
 ?>
 </small>
 </footer>

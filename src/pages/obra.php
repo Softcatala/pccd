@@ -28,8 +28,6 @@ if (!str_starts_with(get_request_uri(), '/obra/')) {
     exit;
 }
 
-$is_book = $obra->ISBN !== '';
-
 // Set meta tags.
 PageRenderer::setCanonicalUrl($canonical_url);
 PageRenderer::setTitle(htmlspecialchars($obra->Títol));
@@ -39,18 +37,18 @@ if ($obra->Imatge !== '') {
 if ($obra->Observacions !== '') {
     PageRenderer::setMetaDescription(prepare_field($obra->Observacions));
 }
-if ($is_book) {
+if ($obra->isBook()) {
     PageRenderer::setOgType(OgType::BOOK);
 }
 
 // Render the page.
-echo '<div class="row" vocab="http://schema.org/" typeof="' . ($is_book ? 'Book' : 'Thing') . '">';
+echo '<div class="row" vocab="http://schema.org/" typeof="' . ($obra->isBook() ? 'Book' : 'Thing') . '">';
 if ($obra->Imatge !== '') {
     echo '<figure class="col-image">';
     echo render_image_tags(
         file_name: $obra->Imatge,
         path: '/img/obres/',
-        alt_text: $is_book ? 'Coberta' : $obra->Títol,
+        alt_text: $obra->isBook() ? 'Coberta' : $obra->Títol,
         width: $obra->WIDTH,
         height: $obra->HEIGHT,
         preload: true,
@@ -145,7 +143,7 @@ if ($obra->Preu !== '' && $obra->Preu !== '0') {
 }
 if ($obra->URL !== '') {
     echo '<dt hidden>Enllaç:</dt>';
-    echo '<dd>' . html_escape_and_link_urls(text: $obra->URL, property: 'url') . '</dd>';
+    echo '<dd>' . html_escape_and_link_urls($obra->URL, property: 'url') . '</dd>';
 }
 if ($obra->Observacions !== '') {
     echo '<dt>Observacions:</dt>';

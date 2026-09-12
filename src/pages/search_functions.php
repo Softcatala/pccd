@@ -103,7 +103,7 @@ function get_search_pagination_limit(): int
 
     if (isset($_GET['mostra']) && is_string($_GET['mostra'])) {
         $results_per_page = (int) $_GET['mostra'];
-        if (in_array($results_per_page, PAGINATION_RESULTS_PER_PAGE_OPTIONS, true)) {
+        if (in_array($results_per_page, PAGINATION_RESULTS_PER_PAGE_OPTIONS, strict: true)) {
             return $results_per_page;
         }
         if ($results_per_page === -1) {
@@ -324,9 +324,45 @@ function render_search_pager(int $current_page_number, int $page_count): string
 }
 
 /**
+ * Determines if the given number requires an apostrophe in Catalan.
+ *
+ * The num parameter specifies the number to check.
+ */
+function number_needs_apostrophe(int $num): bool
+{
+    // A result count of 1.000.000 or bigger is not expected, so this logic is sufficient.
+    return $num === 1 || $num === 11 || ($num >= 11000 && $num < 12000);
+}
+
+/**
+ * Returns the search summary.
+ *
+ * The offset parameter specifies the current offset for pagination.
+ * The results_per_page parameter specifies the number of results per page.
+ * The result_count parameter specifies the total number of results.
+ * The search_query parameter specifies the search query string.
+ */
+function render_search_summary(int $offset, int $results_per_page, int $result_count, string $search_query): string
+{
+    $output = "S'ha trobat " . format_nombre($result_count) . ' paremiotipus per a la cerca <span class="text-monospace text-break">' . $search_query . '</span>.';
+
+    if ($result_count <= $results_per_page) {
+        return $output;
+    }
+
+    $first = $offset + 1;
+    $output .= (number_needs_apostrophe($first) ? " Registres de l'" : ' Registres del ') . format_nombre($first);
+
+    $last = min($offset + $results_per_page, $result_count);
+    $output .= (number_needs_apostrophe($last) ? " a l'" : ' al ') . format_nombre($last) . '.';
+
+    return $output;
+}
+
+/**
  * Builds the search query, storing it in $where_clause variable, and returns the search arguments.
  *
- * @return array{0: string, 1: list<string>} Returns a tuple where the first element is the SQL where clause and the second element is the list of query arguments
+ * @return array{0: string, 1: list<string>} A tuple containing the SQL WHERE clause and its query arguments.
  */
 function build_search_sql_query(): array
 {
@@ -389,16 +425,14 @@ function build_search_sql_query(): array
  */
 function get_result_count(string $where_clause, array $arguments): int
 {
-    $apcu = extension_loaded('apcu');
+    $apcu_is_available = function_exists('apcu_enabled') && apcu_enabled();
 
     // Create a unique cache key based on the query and arguments.
     $cache_key = CACHE_KEY_PREFIX . 'search_count:' . $where_clause . ' ' . implode('|', $arguments);
 
-    if ($apcu) {
+    if ($apcu_is_available) {
         $cached = apcu_fetch($cache_key, $success);
-        if ($success) {
-            assert(is_int($cached));
-
+        if ($success && is_int($cached)) {
             return $cached;
         }
     }
@@ -413,7 +447,7 @@ function get_result_count(string $where_clause, array $arguments): int
         return 0;
     }
 
-    if ($count > 0 && $apcu) {
+    if ($count > 0 && $apcu_is_available) {
         apcu_store($cache_key, $count);
     }
 

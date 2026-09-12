@@ -39,7 +39,7 @@ Node.js is preferred for maintainability and portability. Shell scripts are rese
 
 ### Image Processing
 
-**Input formats**: `.jpg`, `.png`, `.gif` only.
+**Input formats**: `.gif`, `.jpg`, `.png` only.
 
 The optimization pipeline resizes, quantizes, and compresses images, generating modern variants (AVIF, and WebP for animated GIFs).
 
@@ -69,7 +69,7 @@ Avoid unnecessary frameworks and abstractions. Use procedural code when appropri
 
 Prefer npm/Composer packages over system binaries. `composer.phar` is committed to the repository to ensure reproducibility.
 
-Current system dependencies include tools for image optimization (gifsicle, jpegoptim), linting (shellcheck, shfmt), and data processing (mdbtools).
+Current system dependencies include tools for image optimization (gifsicle, webp), linting (shellcheck, shfmt, tidy), and data processing (mdbtools).
 
 ### Dependency Versioning
 

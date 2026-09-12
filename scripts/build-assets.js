@@ -13,7 +13,6 @@
 import * as esbuild from "esbuild";
 import { Features, bundle } from "lightningcss";
 import { copyFile, readdir, stat, writeFile } from "node:fs/promises";
-import console from "node:console";
 import path from "node:path";
 
 const rootDirectory = path.join(import.meta.dirname, "..");
@@ -147,7 +146,7 @@ const exportAssetSizes = async () => {
   };
 
   const outputFile = path.join(rootDirectory, "data/assets/assets-sizes.json");
-  await writeFile(outputFile, JSON.stringify(report, null, JSON_INDENT) + "\n");
+  await writeFile(outputFile, JSON.stringify(report, undefined, JSON_INDENT) + "\n");
 
   console.log(`Asset sizes report written to ${outputFile}`);
 };

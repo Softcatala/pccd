@@ -11,34 +11,28 @@
  */
 
 import { appendFile, readFile, unlink, writeFile } from "node:fs/promises";
-import htmlhintPkg from "htmlhint";
-const { HTMLHint } = htmlhintPkg;
+import { HTMLHint } from "htmlhint";
 import { HtmlValidate } from "html-validate";
-import console from "node:console";
 import { exec } from "node:child_process";
 import path from "node:path";
-import process from "node:process";
 import { promisify } from "node:util";
 import { randomUUID } from "node:crypto";
 
 import htmlValidateConfig from "../../.htmlvalidate.json" with { type: "json" };
 import htmlhintConfig from "../../.htmlhintrc.json" with { type: "json" };
 
-const TIDY = "tidy";
-
-const execAsync = promisify(exec);
-const rootDirectory = path.join(import.meta.dirname, "../..");
-const MAX_CONCURRENT = 10;
-const EXIT_CODE_ERROR = 255;
-
-const state = { httpErrorCount: 0 };
-
 process.loadEnvFile();
 if (!process.env.BASE_URL) {
   console.error("ERROR: BASE_URL variable is not set.");
-  process.exit(EXIT_CODE_ERROR);
+  process.exit(255);
 }
 
+const EXIT_CODE_ERROR = 255;
+const TIDY = "tidy";
+const execAsync = promisify(exec);
+const rootDirectory = path.join(import.meta.dirname, "../..");
+const MAX_CONCURRENT = 10;
+const state = { httpErrorCount: 0 };
 const baseUrl = process.env.BASE_URL;
 
 /**
@@ -50,18 +44,6 @@ const productionToLocalUrl = (url) => url.replace("https://pccd.dites.cat", base
  * Converts a local URL to a production URL.
  */
 const localToProductionUrl = (url) => url.replace(baseUrl, "https://pccd.dites.cat");
-
-/**
- * Gets the current date in Catalan format.
- */
-const getCatalanDate = () => {
-  const formatter = new Intl.DateTimeFormat("ca-ES", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  return formatter.format(new Date()).replaceAll("’", "'").replaceAll(" del ", " de ");
-};
 
 /**
  * Validates URL using curl, htmlhint, html-validate, and Tidy HTML.
@@ -149,11 +131,8 @@ const processUrlsBatch = async (urls, options) => {
 // Main execution.
 // Initialize report files.
 const htmlErrorsFile = path.join(rootDirectory, "data/reports/test_html_errors.txt");
-const zeroFontsFile = path.join(rootDirectory, "data/reports/test_zero_fonts.txt");
 
 await writeFile(htmlErrorsFile, "");
-const catalanDate = getCatalanDate();
-await writeFile(zeroFontsFile, `Informe actualitzat el dia: ${catalanDate}\n`);
 
 // Read sitemap URLs.
 const sitemapContent = await readFile(path.join(rootDirectory, "docroot/sitemap.txt"), "utf8");
@@ -162,22 +141,13 @@ const urls = sitemapContent.trim().split("\n");
 // Process all URLs.
 await processUrlsBatch(urls, {
   concurrency: MAX_CONCURRENT,
-  reportFiles: {
-    htmlErrorsFile,
-    zeroFontsFile,
-  },
+  reportFiles: { htmlErrorsFile },
 });
 
 if (state.httpErrorCount > 0) {
   console.error(`Validation failed with ${state.httpErrorCount} HTTP errors.`);
 } else {
   console.log("All URLs in the sitemap file returned HTTP 200.");
-}
-
-// Add final message if no zero fonts found.
-const zeroFontsContent = await readFile(zeroFontsFile, "utf8");
-if (zeroFontsContent.trim() === `Informe actualitzat el dia: ${catalanDate}`) {
-  await appendFile(zeroFontsFile, "(no hi ha parèmies amb 0 fonts).\n");
 }
 
 // Exit with error code if any errors were found.

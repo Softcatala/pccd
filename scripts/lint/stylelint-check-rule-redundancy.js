@@ -8,8 +8,6 @@
  * source code in the file LICENSE.
  */
 
-import console from "node:console";
-import process from "node:process";
 import stylelint from "stylelint";
 
 import localConfig from "../../.stylelintrc.json" with { type: "json" };
@@ -45,7 +43,7 @@ try {
     const customValue = customRules[ruleName];
     const extendedValue = extendedRules[ruleName];
 
-    if (typeof extendedValue !== "undefined") {
+    if (extendedValue !== undefined) {
       // Normalize values for comparison (stylelint accepts both array and scalar formats).
       const normalizeValue = (value) => {
         if (Array.isArray(value) && value.length === 1) {

@@ -9,9 +9,7 @@
  */
 
 import { readdir, stat } from "node:fs/promises";
-import console from "node:console";
 import path from "node:path";
-import process from "node:process";
 
 const rootDirectory = path.join(import.meta.dirname, "../..");
 const directoriesToCheck = [path.join(rootDirectory, "images"), path.join(rootDirectory, "docroot/img")];
@@ -95,7 +93,7 @@ for (const directory of directoriesToCheck) {
 if (hasConflicts) {
   console.log("\nThese files would conflict on case-sensitive filesystems (Linux)");
   process.exit(1);
-} else {
-  console.log("No case-only filename conflicts found");
-  process.exit(0);
 }
+
+console.log("No case-only filename conflicts found");
+process.exit(0);

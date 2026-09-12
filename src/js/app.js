@@ -46,9 +46,8 @@ const prefetchLink = (href) => {
   document.head.append(link);
 };
 
-document.addEventListener("mouseover", (event) => {
-  const a = event.target.closest("a");
-  if (a && a.href && a.origin === location.origin) {
-    prefetchLink(a.href);
+for (const a of document.querySelectorAll("a")) {
+  if (a.href && a.origin === location.origin) {
+    a.addEventListener("mouseenter", () => prefetchLink(a.href));
   }
-});
+}

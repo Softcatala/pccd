@@ -19,14 +19,14 @@
   "require-dev": {
     "ext-curl": "*",
     "ext-intl": "*",
-    "ergebnis/composer-normalize": "^2.52",
+    "ergebnis/composer-normalize": "^2.53",
     "pereorga/phpstan-rules": "^1.5",
     "php-cs-fixer/shim": "^3.95",
     "phpstan/phpstan": "^2.2",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-strict-rules": "^2.0",
     "phpunit/phpunit": "^13.3",
-    "psalm/phar": "^6.16",
+    "psalm/phar": "^6.17",
     "slevomat/coding-standard": "^8.31",
     "squizlabs/php_codesniffer": "^4.0"
   },

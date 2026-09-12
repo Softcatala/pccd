@@ -9,8 +9,6 @@
  */
 
 import { configPresets } from "html-validate";
-import console from "node:console";
-import process from "node:process";
 
 import localConfig from "../../.htmlvalidate.json" with { type: "json" };
 
@@ -77,7 +75,7 @@ try {
     const customValue = customRules[ruleName];
     const extendedValue = extendedRules[ruleName];
 
-    if (typeof extendedValue !== "undefined") {
+    if (extendedValue !== undefined) {
       const sources = presetSources[ruleName] || [];
       const sourceText = sources.join(" and ");
 

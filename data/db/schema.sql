@@ -1,9 +1,9 @@
 /*M!999999\- enable the sandbox mode */ 
--- MariaDB dump 10.19-12.3.2-MariaDB, for debian-linux-gnu (aarch64)
+-- MariaDB dump 10.20-12.3.3-MariaDB, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: pccd
 -- ------------------------------------------------------
--- Server version	12.3.2-MariaDB-ubu2404
+-- Server version	12.3.3-MariaDB-ubu2404
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;

@@ -10,8 +10,6 @@
 
 import pkg from "htmlhint";
 const { HTMLHint } = pkg;
-import console from "node:console";
-import process from "node:process";
 
 import config from "../../.htmlhintrc.json" with { type: "json" };
 

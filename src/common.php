@@ -100,6 +100,8 @@ final class PageRenderer
 
     private static OgType $ogType = OgType::ARTICLE;
 
+    private static TwitterCardType $twitterCardType = TwitterCardType::SUMMARY;
+
     /**
      * Initializes the page renderer, setting up the page name, main content, and side blocks.
      *
@@ -139,14 +141,8 @@ final class PageRenderer
         }
 
         if (self::$metaImage !== '') {
-            $card_type = 'summary';
-            // The only pages we know the image is large is enough are the
-            // homepage and the ones that have generated OG images.
-            if ($this->isHomepage() || str_contains(self::$metaImage, '/og/')) {
-                $card_type = 'summary_large_image';
-            }
-            $meta_tags[] = '<meta name="twitter:image" property="og:image" content="' . self::$metaImage . '">';
-            $meta_tags[] = '<meta name="twitter:card" content="' . $card_type . '">';
+            $meta_tags[] = '<meta property="og:image" content="' . self::$metaImage . '">';
+            $meta_tags[] = '<meta name="twitter:card" content="' . self::$twitterCardType->value . '">';
         }
 
         if (self::$ogAudioUrl !== '') {
@@ -217,6 +213,14 @@ final class PageRenderer
     }
 
     /**
+     * Sets the Twitter card type.
+     */
+    public static function setTwitterCardType(TwitterCardType $type): void
+    {
+        self::$twitterCardType = $type;
+    }
+
+    /**
      * Outputs the CSS content for the current page.
      *
      * Returns page-specific CSS if it exists, otherwise falls back to base.css.
@@ -252,15 +256,6 @@ final class PageRenderer
     public static function render(): void
     {
         header('Cache-Control: public, max-age=' . self::CACHE_MAX_AGE_DYNAMIC_PAGES);
-        header('Vary: X-Requested-With');
-
-        if (is_xhr()) {
-            $page = new self();
-            header('Content-Type: application/json; charset=utf-8');
-            echo json_encode(['mainContent' => $page->mainContent]);
-
-            return;
-        }
 
         // Include the page template.
         require __DIR__ . '/templates/main.php';
@@ -310,12 +305,16 @@ final class PageRenderer
      */
     private function renderMainContent(): string
     {
-        ob_start();
+        if (!ob_start()) {
+            return_500_and_exit();
+        }
 
         require __DIR__ . "/pages/{$this->name}.php";
         $main_content = ob_get_clean();
 
-        assert(is_string($main_content));
+        if ($main_content === false) {
+            return_500_and_exit();
+        }
 
         return $main_content;
     }
@@ -452,6 +451,14 @@ final readonly class Obra
     public string $WIDTH;
 
     public string $HEIGHT;
+
+    /**
+     * Returns whether the work may be a printed book.
+     */
+    public function isBook(): bool
+    {
+        return $this->ISBN !== '' || $this->Data_compra !== '' || $this->Lloc_compra !== '';
+    }
 }
 
 /**
@@ -513,6 +520,16 @@ enum OgType: string
 }
 
 /**
+ * Enum for Twitter card types.
+ */
+enum TwitterCardType: string
+{
+    case SUMMARY = 'summary';
+
+    case SUMMARY_LARGE_IMAGE = 'summary_large_image';
+}
+
+/**
  * Enum for search modes.
  *
  * This enum defines the different search modes available in the application.
@@ -570,22 +587,14 @@ enum SearchMode: string
  */
 function cache_get(string $key, callable $callback): mixed
 {
-    if (!extension_loaded('apcu')) {
+    $apcu_is_available = function_exists('apcu_enabled') && apcu_enabled();
+    if (!$apcu_is_available) {
         return $callback();
     }
 
     $cache_key = CACHE_KEY_PREFIX . $key;
 
-    /** @var T */
-    $cached = apcu_fetch($cache_key, $success);
-    if ($success) {
-        return $cached;
-    }
-
-    $value = $callback();
-    apcu_store($cache_key, $value);
-
-    return $value;
+    return apcu_entry($cache_key, static fn () => $callback());
 }
 
 /**
@@ -642,10 +651,9 @@ function get_db(): PDO
     $user = getenv('MYSQL_USER');
     $password = getenv('MYSQL_PASSWORD');
 
-    assert(is_string($host));
-    assert(is_string($db_name));
-    assert(is_string($user));
-    assert(is_string($password));
+    if ($host === false || $db_name === false || $user === false || $password === false) {
+        return_500_and_exit();
+    }
 
     try {
         $pdo = new PDO("mysql:host={$host};dbname={$db_name};charset=utf8mb4", $user, $password, [
@@ -658,19 +666,12 @@ function get_db(): PDO
 
         return $pdo;
     } catch (Exception) {
-        ob_end_clean();
-
-        http_response_code(500);
-        header('Cache-Control: no-cache, no-store, must-revalidate');
-
-        readfile(__DIR__ . '/../docroot/500.html');
-
-        exit;
+        return_500_and_exit();
     }
 }
 
 /**
- * Prepares a SQL statement, asserting it succeeds.
+ * Prepares a SQL statement.
  */
 function db_prepare(string $query): PDOStatement
 {
@@ -682,7 +683,7 @@ function db_prepare(string $query): PDOStatement
 }
 
 /**
- * Executes a SQL query directly, asserting it succeeds.
+ * Executes a SQL query directly.
  */
 function db_query(string $query): PDOStatement
 {
@@ -823,21 +824,6 @@ function get_request_uri(): string
 }
 
 /**
- * Returns wether the current request is XMLHttpRequest.
- */
-function is_xhr(): bool
-{
-    /**
-     * @phpstan-var string $requested_with
-     *
-     * @psalm-suppress UnnecessaryVarAnnotation
-     */
-    $requested_with = $_SERVER['HTTP_X_REQUESTED_WITH'] ?? '';
-
-    return strtolower($requested_with) === 'xmlhttprequest';
-}
-
-/**
  * Routes the request based on REQUEST_URI and populates $_GET accordingly.
  *
  * This centralizes routing logic in PHP, making it portable across web servers
@@ -855,7 +841,7 @@ function route_request(): void
 
     // Route: static pages.
     $path_without_slash = ltrim($path, '/');
-    if (in_array($path_without_slash, PageRenderer::STATIC_PAGE_NAMES, true)) {
+    if (in_array($path_without_slash, PageRenderer::STATIC_PAGE_NAMES, strict: true)) {
         $_GET[$path_without_slash] = '';
 
         return;
@@ -945,11 +931,7 @@ function format_nombre(float|int|string $num, int $decimals = 0): string
  */
 function get_idiomes(): array
 {
-    return cache_get('list:equivalents', static function (): array {
-        $stmt = db_query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`');
-
-        return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-    });
+    return cache_get('list:equivalents', static fn (): array => db_query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`')->fetchAll(PDO::FETCH_KEY_PAIR));
 }
 
 /**
@@ -988,7 +970,7 @@ function get_idioma_iso_code(string $input_code): string
         // 'ne' => 'nl',
         'po' => 'pl',
         // ISO code for Provençal is missing. "pro" is for Old Provençal, and "prv" is no longer recognized. In the
-        // database we have "pr", which is not assigned by ISO.
+        // database there is "pr", which is not assigned by ISO.
         'pr' => 'oc',
         'sa' => 'sc',
         // `si` is the ISO code of Sinhalese, but in the database it is used for Sicilian.
@@ -1006,9 +988,8 @@ function get_idioma_iso_code(string $input_code): string
 function get_idioma_iso_code_from_name(string $input_name): string
 {
     $name = mb_strtolower(trim($input_name));
-    $languages = get_idiomes();
 
-    foreach ($languages as $code => $language) {
+    foreach (get_idiomes() as $code => $language) {
         if (mb_strtolower($language) === $name) {
             return get_idioma_iso_code($code);
         }
@@ -1095,11 +1076,7 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
  */
 function get_editorials(): array
 {
-    return cache_get('list:editorials', static function (): array {
-        $stmt = db_query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`');
-
-        return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-    });
+    return cache_get('list:editorials', static fn (): array => db_query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`')->fetchAll(PDO::FETCH_KEY_PAIR));
 }
 
 /**
@@ -1111,15 +1088,11 @@ function get_editorials(): array
  */
 function get_fonts_paremiotipus(): array
 {
-    return cache_get('list:fonts', static function (): array {
-        $stmt = db_query('SELECT `Identificador`, `Títol` FROM `00_FONTS`');
-
-        return $stmt->fetchAll(PDO::FETCH_KEY_PAIR);
-    });
+    return cache_get('list:fonts', static fn (): array => db_query('SELECT `Identificador`, `Títol` FROM `00_FONTS`')->fetchAll(PDO::FETCH_KEY_PAIR));
 }
 
 /**
- * Generates HTML markup for a .jpg, .png or .gif image, within a <picture> with avif/webp alternatives.
+ * Generates a <picture> tag for a GIF/JPEG/PNG image, adding AVIF/WebP alternatives.
  *
  * The file_name parameter specifies the file name of the image file.
  * The path parameter specifies the path to the image file, starting with a slash.
@@ -1144,7 +1117,7 @@ function render_image_tags(
 ): string {
     $extension = strtolower(pathinfo($file_name, PATHINFO_EXTENSION));
 
-    // We provide AVIF for JPEG/PNG images, and WEBP for GIF.
+    // Provide AVIF for JPEG/PNG images, and WebP for GIF.
     [$optimized_extension, $mime_type] = match ($extension) {
         'jpg', 'png' => ['avif', 'image/avif'],
         'gif' => ['webp', 'image/webp'],
@@ -1174,7 +1147,7 @@ function render_image_tags(
 
     if ($preload) {
         // For using preload/lazyload at the same time, see https://news.ycombinator.com/item?id=46574640.
-        preload_image_header(url: $optimized_file_url, media: $preload_media, type: $mime_type);
+        preload_image_header($optimized_file_url, media: $preload_media, type: $mime_type);
     }
 
     return $image_tags;
@@ -1189,11 +1162,6 @@ function render_image_tags(
  */
 function preload_image_header(string $url, string $media = '', string $type = ''): void
 {
-    if (is_xhr()) {
-        // No need to preload any image for XHR.
-        return;
-    }
-
     $header = "Link: <{$url}>; rel=preload; as=image";
     if ($type !== '') {
         $header .= "; type={$type}";
@@ -1241,15 +1209,28 @@ function return_404_and_exit(string $input_paremiotipus = ''): never
 }
 
 /**
+ * Returns an HTTP 500 page and exits.
+ */
+function return_500_and_exit(): never
+{
+    while (ob_get_level() > 0) {
+        ob_end_clean();
+    }
+
+    http_response_code(500);
+    header('Cache-Control: no-cache, no-store, must-revalidate');
+
+    readfile(__DIR__ . '/../docroot/500.html');
+
+    exit;
+}
+
+/**
  * Returns the total number of occurrences (modismes).
  */
 function get_modisme_count(): int
 {
-    return cache_get('count:modisme', static function (): int {
-        $stmt = db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
-
-        return (int) $stmt->fetchColumn();
-    });
+    return cache_get('count:modisme', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`')->fetchColumn());
 }
 
 /**
@@ -1257,11 +1238,7 @@ function get_modisme_count(): int
  */
 function get_paremiotipus_count(): int
 {
-    return cache_get('count:paremiotipus', static function (): int {
-        $stmt = db_query('SELECT COUNT(1) FROM `paremiotipus_display`');
-
-        return (int) $stmt->fetchColumn();
-    });
+    return cache_get('count:paremiotipus', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `paremiotipus_display`')->fetchColumn());
 }
 
 /**
@@ -1269,11 +1246,7 @@ function get_paremiotipus_count(): int
  */
 function get_informant_count(): int
 {
-    return cache_get('count:informant', static function (): int {
-        $stmt = db_query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
-
-        return (int) $stmt->fetchColumn();
-    });
+    return cache_get('count:informant', static fn (): int => (int) db_query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`')->fetchColumn());
 }
 
 /**
@@ -1281,11 +1254,7 @@ function get_informant_count(): int
  */
 function get_font_count(): int
 {
-    return cache_get('count:font', static function (): int {
-        $stmt = db_query('SELECT COUNT(1) FROM `00_FONTS`');
-
-        return (int) $stmt->fetchColumn();
-    });
+    return cache_get('count:font', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `00_FONTS`')->fetchColumn());
 }
 
 /**
@@ -1300,14 +1269,10 @@ function get_random_top_paremiotipus(int $max = 10000): string
     $random_index = rand(0, $max - 1);
 
     return cache_get("top_paremiotipus:{$random_index}", static function () use ($random_index): string {
-        $stmt = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
-
-        $random = $stmt->fetchColumn();
+        $random = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}")->fetchColumn();
         if (!is_string($random)) {
-            // We may be using a sample DB, try falling back to the first record.
-            $random_index = 0;
-            $stmt = db_query("SELECT `Paremiotipus` FROM `common_paremiotipus` ORDER BY `Compt` DESC LIMIT 1 OFFSET {$random_index}");
-            $random = $stmt->fetchColumn();
+            // If this is sample DB, try falling back to the first record.
+            $random = db_query('SELECT `Paremiotipus` FROM `common_paremiotipus` LIMIT 1')->fetchColumn();
             if (!is_string($random)) {
                 exit('PCCD may have not been installed after importing a new database. Consider running `npm run install:db` or reading the docs.');
             }
@@ -1348,7 +1313,9 @@ function get_random_book(): Book
 function get_latest_db_date(): string
 {
     $date = file_get_contents(__DIR__ . '/../data/db_date.txt');
-    assert($date !== false);
+    if ($date === false) {
+        return '';
+    }
 
     return trim($date);
 }
@@ -1358,7 +1325,10 @@ function get_latest_db_date(): string
  */
 function get_copyright_notice(): string
 {
-    $current_year = date('Y');
+    $year = '2020';
+    if (preg_match('/\b\d{4}\b/', get_latest_db_date(), $matches) === 1) {
+        $year .= '-' . $matches[0];
+    }
 
-    return "© Víctor Pàmies i Riudor, 2020-{$current_year}.";
+    return "© Víctor Pàmies i Riudor, {$year}.";
 }

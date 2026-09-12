@@ -11,39 +11,31 @@ test.describe("Homepage <picture> tag", () => {
   });
 
   test("the picture includes an AVIF file", async ({ page }) => {
-    const pictureSrcset = await page.locator("picture source").getAttribute("srcset");
-    expect(pictureSrcset).toMatch(/\.avif/u);
+    await expect(page.locator("picture source")).toHaveAttribute("srcset", /\.avif/);
   });
 
   test("the server sets the correct image/avif content type for the AVIF file", async ({ page }) => {
-    const avifUrl = await page.evaluate(() => {
-      const sourceElement = document.querySelector("picture source[type='image/avif']");
-      return sourceElement ? sourceElement.srcset : null;
-    });
+    const avifUrl = await page.locator("picture source[type='image/avif']").getAttribute("srcset");
 
     const response = await page.request.get(avifUrl);
     expect(response.headers()["content-type"]).toBe("image/avif");
   });
 
   test("all files in the picture element have the correct Cache-Control header", async ({ page }) => {
-    const urls = await page.evaluate(() => {
-      const sources = document.querySelectorAll("picture source");
-      return [...sources].map((source) => source.srcset);
-    });
+    const sources = await page.locator("picture source").all();
 
-    for (const url of urls) {
+    for (const source of sources) {
+      const url = await source.getAttribute("srcset");
       const response = await page.request.get(url);
       expect(response.headers()["cache-control"]).toBe("public, max-age=31536000, immutable");
     }
   });
 
   test("all files in the picture element have the correct Strict-Transport-Security header", async ({ page }) => {
-    const urls = await page.evaluate(() => {
-      const sources = document.querySelectorAll("picture source");
-      return [...sources].map((source) => source.srcset);
-    });
+    const sources = await page.locator("picture source").all();
 
-    for (const url of urls) {
+    for (const source of sources) {
+      const url = await source.getAttribute("srcset");
       const response = await page.request.get(url);
       expect(response.headers()["strict-transport-security"]).toBe("max-age=31536000");
     }
@@ -54,7 +46,7 @@ test.describe("Homepage <picture> tag", () => {
     const linkHeader = response.headers().link;
 
     expect(linkHeader).toMatch(
-      /<[^>]+>; rel=preload; as=image; type=image\/(?:avif|webp|jpeg|png|gif); media="\(width >= \d+px\)"/u,
+      /<[^>]+>; rel=preload; as=image; type=image\/(?:avif|webp|jpeg|png|gif); media="\(width >= \d+px\)"/,
     );
   });
 });
@@ -66,19 +58,19 @@ test.describe("SVG in <img> tags", () => {
   });
 
   test("homepage has <img> tags with SVG files", async ({ page }) => {
-    const svgImagesCount = await page.locator('img[src$=".svg"]').count();
-    expect(svgImagesCount).toBeGreaterThan(0);
+    await expect(page.locator('img[src$=".svg"]')).not.toHaveCount(0);
   });
 
   test("the server sends correct type and sets Brotli or Zstd compression for SVG files", async ({ page }) => {
-    const svgUrls = await page.evaluate(() => [...document.querySelectorAll('img[src$=".svg"]')].map((img) => img.src));
+    const svgImages = await page.locator('img[src$=".svg"]').all();
 
-    for (const url of svgUrls) {
+    for (const image of svgImages) {
+      const url = await image.getAttribute("src");
       const response = await page.request.get(url, {
         headers: { "Accept-Encoding": "gzip, deflate, br, zstd" },
       });
-      expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/u);
-      expect(response.headers()["content-encoding"]).toMatch(/^(?:br|zstd)$/u);
+      expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/);
+      expect(response.headers()["content-encoding"]).toMatch(/^(?:br|zstd)$/);
     }
   });
 });

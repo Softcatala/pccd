@@ -68,7 +68,7 @@ final class DocumentationTest extends TestCase
     private function getPhpVersionFromComposer(): string
     {
         $composerJsonContent = file_get_contents(__DIR__ . '/../../composer.json');
-        $composerJson = json_decode(json: $composerJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
+        $composerJson = json_decode($composerJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
         assert(is_string($composerJson['require']['php']));
 
         return trim($composerJson['require']['php'], '>=^');
@@ -77,7 +77,7 @@ final class DocumentationTest extends TestCase
     private function getNodeVersionFromPackage(): string
     {
         $packageJsonContent = file_get_contents(__DIR__ . '/../../package.json');
-        $packageJson = json_decode(json: $packageJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
+        $packageJson = json_decode($packageJsonContent, associative: true, flags: JSON_THROW_ON_ERROR);
         assert(is_string($packageJson['engines']['node']));
 
         return trim($packageJson['engines']['node'], '>=^');

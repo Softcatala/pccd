@@ -2,11 +2,11 @@
   "js": [
     {
       "path": "app.min.js",
-      "size": 795
+      "size": 801
     },
     {
       "path": "pages/fonts.min.js",
-      "size": 81492
+      "size": 81460
     },
     {
       "path": "pages/paremiotipus.min.js",
@@ -14,7 +14,7 @@
     },
     {
       "path": "pages/search.min.js",
-      "size": 1925
+      "size": 1224
     }
   ],
   "css": [
@@ -36,7 +36,7 @@
     },
     {
       "path": "pages/paremiotipus.min.css",
-      "size": 6342
+      "size": 6508
     },
     {
       "path": "pages/search.min.css",

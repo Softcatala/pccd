@@ -8,13 +8,12 @@
  * source code in the file LICENSE.
  */
 
-import { execFileSync, spawnSync } from "node:child_process";
-import console from "node:console";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
-import process from "node:process";
 import sharp from "sharp";
 
+const JPEG_QUALITY = 80;
 const PNG_QUALITY = 80;
 const IMAGE_WIDTH = 500;
 const IGNORED_FILES = new Set([".picasa.ini"]);
@@ -23,49 +22,15 @@ const IGNORED_FILES = new Set([".picasa.ini"]);
 // TODO: consider removing these packages to reduce system dependencies (no npm equivalents currently available).
 const GIF2WEBP = "gif2webp";
 const GIFSICLE = "gifsicle";
-const JPEGOPTIM = "jpegoptim";
-const OXIPNG = "oxipng";
 
 const paremiesDirectory = path.join(import.meta.dirname, "../../images/paremies");
 const paremiesTargetDirectory = path.join(import.meta.dirname, "../../docroot/img/imatges");
 const cobertesDirectory = path.join(import.meta.dirname, "../../images/cobertes");
 const cobertesTargetDirectory = path.join(import.meta.dirname, "../../docroot/img/obres");
 
-const isCommandAvailable = (command) => {
-  const result = spawnSync(command, ["--version"], { stdio: "ignore" });
-  return result.status === 0;
-};
-
-const OXIPNG_AVAILABLE = isCommandAvailable(OXIPNG);
-if (!OXIPNG_AVAILABLE) {
-  console.log("oxipng is not available, skipping it for PNG optimization.");
-}
-
-const resizeImage = async (sourceFile, targetFile, width) => {
-  try {
-    const metadata = await sharp(sourceFile).metadata();
-
-    if (metadata.width > width) {
-      await sharp(sourceFile).resize({ width }).toFile(targetFile);
-    }
-  } catch (error) {
-    console.error(`Error while resizing ${sourceFile}: ${error.message}`);
-  }
-
-  if (!fs.existsSync(targetFile)) {
-    // Use original file.
-    fs.copyFileSync(sourceFile, targetFile);
-  }
-};
-
 const createAvifImage = async (sourceFile, targetFile, width) => {
   const { dir, name } = path.parse(targetFile);
   const targetFileAvif = path.join(dir, `${name}.avif`);
-
-  // Process file only once.
-  if (fs.existsSync(targetFileAvif)) {
-    return;
-  }
 
   try {
     await sharp(sourceFile).resize({ width, withoutEnlargement: true }).toFormat("avif").toFile(targetFileAvif);
@@ -75,38 +40,38 @@ const createAvifImage = async (sourceFile, targetFile, width) => {
 };
 
 const processPng = async (sourceFile, targetFile, width) => {
-  await resizeImage(sourceFile, targetFile, width);
-
-  // Optimize with palette quantization (uses libimagequant if available).
-  const temporaryFile = `${targetFile}.tmp.png`;
   try {
-    await sharp(targetFile)
+    await sharp(sourceFile)
+      .resize({ width, withoutEnlargement: true })
       .png({
         palette: true,
         quality: PNG_QUALITY,
         compressionLevel: 9,
+        effort: 10,
       })
-      .toFile(temporaryFile);
-
-    fs.renameSync(temporaryFile, targetFile);
+      .toFile(targetFile);
   } catch (error) {
-    console.warn(`Warning: Palette optimization failed for ${targetFile}: ${error.message}`);
-    console.warn("Continuing with oxipng optimization");
-    if (fs.existsSync(temporaryFile)) {
-      fs.unlinkSync(temporaryFile);
-    }
-  }
-
-  if (OXIPNG_AVAILABLE) {
-    execFileSync(OXIPNG, ["--quiet", "-o3", "--strip", "safe", "--zopfli", targetFile]);
+    console.error(`Error processing PNG ${sourceFile}: ${error.message}`);
+    fs.copyFileSync(sourceFile, targetFile);
   }
 
   await createAvifImage(sourceFile, targetFile, width);
 };
 
 const processJpg = async (sourceFile, targetFile, width) => {
-  await resizeImage(sourceFile, targetFile, width);
-  execFileSync(JPEGOPTIM, ["--strip-all", "--quiet", targetFile]);
+  try {
+    await sharp(sourceFile)
+      .resize({ width, withoutEnlargement: true })
+      .jpeg({
+        quality: JPEG_QUALITY,
+        mozjpeg: true,
+      })
+      .toFile(targetFile);
+  } catch (error) {
+    console.error(`Error processing JPEG ${sourceFile}: ${error.message}`);
+    fs.copyFileSync(sourceFile, targetFile);
+  }
+
   await createAvifImage(sourceFile, targetFile, width);
 };
 
@@ -122,11 +87,6 @@ const processGif = (sourceFile, targetFile) => {
   // should be preserved, and looks like the tooling is not there yet.
   const { dir, name } = path.parse(targetFile);
   const targetFileWebp = path.join(dir, `${name}.webp`);
-
-  // Process file only once.
-  if (fs.existsSync(targetFileWebp)) {
-    return;
-  }
 
   execFileSync(GIF2WEBP, ["-q", "100", "-mt", "-m", "6", "-o", targetFileWebp, targetFile]);
 };
@@ -152,9 +112,6 @@ const processFile = async ({ file, sourceDirectory, targetDirectory, width }) =>
     }
     case ".png": {
       await processPng(sourceFile, targetFile, width);
-      break;
-    }
-    default: {
       break;
     }
   }

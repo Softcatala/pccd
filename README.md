@@ -1,4 +1,4 @@
-# Paremiologia catalana comparada digital (PCCD) [![License: AGPL v3](docs/img/agpl-v3.svg)](https://www.gnu.org/licenses/agpl-3.0) [![PHP 8.4+](https://img.shields.io/badge/PHP-8.4+-777BB4?logo=php)](https://www.php.net/) [![Node.js 22.16.0+](https://img.shields.io/badge/Node.js-22.16.0+-339933?logo=node.js)](https://nodejs.org/)
+# Paremiologia catalana comparada digital (PCCD) [![License: AGPL v3](docs/img/agpl-v3.svg)](https://www.gnu.org/licenses/agpl-3.0) [![PHP 8.4+](https://img.shields.io/badge/PHP-8.4+-777BB4?logo=php)](https://www.php.net/) [![Node.js 22.22.2+](https://img.shields.io/badge/Node.js-22.22.2+-339933?logo=node.js)](https://nodejs.org/)
 
 This is the source code of [Paremiologia catalana comparada digital](https://pccd.dites.cat/) website.
 
@@ -29,7 +29,7 @@ Note: If you don't have a database, you can copy `data/db/schema.sql` and `data/
 ## Development requirements
 
 - PHP 8.4+
-- Node.js 22.16.0+
+- Node.js 22.22.2+
 
 ## Development
 

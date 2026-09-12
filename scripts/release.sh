@@ -135,6 +135,5 @@ if [ "${SKIP_TESTS}" -eq 0 ]; then
 else
   echo "  2. Stop containers: docker compose down"
 fi
-echo "  3. Commit: git add . && git commit -m 'new release'"
-echo "  4. Push: git push"
-echo "  5. Export to public repo: npm run export:code"
+echo "  3. Commit and push: git add . && git commit -m 'new release' && git push"
+echo "  4. Export to public repo: npm run export:code"

@@ -422,10 +422,8 @@ function try_to_redirect_to_valid_paremiotipus_and_exit(string $input_paremiotip
  */
 function render_common_voice_and_set_og_tags(string $paremiotipus_id): string
 {
-    $mp3_files = get_cv_files($paremiotipus_id);
-
     $commonvoice_content_html = '';
-    foreach ($mp3_files as $mp3_file) {
+    foreach (get_cv_files($paremiotipus_id) as $mp3_file) {
         // Set OG audio file. Only the last one set will be used if it overwrites.
         PageRenderer::setOgAudioUrl(BASE_URL . "/mp3/{$mp3_file}");
 
@@ -458,10 +456,8 @@ function render_common_voice_and_set_og_tags(string $paremiotipus_id): string
  */
 function render_paremiotipus_images_and_set_og_tags(string $paremiotipus_id, string $alt_text): string
 {
-    $images = get_paremiotipus_images($paremiotipus_id);
-
     $images_content_html = '';
-    foreach ($images as $image) {
+    foreach (get_paremiotipus_images($paremiotipus_id) as $image) {
         $is_first_processed_image = $images_content_html === '';
         if ($is_first_processed_image) {
             // Use the newest image as meta image.
@@ -503,6 +499,7 @@ function render_paremiotipus_images_and_set_og_tags(string $paremiotipus_id, str
     if ($images_content_html === '') {
         // If there are no images, generate an OG image with text.
         PageRenderer::setMetaImage(BASE_URL . '/og/' . name_to_slug($paremiotipus_id) . '.png');
+        PageRenderer::setTwitterCardType(TwitterCardType::SUMMARY_LARGE_IMAGE);
 
         return '';
     }
@@ -615,7 +612,7 @@ function render_paremiotipus_translations(string $paremiotipus_id): string
 {
     $translations = get_paremiotipus_translations($paremiotipus_id);
     // Sort translations by language name.
-    // FIXME: ideally, use Collator for handling UTF-8.
+    // FIXME: ideally, use Collator for handling UTF-8. But let's not increase the number of runtime dependencies now.
     ksort($translations);
 
     $translations_array = [];

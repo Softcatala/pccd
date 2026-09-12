@@ -2,13 +2,11 @@
 curl
 gifsicle
 git
-jpegoptim
 libwebp-tools
 mdbtools
 nodejs
 npm
 openjdk17-jre-headless
-oxipng
 php
 php-ctype
 php-curl

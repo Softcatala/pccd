@@ -9,7 +9,6 @@
  */
 
 import { readdir, writeFile } from "node:fs/promises";
-import console from "node:console";
 import path from "node:path";
 import sharp from "sharp";
 

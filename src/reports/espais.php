@@ -94,7 +94,7 @@ function test_espais(): void
     $output = '';
     foreach ($modismes as $m) {
         assert(is_string($m));
-        if (preg_match("/\u{200E}/", $m) === 1 || preg_match("/\u{00AD}/", $m) === 1) {
+        if (str_contains($m, "\u{200E}") || str_contains($m, "\u{00AD}")) {
             $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
         }
     }
@@ -192,7 +192,7 @@ function test_espais(): void
     $output = '';
     foreach ($modismes as $m) {
         assert(is_string($m));
-        if (preg_match("/\u{200E}/", $m) === 1 || preg_match("/\u{00AD}/", $m) === 1) {
+        if (str_contains($m, "\u{200E}") || str_contains($m, "\u{00AD}")) {
             $output .= $m . "\n";
         }
     }

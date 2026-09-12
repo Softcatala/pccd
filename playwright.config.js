@@ -1,6 +1,5 @@
 /* eslint-disable unicorn/no-top-level-side-effects */
 import { defineConfig } from "@playwright/test";
-import process from "node:process";
 
 process.loadEnvFile();
 if (!process.env.BASE_URL) {

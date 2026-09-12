@@ -20,7 +20,10 @@ function stats_obres(): void
     echo '<h3>Creixement històric de la base de dades</h3>';
     $directory_path = __DIR__ . '/../../data/playwright/historic/';
     $files = scandir($directory_path);
-    assert(is_array($files));
+    if ($files === false) {
+        return_500_and_exit();
+    }
+
     $fonts_number_data = get_data_from_files($files, $directory_path, 'fontsNumber');
     echo get_chart('line', $fonts_number_data, 'fonts', 'Mesos (2023-)', 'Nombre de fonts', style: 'width:800px;');
 

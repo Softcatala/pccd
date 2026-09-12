@@ -329,17 +329,20 @@ function test_imatges_repetides(): void
 
     echo '<h3>Números no fets servir a la taula 00_IMATGES</h3>';
     $keys = array_keys($numbers);
-    assert($keys !== []);
-    $max = max($keys);
-    $output = '';
-    for ($i = 1; $i <= $max; $i++) {
-        if (!isset($numbers[$i])) {
-            $output .= $i . "\n";
-        }
-    }
-    if ($output === '') {
+    if ($keys === []) {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
-        echo "<details><pre>{$output}</pre></details>";
+        $max = max($keys);
+        $output = '';
+        for ($i = 1; $i <= $max; $i++) {
+            if (!isset($numbers[$i])) {
+                $output .= $i . "\n";
+            }
+        }
+        if ($output === '') {
+            echo '<pre class="empty">(cap resultat)</pre>';
+        } else {
+            echo "<details><pre>{$output}</pre></details>";
+        }
     }
 }

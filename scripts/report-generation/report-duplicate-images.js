@@ -9,10 +9,8 @@
  */
 
 import { readFile, readdir, stat } from "node:fs/promises";
-import console from "node:console";
 import crypto from "node:crypto";
 import path from "node:path";
-import process from "node:process";
 
 /**
  * Finds duplicate images by comparing MD5 hashes of files with the same size.

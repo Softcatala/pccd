@@ -51,26 +51,6 @@ function test_fonts_buides(): void
     }
 }
 
-function test_fonts_zero(): void
-{
-    require_once __DIR__ . '/../common.php';
-
-    echo '<h3>Paremiotipus amb almenys 1 registre sense detalls a la font</h3>';
-    $output = '';
-    $lines = explode("\n", (string) @file_get_contents(__DIR__ . '/../../data/reports/test_zero_fonts.txt'));
-    foreach ($lines as $line) {
-        if ($line === '') {
-            continue;
-        }
-        $output .= html_escape_and_link_urls($line) . '<br>';
-    }
-    if ($output === '') {
-        echo '<pre class="empty">(cap resultat)</pre>';
-    } else {
-        echo "<div style='font-size: 13px;'>{$output}</div>";
-    }
-}
-
 function test_fonts_sense_paremia(): void
 {
     require_once __DIR__ . '/../common.php';

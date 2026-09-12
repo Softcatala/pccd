@@ -1,9 +1,7 @@
 import { describe, test } from "node:test";
 import { mkdir, rm, writeFile } from "node:fs/promises";
-import { Buffer } from "node:buffer";
 import assert from "node:assert";
 import path from "node:path";
-import process from "node:process";
 import { tmpdir } from "node:os";
 
 // Import the function we want to test.
@@ -38,8 +36,8 @@ describe("findDuplicateImages", { skip: shouldSkip }, () => {
 
     const result = await findDuplicateImages(testDirectory);
 
-    assert.match(result, /image1\.jpg/u);
-    assert.match(result, /image2\.jpg/u);
+    assert.match(result, /image1\.jpg/);
+    assert.match(result, /image2\.jpg/);
   });
 
   test("should not report unique images as duplicates", async () => {
@@ -74,9 +72,9 @@ describe("findDuplicateImages", { skip: shouldSkip }, () => {
     const result = await findDuplicateImages(testDirectory);
 
     // Should contain both groups.
-    assert.match(result, /a1\.jpg/u);
-    assert.match(result, /a2\.jpg/u);
-    assert.match(result, /b1\.jpg/u);
-    assert.match(result, /b2\.jpg/u);
+    assert.match(result, /a1\.jpg/);
+    assert.match(result, /a2\.jpg/);
+    assert.match(result, /b1\.jpg/);
+    assert.match(result, /b2\.jpg/);
   });
 });

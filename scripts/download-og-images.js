@@ -11,22 +11,17 @@
  */
 
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises";
-import { Buffer } from "node:buffer";
-import console from "node:console";
 import path from "node:path";
-import process from "node:process";
 import { randomUUID } from "node:crypto";
-
-const rootDirectory = path.join(import.meta.dirname, "..");
-const MAX_CONCURRENT = 10;
-const EXIT_CODE_ERROR = 255;
 
 process.loadEnvFile();
 if (!process.env.BASE_URL) {
   console.error("ERROR: BASE_URL variable is not set.");
-  process.exit(EXIT_CODE_ERROR);
+  process.exit(255);
 }
 
+const rootDirectory = path.join(import.meta.dirname, "..");
+const MAX_CONCURRENT = 10;
 const baseUrl = process.env.BASE_URL;
 
 /**
@@ -55,7 +50,7 @@ const downloadOgImage = async (url) => {
   await writeFile(filename, html);
 
   // Extract the og:image URL from the downloaded HTML.
-  const match = /property="og:image" content="(?<imageUrl>[^"]*)"/u.exec(html);
+  const match = /property="og:image" content="([^"]*)"/.exec(html);
   if (!match) {
     console.error(`Failed to find og:image in ${localUrl}.`);
     if (url.includes("/p/")) {
@@ -64,7 +59,7 @@ const downloadOgImage = async (url) => {
     return;
   }
 
-  const imageUrl = match.groups.imageUrl;
+  const imageUrl = match[1];
   const localImageUrl = productionToLocalUrl(imageUrl);
 
   // Download the image.

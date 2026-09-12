@@ -18,8 +18,7 @@ PageRenderer::setMetaDescription('Llista de les fonts bibliogràfiques disponibl
 echo '<table id="fonts">';
 echo '<thead><tr><th scope="col">Autor</th><th scope="col" class="any">Any</th><th scope="col">Títol</th><th scope="col" class="tematica">Temàtica</th><th scope="col" class="registres">Registres</th><th scope="col" class="varietat">Varietat dialectal</th></tr></thead>';
 echo '<tbody>';
-$obres = get_fonts();
-foreach ($obres as $obra) {
+foreach (get_fonts() as $obra) {
     echo '<tr>';
     echo '<td>' . htmlspecialchars($obra->Autor) . '</td>';
     echo '<td>' . $obra->Any . '</td>';

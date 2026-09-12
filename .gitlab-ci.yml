@@ -78,25 +78,45 @@ reset:
 .check_code_php_template:
   stage: build
   script:
-    # curl: to download install-php-extensions script
-    # git, unzip: required by Composer (see https://github.com/composer/composer/discussions/12278)
-    # oniguruma-dev: required by mbstring since is no longer included by default in docker images (as per 8.6-alpha-2).
-    - apk --no-cache --update add curl git oniguruma-dev unzip
-    - curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
-    - chmod +x /usr/local/bin/install-php-extensions
-    - install-php-extensions gd intl mbstring pdo_mysql
-    - ./composer.phar install --no-interaction
+    - >
+      if [ "${PHP_VERSION}" = "8.6-rc" ]; then
+        apk --no-cache --update add git unzip $PHPIZE_DEPS icu-dev icu-data-full libpng-dev freetype-dev
+        docker-php-ext-configure gd --with-freetype
+        docker-php-ext-configure mbstring --disable-mbregex
+        docker-php-ext-install -j"$(nproc)" gd intl mbstring pdo_mysql
+      else
+        apk --no-cache --update add curl git unzip
+        curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
+        chmod +x /usr/local/bin/install-php-extensions
+        install-php-extensions gd intl mbstring pdo_mysql
+      fi
+    - >
+      if [ "${PHP_VERSION}" = "8.6-rc" ]; then
+        ./composer.phar install --no-interaction --ignore-platform-req=php;
+      else
+        ./composer.phar install --no-interaction;
+      fi
     - ./composer.phar validate --strict
     - ./composer.phar run php-l
     - ./composer.phar run composer-normalize-lint
     - ./composer.phar run phpcs
     - ./composer.phar run php-cs-fixer-lint
     - ./composer.phar run phpstan
-    - ./composer.phar run psalm
+    - >
+      if [ "${PHP_VERSION}" != "8.6-rc" ]; then
+        ./composer.phar run psalm;
+      fi
     - ./composer.phar run phpunit
-    # Run phpstan with the latest development version
-    - PHPSTAN_DEV=$(./composer.phar show phpstan/phpstan --available --format=json | grep -oE '"2\.[0-9]+\.x-dev"' | sort -t. -k2 -n | tail -1 | tr -d '"')
-    - ./composer.phar require --dev "phpstan/phpstan:${PHPSTAN_DEV}" -W
+    # Install and run phpstan with the latest development version
+    - PHPSTAN_MAJOR=$(php -r 'echo explode(".", ltrim(json_decode(file_get_contents("composer.json"), true)["require-dev"]["phpstan/phpstan"], "^~>=v"))[0];')
+    - PHPSTAN_DEV=$(./composer.phar show phpstan/phpstan --available --format=json | grep -oE "${PHPSTAN_MAJOR}\.[0-9]+\.x-dev" | sort -t. -k2 -n | tail -1)
+    - >
+      if [ "${PHP_VERSION}" = "8.6-rc" ]; then
+        ./composer.phar require --dev "phpstan/phpstan:${PHPSTAN_DEV}" --with-all-dependencies --ignore-platform-req=php;
+      else
+        ./composer.phar require --dev "phpstan/phpstan:${PHPSTAN_DEV}" --with-all-dependencies;
+      fi
+    - ./composer.phar run phpstan
   allow_failure: true
 
 check_php:
@@ -118,12 +138,15 @@ check_php:
     - npm ci --ignore-scripts
     - npm run lint:case-sensitive-filenames
     - npm run lint:css
+    - npm run lint:dockerfmt
     - npm run lint:eslint
     - npm run lint:eslint-redundancy
+    - npm run lint:gitlab-ci
     - npm run lint:htmlhint-completeness
     - npm run lint:htmlvalidate-redundancy
     - npm run lint:ls
     - npm run lint:markdown
+    - npm run lint:package-json
     - npm run lint:prettier
     - npm run lint:stylelint-redundancy
     - npm run lint:xml
@@ -135,13 +158,21 @@ check_npm:
   extends: .check_code_npm_template
   parallel:
     matrix:
-      - NODE_VERSION: 22
       - NODE_VERSION: 24
       - NODE_VERSION: 26
   image: node:${NODE_VERSION}-alpine
   before_script:
     - node --version
     - npm --version
+
+check_npm_minimum_node_version:
+  extends: .check_code_npm_template
+  image: debian:stable-slim
+  before_script:
+    - apt-get update && apt-get install --no-install-recommends -y ca-certificates curl git jq make
+    - NODE_VERSION=$(jq --raw-output '.engines.node | match("[0-9]+(\\.[0-9]+){0,2}").string' package.json)
+    - curl --fail --silent --show-error --location https://bit.ly/n-install | N_PREFIX=/tmp/n bash -s -- -y "${NODE_VERSION}"
+    - export PATH="/tmp/n/bin:$PATH"
 
 .check_code_debian_template:
   stage: build

@@ -29,6 +29,20 @@ function get_fonts(): array
         `00_FONTS`');
     $stmt->execute();
 
-    /** @var list<Obra> */
-    return $stmt->fetchAll(PDO::FETCH_CLASS, Obra::class);
+    $fonts = $stmt->fetchAll(PDO::FETCH_CLASS, Obra::class);
+
+    usort($fonts, static function (Obra $a, Obra $b): int {
+        // Remove dots from digits.
+        $a = preg_replace('/(?<=\d)\.(?=\d)/', '', $a->Títol);
+        $b = preg_replace('/(?<=\d)\.(?=\d)/', '', $b->Títol);
+        assert($a !== null && $b !== null);
+
+        // Remove quotes.
+        $a = ltrim($a, '"\'«');
+        $b = ltrim($b, '"\'«');
+
+        return strnatcasecmp($a, $b);
+    });
+
+    return $fonts;
 }

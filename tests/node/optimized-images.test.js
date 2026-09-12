@@ -21,7 +21,7 @@ const getImageFiles = async (directory) => {
 
 /**
  * Returns the expected optimized format extension for a given source file.
- * PNG and JPG files should have AVIF versions, GIF files should have WebP versions.
+ * PNG and JPEG files should have AVIF versions, GIF files should have WebP versions.
  *
  * @param {string} filename - The source file name.
  * @returns {string} The optimized format extension.

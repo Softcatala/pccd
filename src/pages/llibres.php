@@ -13,9 +13,8 @@
 PageRenderer::setTitle('Llibres de Víctor Pàmies');
 PageRenderer::setMetaDescription("Llibres publicats per l'autor de la Paremiologia catalana comparada digital.");
 
-$books = get_books();
 echo '<div class="books">';
-foreach ($books as $book) {
+foreach (get_books() as $book) {
     echo $book->render(lazy_loading: false);
 }
 echo '</div>';
