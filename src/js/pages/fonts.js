@@ -13,7 +13,6 @@ import { DataTable } from "simple-datatables";
 const originalAddEventListener = window.addEventListener;
 window.addEventListener = function (event, listener, options) {
   if (event !== "resize") {
-    // eslint-disable-next-line unicorn/no-this-outside-of-class
     originalAddEventListener.call(this, event, listener, options);
   }
 };
@@ -30,7 +29,6 @@ new DataTable("#fonts", {
       return table;
     }
 
-    /* eslint-disable unicorn/better-dom-traversing -- simple-datatables uses a virtual DOM structure */
     const tHead = table.childNodes[0];
     const filterHeaders = {
       childNodes: tHead.childNodes[0].childNodes.map((th, index) => {

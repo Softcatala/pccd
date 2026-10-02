@@ -26,12 +26,10 @@ const imageDirectory = path.join(rootDirectory, "images");
 const outputExtensionsFile = path.join(rootDirectory, "data/reports/test_imatges_extensions.txt");
 const outputFormatFile = path.join(rootDirectory, "data/reports/test_imatges_format.txt");
 
-const formatOutput = (title, results) => {
-  if (results.length === 0) {
-    return "";
-  }
-  return `${title}\n=============================\n${results.join("\n")}\n=============================\n\n`;
-};
+const formatOutput = (title, results) =>
+  results.length === 0
+    ? ""
+    : `${title}\n=============================\n${results.join("\n")}\n=============================\n\n`;
 
 const checkImages = async (category) => {
   const extensionResults = [];
@@ -66,7 +64,7 @@ const checkImages = async (category) => {
       // 2. Check Integrity.
       await image.stats();
     } catch (error) {
-      integrityResults.push(`${file}: ${error.message}`);
+      integrityResults.push(`${file}: ${error.message.replaceAll(/\s+/g, " ")}`);
     }
   }
 

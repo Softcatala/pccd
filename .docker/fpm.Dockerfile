@@ -26,13 +26,12 @@ RUN apk --no-cache --update add \
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
 COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/performance.ini
-COPY .docker/php/security.ini /etc/php${PHP_VERSION}/conf.d/security.ini
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 # Add only the specific files/directories accessed by PHP itself
 COPY src ./src
 COPY docroot/index.php ./docroot/
-# Some error pages are referenced by both PHP and the HTTP server config
+# Error pages are referenced by both PHP and the HTTP server config
 COPY docroot/404.html ./docroot/
 COPY docroot/500.html ./docroot/
 COPY docroot/admin/index.php ./docroot/admin/

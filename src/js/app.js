@@ -8,14 +8,14 @@
  */
 
 // Google Tag Manager code.
-/* eslint-disable unicorn/prefer-global-this, no-undef, prefer-rest-params, unicorn/no-invalid-argument-count, unicorn/logical-assignment-operators */
+/* eslint-disable no-undef, prefer-rest-params */
 window.dataLayer = window.dataLayer || [];
 const gtag = function () {
   dataLayer.push(arguments);
 };
 gtag("js", new Date());
 gtag("config", "G-CP42Y3NK1R");
-/* eslint-enable unicorn/prefer-global-this, no-undef, prefer-rest-params, unicorn/no-invalid-argument-count, unicorn/logical-assignment-operators */
+/* eslint-enable no-undef, prefer-rest-params */
 
 if (!localStorage.getItem("accept_cookies")) {
   const cookieBanner = document.createElement("div");

@@ -1,10 +1,10 @@
-ARG PHP_IMAGE_TAG=8.5.10-apache-trixie
+ARG PHP_IMAGE_TAG=8.5.11-apache-trixie
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Debian-based image with Apache and mod_php. Used for development."
 
-ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.11.12
+ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.12.0
 ARG profiler
 
 WORKDIR /srv/app
@@ -12,14 +12,12 @@ WORKDIR /srv/app
 # Install install-php-extensions
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions /usr/local/bin/
 
-# Remove some Apache default settings provided by Debian
 # Enable Apache modules
 # Use PHP default development settings
-# Install PHP extensions (intl is used for offline reports)
-RUN rm -f /etc/apache2/mods-enabled/deflate.conf /etc/apache2/mods-enabled/alias.conf \
-  && a2enmod headers brotli \
+# Install PHP extensions
+RUN a2enmod headers \
   && cat /usr/local/etc/php/php.ini-development >/usr/local/etc/php/php.ini \
-  && install-php-extensions apcu gd intl pdo_mysql
+  && install-php-extensions apcu gd pdo_mysql
 
 # Copy configuration files
 COPY .docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf

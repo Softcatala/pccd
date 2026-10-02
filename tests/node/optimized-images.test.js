@@ -28,10 +28,7 @@ const getImageFiles = async (directory) => {
  */
 const getOptimizedExtension = (filename) => {
   const extension = path.extname(filename).toLowerCase();
-  if (extension === ".gif") {
-    return ".webp";
-  }
-  return ".avif";
+  return extension === ".gif" ? ".webp" : ".avif";
 };
 
 describe("Optimized images", () => {

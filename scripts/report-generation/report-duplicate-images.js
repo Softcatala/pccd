@@ -11,6 +11,8 @@
 import { readFile, readdir, stat } from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
+import { pathToFileURL } from "node:url";
+import { writeReport } from "./report-helpers.js";
 
 /**
  * Finds duplicate images by comparing MD5 hashes of files with the same size.
@@ -28,15 +30,17 @@ const findDuplicateImages = async (customPath = "") => {
     const filePath = path.join(directoryPath, file);
     const fileStat = await stat(filePath);
 
-    if (fileStat.isFile()) {
-      const fileSize = fileStat.size;
-
-      // Group files by size as a quick pre-check.
-      if (!Object.hasOwn(files, fileSize)) {
-        files[fileSize] = [];
-      }
-      files[fileSize].push(filePath);
+    if (!fileStat.isFile()) {
+      continue;
     }
+
+    const fileSize = fileStat.size;
+
+    // Group files by size as a quick pre-check.
+    if (!Object.hasOwn(files, fileSize)) {
+      files[fileSize] = [];
+    }
+    files[fileSize].push(filePath);
   }
 
   // Compare files with the same size.
@@ -74,7 +78,6 @@ const findDuplicateImages = async (customPath = "") => {
 // Export for testing.
 export { findDuplicateImages };
 
-// Run when executed directly.
-if (import.meta.url === `file://${process.argv[1]}`) {
-  console.log(await findDuplicateImages());
+if (process.argv[1] && import.meta.url === pathToFileURL(path.resolve(process.argv[1])).href) {
+  await writeReport("test_imatges_duplicades.txt", await findDuplicateImages());
 }

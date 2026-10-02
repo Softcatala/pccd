@@ -30,7 +30,8 @@ function stats_editorials(): void
         GROUP BY
             `EDITORIAL`
         ORDER BY
-            `Repetitions` DESC
+            `Repetitions` DESC,
+            `EDITORIAL` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
     $data = [];
     $data_table_paremiotipus = [];
@@ -66,7 +67,8 @@ function stats_editorials(): void
         GROUP BY
             `EDITORIAL`
         ORDER BY
-            `Repetitions` DESC
+            `Repetitions` DESC,
+            `EDITORIAL` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
 
     $data = [];
@@ -103,7 +105,8 @@ function stats_editorials(): void
         GROUP BY
             `EDITORIAL`
         ORDER BY
-            `Obres` DESC
+            `Obres` DESC,
+            `EDITORIAL` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
     $data = [];
     foreach ($records as $editorial => $count) {

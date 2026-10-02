@@ -39,7 +39,7 @@ function test_imatges_extensions(): void
         echo "<pre>{$output}</pre>";
     }
 
-    echo "<h3>Fitxers d'imatge amb extensió no suportada, en majúscules o no estàndard (gif/jpg/png)</h3>";
+    echo '<h3>Fitxers d\'imatge amb extensió no suportada, en majúscules o no estàndard (gif/jpg/png)</h3>';
     $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_file_extensions.txt'));
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -72,26 +72,8 @@ function test_imatges_no_reconegudes(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    require_once __DIR__ . '/../reports_common.php';
-
     echo '<h3>Imatges a la BD amb extensió no estàndard (gif/jpg/png) o en majúscules</h3>';
-    $stmt = db_query('SELECT `Imatge` FROM `00_FONTS`');
-    $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    $output = '';
-    foreach ($imatges as $i) {
-        assert(is_string($i));
-        if ($i !== '' && !has_supported_image_extension($i)) {
-            $output .= 'cobertes/' . $i . "\n";
-        }
-    }
-    $stmt = db_query('SELECT `Identificador` FROM `00_IMATGES`');
-    $imatges = $stmt->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($imatges as $i) {
-        assert(is_string($i));
-        if ($i !== '' && !has_supported_image_extension($i)) {
-            $output .= 'paremies/' . $i . "\n";
-        }
-    }
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_db_file_extensions.txt'));
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {

@@ -14,7 +14,12 @@ function test_editorials_no_referenciades(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    $editorials_modismes = db_query('SELECT DISTINCT `EDITORIAL`, 1 FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_KEY_PAIR);
+    $stmt = db_query('SELECT DISTINCT `EDITORIAL`, 1 FROM `00_PAREMIOTIPUS`');
+    $editorials_modismes = [];
+    while (($result = $stmt->fetch(PDO::FETCH_NUM)) !== false) {
+        assert(is_string($result[0]));
+        $editorials_modismes[$result[0]] = $result[1];
+    }
 
     echo '<h3>Editorials de la taula 00_EDITORIA que no estan referenciades per cap paremiotipus</h3>';
     $output = '';
@@ -35,14 +40,15 @@ function test_editorials_no_existents(): void
     require_once __DIR__ . '/../common.php';
 
     $editorials = get_editorials();
-    $editorials_paremiotipus = db_query('SELECT `MODISME`, `EDITORIAL` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = db_query('SELECT `MODISME`, `EDITORIAL` FROM `00_PAREMIOTIPUS`');
 
     echo '<h3>Editorials que estan referenciades per parèmies, però que no existeixen a la taula 00_EDITORIA</h3>';
     $output = '';
-    foreach ($editorials_paremiotipus as $ed_p) {
-        assert(is_string($ed_p['EDITORIAL']));
-        if ($ed_p['EDITORIAL'] !== '' && !isset($editorials[$ed_p['EDITORIAL']])) {
-            $output .= $ed_p['EDITORIAL'] . ' (' . $ed_p['MODISME'] . ")\n";
+    while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+        assert(is_string($result['MODISME']));
+        assert(is_string($result['EDITORIAL']));
+        if ($result['EDITORIAL'] !== '' && !isset($editorials[$result['EDITORIAL']])) {
+            $output .= $result['EDITORIAL'] . ' (' . $result['MODISME'] . ")\n";
         }
     }
     if ($output === '') {

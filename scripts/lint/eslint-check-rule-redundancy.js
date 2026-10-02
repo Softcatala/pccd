@@ -9,20 +9,10 @@
  */
 
 import js from "@eslint/js";
-import n from "eslint-plugin-n";
-import promise from "eslint-plugin-promise";
-import regexp from "eslint-plugin-regexp";
-import unicorn from "eslint-plugin-unicorn";
 
 import config from "../../eslint.config.js";
 
-const presetEntries = new Map([
-  [js.configs.recommended, "js.configs.recommended"],
-  [promise.configs["flat/recommended"], "promise.configs.flat.recommended"],
-  [regexp.configs["flat/recommended"], "regexp.configs.flat.recommended"],
-  [unicorn.configs.recommended, "unicorn.configs.recommended"],
-  [n.configs["flat/recommended-module"], "n.configs.flat.recommended-module"],
-]);
+const presetEntries = new Map([[js.configs.recommended, "js.configs.recommended"]]);
 
 const isEqual = (left, right) => JSON.stringify(left) === JSON.stringify(right);
 
@@ -35,13 +25,8 @@ const addGlobalRules = (rules, origin) => {
   }
 };
 
-const describeEntry = (entry, index) => {
-  if (entry.files) {
-    return `entry #${index + 1} (files: ${entry.files.join(", ")})`;
-  }
-
-  return `entry #${index + 1} (global rules)`;
-};
+const describeEntry = (entry, index) =>
+  entry.files ? `entry #${index + 1} (files: ${entry.files.join(", ")})` : `entry #${index + 1} (global rules)`;
 
 for (const [index, entry] of config.entries()) {
   if (!entry || !entry.rules) {

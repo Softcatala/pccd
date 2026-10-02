@@ -12,7 +12,7 @@
 
 require __DIR__ . '/../../src/common.php';
 
-ini_set('memory_limit', '1024M');
+ini_set('memory_limit', '512M');
 set_time_limit(0);
 session_start();
 
@@ -114,6 +114,7 @@ if ($is_test_page) {
     $test_functions = get_test_functions();
     if (isset($test_functions[$test_file])) {
         require __DIR__ . '/../../src/reports/' . $test_file . '.php';
+        ob_start();
         foreach ($test_functions[$test_file] as $function_name) {
             $function_name();
 
@@ -121,6 +122,12 @@ if ($is_test_page) {
             // ob_flush();
             // flush();
         }
+        $report_output = ob_get_clean();
+        if (!is_string($report_output)) {
+            $report_output = '';
+        }
+        echo $report_output;
+        $report_hash = hash('sha256', $report_output);
     }
 
     echo "<p>[<a href='/admin/'>Torna endarrere</a>]</p>";
@@ -130,7 +137,11 @@ if ($is_test_page) {
     $memory_current = format_nombre(round(memory_get_usage(real_usage: true) / 1024 / 1024, precision: 2));
     $memory_peak = format_nombre(round(memory_get_peak_usage(real_usage: true) / 1024 / 1024, precision: 2));
     echo '<hr>';
-    echo "<footer><small>Pàgina generada en {$total_time} segons. Memòria: {$memory_current} MB (pic de {$memory_peak} MB).</small></footer>";
+    echo "<footer><small>Pàgina generada en {$total_time} segons. Memòria: {$memory_current} MB (pic de {$memory_peak} MB).";
+    if (isset($report_hash)) {
+        echo " Empremta: <code>{$report_hash}</code>";
+    }
+    echo '</small></footer>';
     echo '</body>';
     echo '</html>';
 

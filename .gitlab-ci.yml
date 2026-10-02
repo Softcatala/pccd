@@ -4,7 +4,7 @@ include:
 
 variables:
   PROJECT_TO_BE_DEPLOYED: "docker/pccd"
-  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.11.12"
+  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.12.0"
 
 stages:
   - build
@@ -80,15 +80,15 @@ reset:
   script:
     - >
       if [ "${PHP_VERSION}" = "8.6-rc" ]; then
-        apk --no-cache --update add git unzip $PHPIZE_DEPS icu-dev icu-data-full libpng-dev freetype-dev
+        apk --no-cache --update add git unzip $PHPIZE_DEPS libpng-dev freetype-dev
         docker-php-ext-configure gd --with-freetype
         docker-php-ext-configure mbstring --disable-mbregex
-        docker-php-ext-install -j"$(nproc)" gd intl mbstring pdo_mysql
+        docker-php-ext-install gd mbstring pdo_mysql
       else
-        apk --no-cache --update add curl git unzip
-        curl --silent --show-error --location --fail --output /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
+        apk --no-cache --update add git unzip
+        wget -q -O /usr/local/bin/install-php-extensions https://github.com/mlocati/docker-php-extension-installer/releases/download/${DOCKER_PHP_EXTENSION_INSTALLER_VERSION}/install-php-extensions
         chmod +x /usr/local/bin/install-php-extensions
-        install-php-extensions gd intl mbstring pdo_mysql
+        install-php-extensions gd mbstring pdo_mysql
       fi
     - >
       if [ "${PHP_VERSION}" = "8.6-rc" ]; then
@@ -135,7 +135,7 @@ check_php:
 .check_code_npm_template:
   stage: build
   script:
-    - npm ci --ignore-scripts
+    - npm ci --ignore-scripts --engine-strict
     - npm run lint:case-sensitive-filenames
     - npm run lint:css
     - npm run lint:dockerfmt
@@ -158,14 +158,13 @@ check_npm:
   extends: .check_code_npm_template
   parallel:
     matrix:
-      - NODE_VERSION: 24
       - NODE_VERSION: 26
   image: node:${NODE_VERSION}-alpine
   before_script:
     - node --version
     - npm --version
 
-check_npm_minimum_node_version:
+"check_npm:minimum_node_version":
   extends: .check_code_npm_template
   image: debian:stable-slim
   before_script:
@@ -173,6 +172,8 @@ check_npm_minimum_node_version:
     - NODE_VERSION=$(jq --raw-output '.engines.node | match("[0-9]+(\\.[0-9]+){0,2}").string' package.json)
     - curl --fail --silent --show-error --location https://bit.ly/n-install | N_PREFIX=/tmp/n bash -s -- -y "${NODE_VERSION}"
     - export PATH="/tmp/n/bin:$PATH"
+    - node --version
+    - npm --version
 
 .check_code_debian_template:
   stage: build

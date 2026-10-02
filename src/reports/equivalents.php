@@ -15,11 +15,14 @@ function test_equivalents(): void
     require_once __DIR__ . '/../common.php';
 
     echo "<h3>Modismes amb equivalents amb un codi d'idioma no detectat</h3>";
-    $modismes = db_query('SELECT `MODISME`, `EQUIVALENT`, `IDIOMA` FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL')->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = db_query('SELECT `MODISME`, `EQUIVALENT`, `IDIOMA` FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
     $output = '';
-    foreach ($modismes as $m) {
-        if ($m['IDIOMA'] !== '' && get_idioma($m['IDIOMA']) === '') {
-            $output .= $m['MODISME'] . ' (codi idioma: ' . $m['IDIOMA'] . ', equivalent: ' . $m['EQUIVALENT'] . ")\n";
+    while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+        assert(is_string($result['MODISME']));
+        assert(is_string($result['EQUIVALENT']));
+        assert(is_string($result['IDIOMA']));
+        if ($result['IDIOMA'] !== '' && get_idioma($result['IDIOMA']) === '') {
+            $output .= $result['MODISME'] . ' (codi idioma: ' . $result['IDIOMA'] . ', equivalent: ' . $result['EQUIVALENT'] . ")\n";
         }
     }
     if ($output === '') {
@@ -29,11 +32,14 @@ function test_equivalents(): void
     }
 
     echo '<h3>Modismes amb equivalents amb el camp idioma buit</h3>';
-    $modismes = db_query('SELECT `MODISME`, `EQUIVALENT`, `IDIOMA` FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL')->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = db_query('SELECT `MODISME`, `EQUIVALENT`, `IDIOMA` FROM `00_PAREMIOTIPUS` WHERE `EQUIVALENT` IS NOT NULL');
     $output = '';
-    foreach ($modismes as $modisme) {
-        if ($modisme['IDIOMA'] === '' && $modisme['MODISME'] !== '' && $modisme['EQUIVALENT'] !== '') {
-            $output .= $modisme['MODISME'] . ' (equivalent ' . $modisme['EQUIVALENT'] . ")\n";
+    while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
+        assert(is_string($result['MODISME']));
+        assert(is_string($result['EQUIVALENT']));
+        assert(is_string($result['IDIOMA']));
+        if ($result['IDIOMA'] === '' && $result['MODISME'] !== '' && $result['EQUIVALENT'] !== '') {
+            $output .= $result['MODISME'] . ' (equivalent ' . $result['EQUIVALENT'] . ")\n";
         }
     }
     if ($output === '') {

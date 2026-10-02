@@ -20,11 +20,9 @@ const getPackageBinaries = (packageName) => {
   const packageFile = path.join(projectDirectory, "node_modules", packageName, "package.json");
   const packageManifest = JSON.parse(fs.readFileSync(packageFile, "utf8"));
 
-  if (typeof packageManifest.bin === "string") {
-    return [packageName.split("/").pop()];
-  }
-
-  return Object.keys(packageManifest.bin || {});
+  return typeof packageManifest.bin === "string"
+    ? [packageName.split("/").pop()]
+    : Object.keys(packageManifest.bin || {});
 };
 
 const dependencyNames = [

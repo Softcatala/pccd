@@ -46,7 +46,7 @@ const productionToLocalUrl = (url) => url.replace("https://pccd.dites.cat", base
 const localToProductionUrl = (url) => url.replace(baseUrl, "https://pccd.dites.cat");
 
 /**
- * Validates URL using curl, htmlhint, html-validate, and Tidy HTML.
+ * Validates URL using fetch, htmlhint, html-validate, and Tidy HTML.
  */
 const validateHtmlUrl = async (url, reportFiles) => {
   const { htmlErrorsFile, zeroFontsFile } = reportFiles;

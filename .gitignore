@@ -28,9 +28,5 @@ vendor/
 .php-cs-fixer.cache
 .phpunit.result.cache
 /test-results/
-/tmp/*.html
-/tmp/og/
-/tmp/*.json
-/tmp/cv/
-/tmp/github/
-/data/reports/test_tmp_*.txt
+/tmp/*
+!/tmp/.keep

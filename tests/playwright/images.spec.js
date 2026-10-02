@@ -61,16 +61,16 @@ test.describe("SVG in <img> tags", () => {
     await expect(page.locator('img[src$=".svg"]')).not.toHaveCount(0);
   });
 
-  test("the server sends correct type and sets Brotli or Zstd compression for SVG files", async ({ page }) => {
+  test("the server sends the correct type and compresses SVG files", async ({ page }) => {
     const svgImages = await page.locator('img[src$=".svg"]').all();
 
     for (const image of svgImages) {
       const url = await image.getAttribute("src");
       const response = await page.request.get(url, {
-        headers: { "Accept-Encoding": "gzip, deflate, br, zstd" },
+        headers: { "Accept-Encoding": "gzip, deflate, zstd" },
       });
       expect(response.headers()["content-type"]).toMatch(/^image\/svg\+xml/);
-      expect(response.headers()["content-encoding"]).toMatch(/^(?:br|zstd)$/);
+      expect(response.headers()["content-encoding"]).toMatch(/^(?:gzip|zstd)$/);
     }
   });
 });

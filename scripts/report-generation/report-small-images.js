@@ -11,6 +11,7 @@
 import path from "node:path";
 import { readdir } from "node:fs/promises";
 import sharp from "sharp";
+import { writeReport } from "./report-helpers.js";
 
 const IMAGE_MIN_WIDTH = 350;
 const IGNORED_FILES = new Set([".picasa.ini"]);
@@ -50,9 +51,8 @@ const listSmallImages = async (sourceDirectory, minimumWidth = IMAGE_MIN_WIDTH) 
 
 const main = async () => {
   const cobertes = await listSmallImages(cobertesDirectory);
-  console.log(cobertes);
   const paremies = await listSmallImages(paremiesDirectory);
-  console.log(paremies);
+  await writeReport("test_imatges_petites.txt", `${cobertes}\n${paremies}\n`);
 };
 
 try {

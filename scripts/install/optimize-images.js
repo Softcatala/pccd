@@ -8,20 +8,25 @@
  * source code in the file LICENSE.
  */
 
-import { execFileSync } from "node:child_process";
 import fs from "node:fs";
 import path from "node:path";
 import sharp from "sharp";
 
 const JPEG_QUALITY = 80;
 const PNG_QUALITY = 80;
+const WEBP_QUALITY = 80;
 const IMAGE_WIDTH = 500;
 const IGNORED_FILES = new Set([".picasa.ini"]);
 
-// External dependencies for image optimization.
-// TODO: consider removing these packages to reduce system dependencies (no npm equivalents currently available).
-const GIF2WEBP = "gif2webp";
-const GIFSICLE = "gifsicle";
+const GIF_OPTIONS = {
+  colours: 256,
+  dither: 0,
+  effort: 10,
+  interFrameMaxError: 0,
+  interPaletteMaxError: 0,
+  keepDuplicateFrames: true,
+  reuse: true,
+};
 
 const paremiesDirectory = path.join(import.meta.dirname, "../../images/paremies");
 const paremiesTargetDirectory = path.join(import.meta.dirname, "../../docroot/img/imatges");
@@ -75,20 +80,28 @@ const processJpg = async (sourceFile, targetFile, width) => {
   await createAvifImage(sourceFile, targetFile, width);
 };
 
-const processGif = (sourceFile, targetFile) => {
-  execFileSync(GIFSICLE, ["--no-warnings", "-O3", "--output", targetFile, sourceFile]);
+const processGif = async (sourceFile, targetFile) => {
+  const sourceSize = fs.statSync(sourceFile).size;
+  const optimized = await sharp(sourceFile, { animated: true }).gif(GIF_OPTIONS).toBuffer();
+  const [sourceMetadata, optimizedMetadata] = await Promise.all([
+    sharp(sourceFile, { animated: true }).metadata(),
+    sharp(optimized, { animated: true }).metadata(),
+  ]);
+  const sourcePages = sourceMetadata.pages ?? 1;
+  const optimizedPages = optimizedMetadata.pages ?? 1;
+  const output =
+    sourcePages === optimizedPages && optimized.length < sourceSize ? optimized : fs.readFileSync(sourceFile);
 
-  if (!fs.existsSync(targetFile) || fs.statSync(sourceFile).size <= fs.statSync(targetFile).size) {
-    // Restore original file.
-    fs.copyFileSync(sourceFile, targetFile);
-  }
+  fs.writeFileSync(targetFile, output);
 
   // TODO: consider using AVIF instead, although animation and alpha channel
   // should be preserved, and looks like the tooling is not there yet.
   const { dir, name } = path.parse(targetFile);
   const targetFileWebp = path.join(dir, `${name}.webp`);
 
-  execFileSync(GIF2WEBP, ["-q", "100", "-mt", "-m", "6", "-o", targetFileWebp, targetFile]);
+  await sharp(targetFile, { animated: true })
+    .webp({ quality: WEBP_QUALITY, effort: 6, minSize: true })
+    .toFile(targetFileWebp);
 };
 
 const processFile = async ({ file, sourceDirectory, targetDirectory, width }) => {
@@ -103,7 +116,7 @@ const processFile = async ({ file, sourceDirectory, targetDirectory, width }) =>
   const extension = path.extname(file).toLowerCase();
   switch (extension) {
     case ".gif": {
-      processGif(sourceFile, targetFile);
+      await processGif(sourceFile, targetFile);
       break;
     }
     case ".jpg": {
@@ -141,12 +154,14 @@ const deleteUnusedImages = (targetDirectory, sourceDirectory) => {
   for (const targetFile of targetFiles) {
     const targetFileBaseName = path.parse(targetFile).name;
 
-    // If the file doesn't exist in the source directory, delete it.
-    if (!sourceFileSet.has(targetFileBaseName)) {
-      const targetFilePath = path.join(targetDirectory, targetFile);
-      fs.unlinkSync(targetFilePath);
-      console.log(`Deleted: ${targetFilePath}`);
+    // Keep files that still exist in the source directory.
+    if (sourceFileSet.has(targetFileBaseName)) {
+      continue;
     }
+
+    const targetFilePath = path.join(targetDirectory, targetFile);
+    fs.unlinkSync(targetFilePath);
+    console.log(`Deleted: ${targetFilePath}`);
   }
 };
 

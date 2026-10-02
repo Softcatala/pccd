@@ -9,9 +9,6 @@ WORKDIR /srv/app
 RUN install-php-extensions apcu gd pdo_mysql
 
 COPY .docker/php/performance.ini /usr/local/etc/php/php.ini
-COPY .docker/php/security.ini /usr/local/etc/php/conf.d/security.ini
 COPY .docker/frankenphp/Caddyfile /etc/frankenphp/Caddyfile
 
 # Project files are mounted via volume in docker-compose.frankenphp.yml
-
-EXPOSE 80

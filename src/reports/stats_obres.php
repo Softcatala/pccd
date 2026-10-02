@@ -40,7 +40,9 @@ function stats_obres(): void
             00_FONTS.`Identificador`,
             00_FONTS.`Registres`
         ORDER BY
-            NumberOfReferences DESC
+            NumberOfReferences DESC,
+            Font ASC,
+            Registres ASC
     ')->fetchAll(PDO::FETCH_ASSOC);
     echo "<table style='width:1200px;'>";
     echo '<tr><th>Obra</th><th>Total</th><th>Recollides</th><th>Falten</th></tr>';

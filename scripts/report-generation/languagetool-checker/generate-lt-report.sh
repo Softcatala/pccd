@@ -11,16 +11,12 @@ set -eu
 
 cd "$(dirname "$0")"
 
-# Run export script and get flagged sentences with LanguageTool.
-docker compose exec -T web php scripts/report-generation/languagetool-checker/export.php | npx lt-filter --flagged > ../../../data/reports/excluded.txt
+temporary_export=$(mktemp "${TMPDIR:-/tmp}/pccd-lt-export.XXXXXX")
+temporary_report=$(mktemp "${TMPDIR:-/tmp}/pccd-lt-report.XXXXXX")
+trap 'rm -f "$temporary_export" "$temporary_report"' 0 HUP INT TERM
 
-# Get the new LT-excluded sentences since last commit.
-git diff --unified=0 HEAD ../../../data/reports/excluded.txt | grep -E '^\+[^+]' | sed 's/^\+//' > excluded_new_tmp.txt
+# Generate separately so the report can be compared before replacing the current file.
+docker compose exec -T web php scripts/report-generation/languagetool-checker/export.php > "${temporary_export}"
+npx lt-filter --flagged < "${temporary_export}" > "${temporary_report}"
 
-# Only update the file if there are new entries.
-if [ "$(wc -l < excluded_new_tmp.txt)" -gt 1 ]; then
-  cp excluded_new_tmp.txt ../../../data/reports/excluded_new.txt
-fi
-
-# Remove temporary files.
-rm excluded_new_tmp.txt
+node ../update-report.js excluded.txt excluded_new.txt "${temporary_report}"

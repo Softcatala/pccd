@@ -33,7 +33,7 @@ const HTTP_STATUS_NOT_FOUND = 404;
 const baseUrl = process.env.BASE_URL;
 
 /**
- * Validates URL using curl, HTML Tidy, HTMLHint, and HTML-validate.
+ * Validates URL using fetch, HTML Tidy, HTMLHint, and HTML-validate.
  */
 const validateUrl = async (url, options = {}) => {
   const { skipTidy = false, skipHtmlhint = false, skipHtmlvalidate = false } = options;
@@ -102,24 +102,26 @@ const validateUrl = async (url, options = {}) => {
   }
 
   // HTML-validate.
-  if (!skipHtmlvalidate) {
-    console.log("==============");
-    console.log("html-validate");
-    console.log("==============");
-    const htmlValidateInstance = new HtmlValidate(htmlValidateConfig);
-    const htmlValidateResult = await htmlValidateInstance.validateString(html);
+  if (skipHtmlvalidate) {
+    return;
+  }
 
-    if (!htmlValidateResult.valid) {
-      const messages = htmlValidateResult.results[0].messages;
-      for (const message of messages) {
-        console.error(`${outputFilename}:${message.line}:${message.column}: ${message.message} (${message.ruleId})`);
-      }
+  console.log("==============");
+  console.log("html-validate");
+  console.log("==============");
+  const htmlValidateInstance = new HtmlValidate(htmlValidateConfig);
+  const htmlValidateResult = await htmlValidateInstance.validateString(html);
 
-      process.exit(EXIT_CODE_ERROR);
+  if (!htmlValidateResult.valid) {
+    const messages = htmlValidateResult.results[0].messages;
+    for (const message of messages) {
+      console.error(`${outputFilename}:${message.line}:${message.column}: ${message.message} (${message.ruleId})`);
     }
 
-    console.log("No html-validate issues.");
+    process.exit(EXIT_CODE_ERROR);
   }
+
+  console.log("No html-validate issues.");
 };
 
 /**
@@ -132,7 +134,7 @@ const validateUrl404 = async (url) => {
   console.log(`Validating 404 page ${url}...`);
 
   console.log("==============");
-  console.log("curl");
+  console.log("fetch");
   console.log("==============");
 
   const response = await fetch(url, {

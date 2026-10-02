@@ -15,6 +15,10 @@
       "matchImages": ["php"],
       "matchArgs": ["PHP_IMAGE_TAG"],
       "referenceTag": "apache"
+    },
+    {
+      "matchImages": ["nginx"],
+      "referenceTag": "stable-alpine-slim"
     }
   ],
   "sync": [
@@ -22,11 +26,6 @@
       "image": "mariadb",
       "from": "docker-compose.yml",
       "to": ["docker-compose.fpm.yml", ".docker/sql.Dockerfile"]
-    },
-    {
-      "image": "alpine",
-      "from": ".docker/fpm.Dockerfile",
-      "to": [".docker/nginx.Dockerfile"]
     }
   ],
   "githubReleases": [

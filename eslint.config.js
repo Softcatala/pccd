@@ -1,21 +1,13 @@
 import globals from "globals";
 import js from "@eslint/js";
-import n from "eslint-plugin-n";
-import promise from "eslint-plugin-promise";
-import regexp from "eslint-plugin-regexp";
-import unicorn from "eslint-plugin-unicorn";
 
 export default [
   js.configs.recommended,
-  regexp.configs["flat/recommended"],
-  promise.configs["flat/recommended"],
-  unicorn.configs.recommended,
   {
     rules: {
       "array-callback-return": "error",
       "arrow-body-style": "error",
       "camelcase": "error",
-      "consistent-this": "error",
       "curly": "error",
       "default-case-last": "error",
       "default-param-last": "error",
@@ -23,15 +15,11 @@ export default [
       "eqeqeq": "error",
       "grouped-accessor-pairs": "error",
       "guard-for-in": "error",
-      "max-nested-callbacks": "error",
-      "max-params": "error",
       "new-cap": "error",
       "no-alert": "error",
       "no-array-constructor": "error",
       "no-bitwise": "error",
-      "no-caller": "error",
       "no-constructor-return": "error",
-      "no-div-regex": "error",
       "no-duplicate-imports": "error",
       "no-else-return": ["error"],
       "no-eval": "error",
@@ -42,21 +30,16 @@ export default [
       "no-implied-eval": "error",
       "no-inner-declarations": "error",
       "no-invalid-this": "error",
-      "no-iterator": "error",
-      "no-label-var": "error",
       "no-labels": "error",
       "no-lone-blocks": "error",
       "no-lonely-if": "error",
       "no-loop-func": "error",
-      "no-multi-str": "error",
       "no-nested-ternary": "error",
       "no-new": "error",
       "no-new-func": "error",
       "no-new-wrappers": "error",
       "no-object-constructor": "error",
-      "no-octal-escape": "error",
       "no-param-reassign": "error",
-      "no-proto": "error",
       "no-return-assign": "error",
       "no-script-url": "error",
       "no-self-compare": "error",
@@ -90,33 +73,13 @@ export default [
       "prefer-rest-params": "error",
       "prefer-spread": "error",
       "radix": "error",
-      "sort-imports": ["error", { allowSeparatedGroups: true }],
-      "strict": ["error", "never"],
-      "symbol-description": "error",
-      "unicorn/consistent-destructuring": "error",
-      "unicorn/no-global-object-property-assignment": "off",
-      "unicorn/no-unsafe-string-replacement": "off",
-      "unicorn/numeric-separators-style": "off",
-      "unicorn/prefer-number-coercion": "off",
-      "unicorn/prefer-scoped-selector": "off",
       "yoda": "error",
     },
   },
   {
-    ...n.configs["flat/recommended-module"],
     files: ["*.js", "scripts/**", "tests/**"],
     languageOptions: {
-      ...n.configs["flat/recommended-module"].languageOptions,
       globals: { ...globals.node },
-    },
-    rules: {
-      ...n.configs["flat/recommended-module"].rules,
-      "n/hashbang": ["error", { additionalExecutables: ["scripts/**/*.js"] }],
-      "n/no-path-concat": "error",
-      "n/no-process-exit": "off",
-      "n/no-unsupported-features/node-builtins": "off",
-      "n/prefer-promises/fs": "error",
-      "unicorn/no-exports-in-scripts": "off",
     },
   },
   {

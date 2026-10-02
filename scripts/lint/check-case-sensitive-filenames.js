@@ -79,14 +79,16 @@ for (const directory of directoriesToCheck) {
 
   const conflicts = findCaseConflicts(files);
 
-  if (conflicts.length > 0) {
-    hasConflicts = true;
-    const relativePath = path.relative(rootDirectory, directory);
-    console.log(`Found case-only conflicts in ${relativePath}:`);
+  if (conflicts.length === 0) {
+    continue;
+  }
 
-    for (const [file1, file2] of conflicts) {
-      console.log(`   - "${file1}" ↔ "${file2}"`);
-    }
+  hasConflicts = true;
+  const relativePath = path.relative(rootDirectory, directory);
+  console.log(`Found case-only conflicts in ${relativePath}:`);
+
+  for (const [file1, file2] of conflicts) {
+    console.log(`   - "${file1}" ↔ "${file2}"`);
   }
 }
 
@@ -96,4 +98,3 @@ if (hasConflicts) {
 }
 
 console.log("No case-only filename conflicts found");
-process.exit(0);

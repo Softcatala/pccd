@@ -28,45 +28,88 @@ function test_paremiotipus_accents(): void
     }
 }
 
+/**
+ * Yields shared modismes, each grouped by paremiotipus with its exact spelling variants.
+ *
+ * @return Generator<int, list<list<array{0: string, 1: string}>>>
+ */
+function get_shared_modisme_groups(): Generator
+{
+    // Only fetch modismes shared by different paremiotipus, using the database collation.
+    // Weight strings preserve that grouping in PHP; binary values retain exact spellings.
+    $rows = db_query('
+        SELECT DISTINCT
+            WEIGHT_STRING(`p`.`MODISME`),
+            WEIGHT_STRING(`p`.`PAREMIOTIPUS`),
+            BINARY `p`.`PAREMIOTIPUS`,
+            BINARY `p`.`MODISME`
+        FROM `00_PAREMIOTIPUS` `p`
+        INNER JOIN (
+            SELECT `MODISME`
+            FROM `00_PAREMIOTIPUS`
+            WHERE `MODISME` IS NOT NULL AND `PAREMIOTIPUS` IS NOT NULL
+            GROUP BY `MODISME`
+            HAVING COUNT(DISTINCT `PAREMIOTIPUS`) > 1
+        ) `shared` ON `p`.`MODISME` = `shared`.`MODISME`
+        WHERE `p`.`PAREMIOTIPUS` IS NOT NULL
+        ORDER BY `p`.`MODISME`, BINARY `p`.`MODISME`, BINARY `p`.`PAREMIOTIPUS`
+    ');
+    $group_key = null;
+    $group = [];
+    while (($row = $rows->fetch(PDO::FETCH_NUM)) !== false) {
+        [$modisme_key, $paremiotipus_key, $paremiotipus_value, $modisme] = $row;
+        assert(is_string($modisme_key));
+        assert(is_string($paremiotipus_key));
+        assert(is_string($paremiotipus_value));
+        assert(is_string($modisme));
+        if ($group_key !== null && $group_key !== $modisme_key) {
+            yield array_values($group);
+
+            $group = [];
+        }
+        $group_key = $modisme_key;
+        $group['p:' . $paremiotipus_key][] = [$paremiotipus_value, $modisme];
+    }
+    if ($group !== []) {
+        yield array_values($group);
+    }
+}
+
 function test_paremiotipus_modismes_diferents(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    echo '<h3>Paremiotipus diferents que contenen exactament el mateix modisme</h3>';
-    $accents = '';
     $output = '';
-    $paremiotipus = db_query('
-        SELECT
-            `a`.`PAREMIOTIPUS`   as `P_A`,
-            `a`.`MODISME`        as `M_A`,
-            `b`.`PAREMIOTIPUS`   as `P_B`,
-            `b`.`MODISME`        as `M_B`
-        FROM
-            `00_PAREMIOTIPUS` `a`,
-            `00_PAREMIOTIPUS` `b`
-        WHERE
-            `a`.`MODISME` = `b`.`MODISME`
-        AND
-            `a`.`PAREMIOTIPUS` != `b`.`PAREMIOTIPUS`
-    ')->fetchAll(PDO::FETCH_ASSOC);
+    $accents = '';
     $seen_pairs = [];
-    foreach ($paremiotipus as $m) {
-        $pair_key = $m['P_A'] < $m['P_B'] ? ($m['P_A'] . '|' . $m['P_B']) : ($m['P_B'] . '|' . $m['P_A']);
-
-        if (!isset($seen_pairs[$pair_key])) {
-            $seen_pairs[$pair_key] = true;
-            if ($m['M_A'] === $m['M_B']) {
-                $output .= get_paremiotipus_display($m['P_A'], escape_html: false) . ' (modisme: ' . $m['M_A'] . ")\n";
-                $output .= get_paremiotipus_display($m['P_B'], escape_html: false) . ' (modisme: ' . $m['M_B'] . ")\n";
-                $output .= "\n";
-            } else {
-                // Rely on DB Collation to detect these and show them below.
-                $accents .= get_paremiotipus_display($m['P_A'], escape_html: false) . ' (modisme: ' . $m['M_A'] . ")\n";
-                $accents .= get_paremiotipus_display($m['P_B'], escape_html: false) . ' (modisme: ' . $m['M_B'] . ")\n";
-                $accents .= "\n";
+    foreach (get_shared_modisme_groups() as $group) {
+        $count = count($group);
+        for ($i = 0; $i < $count; $i++) {
+            for ($j = $i + 1; $j < $count; $j++) {
+                foreach ($group[$i] as [$paremiotipus_a, $modisme_a]) {
+                    foreach ($group[$j] as [$paremiotipus_b, $modisme_b]) {
+                        // Report each unordered pair once, even if it shares several modismes.
+                        $pair_key = $paremiotipus_a < $paremiotipus_b
+                            ? $paremiotipus_a . '|' . $paremiotipus_b
+                            : $paremiotipus_b . '|' . $paremiotipus_a;
+                        if (isset($seen_pairs[$pair_key])) {
+                            continue;
+                        }
+                        $seen_pairs[$pair_key] = true;
+                        $pair_output = get_paremiotipus_display($paremiotipus_a, escape_html: false) . ' (modisme: ' . $modisme_a . ")\n"
+                            . get_paremiotipus_display($paremiotipus_b, escape_html: false) . ' (modisme: ' . $modisme_b . ")\n\n";
+                        if ($modisme_a === $modisme_b) {
+                            $output .= $pair_output;
+                        } else {
+                            $accents .= $pair_output;
+                        }
+                    }
+                }
             }
         }
     }
+
+    echo '<h3>Paremiotipus diferents que contenen exactament el mateix modisme</h3>';
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
@@ -123,27 +166,7 @@ function test_paremiotipus_repetits(): void
     }
 
     echo "<h3>Nous paremiotipus molt semblants des de l'última actualització (Levenshtein)</h3>";
-    $lines = file(__DIR__ . '/../../data/reports/test_repetits_new.txt');
-    $output = '';
-    if ($lines !== false) {
-        $prev = '';
-        foreach ($lines as $line) {
-            $line = trim($line);
-            if (
-                strlen($prev) > 1
-                && strlen($line) > 1
-                && (
-                    str_starts_with($prev, '+')
-                    || str_starts_with($line, '+')
-                )
-            ) {
-                $output .= ltrim($prev, '+') . "\n";
-                $output .= ltrim($line, '+') . "\n";
-                $output .= "\n";
-            }
-            $prev = $line;
-        }
-    }
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_repetits_new.txt'));
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {

@@ -1,19 +1,14 @@
-# Generated and optimized files
+*.avif
+*.gif
+*.html
+*.jpg
 *.min.*
+*.mp3
+*.png
 *.sql
 *.sublime-project
 *.svg
-/tmp/
+*.webp
 composer.lock
 package-lock.json
-
-# HTML pages
-/docroot/*.html
-
-# Binary files
-*.jpg
-*.png
-*.avif
-*.webp
-*.gif
-*.mp3
+third_party/

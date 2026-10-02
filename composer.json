@@ -17,24 +17,20 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "ext-curl": "*",
-    "ext-intl": "*",
-    "ergebnis/composer-normalize": "^2.53",
+    "ergebnis/composer-normalize": "^2.54",
     "pereorga/phpstan-rules": "^1.5",
     "php-cs-fixer/shim": "^3.95",
     "phpstan/phpstan": "^2.2",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-strict-rules": "^2.0",
-    "phpunit/phpunit": "^13.3",
-    "psalm/phar": "^6.17",
+    "phpunit/phpunit": "^13.4",
+    "psalm/phar": "^6.19",
     "slevomat/coding-standard": "^8.31",
     "squizlabs/php_codesniffer": "^4.0"
   },
   "suggest": {
     "ext-apcu": "Optional: used for caching SQL queries, and for the search stats. Strongly encouraged in the web server",
-    "ext-curl": "Dev: used for some offline reports generated after install",
     "ext-gd": "Required in the web server for generating OG images, and optionally by apc.php in admin pages",
-    "ext-intl": "Dev: used in a few offline reports",
     "ext-pdo-mysql": "Required in the web server for connecting to the database",
     "ext-session": "Required in the web server for the admin page"
   },

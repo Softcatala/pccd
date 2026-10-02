@@ -38,21 +38,15 @@ try {
 
   const extendedRules = resolvedExtendsConfig.rules || {};
 
+  // Normalize values for comparison (stylelint accepts both array and scalar formats).
+  const normalizeValue = (value) => (Array.isArray(value) && value.length === 1 ? value[0] : value);
+
   // Find redundant rules.
   const redundant = customRuleNames.filter((ruleName) => {
     const customValue = customRules[ruleName];
     const extendedValue = extendedRules[ruleName];
 
     if (extendedValue !== undefined) {
-      // Normalize values for comparison (stylelint accepts both array and scalar formats).
-      const normalizeValue = (value) => {
-        if (Array.isArray(value) && value.length === 1) {
-          return value[0];
-        }
-
-        return value;
-      };
-
       const normalizedCustom = normalizeValue(customValue);
       const normalizedExtended = normalizeValue(extendedValue);
 

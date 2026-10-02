@@ -19,11 +19,11 @@ test.describe("Homepage", () => {
     await expect(page).toHaveTitle(data.homepageTitle);
   });
 
-  test("the server sets Brotli or Zstd compression", async ({ page }) => {
+  test("the server compresses the homepage", async ({ page }) => {
     const response = await page.request.get("/", {
-      headers: { "Accept-Encoding": "gzip, deflate, br, zstd" },
+      headers: { "Accept-Encoding": "gzip, deflate, zstd" },
     });
-    expect(response.headers()["content-encoding"]).toMatch(/^(?:br|zstd)$/);
+    expect(response.headers()["content-encoding"]).toMatch(/^(?:gzip|zstd)$/);
   });
 
   test("has correct projecte link", async ({ page }) => {

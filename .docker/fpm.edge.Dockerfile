@@ -18,7 +18,6 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >>/etc/apk/reposito
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
 COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/performance.ini
-COPY .docker/php/security.ini /etc/php${PHP_VERSION}/conf.d/security.ini
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 COPY src ./src

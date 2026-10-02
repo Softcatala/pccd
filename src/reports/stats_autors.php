@@ -29,7 +29,8 @@ function stats_autors(): void
         GROUP BY
             `AUTOR`
         ORDER BY
-            `Paremiotipus` DESC
+            `Paremiotipus` DESC,
+            `AUTOR` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
     $data = [];
     foreach ($records as $autor => $count) {
@@ -62,7 +63,8 @@ function stats_autors(): void
         GROUP BY
             `AUTOR`
         ORDER BY
-            `Fitxes` DESC
+            `Fitxes` DESC,
+            `AUTOR` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
     $data = [];
     foreach ($records as $autor => $count) {
@@ -95,7 +97,8 @@ function stats_autors(): void
         GROUP BY
             `AUTOR`
         ORDER BY
-            `Obres` DESC
+            `Obres` DESC,
+            `AUTOR` ASC
     ')->fetchAll(PDO::FETCH_KEY_PAIR);
     $data = [];
     foreach ($records as $autor => $count) {

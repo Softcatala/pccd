@@ -10,7 +10,6 @@ COPY apt_dev_deps.txt .
 # hadolint ignore=SC2046 # We want word splitting to pass packages as separate arguments
 RUN apt-get update \
   && apt-get install --no-install-recommends -y $(cat apt_dev_deps.txt) \
+  && npx playwright install --with-deps chromium \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
-
-RUN npx playwright install --with-deps chromium

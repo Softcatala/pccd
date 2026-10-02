@@ -97,7 +97,9 @@ function get_test_functions(): array
  */
 function get_chart(string $type, array $data, string $label = '', string $x_title = '', string $y_title = '', string $style = ''): string
 {
-    $chart_id = 'chart-' . uniqid();
+    static $chart_count = 0;
+    $chart_count++;
+    $chart_id = 'chart-' . $chart_count;
     $json_labels = json_encode(array_keys($data));
     $json_values = json_encode(array_values($data));
     $output = "<div style='position:relative;{$style}'><canvas id='{$chart_id}' style='margin-bottom:3rem;'></canvas></div>";
@@ -215,59 +217,4 @@ function get_data_from_files(array $files, string $directory_path, string $attri
     }
 
     return $data;
-}
-
-/**
- * Gets the response code for a URL.
- *
- * The url parameter specifies the URL to check.
- * Set nobody to false to use GET request instead of HEAD.
- */
-function curl_get_response_code(string $url, bool $nobody = true): string
-{
-    if ($url === '') {
-        return 'ERROR: URL is empty';
-    }
-
-    static $ch = null;
-    if ($ch === null) {
-        $ch = curl_init();
-        if ($ch === false) {
-            throw new RuntimeException('Failed to initialize cURL');
-        }
-        curl_setopt_array($ch, [
-            CURLOPT_CONNECTTIMEOUT => 3,
-            CURLOPT_HEADER => true,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 3,
-            CURLOPT_USERAGENT => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-        ]);
-    }
-
-    curl_setopt_array($ch, [
-        CURLOPT_NOBODY => $nobody,
-        CURLOPT_URL => $url,
-    ]);
-
-    if (curl_exec($ch) === false) {
-        $err_no = curl_errno($ch);
-        $error = curl_error($ch);
-
-        return "ERROR {$err_no}: {$error}";
-    }
-
-    return (string) curl_getinfo($ch, CURLINFO_HTTP_CODE);
-}
-
-/**
- * Checks if a filename has a supported image extension.
- *
- * The filename parameter specifies the filename to check.
- */
-function has_supported_image_extension(string $filename): bool
-{
-    $supported_extensions = ['.gif', '.jpg', '.png'];
-    $extension = pathinfo($filename, PATHINFO_EXTENSION);
-
-    return in_array($extension, $supported_extensions, strict: true);
 }

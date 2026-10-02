@@ -1,15 +1,12 @@
 7zip-standalone
 curl
 default-jre-headless
-gifsicle
-git-core
+git
 mdbtools
 nodejs
 npm
 php-cli
-php-curl
 php-gd
-php-intl
 php-mbstring
 php-mysql
 php-xml
@@ -17,4 +14,3 @@ php-zip
 shellcheck
 shfmt
 tidy
-webp

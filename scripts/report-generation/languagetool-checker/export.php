@@ -10,11 +10,27 @@
  * source code in the file LICENSE.
  */
 
+use Pdo\Mysql;
+
 require __DIR__ . '/../../../src/common.php';
 
-$paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
-foreach ($paremiotipus as $p) {
-    $p_display = get_paremiotipus_display($p, escape_html: false);
+$database = get_db();
+$database->setAttribute(Mysql::ATTR_USE_BUFFERED_QUERY, false);
+
+$statement = db_query('SELECT
+    COALESCE(NULLIF(`display`.`Display`, \'\'), `paremiotipus`.`PAREMIOTIPUS`) AS `display`,
+    `paremiotipus`.`PAREMIOTIPUS` AS `value`
+FROM
+    (SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`) `paremiotipus`
+LEFT JOIN
+    `paremiotipus_display` `display`
+ON
+    `display`.`Paremiotipus` = `paremiotipus`.`PAREMIOTIPUS`
+ORDER BY
+    `paremiotipus`.`PAREMIOTIPUS`');
+
+while (($p_display = $statement->fetchColumn()) !== false) {
+    assert(is_string($p_display));
 
     // End the sentence with a dot.
     if (
@@ -31,3 +47,5 @@ foreach ($paremiotipus as $p) {
 
     fwrite(STDOUT, $p_display . "\n");
 }
+
+$statement->closeCursor();

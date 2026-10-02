@@ -48,7 +48,7 @@ The optimization pipeline resizes, quantizes, and compresses images, generating 
 Standard tooling (PHPStan, Psalm, ESLint, Prettier, Stylelint, ShellCheck) enforces code quality.
 
 - **PHPStan custom rules** - Project-specific quality checks.
-- **Data integrity reports** - Custom PHP scripts in `scripts/report-generation/` validate links, detect duplicates, and check asset integrity. These run offline via `npm run generate:reports`.
+- **Data integrity reports** - PHP exports database data to JSON, then Node.js scripts in `scripts/report-generation/` validate links, find duplicates, detect Unicode confusables, and check asset integrity. These run offline via `npm run generate:reports`.
 
 ### Code Style Conventions
 
@@ -69,7 +69,7 @@ Avoid unnecessary frameworks and abstractions. Use procedural code when appropri
 
 Prefer npm/Composer packages over system binaries. `composer.phar` is committed to the repository to ensure reproducibility.
 
-Current system dependencies include tools for image optimization (gifsicle, webp), linting (shellcheck, shfmt, tidy), and data processing (mdbtools).
+Current system dependencies include tools for linting (shellcheck, shfmt, tidy) and data processing (mdbtools).
 
 ### Dependency Versioning
 
@@ -132,7 +132,7 @@ The slowest pages render in under 100ms.
 
 ## Offline Reports
 
-Expensive data quality reports run via `npm run generate:reports`.
+Data quality reports run via `npm run generate:reports`. A PHP export provides database rows to Node.js report generators; Unicode confusable detection uses UTS #39 data from `@moderation-api/unicode-spoofing`.
 
 - **Link validation** for books and sources.
 - **Duplicate detection** using Levenshtein distance.

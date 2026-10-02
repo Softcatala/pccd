@@ -8,7 +8,6 @@
  * source code in the file LICENSE.
  */
 
-// eslint-disable-next-line n/no-extraneous-import -- chrome-launcher is a transitive dependency from lighthouse
 import * as chromeLauncher from "chrome-launcher";
 import lighthouse from "lighthouse";
 
@@ -97,27 +96,26 @@ const auditUrl = async (url, targetBaseUrl, device = "desktop") => {
     for (const category of Object.values(lhr.categories)) {
       const score = Math.floor(category.score * PERFECT_SCORE);
 
-      if (score !== PERFECT_SCORE) {
-        // Check for acceptable, non-perfect scores.
-        // Performance can fluctuate.
-        if (
-          (category.id === "performance" && url === `${targetBaseUrl}/fonts`) ||
-          (category.id === "performance" && score > PERFORMANCE_SCORE_ACCEPTABLE) ||
-          (score === SEO_SCORE_MISSING_META &&
-            category.id === "seo" &&
-            (url.startsWith(`${targetBaseUrl}/p/`) || url.startsWith(`${targetBaseUrl}/obra/`))) ||
-          (device === "small-mobile" &&
-            score === ACCESSIBILITY_SCORE_MINOR &&
-            category.id === "accessibility" &&
-            url === `${targetBaseUrl}/`)
-        ) {
-          // Ignore acceptable score.
-          continue;
-        }
-
-        isAllScoresPerfect = false;
-        console.error(`[${device.toUpperCase()}] ${url}\n   Category '${category.title}' failed with score ${score}`);
+      // Skip perfect scores and acceptable non-perfect scores.
+      // Performance can fluctuate.
+      if (
+        score === PERFECT_SCORE ||
+        (category.id === "performance" && url === `${targetBaseUrl}/fonts`) ||
+        (category.id === "performance" && score > PERFORMANCE_SCORE_ACCEPTABLE) ||
+        (score === SEO_SCORE_MISSING_META &&
+          category.id === "seo" &&
+          (url.startsWith(`${targetBaseUrl}/p/`) || url.startsWith(`${targetBaseUrl}/obra/`))) ||
+        (device === "small-mobile" &&
+          score === ACCESSIBILITY_SCORE_MINOR &&
+          category.id === "accessibility" &&
+          url === `${targetBaseUrl}/`)
+      ) {
+        // Ignore acceptable score.
+        continue;
       }
+
+      isAllScoresPerfect = false;
+      console.error(`[${device.toUpperCase()}] ${url}\n   Category '${category.title}' failed with score ${score}`);
     }
 
     if (isAllScoresPerfect) {

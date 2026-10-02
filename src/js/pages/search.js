@@ -57,14 +57,16 @@ for (const { key, defaultChecked } of checkboxDefaults) {
   });
 
   // Remember the search options, only in the homepage.
-  if (isHomepage) {
-    checkbox.checked = defaultChecked;
-    const checkboxStoredValue = localStorage.getItem(key);
-    if (checkboxStoredValue === MANUALLY_DISABLED) {
-      checkbox.checked = false;
-    } else if (checkboxStoredValue === MANUALLY_ENABLED) {
-      checkbox.checked = true;
-    }
+  if (!isHomepage) {
+    continue;
+  }
+
+  checkbox.checked = defaultChecked;
+  const checkboxStoredValue = localStorage.getItem(key);
+  if (checkboxStoredValue === MANUALLY_DISABLED) {
+    checkbox.checked = false;
+  } else if (checkboxStoredValue === MANUALLY_ENABLED) {
+    checkbox.checked = true;
   }
 }
 
