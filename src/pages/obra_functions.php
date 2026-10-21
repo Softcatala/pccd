@@ -27,7 +27,6 @@ function get_obra(string $obra_title): false|Obra
         `Data_compra`,
         `Edició`,
         `Editorial`,
-        `HEIGHT`,
         `ISBN`,
         `Identificador`,
         `Idioma`,
@@ -42,8 +41,7 @@ function get_obra(string $obra_title): false|Obra
         `Temàtica`,
         `Títol`,
         `URL`,
-        `Varietat_dialectal`,
-        `WIDTH`
+        `Varietat_dialectal`
     FROM
         `00_FONTS`
     WHERE

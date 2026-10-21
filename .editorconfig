@@ -23,6 +23,9 @@ simplify = true
 space_redirects = true
 switch_case_indent = true
 
+[Caddyfile]
+indent_style = tab
+
 # shfmt reads ignore = true as a custom EditorConfig extension to skip directories
 [node_modules/**]
 ignore = true

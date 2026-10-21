@@ -36,12 +36,6 @@ if (table_exists('pccd_is_installed')) {
     exit;
 }
 
-// TODO: DRY.
-echo date('[H:i:s]') . ' standardizing quotes...' . "\n";
-get_db()->exec("UPDATE `00_PAREMIOTIPUS` SET `MODISME` = REPLACE(REPLACE(REPLACE(REPLACE(`MODISME`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\''), `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
-get_db()->exec("UPDATE `00_IMATGES` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
-get_db()->exec("UPDATE `RML` SET `PAREMIOTIPUS` = REPLACE(REPLACE(REPLACE(REPLACE(`PAREMIOTIPUS`, '´', '\\''), '`', '\\''), '’', '\\''), '‘', '\\'')");
-
 echo date('[H:i:s]') . ' preprocessing columns for improved sorting and display...' . "\n";
 $insert_display_stmt = db_prepare('INSERT IGNORE INTO `paremiotipus_display`(`Paremiotipus`, `Display`) VALUES(?, ?)');
 $display_values_stmt = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`');
@@ -111,15 +105,8 @@ $popular_paremiotipus_stmt = db_query('SELECT
     LIMIT 10000');
 while (($result = $popular_paremiotipus_stmt->fetch(PDO::FETCH_NUM)) !== false) {
     [$paremiotipus, $popularity] = $result;
-    assert(is_string($paremiotipus));
-    assert(is_string($popularity));
     $insert_stmt->execute([$paremiotipus, $popularity]);
 }
-
-echo date('[H:i:s]') . ' storing image dimensions...' . "\n";
-store_image_dimensions('00_IMATGES', 'Identificador', 'docroot/img/imatges');
-store_image_dimensions('00_FONTS', 'Imatge', 'docroot/img/obres');
-store_image_dimensions('00_OBRESVPR', 'Imatge', 'docroot/img/obres');
 
 echo date('[H:i:s]') . ' database installation has finished!' . "\n";
 get_db()->exec('CREATE TABLE `pccd_is_installed`(`id` int)');

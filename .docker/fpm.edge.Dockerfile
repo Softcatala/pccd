@@ -1,4 +1,3 @@
-# Unpinned version intentional - this image is for testing latest PHP
 FROM alpine:edge
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Alpine edge-based image with PHP-FPM, for testing latest PHP."
@@ -17,7 +16,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >>/etc/apk/reposito
     php${PHP_VERSION}-session \
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
-COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/performance.ini
+COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 COPY src ./src

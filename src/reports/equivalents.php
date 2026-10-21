@@ -37,7 +37,6 @@ function test_equivalents(): void
     while (($result = $stmt->fetch(PDO::FETCH_ASSOC)) !== false) {
         assert(is_string($result['MODISME']));
         assert(is_string($result['EQUIVALENT']));
-        assert(is_string($result['IDIOMA']));
         if ($result['IDIOMA'] === '' && $result['MODISME'] !== '' && $result['EQUIVALENT'] !== '') {
             $output .= $result['MODISME'] . ' (equivalent ' . $result['EQUIVALENT'] . ")\n";
         }

@@ -19,7 +19,7 @@ services:
       - "./:/srv/app"
 
   mysql:
-    image: mariadb:12.3.3-noble
+    image: mariadb:12.3-noble
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: true
       MYSQL_DATABASE: pccd

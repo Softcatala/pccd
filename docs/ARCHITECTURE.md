@@ -48,7 +48,7 @@ The optimization pipeline resizes, quantizes, and compresses images, generating 
 Standard tooling (PHPStan, Psalm, ESLint, Prettier, Stylelint, ShellCheck) enforces code quality.
 
 - **PHPStan custom rules** - Project-specific quality checks.
-- **Data integrity reports** - PHP exports database data to JSON, then Node.js scripts in `scripts/report-generation/` validate links, find duplicates, detect Unicode confusables, and check asset integrity. These run offline via `npm run generate:reports`.
+- **Data integrity reports** - PHP exports database data to JSON, then Node.js scripts in `scripts/report-generation/` validate links, find duplicates, detect Unicode confusables and Catalan typography issues (e.g. ela geminada), and check asset integrity. These run offline via `npm run generate:reports`.
 
 ### Code Style Conventions
 
@@ -132,7 +132,7 @@ The slowest pages render in under 100ms.
 
 ## Offline Reports
 
-Data quality reports run via `npm run generate:reports`. A PHP export provides database rows to Node.js report generators; Unicode confusable detection uses UTS #39 data from `@moderation-api/unicode-spoofing`.
+Data quality reports run via `npm run generate:reports`. A PHP export provides database rows to Node.js report generators; Unicode confusable detection uses UTS #39 data from `@moderation-api/unicode-spoofing`, and Catalan typography detection (ela geminada, middle dot and its variants) builds on that skeleton.
 
 - **Link validation** for books and sources.
 - **Duplicate detection** using Levenshtein distance.

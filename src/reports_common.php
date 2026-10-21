@@ -18,6 +18,7 @@
 function get_test_functions(): array
 {
     return [
+        'cometes' => ['test_cometes'],
         'compostos' => ['test_paremies_separar'],
         'dates' => [
             'test_fonts_any_erroni',
@@ -39,6 +40,7 @@ function get_test_functions(): array
             'test_imatges_buides',
             'test_imatges_duplicades',
             'test_imatges_extensions',
+            'test_imatges_mida',
             'test_imatges_minuscules',
             'test_imatges_no_existents',
             'test_imatges_no_reconegudes',
@@ -61,6 +63,7 @@ function get_test_functions(): array
         'multilingue' => ['test_multilingue'],
         'ortografia' => ['test_ortografia'],
         'puntuacio' => [
+            'test_paremiotipus_caracters_html',
             'test_paremiotipus_caracters_inusuals',
             'test_paremiotipus_final',
             'test_puntuacio',

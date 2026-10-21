@@ -33,8 +33,6 @@ $valid_endings = ['.', '…', '!', '?', ',', ';', ':'];
 
 $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
 foreach ($paremiotipus as $p) {
-    assert(is_string($p));
-
     // Skip sentences that are too short or too long.
     $number_of_words = mb_substr_count($p, ' ') + 1;
     if ($number_of_words < CV_MIN_WORDS) {
@@ -44,7 +42,7 @@ foreach ($paremiotipus as $p) {
         continue;
     }
 
-    $p_display = get_paremiotipus_display($p, escape_html: false);
+    $p_display = get_paremiotipus_display($p);
 
     // Add a period if the sentence doesn't end with punctuation.
     $needs_period = true;

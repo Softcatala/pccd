@@ -25,9 +25,6 @@ const TABLES = ["00_PAREMIOTIPUS", "00_FONTS", "00_IMATGES", "00_EDITORIA", "00_
 // Tables dropped before import (source + app-managed).
 const DROP_TABLES = [...TABLES, "common_paremiotipus", "paremiotipus_display", "pccd_is_installed"];
 
-// Tables that get WIDTH/HEIGHT columns after data load.
-const IMAGE_DIMENSION_TABLES = ["00_FONTS", "00_IMATGES", "00_OBRESVPR"];
-
 /**
  * Prints CLI usage.
  */
@@ -134,11 +131,6 @@ const convertDatabase = async (databaseFile) => {
 
   for (const table of TABLES) {
     appendTableData(table);
-  }
-
-  for (const table of IMAGE_DIMENSION_TABLES) {
-    appendSql(`ALTER TABLE ${table} ADD COLUMN WIDTH int NOT NULL DEFAULT 0;`);
-    appendSql(`ALTER TABLE ${table} ADD COLUMN HEIGHT int NOT NULL DEFAULT 0;`);
   }
 
   // Indexes for search, informant counts, and obra references.

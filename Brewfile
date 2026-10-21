@@ -1,7 +1,4 @@
 # Homebrew dev packages
-brew "coreutils"
-brew "curl"
-brew "git"
 brew "hadolint"
 brew "mdbtools"
 brew "nodejs"

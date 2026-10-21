@@ -58,7 +58,6 @@ function get_shared_modisme_groups(): Generator
     $group = [];
     while (($row = $rows->fetch(PDO::FETCH_NUM)) !== false) {
         [$modisme_key, $paremiotipus_key, $paremiotipus_value, $modisme] = $row;
-        assert(is_string($modisme_key));
         assert(is_string($paremiotipus_key));
         assert(is_string($paremiotipus_value));
         assert(is_string($modisme));
@@ -96,8 +95,8 @@ function test_paremiotipus_modismes_diferents(): void
                             continue;
                         }
                         $seen_pairs[$pair_key] = true;
-                        $pair_output = get_paremiotipus_display($paremiotipus_a, escape_html: false) . ' (modisme: ' . $modisme_a . ")\n"
-                            . get_paremiotipus_display($paremiotipus_b, escape_html: false) . ' (modisme: ' . $modisme_b . ")\n\n";
+                        $pair_output = get_paremiotipus_display($paremiotipus_a) . ' (modisme: ' . $modisme_a . ")\n"
+                            . get_paremiotipus_display($paremiotipus_b) . ' (modisme: ' . $modisme_b . ")\n\n";
                         if ($modisme_a === $modisme_b) {
                             $output .= $pair_output;
                         } else {
@@ -144,8 +143,8 @@ function test_paremiotipus_repetits(): void
                     && strlen($normalized) > SIMILAR_TEXT_MIN_LENGTH
                 )
             ) {
-                $output .= get_paremiotipus_display($prev, escape_html: false) . "\n";
-                $output .= get_paremiotipus_display($m, escape_html: false) . "\n\n";
+                $output .= get_paremiotipus_display($prev) . "\n";
+                $output .= get_paremiotipus_display($m) . "\n\n";
             }
         }
         $prev = $m;

@@ -20,7 +20,7 @@ $page = new PageRenderer();
     <title><?php echo $page->getTitle() . ' | PCCD'; ?></title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="<?php echo COLOR_PRIMARY; ?>">
-    <meta property="og:title" content="<?php echo $page->getTitle(); ?>">
+    <meta property="og:title" content="<?php echo str_replace('"', '&quot;', $page->getTitle()); ?>">
     <meta property="og:site_name" content="Paremiologia catalana comparada digital">
     <?php echo $page->renderPageMetaTags(); ?>
     <link rel="icon" href="/favicon.ico">

@@ -1,15 +1,16 @@
-import { skeleton } from "@moderation-api/unicode-spoofing";
-import { lines, readReportData, writeReport } from "./report-helpers.js";
+import { groupConfusables, lines, readReportData, writeReport } from "./report-helpers.js";
 
 const modismes = await readReportData("report_modismes.json");
 const groupedModismes = Map.groupBy(modismes, ({ PAREMIOTIPUS }) => PAREMIOTIPUS);
 const confusables = [];
 
-for (const group of groupedModismes.values()) {
-  for (let index = 1; index < group.length; index += 1) {
-    if (group[index - 1].MODISME !== "" && skeleton(group[index - 1].MODISME) === skeleton(group[index].MODISME)) {
-      confusables.push(group[index - 1].MODISME, group[index].MODISME, "");
+for (const paremiotipusGroup of groupedModismes.values()) {
+  const candidates = paremiotipusGroup.filter(({ MODISME }) => MODISME !== "");
+  for (const group of groupConfusables(candidates, ({ MODISME }) => MODISME)) {
+    for (const { MODISME } of group) {
+      confusables.push(MODISME);
     }
+    confusables.push("");
   }
 }
 

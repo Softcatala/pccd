@@ -119,7 +119,6 @@ function stats_editorials(): void
     echo "<table style='width:1200px;'>";
     echo "<tr><th>Editorial</th><th>Nombre d'obres</th></tr>";
     foreach ($records as $editorial => $obres) {
-        assert(is_string($editorial));
         echo '<tr>';
         echo '<td>' . htmlspecialchars($editorial) . '</td>';
         echo '<td>' . format_nombre($obres) . '</td>';

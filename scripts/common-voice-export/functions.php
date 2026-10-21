@@ -29,5 +29,8 @@ function remove_parentheses(string $input_string): string
     // Handle specific examples such as "A (o d')aquesta part".
     $string = str_replace(')a', ') a', $input_string);
 
-    return preg_replace('/\s*\([^)]*\)/', '', $string) ?? '';
+    $string = preg_replace('/\s*\([^)]*\)/', '', $string);
+    assert(is_string($string));
+
+    return $string;
 }

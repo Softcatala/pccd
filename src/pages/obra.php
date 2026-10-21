@@ -49,8 +49,6 @@ if ($obra->Imatge !== '') {
         file_name: $obra->Imatge,
         path: '/img/obres/',
         alt_text: $obra->isBook() ? 'Coberta' : $obra->Títol,
-        width: $obra->WIDTH,
-        height: $obra->HEIGHT,
         preload: true,
         preload_media: BREAKPOINT_MD
     );

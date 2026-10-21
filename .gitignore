@@ -27,6 +27,7 @@ vendor/
 *.report.html
 .php-cs-fixer.cache
 .phpunit.result.cache
+.ryl_cache/
 /test-results/
 /tmp/*
 !/tmp/.keep

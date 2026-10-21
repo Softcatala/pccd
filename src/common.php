@@ -42,6 +42,12 @@ const CACHE_KEY_PREFIX = 'pccd:';
 const DEFAULT_TRIM_CHARS = " \f\n\r\t\v\x00";
 
 /**
+ * Default cache headers for static files.
+ * Used in og_image.php.
+ */
+const STATIC_ASSETS_CACHE_HEADER = 'public, max-age=31536000, immutable';
+
+/**
  * Handles rendering of pages, with their meta tags and side blocks.
  */
 final class PageRenderer
@@ -448,10 +454,6 @@ final readonly class Obra
 
     public string $Temàtica;
 
-    public string $WIDTH;
-
-    public string $HEIGHT;
-
     /**
      * Returns whether the work may be a printed book.
      */
@@ -472,10 +474,6 @@ final readonly class Book
 
     private string $URL;
 
-    private string $WIDTH;
-
-    private string $HEIGHT;
-
     /**
      * Renders the book as HTML, optionally with lazy loading and preload options.
      *
@@ -493,8 +491,6 @@ final readonly class Book
             file_name: $this->Imatge,
             path: '/img/obres/',
             alt_text: 'Coberta ' . $this->Títol,
-            width: $this->WIDTH,
-            height: $this->HEIGHT,
             lazy_loading: $lazy_loading,
             preload: $preload,
             preload_media: $preload_media
@@ -676,8 +672,9 @@ function get_db(): PDO
 function db_prepare(string $query): PDOStatement
 {
     $stmt = get_db()->prepare($query);
-
-    assert($stmt instanceof PDOStatement);
+    if ($stmt === false) {
+        return_500_and_exit();
+    }
 
     return $stmt;
 }
@@ -688,8 +685,9 @@ function db_prepare(string $query): PDOStatement
 function db_query(string $query): PDOStatement
 {
     $stmt = get_db()->query($query);
-
-    assert($stmt instanceof PDOStatement);
+    if ($stmt === false) {
+        return_500_and_exit();
+    }
 
     return $stmt;
 }
@@ -758,10 +756,9 @@ function get_search_page_number(): int
  * Returns the paremiotipus name for display.
  *
  * The paremiotipus parameter specifies the identifier.
- * Set escape_html to false to disable HTML escaping.
  * Set use_fallback_string to false to prevent using the input as fallback if not found.
  */
-function get_paremiotipus_display(string $paremiotipus, bool $escape_html = true, bool $use_fallback_string = true): string
+function get_paremiotipus_display(string $paremiotipus, bool $use_fallback_string = true): string
 {
     static $stmt = null;
     if ($stmt === null) {
@@ -771,22 +768,20 @@ function get_paremiotipus_display(string $paremiotipus, bool $escape_html = true
     $display = cache_get("display:{$paremiotipus}", static function () use ($paremiotipus, $stmt): string {
         $stmt->execute([':paremiotipus' => $paremiotipus]);
         $value = $stmt->fetchColumn();
-        if ($value === false) {
+        if (!is_string($value)) {
             error_log("Error: paremiotipus '{$paremiotipus}' not found in paremiotipus_display table");
 
             return '';
         }
 
-        assert(is_string($value));
-
         return $value;
     });
 
     if ($display === '' && $use_fallback_string) {
-        $display = $paremiotipus;
+        return $paremiotipus;
     }
 
-    return $escape_html ? htmlspecialchars($display) : $display;
+    return $display;
 }
 
 /**
@@ -1006,15 +1001,15 @@ function get_idioma_iso_code_from_name(string $input_name): string
  */
 function normalize_search(string $input_string, ?SearchMode $search_mode = null): string
 {
-    // Remove useless characters in search that may affect syntax, or that are not useful.
+    // Remove characters that may affect syntax, or that are not useful.
     $string = str_replace(
-        ['"', '+', '.', '%', '--', '_', '(', ')', '[', ']', '{', '}', '^', '>', '<', '~', '@', '$', '|', '/', '\\'],
+        ['"', '“', '”', '+', '.', '%', '--', '_', '(', ')', '[', ']', '{', '}', '^', '>', '<', '~', '@', '$', '|', '/', '\\'],
         '',
         $input_string
     );
 
-    $string = str_replace('’', "'", $string);
-
+    // Standarize single quotes and spacing.
+    $string = str_replace(['´', '`', '’', '‘'], "'", $string);
     $string = preg_replace('/\s+/', ' ', $string);
     assert(is_string($string));
 
@@ -1032,9 +1027,9 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
         // Remove loose `-` operator.
         $string = str_replace(' - ', ' ', $string);
 
-        // Nice to have: remove extra useless characters (not `-`).
+        // Remove extra characters (but keep `-`).
         $string = str_replace(
-            ['“', '”', '«', '»', '…', ',', ':', ';', '!', '¡', '¿', '–', '—', '―', '─'],
+            ['«', '»', '…', ',', ':', ';', '!', '¡', '¿', '–', '—', '―', '─'],
             '',
             $string
         );
@@ -1059,10 +1054,11 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
 
             if (str_contains($word, '-')) {
                 // See https://stackoverflow.com/a/5192800/1391963.
-                $string .= '"' . $word . '" ';
+                $string .= '"' . $word . '"';
             } else {
-                $string .= "{$word} ";
+                $string .= $word;
             }
+            $string .= ' ';
         }
     }
 
@@ -1092,14 +1088,38 @@ function get_fonts_paremiotipus(): array
 }
 
 /**
+ * Returns the width and height of an image in docroot, or [0, 0] if undetectable.
+ *
+ * The file_name parameter specifies the file name of the image file.
+ * The path parameter specifies the path to the image file, starting with a slash.
+ *
+ * @return array{int, int} Width and height, or [0, 0] when missing or unreadable.
+ */
+function get_image_dimensions(string $file_name, string $path): array
+{
+    if ($file_name === '' || str_contains($file_name, '/') || str_contains($file_name, '\\')) {
+        return [0, 0];
+    }
+
+    return cache_get("imagesize:{$path}{$file_name}", static function () use ($file_name, $path): array {
+        $size = @getimagesize(__DIR__ . '/../docroot' . $path . $file_name);
+        if ($size === false) {
+            return [0, 0];
+        }
+
+        [$width, $height] = $size;
+
+        return [$width, $height];
+    });
+}
+
+/**
  * Generates a <picture> tag for a GIF/JPEG/PNG image, adding AVIF/WebP alternatives.
  *
  * The file_name parameter specifies the file name of the image file.
  * The path parameter specifies the path to the image file, starting with a slash.
  * The alt_text parameter specifies the alternative text for the image.
  * Set escape_html to false to disable escaping the alternative text.
- * The width parameter specifies the width attribute for the <img> tag ('0' means not set).
- * The height parameter specifies the height attribute for the <img> tag ('0' means not set).
  * Set lazy_loading to false to disable lazy loading.
  * Set preload to true to add a preload HTTP header for the image.
  * The preload_media parameter adds the media rule to the preloaded image.
@@ -1109,8 +1129,6 @@ function render_image_tags(
     string $path,
     string $alt_text = '',
     bool $escape_html = true,
-    string $width = '0',
-    string $height = '0',
     bool $lazy_loading = true,
     bool $preload = false,
     string $preload_media = ''
@@ -1139,8 +1157,9 @@ function render_image_tags(
     if ($lazy_loading) {
         $image_tags .= ' loading="lazy"';
     }
-    if ($width !== '0' && $height !== '0') {
-        $image_tags .= ' width="' . $width . '" height="' . $height . '"';
+    $dimensions = get_image_dimensions($file_name, $path);
+    if ($dimensions[0] > 0 && $dimensions[1] > 0) {
+        $image_tags .= ' width="' . $dimensions[0] . '" height="' . $dimensions[1] . '"';
     }
     $image_tags .= ' src="' . $file_url . '">';
     $image_tags .= '</picture>';
@@ -1290,7 +1309,7 @@ function get_random_top_paremiotipus(int $max = 10000): string
 function get_books(): array
 {
     return cache_get('list:llibres', static function (): array {
-        $stmt = db_query('SELECT `Imatge`, `Títol`, `URL`, `WIDTH`, `HEIGHT` FROM `00_OBRESVPR`');
+        $stmt = db_query('SELECT `Imatge`, `Títol`, `URL` FROM `00_OBRESVPR`');
 
         /** @var non-empty-list<Book> */
         return $stmt->fetchAll(PDO::FETCH_CLASS, Book::class);

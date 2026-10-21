@@ -212,10 +212,6 @@ final readonly class ParemiotipusImage
     public string $DIARI;
 
     public string $ARTICLE;
-
-    public string $WIDTH;
-
-    public string $HEIGHT;
 }
 
 /**
@@ -320,9 +316,7 @@ function get_paremiotipus_images(string $paremiotipus_id): array
         `AUTOR`,
         `ANY`,
         `DIARI`,
-        `ARTICLE`,
-        `WIDTH`,
-        `HEIGHT`
+        `ARTICLE`
     FROM
         `00_IMATGES`
     WHERE
@@ -468,9 +462,6 @@ function render_paremiotipus_images_and_set_og_tags(string $paremiotipus_id, str
             file_name: $image->Identificador,
             path: '/img/imatges/',
             alt_text: $alt_text,
-            escape_html: false,
-            width: $image->WIDTH,
-            height: $image->HEIGHT,
             preload: $is_first_processed_image,
             preload_media: BREAKPOINT_LG
         );

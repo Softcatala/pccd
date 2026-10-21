@@ -1,4 +1,3 @@
-# Unpinned version intentional - this image is rarely used
 FROM debian:stable-slim
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Debian-based image for building a new release 100% inside Docker (not usually tested)."

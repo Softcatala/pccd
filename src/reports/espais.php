@@ -15,10 +15,10 @@ function test_espais(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus que comencen o acaben amb espai en blanc</h3>';
-    $modismes = db_query('SELECT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE CHAR_LENGTH(`PAREMIOTIPUS`) != CHAR_LENGTH(TRIM(`PAREMIOTIPUS`))')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` WHERE CHAR_LENGTH(`Display`) != CHAR_LENGTH(TRIM(`Display`))')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -27,10 +27,10 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus que contenen 2 espais seguits</h3>';
-    $modismes = db_query("SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `PAREMIOTIPUS` LIKE '%  %'")->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query("SELECT `Display` FROM `paremiotipus_display` WHERE `Display` LIKE '%  %'")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -39,10 +39,10 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus que contenen salts de línia</h3>';
-    $modismes = db_query("SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `PAREMIOTIPUS` LIKE '%\\n%' OR `PAREMIOTIPUS` LIKE '%\\r%'")->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query("SELECT `Display` FROM `paremiotipus_display` WHERE `Display` LIKE '%\\n%' OR `Display` LIKE '%\\r%'")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= trim(get_paremiotipus_display($m, escape_html: false)) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= trim($p) . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -51,12 +51,11 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus que comencen o acaben amb caràcters invisibles</h3>';
-    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        assert(is_string($m));
-        if (trim($m) !== mb_trim($m)) {
-            $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        if (trim($p) !== mb_trim($p)) {
+            $output .= $p . "\n";
         }
     }
     if ($output === '') {
@@ -66,10 +65,10 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus que contenen el caràcter tabulador</h3>';
-    $modismes = db_query("SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `PAREMIOTIPUS` LIKE '%\\t%'")->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query("SELECT `Display` FROM `paremiotipus_display` WHERE `Display` LIKE '%\\t%'")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -78,10 +77,10 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus amb espais i parèntesis/claudàtors mal posats</h3>';
-    $modismes = db_query("SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE `PAREMIOTIPUS` LIKE '% )%' OR `PAREMIOTIPUS` LIKE '%( %' OR `PAREMIOTIPUS` LIKE '% ]%' OR `PAREMIOTIPUS` LIKE '%[ %'")->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query("SELECT `Display` FROM `paremiotipus_display` WHERE `Display` LIKE '% )%' OR `Display` LIKE '%( %' OR `Display` LIKE '% ]%' OR `Display` LIKE '%[ %'")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -90,12 +89,11 @@ function test_espais(): void
     }
 
     echo '<h3>Paremiotipus amb caràcters invisibles no segurs</h3>';
-    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        assert(is_string($m));
-        if (str_contains($m, "\u{200E}") || str_contains($m, "\u{00AD}")) {
-            $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        if (str_contains($p, "\u{200E}") || str_contains($p, "\u{00AD}")) {
+            $output .= $p . "\n";
         }
     }
     if ($output === '') {
@@ -152,7 +150,6 @@ function test_espais(): void
     $modismes = db_query('SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
     foreach ($modismes as $m) {
-        assert(is_string($m));
         if (trim($m) !== mb_trim($m)) {
             $output .= $m . "\n";
         }
@@ -191,7 +188,6 @@ function test_espais(): void
     $modismes = db_query('SELECT `MODISME` FROM `00_PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
     foreach ($modismes as $m) {
-        assert(is_string($m));
         if (str_contains($m, "\u{200E}") || str_contains($m, "\u{00AD}")) {
             $output .= $m . "\n";
         }

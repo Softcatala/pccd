@@ -1,10 +1,10 @@
-ARG PHP_IMAGE_TAG=8.5.11-apache-trixie
+ARG PHP_IMAGE_TAG=8.5-apache-trixie
 
 FROM php:${PHP_IMAGE_TAG}
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="Debian-based image with Apache and mod_php. Used for development."
 
-ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.12.0
+ARG DOCKER_PHP_EXTENSION_INSTALLER_VERSION=2.12.3
 ARG profiler
 
 WORKDIR /srv/app
@@ -21,6 +21,7 @@ RUN a2enmod headers \
 
 # Copy configuration files
 COPY .docker/apache/vhost.conf /etc/apache2/sites-available/000-default.conf
+COPY .docker/php/performance.ini /usr/local/etc/php/conf.d/
 
 # Project files are mounted via volume in docker-compose.yml
 

@@ -10,6 +10,8 @@
  * source code in the file LICENSE.
  */
 
+const IMAGE_WIDTH_MIN = 350;
+
 function test_imatges_paremiotipus(): void
 {
     require_once __DIR__ . '/../common.php';
@@ -48,17 +50,44 @@ function test_imatges_extensions(): void
     }
 }
 
-function test_imatges_format(): void
+function test_imatges_mida(): void
 {
-    echo '<h3>Imatges massa petites (menys de 350 píxels d\'amplada)</h3>';
+    require_once __DIR__ . '/../common.php';
+
+    echo '<h3>Imatges massa petites (menys de ' . IMAGE_WIDTH_MIN . ' píxels d\'amplada)</h3>';
     echo '<i>Si fos possible, haurien de ser de 500 px o més.</i>';
-    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_petites.txt'));
+    $output = '';
+    $fonts = db_query('SELECT `Imatge` FROM `00_FONTS`')->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($fonts as $filename) {
+        if ($filename === '') {
+            continue;
+        }
+
+        [$width] = get_image_dimensions($filename, '/img/obres/');
+        if ($width > 0 && $width < IMAGE_WIDTH_MIN) {
+            $output .= "cobertes/{$filename} ({$width} px)\n";
+        }
+    }
+    $identifiers = db_query('SELECT `Identificador` FROM `00_IMATGES`')->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($identifiers as $identifier) {
+        if ($identifier === '') {
+            continue;
+        }
+
+        [$width] = get_image_dimensions($identifier, '/img/imatges/');
+        if ($width > 0 && $width < IMAGE_WIDTH_MIN) {
+            $output .= "paremies/{$identifier} ({$width} px)\n";
+        }
+    }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
         echo "<details><pre>{$output}</pre></details>";
     }
+}
 
+function test_imatges_format(): void
+{
     echo '<h3>Imatges amb possibles problemes de format</h3>';
     $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_imatges_format.txt'));
     if ($output === '') {
@@ -81,19 +110,17 @@ function test_imatges_no_reconegudes(): void
     }
 
     echo "<h3>Imatges que no s'ha pogut detectar la seva mida</h3>";
-    $stmt = db_query('SELECT `Imatge`, `WIDTH`, `HEIGHT` FROM `00_FONTS`');
-    $imatges = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $fonts = db_query('SELECT `Imatge` FROM `00_FONTS`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($imatges as $i) {
-        if ($i['Imatge'] !== '' && ($i['WIDTH'] === '0' || $i['HEIGHT'] === '0')) {
-            $output .= 'cobertes/' . $i['Imatge'] . "\n";
+    foreach ($fonts as $filename) {
+        if ($filename !== '' && get_image_dimensions($filename, '/img/obres/') === [0, 0]) {
+            $output .= 'cobertes/' . $filename . "\n";
         }
     }
-    $stmt = db_query('SELECT `Identificador`, `WIDTH`, `HEIGHT` FROM `00_IMATGES`');
-    $imatges = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    foreach ($imatges as $imatge) {
-        if ($imatge['Identificador'] !== '' && ($imatge['WIDTH'] === '0' || $imatge['HEIGHT'] === '0')) {
-            $output .= 'paremies/' . $imatge['Identificador'] . "\n";
+    $identifiers = db_query('SELECT `Identificador` FROM `00_IMATGES`')->fetchAll(PDO::FETCH_COLUMN);
+    foreach ($identifiers as $identifier) {
+        if ($identifier !== '' && get_image_dimensions($identifier, '/img/imatges/') === [0, 0]) {
+            $output .= 'paremies/' . $identifier . "\n";
         }
     }
     if ($output === '') {
@@ -111,7 +138,6 @@ function test_imatges_minuscules(): void
     $imatges = db_query('SELECT `Imatge` FROM `00_FONTS`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
     foreach ($imatges as $filename) {
-        assert(is_string($filename));
         if ($filename !== '') {
             $name = pathinfo($filename, PATHINFO_FILENAME);
             if ($name !== mb_strtoupper($name)) {
@@ -135,7 +161,6 @@ function test_imatges_sense_paremiotipus(): void
     $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $output = '';
     foreach ($results as $result) {
-        assert(is_string($result['PAREMIOTIPUS']));
         if (strlen($result['PAREMIOTIPUS']) < 2) {
             $output .= $result['Identificador'] . "\n";
         }
@@ -157,7 +182,6 @@ function test_imatges_buides(): void
     $n = 0;
     $output = '';
     foreach ($results as $r) {
-        assert(is_string($r['Imatge']));
         if (strlen($r['Imatge']) < 5) {
             $output .= $r['Identificador'] . "\n";
             $n++;
@@ -293,7 +317,6 @@ function test_imatges_repetides(): void
     $output = '';
     foreach ($images as $image) {
         // Extract number at the beginning of the string.
-        assert(is_string($image));
         $number = (int) preg_replace('/^(\d+).*/', '$1', $image);
         if ($number === $prev) {
             $output .= $prev_image . "\n";

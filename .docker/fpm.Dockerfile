@@ -25,7 +25,7 @@ RUN apk --no-cache --update add \
   php${PHP_VERSION}-session \
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
-COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/performance.ini
+COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 # Add only the specific files/directories accessed by PHP itself

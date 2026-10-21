@@ -29,39 +29,11 @@ function table_exists(string $table): bool
 }
 
 /**
- * Store image width and height in the database.
- */
-function store_image_dimensions(string $table, string $field, string $directory): void
-{
-    $update_stmt = db_prepare("UPDATE `{$table}` SET `WIDTH` = ?, `HEIGHT` = ? WHERE `{$field}` = ?");
-
-    $images = db_query("SELECT `{$field}` FROM `{$table}`")->fetchAll(PDO::FETCH_COLUMN);
-    foreach ($images as $image) {
-        $filename = __DIR__ . '/../' . $directory . '/' . $image;
-        if (!is_file($filename)) {
-            continue;
-        }
-
-        $image_size = getimagesize($filename);
-        if ($image_size === false) {
-            continue;
-        }
-
-        [$width, $height] = $image_size;
-        if ($width < 1) {
-            continue;
-        }
-
-        $update_stmt->execute([$width, $height, $image]);
-    }
-}
-
-/**
  * Returns a paremiotipus formatted for improved sorting, removing useless characters.
  */
 function clean_paremiotipus_for_sorting(string $input_paremiotipus): string
 {
     $paremiotipus = str_replace(['(', ')', '«', '»'], '', $input_paremiotipus);
 
-    return ltrim($paremiotipus, "º-–—―─'\"“”‘’….¡¿*\x95" . DEFAULT_TRIM_CHARS);
+    return ltrim($paremiotipus, "º-–—―─…'\"" . DEFAULT_TRIM_CHARS);
 }

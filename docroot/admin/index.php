@@ -152,6 +152,7 @@ if ($is_test_page) {
 <article>
 <h3>Informes</h3>
     <ul>
+        <li><a href="?test=cometes">Cometes</a></li>
         <li><a href="?test=dates">Dates</a></li>
         <li><a href="?test=editorials">Editorials</a></li>
         <li><a href="?test=equivalents">Equivalents</a></li>

@@ -5,7 +5,15 @@
 /docroot/mp3/
 /docroot/sitemap*.txt
 /images/
+/src/third_party/
 composer.lock
 LICENSE
 package-lock.json
-third_party/
+
+# Include hidden files by default, but ignore some.
+!.*
+.DS_Store
+.git/
+.php-cs-fixer.cache
+.phpunit.result.cache
+.picasa.ini

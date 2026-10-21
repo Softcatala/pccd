@@ -18,7 +18,7 @@ const OG_IMAGE_WIDTH = 1200;
 const OG_IMAGE_HEIGHT = 630;
 const OG_TEXT_MAX_LINES = 4;
 const OG_FONT_PATH = __DIR__ . '/fonts/Roboto-Regular.ttf';
-const OG_TRIM_CHARS = "[](),?!:;«»º-–—―─'\"“”‘’….¡¿*\x95" . DEFAULT_TRIM_CHARS;
+const OG_TRIM_CHARS = "-—[]()/?!.,:;…·«»'\"" . DEFAULT_TRIM_CHARS;
 
 /**
  * Renders an OG image for the provided paremiotipus slug and exits.
@@ -30,23 +30,23 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
         return_404_and_exit();
     }
 
-    $text = get_paremiotipus_display($paremiotipus, escape_html: false, use_fallback_string: false);
+    $text = get_paremiotipus_display($paremiotipus, use_fallback_string: false);
     if ($text === '') {
         return_404_and_exit();
     }
-
-    $text_length = mb_strlen($text);
 
     $image = imagecreatetruecolor(OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT);
     if ($image === false) {
         return_500_and_exit();
     }
+
     imagetruecolortopalette($image, dither: true, num_colors: 2);
 
     $bg_color = imagecolorallocate($image, 43, 87, 151);
     if ($bg_color === false) {
         return_500_and_exit();
     }
+
     imagefilledrectangle($image, 0, 0, OG_IMAGE_WIDTH, OG_IMAGE_HEIGHT, $bg_color);
 
     $text_color = imagecolorallocate($image, 255, 255, 255);
@@ -56,7 +56,6 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
 
     $wrapped_text = wordwrap($text, width: OG_TEXT_MAX_LENGTH / OG_TEXT_MAX_LINES, cut_long_words: true);
     $n_lines = substr_count($wrapped_text, "\n") + 1;
-
     if ($n_lines > OG_TEXT_MAX_LINES) {
         $lines = explode("\n", $wrapped_text);
         $wrapped_text = implode("\n", array_slice($lines, 0, OG_TEXT_MAX_LINES));
@@ -66,6 +65,7 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
 
     // Adjust font size based on text length.
     $font_size = 400;
+    $text_length = mb_strlen($text);
     if ($n_lines === 4) {
         $font_size = 70;
     } elseif ($n_lines === 3) {
@@ -126,7 +126,7 @@ function render_og_image_and_exit(string $paremiotipus_slug): void
     );
 
     header('Content-Type: image/png');
-    header('Cache-Control: public, max-age=31536000, immutable');
+    header('Cache-Control: ' . STATIC_ASSETS_CACHE_HEADER);
     imagepng($image);
 
     exit;

@@ -15,11 +15,12 @@ use Pdo\Mysql;
 /**
  * Keeps SQL collation-based deduplication and groups results by punctuation combination.
  *
- * @param 'MODISME'|'PAREMIOTIPUS' $column
+ * @param 'Display'|'MODISME'|'PAREMIOTIPUS'       $column
+ * @param '00_PAREMIOTIPUS'|'paremiotipus_display' $table
  *
  * @return list<string>
  */
-function get_unusual_punctuation_combinations(string $column): array
+function get_unusual_punctuation_combinations(string $column, string $table = '00_PAREMIOTIPUS'): array
 {
     $select = ['`' . $column . '`'];
     $patterns = ['%?¿%', '%,?%', '%,!', '%!.', '%!…', '%?.', '%?…'];
@@ -30,10 +31,11 @@ function get_unusual_punctuation_combinations(string $column): array
     // Keep LIKE for collation-equivalent punctuation (e.g. full-width question marks).
     $stmt = db_query(
         'SELECT DISTINCT ' . implode(', ', $select)
-        . " FROM `00_PAREMIOTIPUS` WHERE `{$column}` LIKE '%!%' OR `{$column}` LIKE '%?%'"
+        . " FROM `{$table}` WHERE `{$column}` LIKE '%!%' OR `{$column}` LIKE '%?%'"
     );
     $matches = array_fill(0, count($patterns), []);
-    while (($row = $stmt->fetch(PDO::FETCH_NUM)) !== false) {
+    $rows = $stmt->fetchAll(PDO::FETCH_NUM);
+    foreach ($rows as $row) {
         $value = $row[0];
         assert(is_string($value));
         foreach (array_keys($matches) as $index) {
@@ -47,11 +49,12 @@ function get_unusual_punctuation_combinations(string $column): array
 }
 
 /**
- * @param 'MODISME'|'PAREMIOTIPUS' $column
+ * @param 'Display'|'MODISME'|'PAREMIOTIPUS'       $column
+ * @param '00_PAREMIOTIPUS'|'paremiotipus_display' $table
  *
  * @return list<string>
  */
-function get_single_quote_punctuation_matches(string $column): array
+function get_single_quote_punctuation_matches(string $column, string $table = '00_PAREMIOTIPUS'): array
 {
     $conditions = [];
     foreach ([' ', '.', ',', ';', ':', '-'] as $character) {
@@ -59,17 +62,13 @@ function get_single_quote_punctuation_matches(string $column): array
     }
 
     $stmt = db_query(
-        "SELECT `{$column}` FROM `00_PAREMIOTIPUS`
+        "SELECT `{$column}` FROM `{$table}`
         WHERE LENGTH(`{$column}`) - LENGTH(REPLACE(`{$column}`, CHAR(39), '')) = 1
         AND (" . implode(' OR ', $conditions) . ')'
     );
-    $matches = [];
-    while (($value = $stmt->fetchColumn()) !== false) {
-        assert(is_string($value));
-        $matches[] = $value;
-    }
 
-    return $matches;
+    /** @var list<string> */
+    return $stmt->fetchAll(PDO::FETCH_COLUMN);
 }
 
 /** @return list<string> */
@@ -134,7 +133,7 @@ function scan_punctuation_report_values(): array
     $stmt = null;
 
     try {
-        $stmt = db_query('SELECT `PAREMIOTIPUS`, `MODISME` FROM `00_PAREMIOTIPUS`');
+        $stmt = db_query('SELECT COALESCE(`d`.`Display`, `p`.`PAREMIOTIPUS`), `p`.`MODISME` FROM `00_PAREMIOTIPUS` `p` LEFT JOIN `paremiotipus_display` `d` ON `d`.`Paremiotipus` = `p`.`PAREMIOTIPUS`');
         while (($row = $stmt->fetch(PDO::FETCH_NUM)) !== false) {
             [$paremiotipus, $modisme] = $row;
             if (is_string($paremiotipus)) {
@@ -159,12 +158,12 @@ function scan_punctuation_report_values(): array
 }
 
 /** @param iterable<string> $values */
-function show_punctuation_check(string $title, iterable $values, bool $display = false, bool $collapsed = false): void
+function show_punctuation_check(string $title, iterable $values, bool $collapsed = false): void
 {
     echo "<h3>{$title}</h3>";
     $lines = [];
     foreach ($values as $value) {
-        $lines[] = $display ? get_paremiotipus_display($value, escape_html: false) : $value;
+        $lines[] = $value;
     }
     sort($lines, SORT_NATURAL | SORT_FLAG_CASE);
     $output = implode("\n", $lines) . "\n";
@@ -181,28 +180,26 @@ function test_puntuacio(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $modismes = db_query('SELECT DISTINCT `MODISME` FROM `00_PAREMIOTIPUS` ORDER BY `MODISME`')->fetchAll(PDO::FETCH_COLUMN);
     $scan_outputs = scan_punctuation_report_values();
     $show_distinct_check = static function (string $title, callable $matches, array $details = []) use ($paremiotipus, $modismes): void {
         foreach (
             [
-                ['Paremiotipus', $paremiotipus, true],
-                ['Modismes', $modismes, false],
-            ] as [$type, $values, $display]
+                ['Paremiotipus', $paremiotipus],
+                ['Modismes', $modismes],
+            ] as [$type, $values]
         ) {
             show_punctuation_check(
                 "{$type} {$title}",
                 array_filter($values, $matches),
-                display: $display,
                 collapsed: in_array($type, $details, true)
             );
         }
     };
     show_punctuation_check(
         'Paremiotipus amb parèntesis o claudàtors no tancats',
-        $scan_outputs['p_brackets'],
-        display: true
+        $scan_outputs['p_brackets']
     );
 
     show_punctuation_check(
@@ -212,8 +209,7 @@ function test_puntuacio(): void
 
     show_punctuation_check(
         'Paremiotipus amb cometa simple seguida del caràcter espai o signe de puntuació inusual',
-        get_single_quote_punctuation_matches('PAREMIOTIPUS'),
-        display: true
+        get_single_quote_punctuation_matches('Display', 'paremiotipus_display')
     );
 
     foreach (
@@ -226,13 +222,12 @@ function test_puntuacio(): void
             'terminal' => 'acabats amb signe de puntuació inusual',
         ] as $issue => $title
     ) {
-        show_punctuation_check('Paremiotipus ' . $title, $scan_outputs['p_' . $issue], display: true);
+        show_punctuation_check('Paremiotipus ' . $title, $scan_outputs['p_' . $issue]);
     }
 
     show_punctuation_check(
         'Paremiotipus amb una combinació de signes de puntuació inusual',
-        get_unusual_punctuation_combinations('PAREMIOTIPUS'),
-        display: true
+        get_unusual_punctuation_combinations('Display', 'paremiotipus_display')
     );
 
     $show_distinct_check(
@@ -271,7 +266,12 @@ function test_puntuacio(): void
 
     $show_distinct_check(
         'amb tres lletres idèntiques seguides',
-        static fn (string $p): bool => preg_match('/([A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç])\1\1/ui', preg_replace('/\b[IVXLCDM]+\b/ui', '', $p) ?? '') === 1,
+        static function (string $p): bool {
+            $deromanized = preg_replace('/\b[IVXLCDM]+\b/ui', '', $p);
+            assert(is_string($deromanized));
+
+            return preg_match('/([A-Za-zÀ-ÖØ-ÝÇà-öø-ÿç])\1\1/ui', $deromanized) === 1;
+        },
         ['Paremiotipus', 'Modismes']
     );
 
@@ -279,11 +279,6 @@ function test_puntuacio(): void
         'amb més d\'un accent gràfic en una paraula',
         static fn (string $p): bool => preg_match('/[àèéíòóúÀÈÉÍÒÓÚ][^\s,.;:!?()[\]"\'\-–—\/]*[àèéíòóúÀÈÉÍÒÓÚ]/u', $p) === 1,
         ['Paremiotipus', 'Modismes']
-    );
-
-    $show_distinct_check(
-        'amb entitats HTML en text pla',
-        static fn (string $p): bool => str_contains($p, '&') && preg_match('/&(?:amp|lt|gt|quot|apos|nbsp);|&#\d+;/iu', $p) === 1
     );
 
     $show_distinct_check(
@@ -337,10 +332,9 @@ function test_paremiotipus_caracters_inusuals(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus amb caràcters inusuals en català</h3>';
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
     foreach ($paremiotipus as $p) {
-        assert(is_string($p));
         $t = str_replace(
             ['à', 'è', 'é', 'í', 'ï', 'ò', 'ó', 'ú', 'ü', 'ç', '«', '»', '·', '–', '‑', '—', '―', '─', '…'],
             '',
@@ -350,7 +344,7 @@ function test_paremiotipus_caracters_inusuals(): void
             // If it contains any non-ASCII character.
             preg_match('/[^\x00-\x7F]/', $t) === 1
         ) {
-            $output .= get_paremiotipus_display($p, escape_html: false) . "\n";
+            $output .= $p . "\n";
         }
     }
     if ($output === '') {
@@ -360,7 +354,7 @@ function test_paremiotipus_caracters_inusuals(): void
     }
 
     echo '<h3>Paremiotipus amb caràcters de guió o guionet no estàndards (ni — ni -)</h3>';
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $guions = [
         '‑' => [],
         '–' => [],
@@ -369,41 +363,6 @@ function test_paremiotipus_caracters_inusuals(): void
     ];
     $guions_keys = array_keys($guions);
     foreach ($paremiotipus as $p) {
-        assert(is_string($p));
-        foreach ($guions_keys as $guio) {
-            if (str_contains($p, $guio)) {
-                $guions[$guio][] = $p;
-            }
-        }
-    }
-    $output = '';
-    foreach ($guions as $guio => $guio_array) {
-        if ($guio_array === []) {
-            continue;
-        }
-        $output .= "<strong>Caràcter {$guio}</strong>\n";
-        foreach ($guio_array as $p) {
-            $output .= get_paremiotipus_display($p, escape_html: false) . "\n";
-        }
-        $output .= "\n\n";
-    }
-    if ($output === '') {
-        echo '<pre class="empty">(cap resultat)</pre>';
-    } else {
-        echo "<pre>{$output}</pre>";
-    }
-
-    echo '<h3>Modismes amb caràcters de guió o guionet no estàndards (ni — ni -)</h3>';
-    $paremiotipus = db_query('SELECT `MODISME` FROM `00_PAREMIOTIPUS` ORDER BY `MODISME`')->fetchAll(PDO::FETCH_COLUMN);
-    $guions = [
-        '‑' => [],
-        '–' => [],
-        '―' => [],
-        '─' => [],
-    ];
-    $guions_keys = array_keys($guions);
-    foreach ($paremiotipus as $p) {
-        assert(is_string($p));
         foreach ($guions_keys as $guio) {
             if (str_contains($p, $guio)) {
                 $guions[$guio][] = $p;
@@ -426,6 +385,39 @@ function test_paremiotipus_caracters_inusuals(): void
     } else {
         echo "<pre>{$output}</pre>";
     }
+
+    echo '<h3>Modismes amb caràcters de guió o guionet no estàndards (ni — ni -)</h3>';
+    $modismes = db_query('SELECT `MODISME` FROM `00_PAREMIOTIPUS` ORDER BY `MODISME`')->fetchAll(PDO::FETCH_COLUMN);
+    $guions = [
+        '‑' => [],
+        '–' => [],
+        '―' => [],
+        '─' => [],
+    ];
+    $guions_keys = array_keys($guions);
+    foreach ($modismes as $m) {
+        foreach ($guions_keys as $guio) {
+            if (str_contains($m, $guio)) {
+                $guions[$guio][] = $m;
+            }
+        }
+    }
+    $output = '';
+    foreach ($guions as $guio => $guio_array) {
+        if ($guio_array === []) {
+            continue;
+        }
+        $output .= "<strong>Caràcter {$guio}</strong>\n";
+        foreach ($guio_array as $m) {
+            $output .= $m . "\n";
+        }
+        $output .= "\n\n";
+    }
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
 }
 
 function test_paremiotipus_final(): void
@@ -433,10 +425,9 @@ function test_paremiotipus_final(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus que acaben amb caràcters no alfabètics o amb signe de puntuació inusual</h3>';
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
     foreach ($paremiotipus as $p) {
-        assert(is_string($p));
         $t = str_replace(
             ['à', 'è', 'é', 'í', 'ï', 'ò', 'ó', 'ú', 'ü', 'ç'],
             ['a', 'e', 'e', 'i', 'i', 'o', 'o', 'u', 'u', 'c'],
@@ -449,13 +440,36 @@ function test_paremiotipus_final(): void
             && !str_ends_with($t, '»')
             && !str_ends_with($t, '"')
             && !str_ends_with($t, '…')
+            && !str_ends_with($t, ')')
         ) {
-            $output .= get_paremiotipus_display($p, escape_html: false) . "\n";
+            $output .= $p . "\n";
         }
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
     } else {
         echo "<pre>{$output}</pre>";
+    }
+}
+
+function test_paremiotipus_caracters_html(): void
+{
+    require_once __DIR__ . '/../common.php';
+
+    // Double quotes are escaped in place where Display lands in an HTML
+    // attribute (og:title content, img alt), so only < and & can break pages.
+    // Modismes need no check: the only public output is the escaped <h2>
+    // variant header, and reports are admin-only.
+    echo '<h3>Paremiotipus amb caràcters HTML perillosos (&lt; o &amp;)</h3>';
+    $paremiotipus = db_query("SELECT `Display` FROM `paremiotipus_display` WHERE `Display` LIKE '%<%' OR `Display` LIKE '%&%' ORDER BY `Paremiotipus`")->fetchAll(PDO::FETCH_COLUMN);
+    $output = '';
+    foreach ($paremiotipus as $p) {
+        assert(is_string($p));
+        $output .= htmlspecialchars($p) . "\n";
+    }
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<details open><pre>{$output}</pre></details>";
     }
 }

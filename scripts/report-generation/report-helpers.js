@@ -2,6 +2,7 @@ import { mkdtemp, readFile, rename, rm, writeFile } from "node:fs/promises";
 import { availableParallelism } from "node:os";
 import path from "node:path";
 import { Worker } from "node:worker_threads";
+import { skeleton } from "@moderation-api/unicode-spoofing";
 
 export const projectRoot = path.resolve(import.meta.dirname, "../..");
 const dataDirectory = path.join(projectRoot, "tmp");
@@ -9,7 +10,6 @@ const reportDirectory = path.join(projectRoot, "data/reports");
 const modismeWordsExclude = new Set(["a", "amb", "de", "el", "els", "en", "i", "la", "les", "ni", "o", "per", "que"]);
 
 const DIACRITICS_RE = /\p{M}/gu;
-const QUOTES_RE = /[’‘]/g;
 const UNICODE_BLOCK_RE = /[\u0100-\u7fff]/g;
 const WORD_SPLIT_RE = /[a-z]+(?:['-][a-z]+)*'?/g;
 const NEWLINE_RE = /\r?\n/;
@@ -53,13 +53,67 @@ export const writeReportWithNewContent = async (filename, newFilename, contents)
 
 export const displayName = (record) => record.display || record.value;
 
+// Non-standard separators that stand in for the Catalan middle dot (punt volat)
+// in the ela geminada (l·l), e.g. the typewriter "l.l" or the old "l,l".
+const ELA_GEMINADA_SEPARATOR_RE = /[lL][.,:;][lL]/u;
+const ELA_GEMINADA_SEPARATOR_FOLD_RE = /[lL][.,:;][lL]/gu;
+const MIDDLE_DOT = "·";
+const MIDDLE_DOT_VARIANT_RE = /[•‧ꞏ∙⋅]/u;
+// A middle dot that is not flanked by two l's is either misplaced or stands in
+// for an apostrophe in archaic spellings ("que·l"), so it is worth reporting.
+const MISPLACED_MIDDLE_DOT_RE = /(?<![lL·])·|·(?![lL·])/u;
+
+export const normalizeElaGeminada = (value) =>
+  value.replace(ELA_GEMINADA_SEPARATOR_FOLD_RE, (match) => `${match[0]}${MIDDLE_DOT}${match[2]}`);
+
+export const confusableKey = (value) => skeleton(normalizeElaGeminada(value));
+
+export const findTypographyIssues = (value) => {
+  const issues = [];
+  if (ELA_GEMINADA_SEPARATOR_RE.test(value)) {
+    issues.push("ela_geminada_separator");
+  }
+  if (MIDDLE_DOT_VARIANT_RE.test(value)) {
+    issues.push("middle_dot_variant");
+  }
+  if (MISPLACED_MIDDLE_DOT_RE.test(value)) {
+    issues.push("middle_dot_position");
+  }
+  return issues;
+};
+
+export const typographyReport = (values) => {
+  const findingsByIssue = Map.groupBy(
+    [...new Set(values)].flatMap((value) => findTypographyIssues(value).map((issue) => ({ issue, value }))),
+    ({ issue }) => issue,
+  );
+
+  return lines(
+    [...findingsByIssue.entries()].flatMap(([issue, findings]) => [
+      `${issue}:`,
+      ...findings.map(({ value }) => `    ${value}`),
+      "",
+    ]),
+  );
+};
+
+export const groupConfusables = (records, getValue) =>
+  [...Map.groupBy(records, (record) => confusableKey(getValue(record))).values()].filter((group) => group.length > 1);
+
+export const hasAnySignal = ({ signals }) => Object.values(signals).some(Boolean);
+
+export const describeSpoofing = ({ words, normalized }) => [
+  ...words.flatMap(({ word, signals, scripts }) =>
+    signals.map((signal) => {
+      const scriptList = scripts.length > 0 ? ` [${scripts.join(", ")}]` : "";
+      return `    ${signal}: ${word}${scriptList}`;
+    }),
+  ),
+  `    normalized: ${normalized}`,
+];
+
 export const wordsForModismeReport = (value) => {
-  const normalized = value
-    .normalize("NFD")
-    .replace(DIACRITICS_RE, "")
-    .replace(QUOTES_RE, "'")
-    .replace(UNICODE_BLOCK_RE, "")
-    .toLowerCase();
+  const normalized = value.normalize("NFD").replace(DIACRITICS_RE, "").replace(UNICODE_BLOCK_RE, "").toLowerCase();
 
   const words = normalized.match(WORD_SPLIT_RE) ?? [];
   return new Set(words.filter((word) => !modismeWordsExclude.has(word)));

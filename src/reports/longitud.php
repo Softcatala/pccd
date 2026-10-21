@@ -27,10 +27,10 @@ function test_buits(): void
     }
 
     echo '<h3>Paremiotipus amb el camp MODISME buit</h3>';
-    $modismes = db_query("SELECT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` where `MODISME` = '' OR `MODISME` IS NULL")->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query("SELECT `d`.`Display` FROM `00_PAREMIOTIPUS` `p` JOIN `paremiotipus_display` `d` ON `d`.`Paremiotipus` = `p`.`PAREMIOTIPUS` where `p`.`MODISME` = '' OR `p`.`MODISME` IS NULL")->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -44,10 +44,10 @@ function test_paremiotipus_llargs(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus de més de 250 caràcters</h3>';
-    $modismes = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE CHAR_LENGTH(`PAREMIOTIPUS`) > 250 ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` WHERE CHAR_LENGTH(`Display`) > 250 ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $output = '';
-    foreach ($modismes as $m) {
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($paremiotipus as $p) {
+        $output .= $p . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';
@@ -61,12 +61,14 @@ function test_paremiotipus_modismes_curts(): void
     require_once __DIR__ . '/../common.php';
 
     echo '<h3>Paremiotipus de menys de 5 caràcters</h3>';
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` WHERE CHAR_LENGTH(`PAREMIOTIPUS`) < 5 ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $rows = db_query('SELECT `p`.`PAREMIOTIPUS`, `d`.`Display` FROM `00_PAREMIOTIPUS` `p` JOIN `paremiotipus_display` `d` ON `d`.`Paremiotipus` = `p`.`PAREMIOTIPUS` WHERE CHAR_LENGTH(`d`.`Display`) < 5 ORDER BY `p`.`PAREMIOTIPUS`')->fetchAll(PDO::FETCH_ASSOC);
     $existing = [];
     $output = '';
-    foreach ($paremiotipus as $m) {
-        $existing[$m] = true;
-        $output .= get_paremiotipus_display($m, escape_html: false) . "\n";
+    foreach ($rows as $row) {
+        assert(is_string($row['PAREMIOTIPUS']));
+        assert(is_string($row['Display']));
+        $existing[$row['PAREMIOTIPUS']] = true;
+        $output .= $row['Display'] . "\n";
     }
     if ($output === '') {
         echo '<pre class="empty">(cap resultat)</pre>';

@@ -4,7 +4,7 @@ include:
 
 variables:
   PROJECT_TO_BE_DEPLOYED: "docker/pccd"
-  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.12.0"
+  DOCKER_PHP_EXTENSION_INSTALLER_VERSION: "2.12.3"
 
 stages:
   - build
@@ -237,4 +237,13 @@ check_hadolint:
     entrypoint: [""]
   script:
     - hadolint .docker/*Dockerfile
+  allow_failure: true
+
+check_caddyfmt:
+  stage: build
+  image:
+    name: caddy:alpine
+    entrypoint: [""]
+  script:
+    - caddy fmt --diff .docker/frankenphp/Caddyfile
   allow_failure: true

@@ -34,6 +34,27 @@ final class CrossLanguageConstantsMatchTest extends TestCase
         );
     }
 
+    public function testImmutableCacheControlMatches(): void
+    {
+        require_once __DIR__ . '/../../src/common.php';
+
+        $files = [
+            '.docker/apache/vhost.conf',
+            '.docker/nginx/default.conf',
+            '.docker/frankenphp/Caddyfile',
+        ];
+
+        foreach ($files as $file) {
+            $contents = file_get_contents(__DIR__ . '/../../' . $file);
+            self::assertIsString($contents, "Could not read {$file}");
+            self::assertStringContainsString(
+                STATIC_ASSETS_CACHE_HEADER,
+                $contents,
+                "{$file} must contain at least one occurrence of " . STATIC_ASSETS_CACHE_HEADER
+            );
+        }
+    }
+
     public function testBreakpointsMatchCss(): void
     {
         require_once __DIR__ . '/../../src/common.php';

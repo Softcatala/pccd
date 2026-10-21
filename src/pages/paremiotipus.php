@@ -86,13 +86,12 @@ foreach ($recurrences_by_variant as $modisme => $recurrences) {
     }
 
     // Build the display HTML for this variant.
-    $modisme_safe = htmlspecialchars($modisme);
-    if ($modisme_count === 1 && $modisme_safe === $paremiotipus_display) {
+    if ($modisme_count === 1 && $modisme === $paremiotipus_display) {
         // Single variant: no header needed.
         $variant_html = $current_variant_html;
     } else {
         // Multiple variants: show header and summary.
-        $variant_html = "<h2>{$modisme_safe}</h2>";
+        $variant_html = '<h2>' . htmlspecialchars($modisme) . '</h2>';
         $variant_html .= '<details open>';
         $variant_html .= '<summary>';
         $variant_html .= $variant_sources_count === 1 ? '1 font' : "{$variant_sources_count} fonts";

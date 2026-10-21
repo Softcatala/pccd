@@ -14,14 +14,13 @@ function test_ortografia(): void
 {
     require_once __DIR__ . '/../common.php';
 
-    $paremiotipus = db_query('SELECT DISTINCT `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_COLUMN);
+    $paremiotipus = db_query('SELECT `Display` FROM `paremiotipus_display` ORDER BY `Display`')->fetchAll(PDO::FETCH_COLUMN);
     $show_check = static function (string $title, callable $matches) use ($paremiotipus): void {
         echo "<h3>{$title}</h3>";
         $output = '';
-        foreach ($paremiotipus as $paremiotipus_value) {
-            assert(is_string($paremiotipus_value));
-            if ($matches($paremiotipus_value)) {
-                $output .= get_paremiotipus_display($paremiotipus_value, escape_html: false) . "\n";
+        foreach ($paremiotipus as $p) {
+            if ($matches($p)) {
+                $output .= $p . "\n";
             }
         }
         if ($output === '') {
@@ -55,8 +54,8 @@ function test_ortografia(): void
                 }
             }
 
-            $display = get_paremiotipus_display($value, escape_html: false);
-            $unquoted = preg_replace('/«[^»]*»|“[^”]*”|"[^"]*"/u', '', $display) ?? $display;
+            $unquoted = preg_replace('/«[^»]*»|“[^”]*”|"[^"]*"/u', '', $value);
+            assert(is_string($unquoted));
 
             return preg_match('/\bpero\b/iu', $unquoted) === 1;
         }
@@ -66,4 +65,20 @@ function test_ortografia(): void
         'Paremiotipus amb la còpula «son» sense accent',
         static fn (string $value): bool => preg_match('/\bson\s+(?:el|els|la|les|un|uns|una|unes|molt|molts|molta|moltes|poc|pocs|poca|poques|capgrossos|com)\b/iu', $value) === 1
     );
+
+    echo '<h3>Paremiotipus amb problemes tipogràfics (punt volat, ela geminada)</h3>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_paremiotipus_tipografia.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
+
+    echo '<h3>Modismes amb problemes tipogràfics (punt volat, ela geminada)</h3>';
+    $output = trim((string) @file_get_contents(__DIR__ . '/../../data/reports/test_intl_modismes_tipografia.txt'));
+    if ($output === '') {
+        echo '<pre class="empty">(cap resultat)</pre>';
+    } else {
+        echo "<pre>{$output}</pre>";
+    }
 }

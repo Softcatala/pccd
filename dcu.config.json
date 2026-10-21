@@ -18,7 +18,7 @@
     },
     {
       "matchImages": ["nginx"],
-      "referenceTag": "stable-alpine-slim"
+      "referenceTag": "mainline-alpine-slim"
     }
   ],
   "sync": [

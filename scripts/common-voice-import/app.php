@@ -24,7 +24,11 @@ const CV_DIR = '../../tmp/cv/cv-corpus-14.0-2023-06-23/ca';
 
 // Read the TSV file amd split it into lines.
 $lines = file(__DIR__ . '/' . CV_DIR . '/validated.tsv', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES);
-assert(is_array($lines));
+if ($lines === false) {
+    fwrite(STDERR, "Could not read validated.tsv\n");
+
+    exit(1);
+}
 
 $modismes_paremiotipus = db_query('SELECT DISTINCT `MODISME`, `PAREMIOTIPUS` FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`, `MODISME`')->fetchAll(PDO::FETCH_KEY_PAIR);
 $paremiotipus_array = db_query('SELECT DISTINCT `PAREMIOTIPUS`, 1 FROM `00_PAREMIOTIPUS` ORDER BY `PAREMIOTIPUS`')->fetchAll(PDO::FETCH_KEY_PAIR);
@@ -82,7 +86,6 @@ foreach ($sentences_array as $paremiotipus => $pronunciations) {
     usort($pronunciations, static fn (array $a, array $b): int => $b['v'] <=> $a['v']);
     $pronunciations = array_slice($pronunciations, 0, 20);
 
-    assert(is_string($paremiotipus));
     $paremiotipus = str_replace("'", "''", $paremiotipus);
     foreach ($pronunciations as $pronunciation) {
         $file = $pronunciation['f'];

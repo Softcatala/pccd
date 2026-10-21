@@ -1,7 +1,12 @@
 import { analyze } from "@moderation-api/unicode-spoofing";
-import { lines, readReportData, writeReport } from "./report-helpers.js";
+import { describeSpoofing, hasAnySignal, lines, readReportData, writeReport } from "./report-helpers.js";
 
 const modismes = await readReportData("report_modismes_sospitosos.json");
-const report = lines(modismes.filter((modisme) => analyze(modisme).spoofed));
+const report = lines(
+  modismes.flatMap((modisme) => {
+    const result = analyze(modisme);
+    return hasAnySignal(result) ? [modisme, ...describeSpoofing(result)] : [];
+  }),
+);
 
 await writeReport("test_intl_modismes_sospitosos.txt", report);

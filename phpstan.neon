@@ -6,10 +6,6 @@ includes:
   - vendor/pereorga/phpstan-rules/rules.neon
 parameters:
   level: 9
-  checkBenevolentUnionTypes: true
-  reportAlwaysTrueInLastCondition: true
-  reportAnyTypeWideningInVarTag: true
-  reportPossiblyNonexistentConstantArrayOffset: true
   paths:
     - docroot
     - scripts

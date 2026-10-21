@@ -35,7 +35,6 @@ function stats_equivalents(): void
     ];
     $data_table = [];
     foreach ($modismes as $modisme) {
-        assert(is_string($modisme['EQUIVALENTS']));
         $language = $modisme['IDIOMA'] === '(buit)' ? '(buit)' : get_idioma($modisme['IDIOMA']);
         if ($language === '') {
             $data_table['(desconegut)'] = (int) $modisme['EQUIVALENTS'];

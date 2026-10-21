@@ -1,12 +1,5 @@
-# Redundant files
-/tmp/github/
+/docroot/mp3/
 
-# Vendor directories
-vendor/
-node_modules/
-
-# Include hidden files by default, but ignore some
+# Include hidden files by default, but ignore some.
 !.*
 .git/
-.idea/
-.vscode/
