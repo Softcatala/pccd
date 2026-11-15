@@ -6,8 +6,8 @@ ARG PHP_VERSION=86
 
 WORKDIR /srv/app
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >>/etc/apk/repositories \
-  && apk --no-cache --update add \
+RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories \
+  && apk add --no-cache \
     php${PHP_VERSION}-fpm \
     php${PHP_VERSION}-apcu \
     php${PHP_VERSION}-gd \
@@ -16,7 +16,7 @@ RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >>/etc/apk/reposito
     php${PHP_VERSION}-session \
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
-COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/
+COPY .docker/php/custom.ini /etc/php${PHP_VERSION}/conf.d/
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 COPY src ./src
@@ -26,6 +26,7 @@ COPY docroot/500.html ./docroot/
 COPY docroot/admin/index.php ./docroot/admin/
 COPY docroot/css ./docroot/css
 COPY docroot/js ./docroot/js
+COPY docroot/img ./docroot/img
 COPY data ./data
 
 EXPOSE 9000

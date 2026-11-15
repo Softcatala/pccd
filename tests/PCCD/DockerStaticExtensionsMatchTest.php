@@ -35,7 +35,6 @@ final class DockerStaticExtensionsMatchTest extends TestCase
         self::assertSame($apacheExtensions, $caddyExtensions, 'Apache and FrankenPHP static file extensions do not match');
     }
 
-    /** @return list<string> */
     private function getApacheExtensions(): array
     {
         $content = file_get_contents(__DIR__ . '/../../.docker/apache/vhost.conf');
@@ -47,7 +46,6 @@ final class DockerStaticExtensionsMatchTest extends TestCase
         return $extensions;
     }
 
-    /** @return list<string> */
     private function getNginxExtensions(): array
     {
         $content = file_get_contents(__DIR__ . '/../../.docker/nginx/default.conf');
@@ -59,7 +57,6 @@ final class DockerStaticExtensionsMatchTest extends TestCase
         return $extensions;
     }
 
-    /** @return list<string> */
     private function getCaddyExtensions(): array
     {
         $content = file_get_contents(__DIR__ . '/../../.docker/frankenphp/Caddyfile');

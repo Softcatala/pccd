@@ -67,7 +67,7 @@ Avoid unnecessary frameworks and abstractions. Use procedural code when appropri
 
 ### Minimize System Dependencies
 
-Prefer npm/Composer packages over system binaries. `composer.phar` is committed to the repository to ensure reproducibility.
+Prefer npm/Composer packages over system binaries. `composer.phar` is downloaded automatically (latest stable) when running `npm install`.
 
 Current system dependencies include tools for linting (shellcheck, shfmt, tidy) and data processing (mdbtools).
 

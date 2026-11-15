@@ -19,7 +19,7 @@ export const lines = (values) => (values.length === 0 ? "" : `${values.join("\n"
 export const readReportData = async (filename) =>
   JSON.parse(await readFile(path.join(dataDirectory, filename), "utf8"));
 
-export const writeReport = async (filename, contents) => writeFile(path.join(reportDirectory, filename), contents);
+export const writeReport = (filename, contents) => writeFile(path.join(reportDirectory, filename), contents);
 
 export const getNewLinesContent = (previousContent, currentContent) => {
   if (!currentContent) {

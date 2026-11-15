@@ -1,6 +1,5 @@
 name: Docker Startup Test
 
-# yamllint disable-line rule:truthy
 on:
   push:
     branches: [master, main]
@@ -27,14 +26,24 @@ jobs:
       - name: Install npm dependencies
         run: npm ci --ignore-scripts
 
-      - name: Verify committed assets are up to date
+      - name: Run npm-based checks
         run: |
-          npm run build:assets
-          if ! git diff --quiet -- docroot/css docroot/js data/assets/assets-sizes.json; then
-            echo "Committed assets are out of date. Run 'npm run build:assets' and commit generated files."
-            git status --short -- docroot/css docroot/js data/assets/assets-sizes.json
-            exit 1
-          fi
+          npm run lint:assets
+          npm run lint:case-sensitive-filenames
+          npm run lint:css
+          npm run lint:dockerfmt
+          npm run lint:eslint
+          npm run lint:eslint-redundancy
+          npm run lint:gitlab-ci
+          npm run lint:htmlhint-completeness
+          npm run lint:htmlvalidate-redundancy
+          npm run lint:ls
+          npm run lint:markdown
+          npm run lint:package-json
+          npm run lint:prettier
+          npm run lint:stylelint-redundancy
+          npm run lint:xml
+          npm run test:node
 
       - name: Setup environment
         run: |

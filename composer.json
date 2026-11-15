@@ -17,14 +17,14 @@
     "ext-mbstring": "*"
   },
   "require-dev": {
-    "ergebnis/composer-normalize": "^2.54",
+    "ergebnis/composer-normalize": "^2.57",
     "pereorga/phpstan-rules": "^1.5",
     "php-cs-fixer/shim": "^3.95",
     "phpstan/phpstan": "^2.3",
     "phpstan/phpstan-deprecation-rules": "^2.0",
     "phpstan/phpstan-strict-rules": "^2.1",
     "phpunit/phpunit": "^13.4",
-    "psalm/phar": "^6.20",
+    "psalm/phar": "^7.6",
     "slevomat/coding-standard": "^8.31",
     "squizlabs/php_codesniffer": "^4.0"
   },
@@ -44,9 +44,11 @@
     "sort-packages": true
   },
   "scripts": {
+    "post-install-cmd": [
+      "@update-third-party"
+    ],
     "post-update-cmd": [
-      "curl --fail --silent --show-error --location https://raw.githubusercontent.com/krakjoe/apcu/master/apc.php --output src/third_party/apc.php",
-      "curl --fail --silent --show-error --location https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php --output src/third_party/opcache-gui.php"
+      "@update-third-party"
     ],
     "composer-normalize": "./composer.phar normalize --no-interaction --ansi",
     "composer-normalize-lint": "./composer.phar normalize --dry-run --no-interaction --ansi",
@@ -56,7 +58,12 @@
     "phpcbf": "vendor/bin/phpcbf --standard=phpcs.xml .",
     "phpcs": "vendor/bin/phpcs -s --standard=phpcs.xml .",
     "phpstan": "vendor/bin/phpstan analyze --memory-limit=256M --no-progress",
-    "phpunit": "vendor/bin/phpunit --fail-on-warning --display-warnings",
-    "psalm": "vendor/bin/psalm.phar --no-progress"
+    "phpunit": "vendor/bin/phpunit --compact --fail-on-deprecation --fail-on-phpunit-deprecation --fail-on-warning",
+    "psalm": "vendor/bin/psalm.phar --no-progress",
+    "update-third-party": [
+      "curl --fail --silent --show-error --location https://raw.githubusercontent.com/krakjoe/apcu/master/apc.php --output src/third_party/apc.php",
+      "curl --fail --silent --show-error --location https://raw.githubusercontent.com/amnuts/opcache-gui/master/index.php --output src/third_party/opcache-gui.php",
+      "git apply patches/opcache-gui.patch"
+    ]
   }
 }

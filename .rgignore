@@ -1,5 +1,6 @@
 *.min.*
 *.sql
+*.svg
 /data/
 /docroot/img/
 /docroot/mp3/
@@ -12,8 +13,7 @@ package-lock.json
 
 # Include hidden files by default, but ignore some.
 !.*
+*.cache
 .DS_Store
 .git/
-.php-cs-fixer.cache
-.phpunit.result.cache
 .picasa.ini

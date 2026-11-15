@@ -1,4 +1,6 @@
-# Paremiologia catalana comparada digital (PCCD) [![License: AGPL v3](docs/img/agpl-v3.svg)](https://www.gnu.org/licenses/agpl-3.0) [![PHP 8.4+](https://img.shields.io/badge/PHP-8.4+-777BB4?logo=php)](https://www.php.net/) [![Node.js 22.22.2+](https://img.shields.io/badge/Node.js-22.22.2+-339933?logo=node.js)](https://nodejs.org/)
+# Paremiologia catalana comparada digital (PCCD)
+
+[![License: AGPL v3](docs/img/agpl-v3.svg)](https://www.gnu.org/licenses/agpl-3.0) [![PHP 8.4+](https://img.shields.io/badge/PHP-8.4+-777BB4?logo=php)](https://www.php.net/) [![Node.js 22.22.2+](https://img.shields.io/badge/Node.js-22.22.2+-339933?logo=node.js)](https://nodejs.org/)
 
 This is the source code of [Paremiologia catalana comparada digital](https://pccd.dites.cat/) website.
 
@@ -25,15 +27,6 @@ Note: If you don't have a database, you can copy `data/db/schema.sql` and `data/
 <a href="https://developer.mozilla.org/docs/Web/CSS"><img src="docs/img/css.svg" alt="CSS" width="50"></a>
 <a href="https://mariadb.org/"><img src="docs/img/mariadb.svg" alt="MariaDB" width="50"></a>
 <a href="https://github.com/mdbtools/mdbtools"><img src="docs/img/mdbtools.png" alt="MDB Tools" width="50"></a>
-
-## Development requirements
-
-- PHP 8.4+
-- Node.js 22.22.2+
-
-## Development
-
-This project was originally developed by a human, before LLMs were available. LLMs have since been used to assist with code improvements and documentation.
 
 ## Documentation
 
@@ -63,7 +56,6 @@ Note that the database and media files are not distributed with this repository.
 This repository includes:
 
 - [Chart.js](https://www.chartjs.org/), licensed under the [MIT License](https://github.com/chartjs/Chart.js/blob/master/LICENSE.md).
-- [Composer](https://getcomposer.org/), licensed under the [MIT License](https://github.com/composer/composer/blob/main/LICENSE).
 - [Roboto font](https://github.com/googlefonts/roboto), licensed under the [Apache License Version 2.0](src/fonts/LICENSE).
 - [simple-datatables](https://github.com/fiduswriter/simple-datatables), licensed under the
   [LGPL Version 3](https://github.com/fiduswriter/simple-datatables/blob/main/LICENSE).
@@ -72,5 +64,5 @@ This repository includes:
 
 The following tools were originally developed as part of this project and are now maintained in separate repositories:
 
-- [@pccd/lt-filter](https://www.npmjs.com/package/@pccd/lt-filter) - A command-line tool for filtering Catalan sentences using LanguageTool. It separates grammatically or orthographically incorrect sentences from correct ones. Licensed under the LGPL 2.1 or later.
-- [pereorga/phpstan-rules](https://packagist.org/packages/pereorga/phpstan-rules) - Custom opinionated rules for PHPStan. Licensed under the MIT License.
+- [@pccd/lt-filter](https://github.com/pereorga/pccd-lt-filter) - A command-line tool for filtering Catalan sentences using LanguageTool. It separates grammatically or orthographically incorrect sentences from correct ones.
+- [pereorga/phpstan-rules](https://packagist.org/packages/pereorga/phpstan-rules) - Custom opinionated rules for PHPStan.

@@ -71,10 +71,10 @@ echo ""
 if [ "${SKIP_IMAGES}" -eq 0 ]; then
   if ls ./*.zip 1> /dev/null 2>&1; then
     echo ">>> Decompressing images..."
-    npm run decompress:images
+    scripts/install/decompress-images.sh
 
     echo ">>> Optimizing images..."
-    npm run optimize:images
+    node scripts/install/optimize-images.js
   else
     echo ">>> No zip files found, skipping image processing"
   fi
@@ -88,7 +88,7 @@ if [ ! -f database.accdb ]; then
 fi
 
 echo ">>> Converting database..."
-npm run convert:db
+node scripts/install/convert-database.js
 
 # Part 2: Rebuild and start containers
 echo ">>> Stopping existing containers..."
@@ -98,14 +98,14 @@ echo ">>> Building and starting containers (waiting for DB to be healthy)..."
 docker compose up -d --build --wait
 
 echo ">>> Running installation..."
-npm run install:db
+scripts/install.sh
 
 # Part 3: Export, test, and generate reports
 echo ">>> Exporting database..."
-npm run export:db
+scripts/export-db.sh
 
 echo ">>> Refreshing test data..."
-npm run refresh:test-data
+node tests/playwright/refresh-test-data.js
 
 if [ "${SKIP_REPORTS}" -eq 0 ]; then
   echo ">>> Generating reports..."

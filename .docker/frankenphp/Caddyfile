@@ -8,6 +8,10 @@
 	root * /srv/app/docroot
 	encode zstd gzip
 
+	request_body {
+		max_size 1KB
+	}
+
 	header {
 		Cross-Origin-Opener-Policy "same-origin"
 		Strict-Transport-Security "max-age=31536000"

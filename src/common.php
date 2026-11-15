@@ -594,6 +594,31 @@ function cache_get(string $key, callable $callback): mixed
 }
 
 /**
+ * Returns a cached integer result from a COUNT query.
+ *
+ * The cache_key parameter specifies the cache key to use.
+ * The query parameter specifies a query that returns a single value.
+ */
+function get_cached_count(string $cache_key, string $query): int
+{
+    return cache_get($cache_key, static fn (): int => (int) db_query($query)->fetchColumn());
+}
+
+/**
+ * Returns a cached array of values keyed by the first selected column.
+ *
+ * The cache_key parameter specifies the cache key to use.
+ * The query parameter specifies a query selecting the key column first and the
+ * value column second.
+ *
+ * @return array<string, string>
+ */
+function get_cached_key_value_list(string $cache_key, string $query): array
+{
+    return cache_get($cache_key, static fn (): array => db_query($query)->fetchAll(PDO::FETCH_KEY_PAIR));
+}
+
+/**
  * Transforms plain text into valid HTML turning URLs into links.
  *
  * The text parameter contains the input text to escape and linkify.
@@ -926,7 +951,7 @@ function format_nombre(float|int|string $num, int $decimals = 0): string
  */
 function get_idiomes(): array
 {
-    return cache_get('list:equivalents', static fn (): array => db_query('SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`')->fetchAll(PDO::FETCH_KEY_PAIR));
+    return get_cached_key_value_list('list:equivalents', 'SELECT `CODI`, `IDIOMA` FROM `00_EQUIVALENTS`');
 }
 
 /**
@@ -1072,7 +1097,7 @@ function normalize_search(string $input_string, ?SearchMode $search_mode = null)
  */
 function get_editorials(): array
 {
-    return cache_get('list:editorials', static fn (): array => db_query('SELECT `CODI`, `NOM` FROM `00_EDITORIA`')->fetchAll(PDO::FETCH_KEY_PAIR));
+    return get_cached_key_value_list('list:editorials', 'SELECT `CODI`, `NOM` FROM `00_EDITORIA`');
 }
 
 /**
@@ -1084,7 +1109,7 @@ function get_editorials(): array
  */
 function get_fonts_paremiotipus(): array
 {
-    return cache_get('list:fonts', static fn (): array => db_query('SELECT `Identificador`, `Títol` FROM `00_FONTS`')->fetchAll(PDO::FETCH_KEY_PAIR));
+    return get_cached_key_value_list('list:fonts', 'SELECT `Identificador`, `Títol` FROM `00_FONTS`');
 }
 
 /**
@@ -1190,21 +1215,25 @@ function preload_image_header(string $url, string $media = '', string $type = ''
     }
     header($header);
 
-    // The idea here was to flush the headers early, allowing the browser to start
-    // preloading the specified image before the full HTML content is generated.
-    // However, the practical impact of this optimization has proven to be minimal
-    // for 2 reasons:
-    // 1. The page is already generated very quickly.
-    // 2. The header is added late in the script execution.
+    // TODO:
+    // Send the Link header as an HTTP 103 Early Hints response when the SAPI
+    // supports it, so the browser can start preloading the image before the
+    // full HTML content is generated. Only FrankenPHP implements
+    // headers_send(); on Apache and PHP-FPM the Link header is still sent with
+    // the final response.
     //
-    // Benchmarking with Chrome DevTools and curl showed marginal improvements of
-    // ~2-5ms in the time for headers to be received. Moving the preload logic
-    // earlier in the script (e.g., at the top of a long "paremiotipus" page)
-    // reduced this time further to ~12-17ms, still well below the threshold of
-    // human perception.
+    // The expected gain is small: pages are generated very quickly. An earlier
+    // ob_flush()/flush() experiment already pushed the response headers early,
+    // and benchmarking with Chrome DevTools and curl showed improvements of
+    // only ~2-5ms in the time for headers to be received, or ~12-17ms when
+    // moving the preload logic to the top of a long paremiotipus page, both
+    // well below the threshold of human perception.
     //
-    // ob_flush();
-    // flush();
+    // This could be enabled in the future, if slower pages with images emerge.
+    //
+    // if (function_exists('headers_send') && !headers_sent()) {
+    //    headers_send(103);
+    // }
 }
 
 /**
@@ -1249,7 +1278,7 @@ function return_500_and_exit(): never
  */
 function get_modisme_count(): int
 {
-    return cache_get('count:modisme', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `00_PAREMIOTIPUS`')->fetchColumn());
+    return get_cached_count('count:modisme', 'SELECT COUNT(1) FROM `00_PAREMIOTIPUS`');
 }
 
 /**
@@ -1257,7 +1286,7 @@ function get_modisme_count(): int
  */
 function get_paremiotipus_count(): int
 {
-    return cache_get('count:paremiotipus', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `paremiotipus_display`')->fetchColumn());
+    return get_cached_count('count:paremiotipus', 'SELECT COUNT(1) FROM `paremiotipus_display`');
 }
 
 /**
@@ -1265,7 +1294,7 @@ function get_paremiotipus_count(): int
  */
 function get_informant_count(): int
 {
-    return cache_get('count:informant', static fn (): int => (int) db_query('SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`')->fetchColumn());
+    return get_cached_count('count:informant', 'SELECT COUNT(DISTINCT `AUTOR`) FROM `00_PAREMIOTIPUS`');
 }
 
 /**
@@ -1273,7 +1302,7 @@ function get_informant_count(): int
  */
 function get_font_count(): int
 {
-    return cache_get('count:font', static fn (): int => (int) db_query('SELECT COUNT(1) FROM `00_FONTS`')->fetchColumn());
+    return get_cached_count('count:font', 'SELECT COUNT(1) FROM `00_FONTS`');
 }
 
 /**
@@ -1293,7 +1322,7 @@ function get_random_top_paremiotipus(int $max = 10000): string
             // If this is sample DB, try falling back to the first record.
             $random = db_query('SELECT `Paremiotipus` FROM `common_paremiotipus` LIMIT 1')->fetchColumn();
             if (!is_string($random)) {
-                exit('PCCD may have not been installed after importing a new database. Consider running `npm run install:db` or reading the docs.');
+                exit('PCCD may have not been installed after importing a new database. Consider running `scripts/install.sh` or reading the docs.');
             }
         }
 

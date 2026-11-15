@@ -16,16 +16,16 @@ ENV WEB_ADMIN_PASSWORD=${ARG_WEB_ADMIN_PWD}
 
 WORKDIR /srv/app
 
-RUN apk --no-cache --update add \
-  php${PHP_VERSION}-fpm \
-  php${PHP_VERSION}-apcu \
-  php${PHP_VERSION}-gd \
-  php${PHP_VERSION}-mbstring \
-  php${PHP_VERSION}-pdo_mysql \
-  php${PHP_VERSION}-session \
+RUN apk add --no-cache \
+    php${PHP_VERSION}-fpm \
+    php${PHP_VERSION}-apcu \
+    php${PHP_VERSION}-gd \
+    php${PHP_VERSION}-mbstring \
+    php${PHP_VERSION}-pdo_mysql \
+    php${PHP_VERSION}-session \
   && ln -sf /usr/sbin/php-fpm${PHP_VERSION} /usr/sbin/php-fpm
 
-COPY .docker/php/performance.ini /etc/php${PHP_VERSION}/conf.d/
+COPY .docker/php/custom.ini /etc/php${PHP_VERSION}/conf.d/
 COPY .docker/php/fpm.conf /etc/php${PHP_VERSION}/php-fpm.d/zzz-docker.conf
 
 # Add only the specific files/directories accessed by PHP itself
@@ -35,10 +35,12 @@ COPY docroot/index.php ./docroot/
 COPY docroot/404.html ./docroot/
 COPY docroot/500.html ./docroot/
 COPY docroot/admin/index.php ./docroot/admin/
-# CSS/JS are inlined by PHP
+# CSS and JS files are inlined by PHP
 COPY docroot/css ./docroot/css
 COPY docroot/js ./docroot/js
-# Report data and db date (used by some reports and runtime)
+# Image dimensions are read by PHP
+COPY docroot/img ./docroot/img
+# DB date is read by the runtime, and the output of some reports is stored here too
 COPY data ./data
 
 EXPOSE 9000

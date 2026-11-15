@@ -81,7 +81,6 @@ final class CrossLanguageConstantsMatchTest extends TestCase
         }
     }
 
-    /** @return array<string, string> */
     private function getPhpBreakpoints(): array
     {
         $constants = get_defined_constants(true)['user'] ?? [];
@@ -98,7 +97,6 @@ final class CrossLanguageConstantsMatchTest extends TestCase
         return $breakpoints;
     }
 
-    /** @return array<string, string> */
     private function getCssBreakpoints(): array
     {
         $css = $this->getVariablesCss();

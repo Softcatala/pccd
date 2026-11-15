@@ -1,0 +1,67 @@
+diff --git a/src/third_party/opcache-gui.php b/src/third_party/opcache-gui.php
+index 3092f49a0..2f62ffb4f 100644
+--- a/src/third_party/opcache-gui.php
++++ b/src/third_party/opcache-gui.php
+@@ -339,6 +339,13 @@ class Service
+             $config['directives'] = array_merge($config['directives'], $missingConfig);
+         }
+ 
++        // FrankenPHP (ZTS) may report 0 for opcache.memory_consumption in
++        // opcache_get_configuration(). Fall back to the ini value.
++        if ($config['directives']['opcache.memory_consumption'] <= 0) {
++            $config['directives']['opcache.memory_consumption'] =
++                (int) ini_parse_quantity(ini_get('opcache.memory_consumption'));
++        }
++
+         $files = [];
+         if (!empty($status['scripts']) && $this->getOption('allow_filelist')) {
+             uasort($status['scripts'], static function ($a, $b) {
+@@ -366,23 +373,40 @@ class Service
+         if ($config['directives']['opcache.file_cache_only'] || !empty($status['file_cache_only'])) {
+             $overview = false;
+         } else {
++            // The same reporting bug yields a negative used_memory and a
++            // NAN/INF current_wasted_percentage in opcache_get_status().
++            // Derive coherent memory figures from the available values.
++            $memoryConsumption = $config['directives']['opcache.memory_consumption'];
++            $memoryUsage = $status['memory_usage'];
++            if ($memoryUsage['used_memory'] < 0) {
++                $memoryUsage['used_memory'] = max(
++                    0,
++                    $memoryConsumption - $memoryUsage['free_memory'] - $memoryUsage['wasted_memory']
++                );
++            }
++            if (!is_finite($memoryUsage['current_wasted_percentage'])) {
++                $memoryUsage['current_wasted_percentage'] = $memoryConsumption > 0
++                    ? 100 * $memoryUsage['wasted_memory'] / $memoryConsumption
++                    : 0;
++            }
++
+             $overview = array_merge(
+-                $status['memory_usage'], $status['opcache_statistics'], [
++                $memoryUsage, $status['opcache_statistics'], [
+                     'used_memory_percentage' => round(100 * (
+-                        ($status['memory_usage']['used_memory'] + $status['memory_usage']['wasted_memory'])
+-                        / $config['directives']['opcache.memory_consumption']
++                        ($memoryUsage['used_memory'] + $memoryUsage['wasted_memory'])
++                        / $memoryConsumption
+                     )),
+                     'hit_rate_percentage' => round($status['opcache_statistics']['opcache_hit_rate']),
+                     'used_key_percentage' => round(100 * (
+                         $status['opcache_statistics']['num_cached_keys']
+                         / $status['opcache_statistics']['max_cached_keys']
+                     )),
+-                    'wasted_percentage' => round($status['memory_usage']['current_wasted_percentage'], 2),
++                    'wasted_percentage' => round($memoryUsage['current_wasted_percentage'], 2),
+                     'readable' => [
+-                        'total_memory' => $this->size($config['directives']['opcache.memory_consumption']),
+-                        'used_memory' => $this->size($status['memory_usage']['used_memory']),
+-                        'free_memory' => $this->size($status['memory_usage']['free_memory']),
+-                        'wasted_memory' => $this->size($status['memory_usage']['wasted_memory']),
++                        'total_memory' => $this->size($memoryConsumption),
++                        'used_memory' => $this->size($memoryUsage['used_memory']),
++                        'free_memory' => $this->size($memoryUsage['free_memory']),
++                        'wasted_memory' => $this->size($memoryUsage['wasted_memory']),
+                         'num_cached_scripts' => number_format($status['opcache_statistics']['num_cached_scripts']),
+                         'hits' => number_format($status['opcache_statistics']['hits']),
+                         'misses' => number_format($status['opcache_statistics']['misses']),

@@ -36,13 +36,6 @@ final class DocumentationTest extends TestCase
         self::assertStringContainsString("[![PHP {$phpVersion}+]", $this->getReadme(), "README should contain PHP badge label 'PHP {$phpVersion}+'");
     }
 
-    public function testReadmePhpRequirement(): void
-    {
-        $phpVersion = $this->getPhpVersionFromComposer();
-
-        self::assertStringContainsString("- PHP {$phpVersion}+", $this->getReadme(), "README requirements list should contain 'PHP {$phpVersion}+'");
-    }
-
     public function testReadmeNodeBadgeUrl(): void
     {
         $nodeVersion = $this->getNodeVersionFromPackage();
@@ -56,13 +49,6 @@ final class DocumentationTest extends TestCase
         $nodeVersion = $this->getNodeVersionFromPackage();
 
         self::assertStringContainsString("[![Node.js {$nodeVersion}+]", $this->getReadme(), "README should contain Node.js badge label 'Node.js {$nodeVersion}+'");
-    }
-
-    public function testReadmeNodeRequirement(): void
-    {
-        $nodeVersion = $this->getNodeVersionFromPackage();
-
-        self::assertStringContainsString("- Node.js {$nodeVersion}+", $this->getReadme(), "README requirements list should contain 'Node.js {$nodeVersion}+'");
     }
 
     private function getPhpVersionFromComposer(): string

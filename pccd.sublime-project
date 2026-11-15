@@ -2,9 +2,9 @@
     "folders": [
         {
             "path": ".",
-            "folder_exclude_patterns": [".git", "node_modules", "vendor", "docroot/js", "docroot/css", ".idea", ".vscode", "tmp/github"],
-            "file_exclude_patterns": ["*.zip", "*.accdb", "*.mp3", "*.jpg", "*.png", "*.gif", "*.webp", "*.avif", ".DS_Store", "*.sublime-workspace", ".php-cs-fixer.cache", ".phpunit.result.cache"],
-            "index_exclude_patterns": ["node_modules/*", "vendor/*", "docroot/js/*", "docroot/css/*", ".idea/*", ".vscode/*", "tmp/github/*"]
+            "folder_exclude_patterns": [".git", "node_modules", "vendor", "docroot/js", "docroot/css", ".idea", ".vscode", "tmp"],
+            "file_exclude_patterns": ["*.zip", "*.accdb", "*.mp3", "*.jpg", "*.png", "*.gif", "*.webp", "*.avif", ".DS_Store", "*.sublime-workspace", "*.cache"],
+            "index_exclude_patterns": ["node_modules/*", "vendor/*", "docroot/js/*", "docroot/css/*", ".idea/*", ".vscode/*", "tmp/*"]
         }
     ],
     "settings": {

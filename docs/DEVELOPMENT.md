@@ -7,10 +7,10 @@ This document covers local development, testing, profiling, and the content upda
 Build assets:
 
 ```sh
-npm run build:assets
+node scripts/build-assets.js
 ```
 
-**Note**: Compiled assets in `docroot/css/` and `docroot/js/` are committed to git. Remember to rebuild and commit compiled assets when modifying source files in `src/css/` or `src/js/`.
+**Note**: Compiled assets in `docroot/css/` and `docroot/js/`, and optimized SVGs in `docroot/img/`, are committed to git. Remember to rebuild and commit them when modifying source files in `src/css/`, `src/js/`, or SVG images.
 
 Code quality checks:
 
@@ -27,10 +27,14 @@ npm test
 Notes:
 
 - `BASE_URL` can be overridden for tests that target a web server (e.g. Playwright): `BASE_URL=https://pccd.dites.cat npm test`
-- If e2e tests fail after data changes, run `npm run refresh:test-data`
+- If e2e tests fail after data changes, run `node tests/playwright/refresh-test-data.js`
 - To run validation over many pages, use `npm run validate:sitemap-urls`
 - If Lighthouse audits crash, try specifying `CHROME_PATH`:
   `CHROME_PATH="/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" npm run validate:lighthouse`
+
+Third-party admin scripts:
+
+`src/third_party/apc.php` and `src/third_party/opcache-gui.php` are downloaded from upstream by the Composer `update-third-party` script, which runs after `composer install` and `composer update`. Local fixes to these files live in `patches/` and are applied automatically by the same script. If an upstream change makes a patch fail, update the patch and commit it together with the regenerated files.
 
 Profiling (dev only, Apache-based):
 
@@ -71,7 +75,7 @@ Put the MS Access database (database.accdb) and any image archives (Cobertes.zip
 root directory, then run:
 
 ```sh
-npm run release
+scripts/release.sh
 ```
 
 This single command:
@@ -84,9 +88,9 @@ This single command:
 
 Options:
 
-- `npm run release -- --skip-images` - Skip image processing
-- `npm run release -- --skip-tests` - Skip running tests
-- `npm run release -- --skip-reports` - Skip report generation
+- `scripts/release.sh --skip-images` - Skip image processing
+- `scripts/release.sh --skip-tests` - Skip running tests
+- `scripts/release.sh --skip-reports` - Skip report generation
 
 Then commit and push:
 
@@ -101,5 +105,5 @@ The release can also run entirely inside Docker using the build container:
 
 ```sh
 docker compose -f docker-compose.build.yml run build npm ci
-docker compose -f docker-compose.build.yml run build npm run release
+docker compose -f docker-compose.build.yml run build scripts/release.sh
 ```

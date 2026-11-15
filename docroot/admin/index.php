@@ -33,7 +33,7 @@ $is_test_page = isset($_GET['test']) && $_GET['test'] !== '' && is_string($_GET[
 
 if (isset($_SESSION['auth'])) {
     if (isset($_GET['phpinfo'])) {
-        phpinfo();
+        phpinfo(INFO_ALL & ~(INFO_ENVIRONMENT | INFO_VARIABLES));
 
         exit;
     }

@@ -7,6 +7,7 @@
   allFunctionsGlobal="true"
   errorLevel="4"
   findUnusedPsalmSuppress="true"
+  runTaintAnalysis="false"
   strictBinaryOperands="false"
 >
   <projectFiles>

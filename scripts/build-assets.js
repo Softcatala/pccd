@@ -12,7 +12,8 @@
 
 import * as esbuild from "esbuild";
 import { Features, bundle } from "lightningcss";
-import { copyFile, readdir, stat, writeFile } from "node:fs/promises";
+import { optimize } from "svgo";
+import { copyFile, readFile, readdir, stat, writeFile } from "node:fs/promises";
 import path from "node:path";
 
 const rootDirectory = path.join(import.meta.dirname, "..");
@@ -92,6 +93,27 @@ const buildCSS = async () => {
 };
 
 /**
+ * Optimizes SVG images with SVGO.
+ */
+const optimizeSVGs = async () => {
+  console.log("Optimizing SVG assets with SVGO...");
+
+  const imagesDirectory = path.join(rootDirectory, "docroot/img");
+  const files = await readdir(imagesDirectory, { recursive: true });
+  const svgFiles = files.filter((file) => path.extname(file).toLowerCase() === ".svg");
+
+  for (const file of svgFiles) {
+    const filePath = path.join(imagesDirectory, file);
+    const input = await readFile(filePath, "utf8");
+    const { data } = optimize(input, { path: filePath, multipass: true, js2svg: { eol: "lf" } });
+
+    if (data !== input) {
+      await writeFile(filePath, data);
+    }
+  }
+};
+
+/**
  * Copies Chart.js bundle.
  */
 const copyChartJS = async () => {
@@ -152,7 +174,7 @@ const exportAssetSizes = async () => {
 };
 
 // Run all build tasks in parallel.
-await Promise.all([buildJavaScript(), buildCSS(), copyChartJS()]);
+await Promise.all([buildJavaScript(), buildCSS(), copyChartJS(), optimizeSVGs()]);
 
 // Export asset sizes after build completes.
 await exportAssetSizes();
