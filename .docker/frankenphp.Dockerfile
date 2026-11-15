@@ -1,4 +1,4 @@
-FROM dunglas/frankenphp:1.13.5-php8.5.12-alpine
+FROM dunglas/frankenphp:1.13-php8.5-alpine
 LABEL maintainer="Pere Orga pere@orga.cat"
 LABEL description="FrankenPHP (Caddy + PHP)."
 
