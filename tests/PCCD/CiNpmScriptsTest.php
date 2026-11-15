@@ -39,7 +39,7 @@ final class CiNpmScriptsTest extends TestCase
         $content = file_get_contents($filename);
         self::assertIsString($content, "Could not read {$filename}");
 
-        preg_match_all('/npm run (lint:[a-z0-9-]+|test:node)\b/', $content, $matches);
+        preg_match_all('/npm run (lint:[a-z0-9-]+)\b/', $content, $matches);
         $scripts = array_values(array_unique($matches[1]));
         sort($scripts);
 

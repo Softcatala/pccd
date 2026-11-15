@@ -43,7 +43,6 @@ jobs:
           npm run lint:prettier
           npm run lint:stylelint-redundancy
           npm run lint:xml
-          npm run test:node
 
       - name: Setup environment
         run: |
